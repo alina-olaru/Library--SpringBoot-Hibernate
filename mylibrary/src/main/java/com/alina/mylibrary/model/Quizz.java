@@ -3,6 +3,7 @@ package com.alina.mylibrary.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table
@@ -90,4 +91,15 @@ public class Quizz {
     public void setQuizzCorrectAnswer(String quizzCorrectAnswer) {
         this.quizzCorrectAnswer = quizzCorrectAnswer;
     }
+
+    public Set<Voucher> getVouchersGotByQuizz() {
+        return vouchersGotByQuizz;
+    }
+
+    public void setVouchersGotByQuizz(Set<Voucher> vouchersGotByQuizz) {
+        this.vouchersGotByQuizz = vouchersGotByQuizz;
+    }
+
+    @OneToMany(mappedBy = "quizzez")
+    private Set<Voucher> vouchersGotByQuizz;
 }

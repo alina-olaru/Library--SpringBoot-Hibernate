@@ -278,5 +278,8 @@ public class Book {
             fetch = FetchType.LAZY,
     cascade = CascadeType.ALL)
     private Set<BooksAuthors> bookAuthor;
+
+    @OneToMany(mappedBy = "bookR")
+    private Set<Review> reviews;
 }
 

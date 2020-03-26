@@ -115,4 +115,25 @@ public class BookOrder{
     @OneToMany(mappedBy = "order",
     cascade = CascadeType.ALL)
     private Set<OrderItem> items;
+
+    //TODO de vazur cu id_used_voucher
+
+    @OneToOne(mappedBy = "orderWithVouchers",
+    cascade = CascadeType.ALL,
+    fetch = FetchType.LAZY,
+    optional = false)
+    private VoucherUser vouchersForUser;
+
+
+    public void setVouchersForUser(VoucherUser detailsAboutVoucher){
+        if(detailsAboutVoucher==null){
+            if(this.vouchersForUser==null){
+                this.vouchersForUser.setVouchers(null);
+            }
+        }
+        else{
+            vouchersForUser.setVouchers(null);
+        }
+        this.vouchersForUser=detailsAboutVoucher;
+    }
 }

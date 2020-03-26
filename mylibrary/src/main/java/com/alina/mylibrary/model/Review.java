@@ -4,6 +4,7 @@ package com.alina.mylibrary.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Blob;
+import java.util.Objects;
 
 @Entity
 @Table
@@ -64,4 +65,30 @@ public class Review {
     public void setReviewPhoto(Blob reviewPhoto) {
         this.reviewPhoto = reviewPhoto;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Review review = (Review) o;
+        return reviewID == review.reviewID &&
+                reviewerName.equals(review.reviewerName) &&
+                textReview.equals(review.textReview) &&
+                Objects.equals(reviewPhoto, review.reviewPhoto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(reviewID, reviewerName, textReview, reviewPhoto);
+    }
+
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name="FK_BOOK_REVIEW_ID"))
+    private Book bookR;
+
+
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name="FK_USER_REVIEW_ID"))
+    private BookUser userReviewMaker;
 }

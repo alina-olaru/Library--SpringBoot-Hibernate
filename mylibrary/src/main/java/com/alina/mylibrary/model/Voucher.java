@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.sql.Blob;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table
@@ -51,26 +52,6 @@ public class Voucher {
 
 
     public Voucher() {
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Voucher voucher = (Voucher) o;
-        return voucherId == voucher.voucherId &&
-                voucherMaximumUses == voucher.voucherMaximumUses &&
-                Float.compare(voucher.voucherPrice, voucherPrice) == 0 &&
-                Objects.equals(voucherTitle, voucher.voucherTitle) &&
-                Objects.equals(voucherDescription, voucher.voucherDescription) &&
-                Objects.equals(voucherImage, voucher.voucherImage) &&
-                Objects.equals(voucherStartDate, voucher.voucherStartDate) &&
-                Objects.equals(voucherEndDate, voucher.voucherEndDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(voucherId, voucherTitle, voucherDescription, voucherImage, voucherStartDate, voucherEndDate, voucherMaximumUses, voucherPrice);
     }
 
     public int getVoucherId() {
@@ -139,4 +120,42 @@ public class Voucher {
 
     //todo un quizz are un voucher,deci teoetic nu mai am nev de legatura
     //dar cum fac
+
+
+    public Quizz getQuizzez() {
+        return quizzez;
+    }
+
+    public void setQuizzez(Quizz quizzez) {
+        this.quizzez = quizzez;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Voucher voucher = (Voucher) o;
+        return voucherId == voucher.voucherId &&
+                voucherMaximumUses == voucher.voucherMaximumUses &&
+                Float.compare(voucher.voucherPrice, voucherPrice) == 0 &&
+                voucherTitle.equals(voucher.voucherTitle) &&
+                Objects.equals(voucherDescription, voucher.voucherDescription) &&
+                Objects.equals(voucherImage, voucher.voucherImage) &&
+                voucherStartDate.equals(voucher.voucherStartDate) &&
+                voucherEndDate.equals(voucher.voucherEndDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(voucherId, voucherTitle, voucherDescription, voucherImage, voucherStartDate, voucherEndDate, voucherMaximumUses, voucherPrice);
+    }
+
+
+    @OneToMany(mappedBy = "vouchers",
+    cascade = CascadeType.ALL)
+    private Set<VoucherUser> userVoucherLink;
+
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name="FK_QUIZZ_ID"))
+    private Quizz quizzez;
 }
