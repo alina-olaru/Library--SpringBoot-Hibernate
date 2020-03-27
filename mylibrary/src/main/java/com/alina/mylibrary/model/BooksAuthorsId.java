@@ -22,6 +22,7 @@ public class BooksAuthorsId implements Serializable {
                 bookId == that.bookId;
     }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(authorId, bookId);

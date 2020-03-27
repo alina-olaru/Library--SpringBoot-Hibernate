@@ -58,6 +58,31 @@ public class Book {
     @NotNull
     private int numberOfBoooks;
 
+    public static Book get_copy(Book old_book)
+    {
+        Book new_book = new Book();
+        new_book.setPublisher(old_book.getPublisher());
+        new_book.setBookAuthor(old_book.getBookAuthor());
+        new_book.setBookDescription(old_book.getBookDescription());
+        new_book.setNumberofVolumes(old_book.getNumberofVolumes());
+        new_book.setNumberOfPages(old_book.getNumberOfPages());
+        new_book.setNumberOfReviews(old_book.getNumberOfReviews());
+        new_book.setCoverType(old_book.getCoverType());
+        new_book.setNumberOfBoooks(old_book.getNumberOfBoooks());
+        new_book.setBookYear(old_book.getBookYear());
+        new_book.setBookWeight(old_book.getBookWeight());
+        new_book.setBookTitle(old_book.getBookTitle());
+        new_book.setBookRating(old_book.getBookRating());
+        new_book.setBookPrice(old_book.getBookPrice());
+        new_book.setBookLanguage(old_book.getBookLanguage());
+        new_book.setBookDimension(old_book.getBookDimension());
+        new_book.setBookId(old_book.getBookId());
+        new_book.setBooksCategories(old_book.getBooksCategories());
+        new_book.setItems(old_book.getItems());
+        new_book.setPersBooks(old_book.getPersBooks());
+        new_book.setWishBooks(old_book.getWishBooks());
+        return new_book;
+    }
 
     public int getBookId() {
         return bookId;
