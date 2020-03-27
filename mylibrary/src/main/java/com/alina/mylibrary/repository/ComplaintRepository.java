@@ -1,4 +1,14 @@
 package com.alina.mylibrary.repository;
 
-public interface ComplaintRepository {
+import com.alina.mylibrary.model.Complaint;
+import com.alina.mylibrary.model.Publisher;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+@Repository
+@Transactional
+public interface ComplaintRepository extends JpaRepository<Complaint, Integer>{
 }
+
+
+

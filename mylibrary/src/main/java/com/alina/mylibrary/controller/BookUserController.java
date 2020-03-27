@@ -33,6 +33,8 @@ public class BookUserController {
     private VoucherUserRepository voucherUserRepository;
     private CategoryRepository categoryRepository;
     private BooksCategoriesRepository booksCategoriesRepository;
+    private ComplaintRepository complaintRepository;
+    private ReviewRepository reviewRepository;
 
 
     public BookUserController(BookUserRepository bookUserRepository,
@@ -44,7 +46,9 @@ public class BookUserController {
                               BooksAuthorsRepository booksAuthorsRepository,
                            VoucherUserRepository voucherUserRepository,
                               CategoryRepository categoryRepository,
-                              BooksCategoriesRepository booksCategoriesRepository
+                              BooksCategoriesRepository booksCategoriesRepository,
+                              ComplaintRepository complaintRepository,
+                              ReviewRepository reviewRepository
     ) {
         this.bookUserRepository = bookUserRepository;
         this.publisherRepository = publisherRepository;
@@ -57,18 +61,31 @@ public class BookUserController {
         this.voucherUserRepository = voucherUserRepository;
         this.categoryRepository = categoryRepository;
         this.booksCategoriesRepository = booksCategoriesRepository;
+        this.complaintRepository = complaintRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @GetMapping("/all")
     public Iterable<BookUser> all(){
 
+
+        //TODO o carte are mai multe review uri,cum se face acest lucru
+        Review testReview=new Review();
+        testReview.setReviewerName("foarte buna");
+        testReview.setTextReview("Am citit-o pe nerasuflate");
+        reviewRepository.save(testReview);
+
+        Complaint comTest=new Complaint();
+        comTest.setSubject("Cerere");
+        comTest.setText("Ati putea aduce carti scrise de Cecelia Ahern?");
+   //     complaintRepository.save(comTest);
         //   ....................................................................................category............................................................................
 
 
         Category c1=new Category();
         c1.setCategoryDescription("Științifico-fantasticul (numit și știință-ficțiune,[1] SF sau science-fiction, pronunțat [sa-iăns fic-șăn] sau [sa-ins fic-șăn], din engl. science fiction /ˈsaɪ.əns ˈfɪk.ʃən/) este un gen artistic prezent cu precădere în literatură și cinematografie, a cărui temă principală este impactul științei și tehnologiei asupra societății și persoanelor.");
         c1.setCategoryTitle("SF");
-        categoryRepository.save(c1);
+    //    categoryRepository.save(c1);
 
      //   ....................................................................................publisher............................................................................
     //    List<Publisher> pub=publisherRepository.findAll();
@@ -184,18 +201,18 @@ public class BookUserController {
         BooksCategories bcLink=new BooksCategories();
         bcLink.setBooksC(book1);
         bcLink.setCategories(c1);
-        booksCategoriesRepository.save(bcLink);
+      //  booksCategoriesRepository.save(bcLink);
 
         BooksCategories bcLink2=new BooksCategories();
         bcLink2.setBooksC(book2);
         bcLink2.setCategories(c1);
-        booksCategoriesRepository.save(bcLink2);
+    //    booksCategoriesRepository.save(bcLink2);
 
 
         BooksCategories bcLink3=new BooksCategories();
         bcLink3.setBooksC(book3);
         bcLink3.setCategories(c1);
-        booksCategoriesRepository.save(bcLink3);
+//        booksCategoriesRepository.save(bcLink3);
 
 
 
