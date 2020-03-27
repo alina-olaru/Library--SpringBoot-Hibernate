@@ -21,6 +21,8 @@ public class Wishlist implements Serializable {
     private BookUser userwishlist;
 
 
+    public Wishlist() {
+    }
 
     public Book getBookwishlist() {
         return bookwishlist;

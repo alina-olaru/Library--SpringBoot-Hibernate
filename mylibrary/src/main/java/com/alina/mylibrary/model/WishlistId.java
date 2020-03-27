@@ -12,6 +12,10 @@ public class WishlistId  implements Serializable {
     private int userwishlist;
 
 
+    public WishlistId() {
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

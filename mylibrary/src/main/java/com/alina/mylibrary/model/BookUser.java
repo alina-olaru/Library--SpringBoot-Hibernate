@@ -1,5 +1,6 @@
 package com.alina.mylibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.UniqueElements;
 
@@ -314,8 +315,11 @@ public class BookUser {
     cascade = CascadeType.ALL)
     private  Set<PersonalBook> persBooks;
 
+
     @OneToMany(mappedBy = "userwishlist",
     cascade = CascadeType.ALL)
+    //TODO s-a rezolvat problema,dar e ok pt lunga durata?
+    @JsonIgnore
     private Set<Wishlist> wishBooks;
 
 

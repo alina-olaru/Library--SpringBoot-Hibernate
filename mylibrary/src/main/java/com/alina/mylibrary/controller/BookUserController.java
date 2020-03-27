@@ -81,6 +81,17 @@ public class BookUserController {
     public Iterable<BookUser> all(){
 
 
+        List<Book> books=bookRepository.findAll();
+        List<BookOrder> orders=bookOrderRepository.findAll();
+        List<BookUser> _users=bookUserRepository.findAll();
+
+
+        Wishlist wish=new Wishlist();
+        wish.setBookwishlist(books.get(1));
+        wish.setUserwishlist(_users.get(2));
+      //  wishlistRepository.save(wish);
+
+
         BookOrder test_order=new BookOrder();
         test_order.setOrderD(new Date(2020,1,1));
         test_order.setNumberItems(1);
@@ -88,7 +99,16 @@ public class BookUserController {
         test_order.setSubtotal(50);
         test_order.setTotal(62);
         test_order.setVoucherDiscount(12);
-        bookOrderRepository.save(test_order);
+      //  bookOrderRepository.save(test_order);
+
+
+        OrderItem item=new OrderItem();
+        BookOrder test_order1=orders.get(0);
+        item.setOrder(test_order1);
+        Book _b=books.get(20);
+        item.setBooksorder(_b);
+        item.setQuantity(1);
+      //  orderItemRepository.save(item);
 
 
 
@@ -96,7 +116,7 @@ public class BookUserController {
         Review testReview=new Review();
         testReview.setReviewerName("foarte buna");
         testReview.setTextReview("Am citit-o pe nerasuflate");
-        reviewRepository.save(testReview);
+    //    reviewRepository.save(testReview);
 
         Complaint comTest=new Complaint();
         comTest.setSubject("Cerere");
@@ -143,7 +163,6 @@ public class BookUserController {
 
         //   ...................................................................................BOOKS........................................................................................
 
-       List<Book> books=bookRepository.findAll();
 
 
 
