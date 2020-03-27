@@ -1,12 +1,14 @@
 package com.alina.mylibrary.repository;
 
-import com.alina.mylibrary.model.VoucherUser;
+
+import com.alina.mylibrary.model.Category;
+import com.alina.mylibrary.model.Publisher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 @Repository
 @Transactional
-public interface VoucherUserRepository extends JpaRepository<VoucherUser, Integer>{
+
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
 }
-
-

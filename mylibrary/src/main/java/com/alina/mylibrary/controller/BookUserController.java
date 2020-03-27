@@ -30,6 +30,10 @@ public class BookUserController {
     private AuthorRepository authorRepository;
     @Autowired
     private BooksAuthorsRepository booksAuthorsRepository;
+    private VoucherUserRepository voucherUserRepository;
+    private CategoryRepository categoryRepository;
+    private BooksCategoriesRepository booksCategoriesRepository;
+
 
     public BookUserController(BookUserRepository bookUserRepository,
                               PublisherRepository publisherRepository,
@@ -37,7 +41,11 @@ public class BookUserController {
                               VoucherRepository voucherRepository,
                               BookRepository bookRepository,
                               AuthorRepository authorRepository,
-                              BooksAuthorsRepository booksAuthorsRepository) {
+                              BooksAuthorsRepository booksAuthorsRepository,
+                           VoucherUserRepository voucherUserRepository,
+                              CategoryRepository categoryRepository,
+                              BooksCategoriesRepository booksCategoriesRepository
+    ) {
         this.bookUserRepository = bookUserRepository;
         this.publisherRepository = publisherRepository;
         this.quizzRepository = quizzRepository;
@@ -45,12 +53,24 @@ public class BookUserController {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
         this.booksAuthorsRepository = booksAuthorsRepository;
+
+        this.voucherUserRepository = voucherUserRepository;
+        this.categoryRepository = categoryRepository;
+        this.booksCategoriesRepository = booksCategoriesRepository;
     }
 
     @GetMapping("/all")
     public Iterable<BookUser> all(){
 
+        //   ....................................................................................category............................................................................
 
+
+        Category c1=new Category();
+        c1.setCategoryDescription("Științifico-fantasticul (numit și știință-ficțiune,[1] SF sau science-fiction, pronunțat [sa-iăns fic-șăn] sau [sa-ins fic-șăn], din engl. science fiction /ˈsaɪ.əns ˈfɪk.ʃən/) este un gen artistic prezent cu precădere în literatură și cinematografie, a cărui temă principală este impactul științei și tehnologiei asupra societății și persoanelor.");
+        c1.setCategoryTitle("SF");
+        categoryRepository.save(c1);
+
+     //   ....................................................................................publisher............................................................................
     //    List<Publisher> pub=publisherRepository.findAll();
         Publisher p1=new Publisher();
         p1.setPublisherTitle("Corint");
@@ -157,7 +177,29 @@ public class BookUserController {
         book1.setPublisher(p1);
 
 //
- //  bookRepository.save(book1);
+        List<Book> bks=bookRepository.findAll();
+        book1=bks.get(1);
+        book2=bks.get(2);
+        book3=bks.get(3);
+        BooksCategories bcLink=new BooksCategories();
+        bcLink.setBooksC(book1);
+        bcLink.setCategories(c1);
+        booksCategoriesRepository.save(bcLink);
+
+        BooksCategories bcLink2=new BooksCategories();
+        bcLink2.setBooksC(book2);
+        bcLink2.setCategories(c1);
+        booksCategoriesRepository.save(bcLink2);
+
+
+        BooksCategories bcLink3=new BooksCategories();
+        bcLink3.setBooksC(book3);
+        bcLink3.setCategories(c1);
+        booksCategoriesRepository.save(bcLink3);
+
+
+
+        //  bookRepository.save(book1);
 
         //   ..................................................................................books+authors........................................................................................
 
@@ -226,7 +268,7 @@ public class BookUserController {
         firstUser.setFloor(8);
         firstUser.setAppartmentNumber(65);
         firstUser.setCountry("Romania");
-  //      bookUserRepository.save(firstUser);
+     //   bookUserRepository.save(firstUser);
 
 
         //TODO UNICAT PE EMAIL CA S A PUS DE 2 ORI
@@ -235,55 +277,68 @@ public class BookUserController {
     //   ...................................................................................quizzez........................................................................................
 //        List<Quizz> q = quizzRepository.findAll();
 //
-//        Date aa=new Date(2020,3,1);
-//        Date bbbb=new Date(2020,4,15);
-//        Quizz newQuizz = new Quizz();
-//        newQuizz.setQuizzQuestion("Citatul “Just as I succeeded in finding all the answers,\n" +
-//                " all the questions changed.“  este al lui: ");
-//        newQuizz.setNumberOfQuestions(3);
-//        newQuizz.setQuizzAnswers("Paulo Coelho.Mihai Eminescu.Sandra Brown");
-//        newQuizz.setQuizzCorrectAnswer("Paulo Coelho");
-//        newQuizz.setQuizzStartDate(aa);
-//        newQuizz.setQuizzEndDate(bbbb);
-//        System.out.println(newQuizz);
-//        quizzRepository.save(newQuizz);
-//
-//
-//
-//        Date aaa=new Date(2020,4,16);
-//        Date bb=new Date(2020,8,15);
-//        Quizz newQuizzz = new Quizz();
-//        newQuizzz.setQuizzQuestion("Opera De legibus (Marcus Tullius Cicero este:");
-//        newQuizzz.setNumberOfQuestions(4);
-//        newQuizzz.setQuizzAnswers("Dialog politic.Scriere pe tema existentei.Scriere pe tema divinitatii.Expunere a problemei destinului.");
-//        newQuizzz.setQuizzCorrectAnswer("Dialog politic.");
-//        newQuizzz.setQuizzStartDate(aaa);
-//        newQuizzz.setQuizzEndDate(bb);
-//        System.out.println(newQuizzz);
-//        quizzRepository.save(newQuizzz);
+        Date aa=new Date(2020,3,1);
+        Date bbbb=new Date(2020,4,15);
+        Quizz newQuizz = new Quizz();
+        newQuizz.setQuizzQuestion("Citatul “Just as I succeeded in finding all the answers,\n" +
+                " all the questions changed.“  este al lui: ");
+        newQuizz.setNumberOfQuestions(3);
+        newQuizz.setQuizzAnswers("Paulo Coelho.Mihai Eminescu.Sandra Brown");
+        newQuizz.setQuizzCorrectAnswer("Paulo Coelho");
+        newQuizz.setQuizzStartDate(aa);
+        newQuizz.setQuizzEndDate(bbbb);
+        System.out.println(newQuizz);
+    //    quizzRepository.save(newQuizz);
+
+
+
+        Date aaa=new Date(2020,4,16);
+        Date bb=new Date(2020,8,15);
+        Quizz newQuizzz = new Quizz();
+        newQuizzz.setQuizzQuestion("Opera De legibus (Marcus Tullius Cicero este:");
+        newQuizzz.setNumberOfQuestions(4);
+        newQuizzz.setQuizzAnswers("Dialog politic.Scriere pe tema existentei.Scriere pe tema divinitatii.Expunere a problemei destinului.");
+        newQuizzz.setQuizzCorrectAnswer("Dialog politic.");
+        newQuizzz.setQuizzStartDate(aaa);
+        newQuizzz.setQuizzEndDate(bb);
+        System.out.println(newQuizzz);
+     //   quizzRepository.save(newQuizzz);
 //
 //    //   ...................................................................................vouchers........................................................................................
-//        Voucher a = new Voucher();
-//        a.setVoucherTitle("Voucher 10%");
-//        a.setVoucherDescription("5% ka orice comanda");
-//        a.setVoucherMaximumUses(10);
-//        a.setVoucherPrice(10.0f);
-//        a.setVoucherStartDate(new Date(2020,1,1));
-//        a.setVoucherEndDate(new Date(2020,12,31));
-//        a.setQuizzez(newQuizz);
-//
-//        Voucher b = new Voucher();
-//        b.setVoucherTitle("Voucher 25%");
-//        b.setVoucherDescription("25& la orice comanda");
-//        b.setVoucherMaximumUses(1);
-//        b.setVoucherPrice(25.5f);
-//        b.setVoucherStartDate(new Date(2020,4,1));
-//        a.setVoucherEndDate(new Date(2020,12,31));
-//        b.setQuizzez(newQuizzz);
+        Voucher Va = new Voucher();
+        Va.setVoucherTitle("Voucher 10%");
+        Va.setVoucherDescription("5% ka orice comanda");
+        Va.setVoucherMaximumUses(10);
+        Va.setVoucherPrice(10.0f);
+        Va.setVoucherStartDate(new Date(2020,1,1));
+        Va.setVoucherEndDate(new Date(2020,12,31));
+        Va.setQuizzez(newQuizz);
+
+        Voucher Vb = new Voucher();
+        Vb.setVoucherTitle("Voucher 25%");
+        Vb.setVoucherDescription("25& la orice comanda");
+        Vb.setVoucherMaximumUses(1);
+        Vb.setVoucherPrice(25.5f);
+        Vb.setVoucherStartDate(new Date(2020,4,1));
+        Vb.setVoucherEndDate(new Date(2020,12,31));
+        Vb.setQuizzez(newQuizzz);
 //
 //        this.voucherRepository.save(a);
 //        this.voucherRepository.save(b);
 
+        //   ...................................................................................uservoucher........................................................................................
+
+        VoucherUser first_voucher=new VoucherUser();
+        first_voucher.setUsed(false);
+        first_voucher.setVouchers(Va);
+        first_voucher.setUsersWithVouchers(firstUser);
+   //    this.voucherUserRepository.save(first_voucher);
+
+        VoucherUser sec_voucher=new VoucherUser();
+        sec_voucher.setUsed(false);
+        sec_voucher.setVouchers(Va);
+        sec_voucher.setUsersWithVouchers(firstUser);
+   //     this.voucherUserRepository.save(sec_voucher);
 
 //        Quizz newQuizz = new Quizz();
 //        newQuizz.setQuizzQuestion("asdsa");

@@ -8,6 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table
+@IdClass(VoucherUserId.class)
 public class VoucherUser implements Serializable {
 
 

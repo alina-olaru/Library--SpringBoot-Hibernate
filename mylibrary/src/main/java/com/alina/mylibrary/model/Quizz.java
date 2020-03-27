@@ -130,6 +130,7 @@ public class Quizz {
         this.vouchersGotByQuizz = vouchersGotByQuizz;
     }
 
-    @OneToMany(mappedBy = "quizzez")
+    @OneToMany(mappedBy = "quizzez",
+    cascade = CascadeType.ALL)
     private Set<Voucher> vouchersGotByQuizz;
 }

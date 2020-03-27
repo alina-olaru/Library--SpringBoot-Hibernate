@@ -1,10 +1,13 @@
 package com.alina.mylibrary.model;
 
+import org.hibernate.validator.constraints.ISBN;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@IdClass(BooksCategoriesId.class)
 public class BooksCategories implements Serializable {
 
 
