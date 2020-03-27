@@ -274,7 +274,7 @@ public class Book {
     private Set<BooksCategories> booksCategories;
 
 
-    @OneToMany(mappedBy = "_booksA",
+    @OneToMany(mappedBy = "bookId",
             fetch = FetchType.LAZY,
     cascade = CascadeType.ALL)
     private Set<BooksAuthors> bookAuthor;

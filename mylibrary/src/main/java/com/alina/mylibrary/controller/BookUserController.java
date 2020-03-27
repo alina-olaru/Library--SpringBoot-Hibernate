@@ -23,49 +23,74 @@ public class BookUserController {
     private QuizzRepository quizzRepository;
     @Autowired
     private VoucherRepository voucherRepository;
+    @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private AuthorRepository authorRepository;
+    @Autowired
+    private BooksAuthorsRepository booksAuthorsRepository;
 
     public BookUserController(BookUserRepository bookUserRepository,
                               PublisherRepository publisherRepository,
                               QuizzRepository quizzRepository,
                               VoucherRepository voucherRepository,
-                              BookRepository bookRepository) {
+                              BookRepository bookRepository,
+                              AuthorRepository authorRepository,
+                              BooksAuthorsRepository booksAuthorsRepository) {
         this.bookUserRepository = bookUserRepository;
         this.publisherRepository = publisherRepository;
         this.quizzRepository = quizzRepository;
         this.voucherRepository = voucherRepository;
         this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
+        this.booksAuthorsRepository = booksAuthorsRepository;
     }
 
     @GetMapping("/all")
     public Iterable<BookUser> all(){
 
+
+    //    List<Publisher> pub=publisherRepository.findAll();
+        Publisher p1=new Publisher();
+        p1.setPublisherTitle("Corint");
+        publisherRepository.save(p1);
+        //   ...................................................................................authors........................................................................................
+
+
+        List<Author> authors=authorRepository.findAll();
+        Author a1=new Author();
+        a1.setFirstName("Paulo");
+        a1.setLastName("Coelho");
+       authorRepository.save(a1);
+
         //   ...................................................................................BOOKS........................................................................................
 
-        List<Book> books=bookRepository.findAll();
+       List<Book> books=bookRepository.findAll();
 
 
-//        Book book2=new Book();
-//        book2.setBookDescription("O carte captivanta, in care este povestit pelerinajul lui Paulo Coelho catre Santiago de Compostela, pe un drum medieval ce incepe in Pirinei si strabate nordul Spaniei. Pelerinajul facut de autor in 1986 a inspirat acest roman de aventuri care este totodata o fascinanta parabola despre nevoia de a gasi propria cale in viata si despre descoperirea faptului ca miracolul se ascunde intotdeauna in pasii oamenilor obisnuiti.\n" +
-//                "\n" +
-//                "Jurnalul unui Mag ocupa un loc important in opera lui Paulo Coelho nu doar pentru ca este prima dintre cartile lui importante, publicata inainte de Alchimistul, ci si pentru ca este expresia completa a umanismului filozofiei lui Paulo Coelho si a profunzimii cautarilor sale.\n" +
-//                "\n" +
-//                "Am ajuns ieri in oras, dupa ce am luat autobuzul care face curse regulate intre Pedrafita – aproape de Cebreiro – si Compostela. In patru ore am parcurs cei o suta cincizeci de kilometri care desparteau cele doua orase si mi-am amintit de calatoria cu Petrus – uneori aveam nevoie de doua saptamani ca sa strabatem o distanta ca asta. Peste putin aveam sa merg la mormantul Sfantului Iacob sa las acolo icoana Sfintei Fecioare Intrupate, montata in scoici. Apoi, cat mai curand posibil, voi lua avionul inapoi spre Brazilia, fiindca am multa treaba. [...] Ma gandesc sa scriu o carte despre tot ce mi s-a intamplat. Dar este inca un gand departat... - Paulo Coelho");
-//        book2.setBookDimension("15x19x10");
-//        book2.setBookLanguage("Romana");
-//        book2.setBookPrice(89);
-//        book2.setBookRating(4);
-        //TODO de schimbat titlul in spioana
-//        book2.setBookTitle("11 minute");
-//        book2.setBookWeight(0.5f);
-//        book2.setBookYear(1998);
-//        book2.setNumberOfBoooks(15);
-//        book2.setCoverType("hardcover");
-//        book2.setNumberOfPages(543);
-//        book2.setNumberOfReviews(0);
-//        book2.setNumberofVolumes(1);
+
+        Book book2=new Book();
+        book2.setBookDescription("O carte captivanta, in care este povestit pelerinajul lui Paulo Coelho catre Santiago de Compostela, pe un drum medieval ce incepe in Pirinei si strabate nordul Spaniei. Pelerinajul facut de autor in 1986 a inspirat acest roman de aventuri care este totodata o fascinanta parabola despre nevoia de a gasi propria cale in viata si despre descoperirea faptului ca miracolul se ascunde intotdeauna in pasii oamenilor obisnuiti.\n" +
+                "\n" +
+                "Jurnalul unui Mag ocupa un loc important in opera lui Paulo Coelho nu doar pentru ca este prima dintre cartile lui importante, publicata inainte de Alchimistul, ci si pentru ca este expresia completa a umanismului filozofiei lui Paulo Coelho si a profunzimii cautarilor sale.\n" +
+                "\n" +
+                "Am ajuns ieri in oras, dupa ce am luat autobuzul care face curse regulate intre Pedrafita – aproape de Cebreiro – si Compostela. In patru ore am parcurs cei o suta cincizeci de kilometri care desparteau cele doua orase si mi-am amintit de calatoria cu Petrus – uneori aveam nevoie de doua saptamani ca sa strabatem o distanta ca asta. Peste putin aveam sa merg la mormantul Sfantului Iacob sa las acolo icoana Sfintei Fecioare Intrupate, montata in scoici. Apoi, cat mai curand posibil, voi lua avionul inapoi spre Brazilia, fiindca am multa treaba. [...] Ma gandesc sa scriu o carte despre tot ce mi s-a intamplat. Dar este inca un gand departat... - Paulo Coelho");
+        book2.setBookDimension("15x19x10");
+        book2.setBookLanguage("Romana");
+        book2.setBookPrice(89);
+        book2.setBookRating(4);
+      //  TODO de schimbat titlul in spioana
+        book2.setBookTitle("11 minute");
+        book2.setBookWeight(0.5f);
+        book2.setBookYear(1998);
+        book2.setNumberOfBoooks(15);
+        book2.setCoverType("hardcover");
+        book2.setNumberOfPages(543);
+        book2.setNumberOfReviews(0);
+        book2.setPublisher(p1);
+        book2.setNumberofVolumes(1);
 //
-//    bookRepository.save(book2);
+    bookRepository.save(book2);
 
 
         Book book3=new Book();
@@ -86,32 +111,56 @@ public class BookUserController {
         book3.setNumberOfPages(543);
         book3.setNumberOfReviews(0);
         book3.setNumberofVolumes(1);
+        book3.setPublisher(p1);
+
         bookRepository.save(book3);
 
 
 
-//        Book book1=new Book();
-//        book1.setBookDescription("Romanul Unsprezece minute este povestea Mariei, o fata dintr-un sat brazilian, ale carei prime intalniri inocente cu dragostea o lasa cu inima franta. La o varsta frageda, ea se convinge ca nu va gasi niciodata iubirea adevarata, crezand in schimb ca „dragostea este un lucru cumplit, care te face sa suferi...“. O intalnire intamplatoare in Rio de Janeiro o determina sa plece la Geneva, unde viseaza sa gaseasca faima si bogatie, dar sfarseste in strada, ca prostituata.\n" +
-//                "\n" +
-//                "In Geneva, Maria se indeparteaza tot mai mult de iubire, devenind tot mai fascinata de sex. In cele din urma, conceptia ei lipsita de speranta despre dragoste este pusa la incercare cand cunoaste un tanar si chipes pictor. In aceasta odisee a descoperirii de sine, Maria are de ales intre a urma o cale\n" +
-//                "a intunericului – placerea sexuala de dragul placerii sexuale – sau a risca totul pentru a gasi „lumina launtrica“ si potentialitatile sexului sacru, ale sexului in contextul dragostei.\n" +
-//                "\n" +
-//                "In acest palpitant si indraznet roman, Paulo Coelho analizeaza cu sensibilitate natura spirituala a sexului si a iubirii si ne invita sa ne confruntam cu propriile prejudecati, cu propriii demoni, sa ne aflam propria „lumina launtrica“.");
-//        book1.setBookDimension("15x19x10");
-//        book1.setBookLanguage("Romana");
-//        book1.setBookPrice(30);
-//        book1.setBookRating(4);
-//        book1.setBookTitle("11 minute");
-//        book1.setBookWeight(0.5f);
-//        book1.setBookYear(1978);
-//        book1.setNumberOfBoooks(122);
-//        book1.setCoverType("hardcover");
-//        book1.setNumberOfPages(543);
-//        book1.setNumberOfReviews(0);
-//        book1.setNumberofVolumes(1);
-//
-//    bookRepository.save(book1);
+        Book book1=new Book();
+        book1.setBookDescription("Romanul Unsprezece minute este povestea Mariei, o fata dintr-un sat brazilian, ale carei prime intalniri inocente cu dragostea o lasa cu inima franta. La o varsta frageda, ea se convinge ca nu va gasi niciodata iubirea adevarata, crezand in schimb ca „dragostea este un lucru cumplit, care te face sa suferi...“. O intalnire intamplatoare in Rio de Janeiro o determina sa plece la Geneva, unde viseaza sa gaseasca faima si bogatie, dar sfarseste in strada, ca prostituata.\n" +
+                "\n" +
+                "In Geneva, Maria se indeparteaza tot mai mult de iubire, devenind tot mai fascinata de sex. In cele din urma, conceptia ei lipsita de speranta despre dragoste este pusa la incercare cand cunoaste un tanar si chipes pictor. In aceasta odisee a descoperirii de sine, Maria are de ales intre a urma o cale\n" +
+                "a intunericului – placerea sexuala de dragul placerii sexuale – sau a risca totul pentru a gasi „lumina launtrica“ si potentialitatile sexului sacru, ale sexului in contextul dragostei.\n" +
+                "\n" +
+                "In acest palpitant si indraznet roman, Paulo Coelho analizeaza cu sensibilitate natura spirituala a sexului si a iubirii si ne invita sa ne confruntam cu propriile prejudecati, cu propriii demoni, sa ne aflam propria „lumina launtrica“.");
+        book1.setBookDimension("15x19x10");
+        book1.setBookLanguage("Romana");
+        book1.setBookPrice(30);
+        book1.setBookRating(4);
+        book1.setBookTitle("11 minute");
+        book1.setBookWeight(0.5f);
+        book1.setBookYear(1978);
+        book1.setNumberOfBoooks(122);
+        book1.setCoverType("hardcover");
+        book1.setNumberOfPages(543);
+        book1.setNumberOfReviews(0);
+        book1.setNumberofVolumes(1);
+        book1.setPublisher(p1);
 
+//
+   bookRepository.save(book1);
+
+        //   ..................................................................................books+authors........................................................................................
+
+
+        List<BooksAuthors> booksAuthorsLink=booksAuthorsRepository.findAll();
+        BooksAuthors lba1=new BooksAuthors();
+        lba1.setAuthorId(a1);
+        lba1.setBookId(book1);
+        booksAuthorsRepository.save(lba1);
+
+
+        BooksAuthors lba2=new BooksAuthors();
+        lba1.setAuthorId(a1);
+        lba1.setBookId(book2);
+        booksAuthorsRepository.save(lba2);
+
+
+        BooksAuthors lba3=new BooksAuthors();
+        lba1.setAuthorId(a1);
+        lba1.setBookId(book3);
+        booksAuthorsRepository.save(lba3);
         //   ...................................................................................users........................................................................................
 
 //        //todo de schimbat length pt mail

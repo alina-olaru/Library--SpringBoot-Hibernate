@@ -4,53 +4,43 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+
 @Entity
+@Table
+@IdClass(BooksAuthorsId.class)
 public class BooksAuthors implements Serializable {
+
 
 
     @Id
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name="FK_AUTHOR_AB_ID"))
-    private Author _authors;
+    private Author authorId;
 
 
     @Id
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name="FK_BOOKS_AB_ID"))
-    private Book _booksA;
+    private Book bookId;
 
     public BooksAuthors() {
     }
 
-    @Override
-    public boolean equals(Object o) {
 
-
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BooksAuthors that = (BooksAuthors) o;
-        return Objects.equals(_authors, that._authors) &&
-                Objects.equals(_booksA, that._booksA);
+    public Author getAuthorId() {
+        return authorId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(_authors, _booksA);
+    public void setAuthorId(Author authorId) {
+        this.authorId = authorId;
     }
 
-    public Author get_authors() {
-        return _authors;
+    public Book getBookId() {
+        return bookId;
     }
 
-    public void set_authors(Author _authors) {
-        this._authors = _authors;
-    }
-
-    public Book get_booksA() {
-        return _booksA;
-    }
-
-    public void set_booksA(Book _booksA) {
-        this._booksA = _booksA;
+    public void setBookId(Book bookId) {
+        this.bookId = bookId;
     }
 }
+

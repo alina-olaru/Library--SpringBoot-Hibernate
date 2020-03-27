@@ -66,7 +66,7 @@ public class Author {
     }
 
 
-    @OneToMany(mappedBy = "_authors",
+    @OneToMany(mappedBy = "authorId",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Set<BooksAuthors> bookAuthor;
