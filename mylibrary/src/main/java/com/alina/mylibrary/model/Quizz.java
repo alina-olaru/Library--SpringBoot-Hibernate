@@ -2,6 +2,7 @@ package com.alina.mylibrary.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,6 +33,32 @@ public class Quizz {
     @Column(length = 100)
     private String quizzCorrectAnswer;
 
+
+
+    @Column
+
+    private Date quizzStartDate;
+
+    @Column
+
+    private Date quizzEndDate;
+
+    public Date getQuizzStartDate() {
+        return quizzStartDate;
+    }
+
+    public void setQuizzStartDate(Date quizzStartDate) {
+        this.quizzStartDate = quizzStartDate;
+    }
+
+    public Date getQuizzEndDate() {
+        return quizzEndDate;
+    }
+
+    public void setQuizzEndDate(Date quizzEndDate) {
+        this.quizzEndDate = quizzEndDate;
+    }
+
     public Quizz() {
     }
 
@@ -42,14 +69,17 @@ public class Quizz {
         Quizz quizz = (Quizz) o;
         return quizzId == quizz.quizzId &&
                 numberOfQuestions == quizz.numberOfQuestions &&
-                Objects.equals(quizzQuestion, quizz.quizzQuestion) &&
-                Objects.equals(quizzAnswers, quizz.quizzAnswers) &&
-                Objects.equals(quizzCorrectAnswer, quizz.quizzCorrectAnswer);
+                quizzQuestion.equals(quizz.quizzQuestion) &&
+                quizzAnswers.equals(quizz.quizzAnswers) &&
+                quizzCorrectAnswer.equals(quizz.quizzCorrectAnswer) &&
+                quizzStartDate.equals(quizz.quizzStartDate) &&
+                quizzEndDate.equals(quizz.quizzEndDate) &&
+                vouchersGotByQuizz.equals(quizz.vouchersGotByQuizz);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(quizzId, numberOfQuestions, quizzQuestion, quizzAnswers, quizzCorrectAnswer);
+        return Objects.hash(quizzId, numberOfQuestions, quizzQuestion, quizzAnswers, quizzCorrectAnswer, quizzStartDate, quizzEndDate, vouchersGotByQuizz);
     }
 
     public int getQuizzId() {

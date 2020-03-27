@@ -25,7 +25,7 @@ public class BookUser {
     @NotNull
     private String lastName;
 
-    @Column(length = 20, unique = true)
+    @Column(length = 30, unique = true)
     @NotNull
     private String emailAdress;
 

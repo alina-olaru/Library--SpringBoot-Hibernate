@@ -2,15 +2,13 @@ package com.alina.mylibrary.controller;
 
 
 import com.alina.mylibrary.model.*;
-import com.alina.mylibrary.repository.BookUserRepository;
-import com.alina.mylibrary.repository.PublisherRepository;
-import com.alina.mylibrary.repository.QuizzRepository;
-import com.alina.mylibrary.repository.VoucherRepository;
+import com.alina.mylibrary.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @RestController
@@ -25,23 +23,198 @@ public class BookUserController {
     private QuizzRepository quizzRepository;
     @Autowired
     private VoucherRepository voucherRepository;
+    private BookRepository bookRepository;
 
     public BookUserController(BookUserRepository bookUserRepository,
                               PublisherRepository publisherRepository,
                               QuizzRepository quizzRepository,
-                              VoucherRepository voucherRepository) {
+                              VoucherRepository voucherRepository,
+                              BookRepository bookRepository) {
         this.bookUserRepository = bookUserRepository;
         this.publisherRepository = publisherRepository;
         this.quizzRepository = quizzRepository;
         this.voucherRepository = voucherRepository;
+        this.bookRepository = bookRepository;
     }
 
     @GetMapping("/all")
     public Iterable<BookUser> all(){
 
-        List<Quizz> q = quizzRepository.findAll();
+        //   ...................................................................................BOOKS........................................................................................
 
-        
+        List<Book> books=bookRepository.findAll();
+
+
+//        Book book2=new Book();
+//        book2.setBookDescription("O carte captivanta, in care este povestit pelerinajul lui Paulo Coelho catre Santiago de Compostela, pe un drum medieval ce incepe in Pirinei si strabate nordul Spaniei. Pelerinajul facut de autor in 1986 a inspirat acest roman de aventuri care este totodata o fascinanta parabola despre nevoia de a gasi propria cale in viata si despre descoperirea faptului ca miracolul se ascunde intotdeauna in pasii oamenilor obisnuiti.\n" +
+//                "\n" +
+//                "Jurnalul unui Mag ocupa un loc important in opera lui Paulo Coelho nu doar pentru ca este prima dintre cartile lui importante, publicata inainte de Alchimistul, ci si pentru ca este expresia completa a umanismului filozofiei lui Paulo Coelho si a profunzimii cautarilor sale.\n" +
+//                "\n" +
+//                "Am ajuns ieri in oras, dupa ce am luat autobuzul care face curse regulate intre Pedrafita – aproape de Cebreiro – si Compostela. In patru ore am parcurs cei o suta cincizeci de kilometri care desparteau cele doua orase si mi-am amintit de calatoria cu Petrus – uneori aveam nevoie de doua saptamani ca sa strabatem o distanta ca asta. Peste putin aveam sa merg la mormantul Sfantului Iacob sa las acolo icoana Sfintei Fecioare Intrupate, montata in scoici. Apoi, cat mai curand posibil, voi lua avionul inapoi spre Brazilia, fiindca am multa treaba. [...] Ma gandesc sa scriu o carte despre tot ce mi s-a intamplat. Dar este inca un gand departat... - Paulo Coelho");
+//        book2.setBookDimension("15x19x10");
+//        book2.setBookLanguage("Romana");
+//        book2.setBookPrice(89);
+//        book2.setBookRating(4);
+        //TODO de schimbat titlul in spioana
+//        book2.setBookTitle("11 minute");
+//        book2.setBookWeight(0.5f);
+//        book2.setBookYear(1998);
+//        book2.setNumberOfBoooks(15);
+//        book2.setCoverType("hardcover");
+//        book2.setNumberOfPages(543);
+//        book2.setNumberOfReviews(0);
+//        book2.setNumberofVolumes(1);
+//
+//    bookRepository.save(book2);
+
+
+        Book book3=new Book();
+        book3.setBookDescription("Pe buna dreptate, contemporanii l-au numi regele forului, iar in vremurile urmatoare a castigat atata glorie, incat Cicero nu este numele unui om, ci al elocventei. - Quintilian\n" +
+                "\n" +
+                "Cat despre elocventa lui Cicero, e mai presus de orice comparatie. Cred ca niciodata vreun om nu-l va egala. - Montaigne\n" +
+                "\n" +
+                "Cicero are constiinta valorii sale si a importantei oratoriei in statul roman. El face un vibrant elogiu oratoriei in relatile cu problemele majore ale cetatii. Forta oratoriei, intr-o societate libera, este mirifica. Oratorul cucereste forul, senatul, tribunele, salveaza libertatea sau viata cetatenilor si contribuie la propasirea statului. - Traian Diaconescu");
+        book3.setBookDimension("15x19x10");
+        book3.setBookLanguage("Romana");
+        book3.setBookPrice(89);
+        book3.setBookRating(4);
+        book3.setBookTitle("Arta oratoriei ");
+        book3.setBookWeight(0.5f);
+        book3.setBookYear(1998);
+        book3.setNumberOfBoooks(15);
+        book3.setCoverType("hardcover");
+        book3.setNumberOfPages(543);
+        book3.setNumberOfReviews(0);
+        book3.setNumberofVolumes(1);
+        bookRepository.save(book3);
+
+
+
+//        Book book1=new Book();
+//        book1.setBookDescription("Romanul Unsprezece minute este povestea Mariei, o fata dintr-un sat brazilian, ale carei prime intalniri inocente cu dragostea o lasa cu inima franta. La o varsta frageda, ea se convinge ca nu va gasi niciodata iubirea adevarata, crezand in schimb ca „dragostea este un lucru cumplit, care te face sa suferi...“. O intalnire intamplatoare in Rio de Janeiro o determina sa plece la Geneva, unde viseaza sa gaseasca faima si bogatie, dar sfarseste in strada, ca prostituata.\n" +
+//                "\n" +
+//                "In Geneva, Maria se indeparteaza tot mai mult de iubire, devenind tot mai fascinata de sex. In cele din urma, conceptia ei lipsita de speranta despre dragoste este pusa la incercare cand cunoaste un tanar si chipes pictor. In aceasta odisee a descoperirii de sine, Maria are de ales intre a urma o cale\n" +
+//                "a intunericului – placerea sexuala de dragul placerii sexuale – sau a risca totul pentru a gasi „lumina launtrica“ si potentialitatile sexului sacru, ale sexului in contextul dragostei.\n" +
+//                "\n" +
+//                "In acest palpitant si indraznet roman, Paulo Coelho analizeaza cu sensibilitate natura spirituala a sexului si a iubirii si ne invita sa ne confruntam cu propriile prejudecati, cu propriii demoni, sa ne aflam propria „lumina launtrica“.");
+//        book1.setBookDimension("15x19x10");
+//        book1.setBookLanguage("Romana");
+//        book1.setBookPrice(30);
+//        book1.setBookRating(4);
+//        book1.setBookTitle("11 minute");
+//        book1.setBookWeight(0.5f);
+//        book1.setBookYear(1978);
+//        book1.setNumberOfBoooks(122);
+//        book1.setCoverType("hardcover");
+//        book1.setNumberOfPages(543);
+//        book1.setNumberOfReviews(0);
+//        book1.setNumberofVolumes(1);
+//
+//    bookRepository.save(book1);
+
+        //   ...................................................................................users........................................................................................
+
+//        //todo de schimbat length pt mail
+//        List<BookUser> users = bookUserRepository.findAll();
+//        BookUser admin=new BookUser();
+//        admin.setAppartmentNumber(35);
+//        admin.setBlock("17");
+//        admin.setCity("Bucuresti");
+//        admin.setEmailAdress("olaru@gmail.com");
+//        admin.setFirstName("Alina");
+//        admin.setLastName("Olaru");
+//        admin.setFloor(8);
+//        admin.setUsername("alinaaolaru");
+//        admin.setPassword("5555");
+//        admin.setPhoneNumber("0726080518");
+//        admin.setProvince("Bucuresti");
+//        admin.setStreetName("Berceni");
+//        admin.setUserPrivilege(true);
+//        admin.setNewsletter(true);
+//        admin.setAdminPrivilege(true);
+//        admin.setStreetNumber(17);
+//        admin.setFloor(8);
+//        admin.setAppartmentNumber(65);
+//        admin.setCountry("Romania");
+//     bookUserRepository.save(admin);
+//
+//        BookUser firstUser=new BookUser();
+//        firstUser.setAppartmentNumber(35);
+//        firstUser.setBlock("17");
+//        firstUser.setCity("Bucuresti");
+//        firstUser.setEmailAdress("test@gmail.com");
+//        firstUser.setFirstName("Alina");
+//        firstUser.setLastName("Olaru");
+//        firstUser.setFloor(8);
+//        firstUser.setUsername("test");
+//        firstUser.setPassword("5555");
+//        firstUser.setPhoneNumber("0726080518");
+//        firstUser.setProvince("Bucuresti");
+//        firstUser.setStreetName("Berceni");
+//        firstUser.setUserPrivilege(true);
+//        firstUser.setNewsletter(true);
+//        firstUser.setAdminPrivilege(true);
+//        firstUser.setStreetNumber(17);
+//        firstUser.setFloor(8);
+//        firstUser.setAppartmentNumber(65);
+//        firstUser.setCountry("Romania");
+//        bookUserRepository.save(firstUser);
+
+        //TODO UNICAT PE EMAIL CA S A PUS DE 2 ORI
+        //TODO DE STERS DUPLICATELE DE AICI SI DE LA QUIZZEZ
+
+    //   ...................................................................................quizzez........................................................................................
+//        List<Quizz> q = quizzRepository.findAll();
+//
+//        Date aa=new Date(2020,3,1);
+//        Date bbbb=new Date(2020,4,15);
+//        Quizz newQuizz = new Quizz();
+//        newQuizz.setQuizzQuestion("Citatul “Just as I succeeded in finding all the answers,\n" +
+//                " all the questions changed.“  este al lui: ");
+//        newQuizz.setNumberOfQuestions(3);
+//        newQuizz.setQuizzAnswers("Paulo Coelho.Mihai Eminescu.Sandra Brown");
+//        newQuizz.setQuizzCorrectAnswer("Paulo Coelho");
+//        newQuizz.setQuizzStartDate(aa);
+//        newQuizz.setQuizzEndDate(bbbb);
+//        System.out.println(newQuizz);
+//        quizzRepository.save(newQuizz);
+//
+//
+//
+//        Date aaa=new Date(2020,4,16);
+//        Date bb=new Date(2020,8,15);
+//        Quizz newQuizzz = new Quizz();
+//        newQuizzz.setQuizzQuestion("Opera De legibus (Marcus Tullius Cicero este:");
+//        newQuizzz.setNumberOfQuestions(4);
+//        newQuizzz.setQuizzAnswers("Dialog politic.Scriere pe tema existentei.Scriere pe tema divinitatii.Expunere a problemei destinului.");
+//        newQuizzz.setQuizzCorrectAnswer("Dialog politic.");
+//        newQuizzz.setQuizzStartDate(aaa);
+//        newQuizzz.setQuizzEndDate(bb);
+//        System.out.println(newQuizzz);
+//        quizzRepository.save(newQuizzz);
+//
+//    //   ...................................................................................vouchers........................................................................................
+//        Voucher a = new Voucher();
+//        a.setVoucherTitle("Voucher 10%");
+//        a.setVoucherDescription("5% ka orice comanda");
+//        a.setVoucherMaximumUses(10);
+//        a.setVoucherPrice(10.0f);
+//        a.setVoucherStartDate(new Date(2020,1,1));
+//        a.setVoucherEndDate(new Date(2020,12,31));
+//        a.setQuizzez(newQuizz);
+//
+//        Voucher b = new Voucher();
+//        b.setVoucherTitle("Voucher 25%");
+//        b.setVoucherDescription("25& la orice comanda");
+//        b.setVoucherMaximumUses(1);
+//        b.setVoucherPrice(25.5f);
+//        b.setVoucherStartDate(new Date(2020,4,1));
+//        a.setVoucherEndDate(new Date(2020,12,31));
+//        b.setQuizzez(newQuizzz);
+//
+//        this.voucherRepository.save(a);
+//        this.voucherRepository.save(b);
+
 
 //        Quizz newQuizz = new Quizz();
 //        newQuizz.setQuizzQuestion("asdsa");
