@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@IdClass(OrderItemId.class)
 public class OrderItem  implements Serializable
 {
     @Id

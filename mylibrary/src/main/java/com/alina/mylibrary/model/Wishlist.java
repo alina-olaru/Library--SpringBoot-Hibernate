@@ -6,6 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table
+@IdClass(WishlistId.class)
 public class Wishlist implements Serializable {
 
 

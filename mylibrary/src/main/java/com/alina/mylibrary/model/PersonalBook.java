@@ -7,6 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table
+@IdClass(PersonalBookId.class)
 public class PersonalBook implements Serializable {
 
     @Id

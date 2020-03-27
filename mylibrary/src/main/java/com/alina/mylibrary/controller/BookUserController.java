@@ -35,6 +35,10 @@ public class BookUserController {
     private BooksCategoriesRepository booksCategoriesRepository;
     private ComplaintRepository complaintRepository;
     private ReviewRepository reviewRepository;
+    private BookOrderRepository bookOrderRepository;
+    private OrderItemRepository orderItemRepository;
+    private PersonalBookRepository personalBookRepository;
+    private WishlistRepository wishlistRepository;
 
 
     public BookUserController(BookUserRepository bookUserRepository,
@@ -48,7 +52,11 @@ public class BookUserController {
                               CategoryRepository categoryRepository,
                               BooksCategoriesRepository booksCategoriesRepository,
                               ComplaintRepository complaintRepository,
-                              ReviewRepository reviewRepository
+                              ReviewRepository reviewRepository,
+                              BookOrderRepository bookOrderRepository,
+                              OrderItemRepository orderItemRepository,
+                              PersonalBookRepository personalBookRepository,
+                              WishlistRepository wishlistRepository
     ) {
         this.bookUserRepository = bookUserRepository;
         this.publisherRepository = publisherRepository;
@@ -63,10 +71,25 @@ public class BookUserController {
         this.booksCategoriesRepository = booksCategoriesRepository;
         this.complaintRepository = complaintRepository;
         this.reviewRepository = reviewRepository;
+        this.bookOrderRepository = bookOrderRepository;
+        this.orderItemRepository = orderItemRepository;
+        this.personalBookRepository = personalBookRepository;
+        this.wishlistRepository = wishlistRepository;
     }
 
     @GetMapping("/all")
     public Iterable<BookUser> all(){
+
+
+        BookOrder test_order=new BookOrder();
+        test_order.setOrderD(new Date(2020,1,1));
+        test_order.setNumberItems(1);
+        test_order.setShipping(12);
+        test_order.setSubtotal(50);
+        test_order.setTotal(62);
+        test_order.setVoucherDiscount(12);
+        bookOrderRepository.save(test_order);
+
 
 
         //TODO o carte are mai multe review uri,cum se face acest lucru
