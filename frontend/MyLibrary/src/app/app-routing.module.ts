@@ -1,4 +1,4 @@
-import { RegisterComponent } from './areas/register/register/register.component';
+import { RegisterComponent } from './areas/register/register.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

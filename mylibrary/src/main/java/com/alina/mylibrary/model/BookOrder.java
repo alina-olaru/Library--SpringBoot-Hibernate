@@ -5,6 +5,7 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -113,7 +114,7 @@ public class BookOrder{
 
     @OneToMany(mappedBy = "order",
     cascade = CascadeType.ALL)
-    private Set<OrderItem> items;
+    private List<OrderItem> items;
 
 
 

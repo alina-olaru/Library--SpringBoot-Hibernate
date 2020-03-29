@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Blob;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -149,7 +150,7 @@ public class Voucher {
 
     @OneToMany(mappedBy = "vouchers",
             cascade = CascadeType.ALL)
-    private Set<VoucherUser> userVoucherLink;
+    private List<VoucherUser> userVoucherLink;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_QUIZZ_ID"))

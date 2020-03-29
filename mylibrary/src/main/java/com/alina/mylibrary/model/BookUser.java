@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -38,58 +39,22 @@ public class BookUser {
     private String emailAdress;
 
     @Column(length = 11,unique = true)
-    //TODO DE CE NU MERGE UNIQUE
     @NotNull
     private String phoneNumber;
 
     @Column
     @NotNull
-    @ColumnDefault("false")
     private boolean newsletter=false;
 
 
     @Column
-    @ColumnDefault("false")
     @NotNull
     private boolean adminPrivilege=false;
 
 
     @Column
-    @ColumnDefault("false")
     @NotNull
     private boolean userPrivilege =false;
-
-    @NotNull
-    @Column(length = 20)
-    private String country;
-
-    @NotNull
-    @Column(length = 20)
-    private String province;
-
-    @NotNull
-    @Column(length = 20)
-    private String city;
-
-    @NotNull
-    @Column(length = 20)
-    private String streetName;
-
-    @NotNull
-    @Column
-    private int streetNumber;
-
-    @NotNull
-    @Column(length = 20)
-    private String block;
-
-    @NotNull
-    @Column
-    private int floor;
-
-    @NotNull
-    @Column
-    private int appartmentNumber;
 
     @Column
     private String password;
@@ -102,26 +67,30 @@ public class BookUser {
 
     @OneToMany(mappedBy = "user",
     cascade = CascadeType.ALL)
-    private  Set<PersonalBook> persBooks;
+    private List<PersonalBook> persBooks;
 
     @OneToMany(mappedBy = "userwishlist",
     cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Wishlist> wishBooks;
+    private List<Wishlist> wishBooks;
 
     @OneToMany(mappedBy = "ordersUser",
     cascade = CascadeType.ALL)
-    private Set<BookOrder> ordersbyuser;
+    private List<BookOrder> ordersbyuser;
 
     @OneToMany(mappedBy = "com")
-    private Set<Complaint> userComplaints;
+    private List<Complaint> userComplaints;
 
     @OneToMany(mappedBy = "userReviewMaker")
-    private Set<Review> reviewsByUser;
+    private List<Review> reviewsByUser;
 
     @OneToMany(mappedBy = "usersWithVouchers",
             cascade = CascadeType.ALL)
-    private Set<VoucherUser> userVoucherLink;
+    private List<VoucherUser> userVoucherLink;
+
+    @OneToMany(mappedBy = "userAddress",
+    cascade = CascadeType.ALL)
+    private List<Address> addresses;
 
 }
 

@@ -3,6 +3,7 @@ package com.alina.mylibrary.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -122,15 +123,15 @@ public class Quizz {
         this.quizzCorrectAnswer = quizzCorrectAnswer;
     }
 
-    public Set<Voucher> getVouchersGotByQuizz() {
+    public List<Voucher> getVouchersGotByQuizz() {
         return vouchersGotByQuizz;
     }
 
-    public void setVouchersGotByQuizz(Set<Voucher> vouchersGotByQuizz) {
+    public void setVouchersGotByQuizz(List<Voucher> vouchersGotByQuizz) {
         this.vouchersGotByQuizz = vouchersGotByQuizz;
     }
 
     @OneToMany(mappedBy = "quizzez",
     cascade = CascadeType.ALL)
-    private Set<Voucher> vouchersGotByQuizz;
+    private List<Voucher> vouchersGotByQuizz;
 }

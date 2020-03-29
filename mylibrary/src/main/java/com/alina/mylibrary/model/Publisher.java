@@ -2,6 +2,7 @@ package com.alina.mylibrary.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 
@@ -21,7 +22,7 @@ public class Publisher {
 
 
     @OneToMany(mappedBy = "publisher")
-    private Set<Book> book;
+    private List<Book> book;
 
 
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -42,6 +43,6 @@ public class Author {
     @OneToMany(mappedBy = "authorId",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private Set<BooksAuthors> bookAuthor;
+    private List<BooksAuthors> bookAuthor;
 
 }

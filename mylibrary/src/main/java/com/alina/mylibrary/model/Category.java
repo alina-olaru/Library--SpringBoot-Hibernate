@@ -3,6 +3,7 @@ package com.alina.mylibrary.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -70,6 +71,6 @@ public class Category {
 
     @OneToMany(mappedBy = "categories",
     cascade = CascadeType.ALL)
-    private Set<BooksCategories> booksCategories;
+    private List<BooksCategories> booksCategories;
 
 }

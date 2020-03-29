@@ -1,4 +1,4 @@
-export class User{
+export class BookUser{
   userId: number;
   firstName: String;
   lastName: String;
@@ -7,11 +7,10 @@ export class User{
   newsletter: boolean;
   adminPrivilege: boolean;
   userPrivilege: boolean
-  country:String;
-  province:String;
-  city:String;
-  streetName:String;
-  streetNumber:number;
-  block:number;
-  floor:number
+  blocked: boolean;
+  username: String;
+  password: String;
+  public constructor(init?: Partial<BookUser>) {
+    Object.assign(this, init);
+}
 }

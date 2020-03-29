@@ -3,6 +3,7 @@ package com.alina.mylibrary.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -204,43 +205,43 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Set<PersonalBook> getPersBooks() {
+    public List<PersonalBook> getPersBooks() {
         return persBooks;
     }
 
-    public void setPersBooks(Set<PersonalBook> persBooks) {
+    public void setPersBooks(List<PersonalBook> persBooks) {
         this.persBooks = persBooks;
     }
 
-    public Set<Wishlist> getWishBooks() {
+    public List<Wishlist> getWishBooks() {
         return wishBooks;
     }
 
-    public void setWishBooks(Set<Wishlist> wishBooks) {
+    public void setWishBooks(List<Wishlist> wishBooks) {
         this.wishBooks = wishBooks;
     }
 
-    public Set<OrderItem> getItems() {
+    public List<OrderItem> getItems() {
         return items;
     }
 
-    public void setItems(Set<OrderItem> items) {
+    public void setItems(List<OrderItem> items) {
         this.items = items;
     }
 
-    public Set<BooksCategories> getBooksCategories() {
+    public List<BooksCategories> getBooksCategories() {
         return booksCategories;
     }
 
-    public void setBooksCategories(Set<BooksCategories> booksCategories) {
+    public void setBooksCategories(List<BooksCategories> booksCategories) {
         this.booksCategories = booksCategories;
     }
 
-    public Set<BooksAuthors> getBookAuthor() {
+    public List<BooksAuthors> getBookAuthor() {
         return bookAuthor;
     }
 
-    public void setBookAuthor(Set<BooksAuthors> bookAuthor) {
+    public void setBookAuthor(List<BooksAuthors> bookAuthor) {
         this.bookAuthor = bookAuthor;
     }
 
@@ -283,28 +284,28 @@ public class Book {
 
     @OneToMany(mappedBy = "book",
     cascade = CascadeType.ALL)
-    private Set<PersonalBook> persBooks;
+    private List<PersonalBook> persBooks;
 
     @OneToMany(mappedBy = "bookwishlist",
     cascade = CascadeType.ALL)
-    private Set<Wishlist> wishBooks;
+    private List<Wishlist> wishBooks;
 
     @OneToMany(mappedBy = "booksorder",
     cascade = CascadeType.ALL)
-    private Set<OrderItem> items;
+    private List<OrderItem> items;
 
 
     @OneToMany(mappedBy = "booksC",
     cascade = CascadeType.ALL)
-    private Set<BooksCategories> booksCategories;
+    private List<BooksCategories> booksCategories;
 
 
     @OneToMany(mappedBy = "bookId",
             fetch = FetchType.LAZY,
     cascade = CascadeType.ALL)
-    private Set<BooksAuthors> bookAuthor;
+    private List<BooksAuthors> bookAuthor;
 
     @OneToMany(mappedBy = "bookR")
-    private Set<Review> reviews;
+    private List<Review> reviews;
 }
 
