@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from '../../../services/toastr.service';
-import { MustMatch } from '../../../moduls/material/validators/must-match';
+import { MustMatch } from '../../../modules/validators/must-match';
 //import { RegisterService } from '../register.service';
 
 @Component({

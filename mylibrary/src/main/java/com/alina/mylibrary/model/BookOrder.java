@@ -44,8 +44,7 @@ public class BookOrder{
     @NotNull
     @Column
     private int numberItems;
-    //TODO daca mai trebuie sau fac direct un count
-    //TODO DE ADAUGAT ID_USER_VOUCHER DIN TABELUL DE LEG USER-VOUCHER
+
 
 
     public BookOrder() {
@@ -116,7 +115,7 @@ public class BookOrder{
     cascade = CascadeType.ALL)
     private Set<OrderItem> items;
 
-    //TODO de vazur cu id_used_voucher
+
 
     @OneToOne(mappedBy = "orderWithVouchers",
     cascade = CascadeType.ALL,

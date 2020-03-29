@@ -118,10 +118,6 @@ public class Voucher {
         this.voucherPrice = voucherPrice;
     }
 
-    //todo un quizz are un voucher,deci teoetic nu mai am nev de legatura
-    //dar cum fac
-
-
     public Quizz getQuizzez() {
         return quizzez;
     }
@@ -152,10 +148,10 @@ public class Voucher {
 
 
     @OneToMany(mappedBy = "vouchers",
-    cascade = CascadeType.ALL)
+            cascade = CascadeType.ALL)
     private Set<VoucherUser> userVoucherLink;
 
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name="FK_QUIZZ_ID"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_QUIZZ_ID"))
     private Quizz quizzez;
 }

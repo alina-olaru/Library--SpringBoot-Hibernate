@@ -67,6 +67,22 @@ public class Review {
     }
 
 
+    public Book getBookR() {
+        return bookR;
+    }
+
+    public void setBookR(Book bookR) {
+        this.bookR = bookR;
+    }
+
+    public BookUser getUserReviewMaker() {
+        return userReviewMaker;
+    }
+
+    public void setUserReviewMaker(BookUser userReviewMaker) {
+        this.userReviewMaker = userReviewMaker;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

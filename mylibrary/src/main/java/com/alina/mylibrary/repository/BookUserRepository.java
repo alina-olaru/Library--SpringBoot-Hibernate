@@ -7,12 +7,15 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 //public interface BookUserRepository extends CrudRepository<BookUser,Integer> {
 //}
 
 @Repository
 @Transactional
-public interface BookUserRepository extends JpaRepository<BookUser,Integer>{
-
+public interface BookUserRepository extends JpaRepository<BookUser, Integer> {
+    List<BookUser> findByEmailAdress(String emailAdress);
+    List<BookUser> findByUsername(String username);
 }
 

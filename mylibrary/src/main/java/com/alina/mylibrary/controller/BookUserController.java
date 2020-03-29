@@ -4,6 +4,7 @@ package com.alina.mylibrary.controller;
 import com.alina.mylibrary.model.*;
 import com.alina.mylibrary.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class BookUserController {
 
     @Autowired
@@ -112,10 +114,11 @@ public class BookUserController {
 
 
 
-        //TODO o carte are mai multe review uri,cum se face acest lucru
+
         Review testReview=new Review();
         testReview.setReviewerName("foarte buna");
         testReview.setTextReview("Am citit-o pe nerasuflate");
+        testReview.setBookR(books.get(1));
     //    reviewRepository.save(testReview);
 
         Complaint comTest=new Complaint();
@@ -176,7 +179,7 @@ public class BookUserController {
         book2.setBookLanguage("Romana");
         book2.setBookPrice(89);
         book2.setBookRating(4);
-      //  TODO de schimbat titlul in spioana
+
         book2.setBookTitle("Spioana");
         book2.setBookWeight(0.5f);
         book2.setBookYear(1998);
@@ -283,7 +286,6 @@ public class BookUserController {
       //  booksAuthorsRepository.save(lba3);
         //   ...................................................................................users........................................................................................
 
-//        //todo de schimbat length pt mail
 //        List<BookUser> users = bookUserRepository.findAll();
         BookUser admin=new BookUser();
         admin.setAppartmentNumber(35);
@@ -331,7 +333,6 @@ public class BookUserController {
 
 
         //TODO UNICAT PE EMAIL CA S A PUS DE 2 ORI
-        //TODO DE STERS DUPLICATELE DE AICI SI DE LA QUIZZEZ
 
     //   ...................................................................................quizzez........................................................................................
 //        List<Quizz> q = quizzRepository.findAll();
