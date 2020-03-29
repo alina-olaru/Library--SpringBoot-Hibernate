@@ -61,6 +61,11 @@
                 <mat-error *ngIf="form.checkpass?.errors?.required"> Confirmarea parolei este obligatorie </mat-error>
                 <mat-error *ngIf="form.checkpass?.errors?.mustMatch"> Confirmarea parolei trebuie sa fie aceeasi cu cea de mai sus </mat-error>
               </mat-form-field>
+              <div fxFlex class="example-full-width">
+                <mat-checkbox formControlName="newsletter">
+                  Aboneaza-te la newsletter!
+                </mat-checkbox>
+              </div>
               <div fxFlex class="mt">
                 <button fxFlex mat-raised-button color="primary" type="submit">
                   Inregistreaza-te

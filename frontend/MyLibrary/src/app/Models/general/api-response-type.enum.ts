@@ -1,4 +1,4 @@
 export enum ApiResponseType {
-  SUCCESS=0,
-  ERROR
+  SUCCESS = "SUCCESS",
+  ERROR = "ERROR"
 }

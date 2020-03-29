@@ -7,6 +7,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -19,8 +20,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatSidenavModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressBarModule
-
+    MatProgressBarModule,
+    MatCheckboxModule
 
   ],
   exports: [
@@ -30,7 +31,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatSidenavModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCheckboxModule
 
   ]
 })

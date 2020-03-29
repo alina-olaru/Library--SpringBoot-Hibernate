@@ -22,6 +22,7 @@ public class RegisterApiImpl implements RegisterApi {
             BookUser response = this.registerService.registerUser(user);
             return new ApiResponse<BookUser>(ApiResponseType.SUCCESS, response);
         }
-        return new ApiResponse<BookUser>(ApiResponseType.ERROR, null);
+        //TODO mesaj eroare cu detalii
+        return new ApiResponse<BookUser>(ApiResponseType.ERROR, null, "Contul nu a putut fi creat, verifica datele introduse!");
     }
 }
