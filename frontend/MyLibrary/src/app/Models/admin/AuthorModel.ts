@@ -1,5 +1,8 @@
 export class Author{
-  AUTHOR_ID:number;
-  FIRST_NAME:String;
-  LAST_NAME:String;
+  authorId:number;
+  firstName:String;
+  lastName:String;
+  public constructor(init?: Partial<Author>) {
+    Object.assign(this, init);
+  }
 }
