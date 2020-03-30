@@ -11,8 +11,8 @@ import java.util.List;
 
 @Repository
 @Transactional
-
 public interface BookRepository extends JpaRepository<Book,Integer> {
+    List<Book> findByBookTitle(String bookTitle);
 }
 
 

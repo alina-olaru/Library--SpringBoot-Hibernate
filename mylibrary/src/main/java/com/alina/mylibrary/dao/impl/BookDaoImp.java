@@ -40,16 +40,33 @@ public class BookDaoImp implements BookDao {
     //        return this.bookUserRepository.findByEmailAdress(email).stream().findFirst().orElse(null);
     @Override
     public Book addBook(Book book) {
+
+        if(book!=null) {
+            this.bookRepository.save(book);
+            return book;
+        }
         return null;
     }
 
     @Override
-    public boolean deleteBook(int bookId) {
-        return false;
+    public boolean deleteBook(int bookId)
+    {
+        if(bookId==0){
+            return false;
+        }
+
+        this.bookRepository.deleteById(bookId);
+        return true;
+
     }
 
     @Override
-    public Book updateBook(Book book) {
-        return null;
+    public Book updateBook(Book book)
+    {
+       if(book.getBookId()==0){
+           return null;
+       }
+       this.bookRepository.save(book);
+       return book;
     }
 }
