@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Edituri")
+@RequestMapping("/public/Edituri")
 @CrossOrigin
 public interface PublisherApi {
 
@@ -26,6 +26,3 @@ public interface PublisherApi {
 }
 
 
-
-
- */

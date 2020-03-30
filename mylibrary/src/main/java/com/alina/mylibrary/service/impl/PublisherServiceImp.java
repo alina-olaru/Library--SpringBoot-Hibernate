@@ -16,7 +16,7 @@ public class PublisherServiceImp implements PublisherService {
 
     @Autowired
     PublisherDao publisherDao;
-    PublisherRepository publisherRepository;
+
 
     @Override
     public Publisher addPublisher(Publisher publisher) {

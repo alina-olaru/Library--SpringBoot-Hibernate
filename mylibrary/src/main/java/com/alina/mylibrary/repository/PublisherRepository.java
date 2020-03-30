@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface PublisherRepository extends JpaRepository<Publisher, Integer> {
 
- List<Publisher> findrBypublisherTitle(String publisherTitle);
-    Publisher findrBypublisherId(int publisherId);
+ List<Publisher> findBypublisherTitle(String publisherTitle);
+    Publisher findBypublisherId(int publisherId);
 
 }
