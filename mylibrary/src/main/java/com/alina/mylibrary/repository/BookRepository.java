@@ -14,6 +14,9 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book,Integer> {
 
+        List<Book> findByFirstName(String firstName);
+        List<Book> findByLastName(String lastName);
 
 }
+
 

@@ -23,7 +23,8 @@ public interface AuthorApi {
     @PutMapping
     ApiResponse<Author> updateAuthor(@RequestBody Author author);
 
-
+    @DeleteMapping("/{id}")
+    ApiResponse<Boolean> deleteAuthor(@RequestParam int id);
 }
 
 

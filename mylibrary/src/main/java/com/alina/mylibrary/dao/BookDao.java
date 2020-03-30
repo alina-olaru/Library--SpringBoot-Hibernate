@@ -11,7 +11,7 @@ public interface BookDao {
 
     public List<Book> getBooks();
     public Book getBookbyId(int bookId);
-    public Book getBookbyAuthor(String firstName,String lastname);
+    public List<Book> getBookbyAuthor(String firstName,String lastname);
     public Book addBook(Book book);
     public boolean deleteBook(int bookId);
     public Book updateBook(Book book);
