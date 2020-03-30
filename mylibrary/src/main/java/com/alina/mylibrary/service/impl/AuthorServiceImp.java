@@ -6,6 +6,8 @@ import com.alina.mylibrary.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class AuthorServiceImp implements AuthorService {
@@ -32,5 +34,10 @@ public class AuthorServiceImp implements AuthorService {
     @Override
     public boolean deleteAuthor(int authorId) {
         return authorDao.deleteAuthor(authorId);
+    }
+
+    @Override
+    public List<Author> getAuthors() {
+        return authorDao.getAuthors();
     }
 }
