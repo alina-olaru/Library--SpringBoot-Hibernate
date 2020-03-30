@@ -71,15 +71,89 @@ export class AuthorsComponent implements OnInit {
       });
   }
 
-  DeleteAuthor(element) {}
+  DeleteAuthor(autor:Author) {
+    this.toastr.Swal.fire({
+      title: 'Esti sigur ca vrei sa stergi acest bautura?',
+      html: `Id: <b>${autor.authorId}</b> - Nume: <b>${autor.firstName} ${autor.lastName}</b>`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Da',
+      cancelButtonText: 'Nu'
+    }).then(result => {
+      if (result.value) {
+        this.loadingService.start();
+
+        this.authorsService
+          .DeleteAuthor(autor.authorId)
+          .subscribe((response: ApiResponse<boolean>) => {
+            this.loadingService.stop();
+            if (response && response.status==ApiResponseType.SUCCESS && response.body == true) {
+              this.toastr.Toast.fire({
+                title: 'Autorul a fost sters.',
+                icon: 'success'
+              });
+              this.GetAuthors();
+            } else {
+              this.toastr.Swal.fire(
+                'Eroare!',
+                'A aparut o eroare la stergere, incearca din nou!',
+                'error'
+              );
+            }
+          });
+      }
+    });
+  }
 
   EditAuthor(item:Author) {
     const dialogRef=this.dialog.open(AddEditAuthorComponent,{
+      width: '400px',
+      data: {
+        type: 'edit',
+        model: Object.assign({}, item)
+      }
 
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(result!=undefined && result !=null){
+        this.EditAuthorConfirm(result,item);
+      }
     })
 
 
+  }
+
+  EditAuthorConfirm(newAuthor:Author,oldAuthor:Author){
+    this.loadingService.start();
+
+    this.authorsService.UpdateAuthor(newAuthor,newAuthor.authorId).subscribe((response:ApiResponse<Author>)=> {
+      this.loadingService.stop();
+      if (response && response.status == ApiResponseType.SUCCESS) {
+        this.toastr.Toast.fire({
+          title: 'Autorul a fost editat cu succes!',
+          icon: 'success'
+
+        });
+
+        const idxOld=this.authors.indexOf(oldAuthor);
+        this.authors[idxOld]=newAuthor;
+        this.updateDataSouce();
+      }
+
+      else {
+        this.toastr.Swal.fire(
+          'Eroare!',
+          'A aparut o eroare la editare, incearca din nou!',
+          'error'
+        );
+
+
+      }
+    },
+  );
   }
 
   AddAuthor() {
