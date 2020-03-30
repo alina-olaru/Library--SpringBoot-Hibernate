@@ -1,3 +1,4 @@
+import { PublishersComponent } from './pages/publishers/publishers.component';
 import { AuthorsComponent } from './pages/authors/authors.component';
 
 import { LayoutComponent } from './layout/layout.component';
@@ -26,7 +27,10 @@ const routes: Routes = [
       },
     {  path:"carti",
       component:BooksComponent
-    }
+    },
+    {  path:"edituri",
+    component:PublishersComponent
+  }
     ]
   }
 ];
