@@ -10,11 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class BookServiceImp implements BookService {
 
     @Autowired
-    BookDao bookDao;
+    private BookDao bookDao;
 
 
     @Override
@@ -53,6 +52,6 @@ public class BookServiceImp implements BookService {
 
     @Override
     public List<Book> getBook() {
-       return this.getBook();
+       return this.bookDao.getBooks();
     }
 }

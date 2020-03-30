@@ -119,7 +119,7 @@ public class BookUserController {
      //   bookUserRepository.save(firstUser);
 
 
-        //TODO UNICAT PE EMAIL CA S A PUS DE 2 ORI
+
 
         /*
 

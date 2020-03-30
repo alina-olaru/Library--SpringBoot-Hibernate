@@ -6,10 +6,12 @@ import com.alina.mylibrary.model.Book;
 import com.alina.mylibrary.repository.AuthorRepository;
 import com.alina.mylibrary.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class BookDaoImp implements BookDao {
 
 
