@@ -12,6 +12,8 @@ import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthorsComponent } from './pages/authors/authors.component';
 import { AddEditAuthorComponent } from './pages/authors/add-edit-author/add-edit-author.component';
+import { BooksComponent } from './pages/books/books.component';
+import { AddEditBookComponent } from './pages/books/add-edit-book/add-edit-book.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { AddEditAuthorComponent } from './pages/authors/add-edit-author/add-edit
   [LayoutComponent,
     DashboardComponent,
     AuthorsComponent,
-    AddEditAuthorComponent],
+    AddEditAuthorComponent,
+    BooksComponent,
+    AddEditBookComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

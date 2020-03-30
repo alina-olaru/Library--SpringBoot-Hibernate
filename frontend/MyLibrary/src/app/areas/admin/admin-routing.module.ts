@@ -4,6 +4,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { BooksComponent } from './pages/books/books.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,10 @@ const routes: Routes = [
       {
         path:"autori",
         component:AuthorsComponent
-      }
+      },
+    {  path:"carti",
+      component:BooksComponent
+    }
     ]
   }
 ];
