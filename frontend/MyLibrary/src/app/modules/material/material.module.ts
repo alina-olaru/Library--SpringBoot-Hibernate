@@ -13,6 +13,13 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {  MatDialogModule } from '@angular/material/dialog';
+
+
 @NgModule({
   declarations: [],
   imports: [
@@ -29,8 +36,12 @@ import {MatMenuModule} from '@angular/material/menu';
     MatDividerModule,
     MatListModule,
     MatToolbarModule,
-    MatMenuModule
-
+    MatMenuModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSortModule
   ],
   exports: [
     MatButtonModule,
@@ -45,8 +56,12 @@ import {MatMenuModule} from '@angular/material/menu';
     MatDividerModule,
     MatListModule,
     MatToolbarModule,
-    MatMenuModule
-
+    MatMenuModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSortModule
   ]
 })
 export class MaterialModule { }

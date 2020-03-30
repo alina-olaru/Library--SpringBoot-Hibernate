@@ -1,1 +1,39 @@
 <p>authors works!</p>
+<div class="p-2" fxLayout="row">
+  <mat-form-field fxFlex>
+    <input matInput placeholder="Filtreaza" >
+
+  </mat-form-field>
+  <div fxFlex="2 2 calc(10em + 10px)"></div>
+  <div fxFlex fxLayoutAlign="end center">
+    <button mat-button color="accent" (click)="AddAuthor()">
+      <mat-icon>add</mat-icon> Adauga
+    </button>
+  </div>
+</div>
+
+<div class="mat-elevation-z8 m-2" fxLayout="column" gallerize>
+  <!-- <table mat-table fxFlex [dataSource]="" matSort>
+
+
+
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element" fxLayoutAlign="end center">
+        <button mat-button color="warn" (click)="DeleteAuthor(element)">
+          <mat-icon>delete</mat-icon>Sterge
+        </button>
+        <button mat-button color="primary" (click)="EditAuthor(element)">
+          <mat-icon>edit</mat-icon>Editeaza
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+  </table> -->
+  <mat-paginator [pageSizeOptions]="[10, 20, 30, 50]" showFirstLastButtons></mat-paginator>
+</div>
