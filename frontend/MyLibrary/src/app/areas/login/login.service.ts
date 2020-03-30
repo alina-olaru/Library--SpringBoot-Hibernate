@@ -15,6 +15,7 @@ import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
   providedIn: "root"
 })
 export class LoginService {
+
   baseUrl: String;
 
   private user: BookUser = null;

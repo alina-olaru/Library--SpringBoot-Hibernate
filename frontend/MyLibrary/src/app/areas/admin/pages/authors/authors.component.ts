@@ -1,4 +1,8 @@
+import { TitleService } from './../../services/title.service';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ToastrService } from 'src/app/services/toastr.service';
+
 
 @Component({
   selector: 'app-authors',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthorsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private titleService:TitleService,
+    private toastr: ToastrService,
+    private sanitizer: DomSanitizer,
 
-  ngOnInit(): void {
-  }
+    ) { }
 
+
+
+ngOnInit() {
+
+  this.titleService.setTitle('faGlobeEurope', 'Autori');
+}
 }
