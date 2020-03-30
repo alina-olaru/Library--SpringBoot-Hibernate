@@ -1,3 +1,4 @@
+import { AuthorsComponent } from './pages/authors/authors.component';
 
 import { LayoutComponent } from './layout/layout.component';
 import { NgModule } from '@angular/core';
@@ -18,6 +19,10 @@ const routes: Routes = [
         path:"dashboard",
         component:DashboardComponent
       },
+      {
+        path:"autori",
+        component:AuthorsComponent
+      }
     ]
   }
 ];

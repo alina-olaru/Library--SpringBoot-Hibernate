@@ -25,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     RegisterComponent,
     LoadingSpinnerComponent,
-    LoginComponent
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,
