@@ -24,7 +24,7 @@ public interface AuthorApi {
     ApiResponse<Author> updateAuthor(@RequestBody Author author);
 
     @DeleteMapping(path="/{id}")
-    ApiResponse<Boolean> deleteAuthor(@PathVariable int id,@RequestBody Author author);
+    ApiResponse<Boolean> deleteAuthor(@PathVariable int id);
 }
 
 

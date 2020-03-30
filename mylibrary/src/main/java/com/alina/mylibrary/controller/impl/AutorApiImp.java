@@ -45,9 +45,9 @@ public class AutorApiImp  implements AuthorApi {
     }
 
     @Override
-    public ApiResponse<Boolean> deleteAuthor(int id, Author author) {
+    public ApiResponse<Boolean> deleteAuthor(int id) {
 
         boolean response=this.authorService.deleteAuthor(id);
-        return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,null);
+        return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,response);
     }
 }
