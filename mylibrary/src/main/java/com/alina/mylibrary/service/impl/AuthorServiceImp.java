@@ -18,7 +18,7 @@ public class AuthorServiceImp implements AuthorService {
 
     @Override
     public Author addAuthor(Author author) {
-        if ((authorDao.getAuthorByFirstName(author.getFirstName()) == null) && (authorDao.getAuthorByLastName(author.getLastName()) == null)) {
+        if ((authorDao.getAuthorByFirstName(author.getFirstName()) != null) && (authorDao.getAuthorByLastName(author.getLastName()) != null)) {
             return null;
         }
        authorDao.addAuthor(author);
