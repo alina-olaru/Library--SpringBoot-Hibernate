@@ -8,8 +8,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
-
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [],
   imports: [
@@ -21,7 +24,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatDividerModule,
+    MatListModule,
+    MatToolbarModule,
+    MatMenuModule
 
   ],
   exports: [
@@ -32,7 +40,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatDividerModule,
+    MatListModule,
+    MatToolbarModule,
+    MatMenuModule
 
   ]
 })

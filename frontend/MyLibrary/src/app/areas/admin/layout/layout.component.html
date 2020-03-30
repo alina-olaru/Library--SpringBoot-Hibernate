@@ -1,0 +1,45 @@
+<div class="container-fluid p-0 full-vh" fxFlex fxLayout="column">
+  <mat-drawer-container class="example-container" fxFlex fxLayout="row wrap" autosize>
+    <mat-drawer mode="side" opened fxFlex="10" style="width: 10%;">
+      <div class="" fxFlex fxLayout="column" fxLayoutGap="0" style="width: 100%;">
+        <div class="sidebar-title" fxLayoutAlign="center center">
+          <div class="mat-h1 mb-0">
+            Events - Admin
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-action-list class="p-2">
+          <button mat-list-item routerLink='/admin/dashboard' [routerLinkActive]="['route-ling-selected']"
+            matTooltip="Dashboard" [matTooltipPosition]="'right'">
+            <fa-icon mat-list-icon [icon]="faTachometerAlt"></fa-icon>
+            <span mat-line>Dashboard</span>
+          </button>
+
+        </mat-action-list>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content fxFlex="90">
+      <mat-toolbar class="mat-elevation-z1">
+        <mat-toolbar-row>
+          <div *ngIf="loaded">
+            <fa-icon [icon]="icon" class="mr-2"></fa-icon>
+            <span>{{title.title}}</span>
+          </div>
+          <span class="example-spacer"></span>
+          <span>
+            <fa-icon mat-list-icon [icon]="faUserCircle" size="lg"
+            matTooltip="{{user.firstName}} {{user.lastName}}"  [matTooltipPosition]="'left'"
+            mat-icon-button [matMenuTriggerFor]="menu"></fa-icon>
+            <mat-menu #menu="matMenu">
+              <!-- <button mat-menu-item>Settings</button> -->
+              <button mat-menu-item (click)="LogOut()">
+                Deconectare
+              </button>
+            </mat-menu>
+          </span>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

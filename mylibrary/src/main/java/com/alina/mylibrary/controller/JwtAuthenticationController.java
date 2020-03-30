@@ -1,8 +1,12 @@
 package com.alina.mylibrary.controller;
 
 import com.alina.mylibrary.config.JwtTokenUtil;
+import com.alina.mylibrary.model.ApiResponse;
+import com.alina.mylibrary.model.ApiResponseType;
+import com.alina.mylibrary.model.BookUser;
 import com.alina.mylibrary.model.auth.JwtRequest;
 import com.alina.mylibrary.model.auth.JwtResponse;
+import com.alina.mylibrary.service.BookUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +34,11 @@ public class JwtAuthenticationController {
     @Autowired
     private UserDetailsService jwtInMemoryUserDetailsService;
 
+    @Autowired
+    private BookUserService bookUserService;
+
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> generateAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
+    public ApiResponse<JwtResponse> generateAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
             throws Exception {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -41,7 +48,9 @@ public class JwtAuthenticationController {
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        BookUser user = this.bookUserService.GetUserByUsernameOrEmail(authenticationRequest.getUsername());
+
+        return new ApiResponse<JwtResponse>(ApiResponseType.SUCCESS, new JwtResponse(token, user));
     }
 
     private void authenticate(String username, String password) throws Exception {

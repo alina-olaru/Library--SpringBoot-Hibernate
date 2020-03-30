@@ -1,1 +1,48 @@
-<p>login works!</p>
+<mat-card-content class="container full-vh">
+  <mat-card-content fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card-content fxFlex="1 1 auto" fxLayout="row">
+      <div fxFlex></div>
+      <mat-card-content fxFlex>
+        <mat-card class="login-card mat-elevation-z5">
+          <mat-card-header class="mb-4">
+            <mat-card-title class="text-center">
+              Autentificare
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div fxLayout="column" [formGroup]="loginForm">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Utilizator" formControlName="username">
+                <mat-error *ngIf="form.username?.invalid">
+                  Numele utilizatorului este obligatoriu
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width mb-3">
+                <input matInput placeholder="Parola" type="password" formControlName="password">
+                <mat-error *ngIf="form.password?.invalid">
+                  Parola este obligatorie
+                </mat-error>
+              </mat-form-field>
+
+              <div fxFlex fxLayout="row">
+                <div fxFlex class="mb-2">
+                  <button fxFlex mat-raised-button color="primary" type="button" [disabled]="!loginForm.valid"
+                    (click)="onSubmit()">
+                    Login
+                  </button>
+                </div>
+                <div fxFlex>
+                  <a [routerLink]="['/register']" fxFlex mat-raised-button color="warn" type="button">
+                    Inregistrare
+                  </a>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-card-content>
+      <div fxFlex></div>
+    </mat-card-content>
+
+  </mat-card-content>
+</mat-card-content>

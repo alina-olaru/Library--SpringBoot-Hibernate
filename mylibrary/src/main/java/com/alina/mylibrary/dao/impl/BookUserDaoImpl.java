@@ -28,6 +28,16 @@ public class BookUserDaoImpl implements BookUserDao {
     }
 
     @Override
+    public BookUser getBookUserByUsername(String username) {
+        return this.bookUserRepository.findByUsername(username).stream().findFirst().orElse(null);
+    }
+
+    @Override
+    public BookUser getBookUserByEmail(String email) {
+        return this.bookUserRepository.findByEmailAdress(email).stream().findFirst().orElse(null);
+    }
+
+    @Override
     public BookUser addBookUser(BookUser bookUser) {
         this.bookUserRepository.save(bookUser);
         return bookUser;

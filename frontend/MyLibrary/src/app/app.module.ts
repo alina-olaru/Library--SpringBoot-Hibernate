@@ -18,15 +18,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from './areas/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { JwtResponseComponent } from './Models/general/jwt-response/jwt-response.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoadingSpinnerComponent,
-    LoginComponent,
-    JwtResponseComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
