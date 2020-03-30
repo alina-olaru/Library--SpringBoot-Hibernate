@@ -1,5 +1,4 @@
 
-import { PublishersService } from './../publishers.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { TitleService } from './../../services/title.service';
@@ -13,6 +12,7 @@ import { ApiResponse } from 'src/app/Models/general/api-response';
 import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
 import { Publisher } from 'src/app/Models/admin/PublisherModel';
 import { AddEditPublisherComponent } from './add-edit-publisher/add-edit-publisher.component';
+import { PublishersService } from './publishers.service';
 @Component({
   selector: 'app-publishers',
   templateUrl: './publishers.component.html',

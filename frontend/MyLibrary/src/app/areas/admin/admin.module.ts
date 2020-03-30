@@ -1,3 +1,4 @@
+import { AddEditPublisherComponent } from './pages/publishers/add-edit-publisher/add-edit-publisher.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MaterialModule } from './../../modules/material/material.module';
@@ -13,7 +14,6 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthorsComponent } from './pages/authors/authors.component';
 import { AddEditAuthorComponent } from './pages/authors/add-edit-author/add-edit-author.component';
 import { BooksComponent } from './pages/books/books.component';
-import { AddEditBookComponent } from './pages/books/add-edit-book/add-edit-book.component';
 import { PublishersComponent } from './pages/publishers/publishers.component';
 
 
@@ -24,8 +24,8 @@ import { PublishersComponent } from './pages/publishers/publishers.component';
     AuthorsComponent,
     AddEditAuthorComponent,
     BooksComponent,
-    AddEditBookComponent,
-    PublishersComponent],
+    PublishersComponent,
+    AddEditPublisherComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -37,7 +37,8 @@ import { PublishersComponent } from './pages/publishers/publishers.component';
     FontAwesomeModule
   ],
   entryComponents:[
-    AddEditAuthorComponent
+    AddEditAuthorComponent,
+    AddEditPublisherComponent
   ]
 })
 export class AdminModule { }

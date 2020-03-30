@@ -1,1 +1,41 @@
-<p>add-edit-book works!</p>
+
+<h1 mat-dialog-title fxLayoutAlign="center center">
+  <span *ngIf="data.type=='add'">
+    Adauga editura
+  </span>
+  <span *ngIf="data.type=='edit'">
+    Editeaza
+  </span>
+</h1>
+<form fxLayout="column" [formGroup]="localForm" (ngSubmit)="SubmitForm()">
+  <div mat-dialog-content class="example-container" fxLayout="column">
+    <div class="input-row" *ngIf="data.type=='edit'">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Id" formControlName="authorId">
+      </mat-form-field>
+    </div>
+    <div class="input-row">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Titlu*" formControlName="publisherTitle">
+        <mat-error *ngIf="form.publisherTitle?.invalid">
+         Titlul este obligatoriu
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-button color="primary" type="submit" cdkFocusInitial *ngIf="data.type=='add'">
+      <mat-icon>add</mat-icon> Adauga
+    </button>
+    <button mat-button color="primary" type="submit" cdkFocusInitial *ngIf="data.type=='edit'">
+      <mat-icon>save</mat-icon> Salveaza
+    </button>
+    <button mat-button color="warn" type="button" (click)="onNoClick()">
+      <mat-icon>close</mat-icon> Renunta
+    </button>
+  </div>
+
+</div>
+</form>
+
