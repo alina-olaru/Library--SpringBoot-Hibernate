@@ -13,10 +13,23 @@
 </div>
 
 <div class="mat-elevation-z8 m-2" fxLayout="column" gallerize>
-  <!-- <table mat-table fxFlex [dataSource]="" matSort>
+  <table mat-table fxFlex [dataSource]="dataSource" matSort>
 
 
+    <ng-container matColumnDef="authorId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.authorId}} </mat-cell>
+    </ng-container>
 
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nume </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Prenume </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="actions">
       <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
@@ -34,6 +47,6 @@
     <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
 
-  </table> -->
+  </table>
   <mat-paginator [pageSizeOptions]="[10, 20, 30, 50]" showFirstLastButtons></mat-paginator>
 </div>
