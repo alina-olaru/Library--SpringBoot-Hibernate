@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoadingService } from 'src/app/modules/loading-spinner/loading.service';
 import { Author} from '../../../../Models/admin/AuthorModel';
 import { threadId } from 'worker_threads';
+import { ApiResponse } from 'src/app/Models/general/api-response';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,18 +26,28 @@ export class AuthorsService {
     private toastr: ToastrService
     ) {
 
-      this.baseUrl="/api/authors";
+      this.baseUrl="/public/api/author";
     }
 
 
     GetAuthors(){
-      this.
-      return this.http.get<Author[]>(this.globalVarService.globalUrl+this.baseUrl);
+
+      return this.http.get<ApiResponse<Author[]>>(this.globalVarService.globalUrl+this.baseUrl);
     }
 
-    Delete Author(id:number):Observable<boolean>
+    DeleteAuthor(id:number):Observable<boolean>
     {
-      return this.http.delete<boolean>(this.globalVarService.globalUrl+this.baseUrl+'/'+id
-      );
+      return this.http.delete<boolean>(this.globalVarService.globalUrl+this.baseUrl+'/'+id);
+    }
+
+    AddAuthor(author:Author):Observable<Author>
+    {
+      return this.http.post<Author>(this.globalVarService.globalUrl+this.baseUrl,author);
+    }
+
+    UpdateAuthor(author:Author,id:number):Observable<Author>
+    {
+      return this.http.put<Author>(this.globalVarService.globalUrl+this.baseUrl+"/"+id,
+      author);
     }
 }
