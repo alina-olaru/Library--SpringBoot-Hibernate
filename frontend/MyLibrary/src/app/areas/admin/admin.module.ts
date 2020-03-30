@@ -11,13 +11,15 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthorsComponent } from './pages/authors/authors.component';
+import { AddEditAuthorComponent } from './pages/authors/add-edit-author/add-edit-author.component';
 
 
 @NgModule({
   declarations:
   [LayoutComponent,
     DashboardComponent,
-    AuthorsComponent],
+    AuthorsComponent,
+    AddEditAuthorComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -27,6 +29,9 @@ import { AuthorsComponent } from './pages/authors/authors.component';
     FlexLayoutModule,
     MaterialModule,
     FontAwesomeModule
+  ],
+  entryComponents:[
+    AddEditAuthorComponent
   ]
 })
 export class AdminModule { }

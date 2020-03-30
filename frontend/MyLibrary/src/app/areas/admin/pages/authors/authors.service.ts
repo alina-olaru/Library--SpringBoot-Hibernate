@@ -37,17 +37,17 @@ export class AuthorsService {
 
     DeleteAuthor(id:number):Observable<boolean>
     {
-      return this.http.delete<boolean>(this.globalVarService.globalUrl+this.baseUrl+'/'+id);
+      return this.http.delete<boolean>(this.globalVarService.globalUrl + this.baseUrl + '/' + id);
     }
 
-    AddAuthor(author:Author):Observable<Author>
+    AddAuthor(author:Author):Observable<ApiResponse<Author>>
     {
-      return this.http.post<Author>(this.globalVarService.globalUrl+this.baseUrl,author);
+      return this.http.post<ApiResponse<Author>>(this.globalVarService.globalUrl + this.baseUrl,author);
     }
 
     UpdateAuthor(author:Author,id:number):Observable<Author>
     {
-      return this.http.put<Author>(this.globalVarService.globalUrl+this.baseUrl+"/"+id,
+      return this.http.put<Author>(this.globalVarService.globalUrl + this.baseUrl + "/" + id,
       author);
     }
 }
