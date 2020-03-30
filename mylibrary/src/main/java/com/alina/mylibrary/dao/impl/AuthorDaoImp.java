@@ -50,24 +50,24 @@ public class AuthorDaoImp implements AuthorDao {
 
     @Override
     public Author addAuthor(Author author) {
-        try {
+      //  try {
             this.authorRepository.save(author);
-        }
-        catch(ConstraintViolationException ex){
-            System.out.println(ex);
-        }
-        catch(SQLGrammarException ex){
-            System.out.println(ex);
-        }
-        catch(QueryTimeoutException ex){
-            System.out.println(ex);
-        }
-        catch(GenericJDBCException ex){
-            System.out.println(ex);
-        }
-        catch(JDBCConnectionException ex){
-            System.out.println(ex);
-        }
+     //   }
+//        catch(ConstraintViolationException ex){
+////            System.out.println(ex);
+////        }
+////        catch(SQLGrammarException ex){
+////            System.out.println(ex);
+////        }
+////        catch(QueryTimeoutException ex){
+////            System.out.println(ex);
+////        }
+////        catch(GenericJDBCException ex){
+////            System.out.println(ex);
+////        }
+////        catch(JDBCConnectionException ex){
+////            System.out.println(ex);
+////        }
         return author;
     }
 
