@@ -6,3 +6,4 @@ export class Author{
     Object.assign(this, init);
   }
 }
+
