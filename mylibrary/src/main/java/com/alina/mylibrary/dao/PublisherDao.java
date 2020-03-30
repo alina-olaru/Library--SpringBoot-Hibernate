@@ -12,7 +12,7 @@ public interface PublisherDao {
 
     public List<Publisher> getPublishers();
 
-    public Publisher getPublisherBypublisherTitle(String publisherTitle);
+    public   List< Publisher> getPublisherBypublisherTitle(String publisherTitle);
 
     public Publisher addPublisher(Publisher publisher);
 

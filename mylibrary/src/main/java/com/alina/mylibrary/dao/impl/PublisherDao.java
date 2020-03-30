@@ -28,10 +28,9 @@ public class PublisherDao implements com.alina.mylibrary.dao.PublisherDao {
     }
 
     @Override
-    public Publisher getPublisherBypublisherTitle(String publisherTitle) {
-       Publisher result=new Publisher();
-       result=this.publisherRepository.findrBypublisherTitle(publisherTitle);
-       return result;
+    public   List< Publisher> getPublisherBypublisherTitle(String publisherTitle) {
+      List< Publisher> results=this.publisherRepository.findrBypublisherTitle(publisherTitle);
+       return results;
     }
 
     @Override
