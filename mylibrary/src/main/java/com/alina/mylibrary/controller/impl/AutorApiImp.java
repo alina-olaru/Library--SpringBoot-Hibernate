@@ -6,9 +6,11 @@ import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.Author;
 import com.alina.mylibrary.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class AutorApiImp  implements AuthorApi {
 
 
