@@ -15,7 +15,6 @@ public class AutorApiImp  implements AuthorApi {
     @Autowired
     private AuthorService authorService;
 
-
     @Override
     public ApiResponse<Author> insertAuthor(Author author) {
         if(author!=null){
@@ -26,41 +25,27 @@ public class AutorApiImp  implements AuthorApi {
         return new ApiResponse<Author>(ApiResponseType.ERROR,null,"Autorul nu a putut fi adaugat");
     }
 
+
     @Override
     public ApiResponse<List<Author>> getAuthors() {
-      List<Author> response=this.authorService.getAuthors();
-      return new ApiResponse<List<Author>>(ApiResponseType.SUCCESS,response);
+        List<Author> response=this.authorService.getAuthors();
+        return new ApiResponse<List<Author>>(ApiResponseType.SUCCESS,response);
     }
 
     @Override
     public ApiResponse<Author> updateAuthor(Author author) {
-       if(author!=null)
-       {
-           Author response=this.authorService.updateAuthor(author);
-           return new ApiResponse<Author>(ApiResponseType.SUCCESS,author);
-       }
-       return new ApiResponse<Author>(ApiResponseType.ERROR,null,"Autorul nu a putut fi updatat");
+        if(author!=null)
+        {
+            Author response=this.authorService.updateAuthor(author);
+            return new ApiResponse<Author>(ApiResponseType.SUCCESS,author);
+        }
+        return new ApiResponse<Author>(ApiResponseType.ERROR,null,"Autorul nu a putut fi updatat");
     }
-}
-
-
-
-/*
-
-
-    @Autowired
-    private RegisterService registerService;
 
     @Override
-    public ApiResponse<BookUser> registerUser(@RequestBody BookUser user) {
-        if(user!=null){
-            BookUser response = this.registerService.registerUser(user);
-            return new ApiResponse<BookUser>(ApiResponseType.SUCCESS, response);
-        }
-        //TODO mesaj eroare cu detalii
-        return new ApiResponse<BookUser>(ApiResponseType.ERROR, null, "Contul nu a putut fi creat, verifica datele introduse!");
+    public ApiResponse<Boolean> deleteAuthor(int id, Author author) {
+
+        boolean response=this.authorService.deleteAuthor(id);
+        return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,null);
     }
 }
-
-
- */

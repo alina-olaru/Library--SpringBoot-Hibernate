@@ -32,14 +32,23 @@ public class BookUserController {
     private AuthorRepository authorRepository;
     @Autowired
     private BooksAuthorsRepository booksAuthorsRepository;
+    @Autowired
     private VoucherUserRepository voucherUserRepository;
+    @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
     private BooksCategoriesRepository booksCategoriesRepository;
+    @Autowired
     private ComplaintRepository complaintRepository;
+    @Autowired
     private ReviewRepository reviewRepository;
+    @Autowired
     private BookOrderRepository bookOrderRepository;
+    @Autowired
     private OrderItemRepository orderItemRepository;
+    @Autowired
     private PersonalBookRepository personalBookRepository;
+    @Autowired
     private WishlistRepository wishlistRepository;
 
 
@@ -95,7 +104,7 @@ public class BookUserController {
         admin.setUserPrivilege(true);
         admin.setNewsletter(true);
         admin.setAdminPrivilege(true);
-        bookUserRepository.save(admin);
+     //   bookUserRepository.save(admin);
 //
         BookUser firstUser=new BookUser();
         firstUser.setEmailAdress("testt@gmail.com");
@@ -107,7 +116,7 @@ public class BookUserController {
         firstUser.setUserPrivilege(true);
         firstUser.setNewsletter(true);
         firstUser.setAdminPrivilege(false);
-        bookUserRepository.save(firstUser);
+     //   bookUserRepository.save(firstUser);
 
 
         //TODO UNICAT PE EMAIL CA S A PUS DE 2 ORI

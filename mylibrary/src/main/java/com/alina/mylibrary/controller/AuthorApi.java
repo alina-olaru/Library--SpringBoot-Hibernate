@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Author")
+@RequestMapping("/api/author")
 @CrossOrigin
 public interface AuthorApi {
 
@@ -20,11 +20,11 @@ public interface AuthorApi {
     ApiResponse<List<Author>>  getAuthors();
 
 
-    @PutMapping
+    @PutMapping(path="/{id}")
     ApiResponse<Author> updateAuthor(@RequestBody Author author);
 
-    @DeleteMapping("/{id}")
-    ApiResponse<Boolean> deleteAuthor(@RequestParam int id);
+    @DeleteMapping(path="/{id}")
+    ApiResponse<Boolean> deleteAuthor(@PathVariable int id,@RequestBody Author author);
 }
 
 

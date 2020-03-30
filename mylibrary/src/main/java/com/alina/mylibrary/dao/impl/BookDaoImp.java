@@ -1,7 +1,9 @@
 package com.alina.mylibrary.dao.impl;
 
 import com.alina.mylibrary.dao.BookDao;
+import com.alina.mylibrary.model.Author;
 import com.alina.mylibrary.model.Book;
+import com.alina.mylibrary.repository.AuthorRepository;
 import com.alina.mylibrary.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +17,9 @@ public class BookDaoImp implements BookDao {
     private BookRepository bookRepository;
 
 
+    @Autowired
+    private AuthorRepository authorRepository;
+
     @Override
     public List<Book> getBooks() {
         return this.bookRepository.findAll();
@@ -27,18 +32,8 @@ public class BookDaoImp implements BookDao {
 
     @Override
     public  List<Book> getBookbyAuthor(String firstName, String lastname) {
-        List<Book> response=new ArrayList<Book>();
-        List<Book> responseByFirstAName=this.bookRepository.findByFirstName(firstName);
-        List<Book> responseByLastName=this.bookRepository.findByFirstName(lastname);
-        for(Book i:responseByFirstAName){
-            response.add(i);
-        }
 
-        for(Book i:responseByLastName){
-            response.add(i);
-        }
-
-        return response;
+        return new ArrayList<Book>();
 
     }
 
