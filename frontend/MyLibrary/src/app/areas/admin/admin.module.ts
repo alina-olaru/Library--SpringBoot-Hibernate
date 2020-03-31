@@ -17,6 +17,7 @@ import { AddEditAuthorComponent } from './pages/authors/add-edit-author/add-edit
 import { BooksComponent } from './pages/books/books.component';
 import { PublishersComponent } from './pages/publishers/publishers.component';
 import { CategoryComponent } from './pages/category/category.component';
+import { AddEditBooksComponent } from './pages/books/add-edit-books/add-edit-books.component';
 
 
 
@@ -30,7 +31,8 @@ import { CategoryComponent } from './pages/category/category.component';
     PublishersComponent,
     AddEditPublisherComponent,
     CategoryComponent,
-    AddEditCategoryComponent
+    AddEditCategoryComponent,
+    AddEditBooksComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { CategoryComponent } from './pages/category/category.component';
   entryComponents:[
     AddEditAuthorComponent,
     AddEditPublisherComponent,
-    AddEditCategoryComponent
+    AddEditCategoryComponent,
+    AddEditBooksComponent
   ]
 })
 export class AdminModule { }
