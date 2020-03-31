@@ -1,10 +1,7 @@
 package com.alina.mylibrary.dao.impl;
 
 import com.alina.mylibrary.dao.WishListDao;
-import com.alina.mylibrary.model.Author;
-import com.alina.mylibrary.model.BookUser;
-import com.alina.mylibrary.model.BooksAuthors;
-import com.alina.mylibrary.model.Wishlist;
+import com.alina.mylibrary.model.*;
 import com.alina.mylibrary.repository.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,76 +17,35 @@ public class WishListDaoImpl implements WishListDao {
 
 
     @Override
-    public List<Wishlist> getWhislistIncludingBookTitle(String bookTitle) {
-       if(bookTitle.length()<2){
-           return null;
-       }
-       List<Wishlist> wishLists=this.wishlistRepository.findAll();
-       List<Wishlist> response=null;
-       for(Wishlist w:wishLists){
-           if(w.getBookwishlist().getBookTitle().equals(bookTitle)){
-               response.add(w);
-           }
-       }
-
-       return response;
-    }
-
-    @Override
     public List<Wishlist> getAllWhislists() {
         return this.wishlistRepository.findAll();
     }
 
     @Override
-    public List<Wishlist> getWhislistForaUser(BookUser bookUser) {
-        return this.wishlistRepository.findByuserwishlist(bookUser);
+    public Wishlist getWishlistById(int wishlistId) {
+        return this.wishlistRepository.findById(wishlistId).orElse(null);
     }
 
     @Override
-    public List<Wishlist> getWishlistForBookTitle(String bookTitle) {
-        return null;
+    public Boolean deleteWishlist(int wishlistId) {
+        try {
+
+            this.wishlistRepository.deleteById(wishlistId);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     @Override
-    public List<Wishlist> getWishlistForBookPublisher(String bookPublisher) {
-        if(bookPublisher==null){
+    public Wishlist addWishlist(Wishlist wishlist) {
+        try{
+            this.wishlistRepository.save(wishlist);
+            return wishlist;
+        }catch (Exception ex){
             return null;
         }
-        List<Wishlist> wishLists=this.wishlistRepository.findAll();
-        List<Wishlist> response=null;
-        for(Wishlist w:wishLists){
-            if(w.getBookwishlist().getPublisher().getPublisherTitle()==bookPublisher){
-                response.add(w);
-            }
-        }
-
-        return response;
     }
 
-    @Override
-    public List<Wishlist> getWishlistForBookAuthor(String firstName, String lastName) {
-        if((firstName.length()<2)||(lastName.length()<2)){
-            return null;
-        }
 
-        List<Wishlist> wishLists=this.wishlistRepository.findAll();
-        List<Wishlist> response=null;
-        for(Wishlist w:wishLists){
-            List<BooksAuthors> responseAuthors=w.getBookwishlist().getBookAuthor();
-            for(BooksAuthors a:responseAuthors){
-                if((a.getAuthorId().getLastName()==lastName)&&
-                        (a.getAuthorId().getFirstName()==firstName)){
-                    response.add(w);
-                }
-            }
-
-        }
-
-        return response;
-    }
-
-    @Override
-    public Boolean deleteFromWhislist(int userId, int bookId) {
-        return null;
-    }
 }
