@@ -3,6 +3,7 @@ package com.alina.mylibrary.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.sql.Blob;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -61,6 +62,12 @@ public class Book {
     @NotNull
     private int numberOfBoooks;
 
+    @Column
+    @Lob
+    private Blob bookImage;
+
+
+
     public static Book get_copy(Book old_book)
     {
         Book new_book = new Book();
@@ -85,6 +92,7 @@ public class Book {
         new_book.setPersBooks(old_book.getPersBooks());
         new_book.setWishBooks(old_book.getWishBooks());
         return new_book;
+        //todo de adaugat campurile noi sau de schimbat cu seterele
     }
 
     public int getBookId() {
@@ -247,6 +255,7 @@ public class Book {
         this.bookAuthor = bookAuthor;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -266,17 +275,35 @@ public class Book {
                 Objects.equals(bookDescription, book.bookDescription) &&
                 Objects.equals(bookDimension, book.bookDimension) &&
                 Objects.equals(coverType, book.coverType) &&
+                Objects.equals(bookImage, book.bookImage) &&
                 Objects.equals(publisher, book.publisher) &&
                 Objects.equals(persBooks, book.persBooks) &&
                 Objects.equals(wishBooks, book.wishBooks) &&
                 Objects.equals(items, book.items) &&
                 Objects.equals(booksCategories, book.booksCategories) &&
-                Objects.equals(bookAuthor, book.bookAuthor);
+                Objects.equals(bookAuthor, book.bookAuthor) &&
+                Objects.equals(reviews, book.reviews);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookId, bookTitle, bookYear, numberOfPages, numberofVolumes, bookLanguage, bookDescription, bookDimension, bookWeight, bookPrice, coverType, numberOfReviews, bookRating, numberOfBoooks, publisher, persBooks, wishBooks, items, booksCategories, bookAuthor);
+        return Objects.hash(bookId, bookTitle, bookYear, numberOfPages, numberofVolumes, bookLanguage, bookDescription, bookDimension, bookWeight, bookPrice, coverType, numberOfReviews, bookRating, numberOfBoooks, bookImage, publisher, persBooks, wishBooks, items, booksCategories, bookAuthor, reviews);
+    }
+
+    public Blob getBookImage() {
+        return bookImage;
+    }
+
+    public void setBookImage(Blob bookImage) {
+        this.bookImage = bookImage;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     @ManyToOne
