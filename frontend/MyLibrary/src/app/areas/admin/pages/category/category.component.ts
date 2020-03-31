@@ -82,7 +82,7 @@ export class CategoryComponent implements OnInit {
 
   DeleteCategory(category:Category) {
     this.toastr.Swal.fire({
-      title: 'Esti sigur ca vrei sa stergi acest bautura?',
+      title: 'Esti sigur ca vrei sa stergi aceasta categorie?',
       html: `Id: <b>${category.categoryId}</b> - Nume: <b>${category.categoryTitle}</b>`,
       icon: 'warning',
       showCancelButton: true,
