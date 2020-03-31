@@ -23,6 +23,7 @@ export class Book{
   booksCategories:Category
   bookAuthor:any;
   bookR:any;
+  bookImage:any;
   public constructor(init?: Partial<Book>) {
     Object.assign(this, init);
   }

@@ -8,6 +8,7 @@ import { TruncatePipe } from '../pipes/truncate.pipe';
   declarations: [TruncatePipe],
   imports: [
     CommonModule,
-  ]
+  ],
+  exports: [TruncatePipe]
 })
 export class SharedModule { }

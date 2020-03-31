@@ -1,3 +1,4 @@
+import { SharedModule } from './../../modules/shared/shared.module';
 import { AddEditCategoryComponent } from './pages/category/add-edit-category/add-edit-category.component';
 import { AddEditPublisherComponent } from './pages/publishers/add-edit-publisher/add-edit-publisher.component';
 
@@ -42,7 +43,8 @@ import { AddEditBooksComponent } from './pages/books/add-edit-books/add-edit-boo
     ReactiveFormsModule,
     FlexLayoutModule,
     MaterialModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SharedModule
   ],
   entryComponents:[
     AddEditAuthorComponent,
