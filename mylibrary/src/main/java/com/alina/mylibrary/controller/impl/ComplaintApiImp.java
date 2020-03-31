@@ -21,5 +21,13 @@ public class ComplaintApiImp implements ComplaintApi {
      return new ApiResponse<List<Complaint>>(ApiResponseType.SUCCESS,response);
     }
 
+    @Override
+    public ApiResponse<Complaint> insertComplaint(Complaint complaint) {
+        if(complaint==null){
+            return new ApiResponse<Complaint>(ApiResponseType.ERROR,null,"Nu s-a putut adauga plangerea,ne pare rau.");
+        }
 
+        Complaint reponse=this.complaintService.addComplaint(complaint);
+        return new ApiResponse<Complaint>(ApiResponseType.ERROR,reponse,"Cererea s-a trimis.");
+    }
 }
