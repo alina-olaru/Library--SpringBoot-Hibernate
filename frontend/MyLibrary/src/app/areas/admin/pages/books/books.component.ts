@@ -31,7 +31,7 @@ export class BooksComponent implements OnInit {
   _addBook: Book;
   displayedColumns: string[] = ['bookId', 'bookTitle', 'bookLanguage',
   'bookYear','numberOfPages','numberofVolumes','bookDescription','bookDimension',
-  'bookWeight','bookPrice','coverType','numberOfReviews','bookRating','numberOfBoooks',
+  'bookWeight','bookPrice','coverType','numberOfBoooks',
   'publisher','booksCategories',
   'actions'];
   dataSource: MatTableDataSource<Book> = new MatTableDataSource(this.Books);

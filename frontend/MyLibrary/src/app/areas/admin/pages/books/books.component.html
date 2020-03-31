@@ -1,1 +1,125 @@
-<p>books works!</p>
+<p>Categorys works!</p>
+<div class="p-2" fxLayout="row">
+  <mat-form-field fxFlex>
+    <input matInput placeholder="Filtreaza" (keyup)="applyFilter($event.target.value)">
+
+  </mat-form-field>
+  <div fxFlex="2 2 calc(10em + 10px)"></div>
+  <div fxFlex fxLayoutAlign="end center">
+    <button mat-button color="accent" (click)="AddBook()">
+      <mat-icon>add</mat-icon> Adauga
+    </button>
+  </div>
+</div>
+
+<div class="mat-elevation-z8 m-2" fxLayout="column" gallerize>
+  <table mat-table fxFlex [dataSource]="dataSource" matSort>
+
+<!-- TODO:sagestile se vad doar la hover,sa scot asta-->
+    <ng-container matColumnDef="bookId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.bookId}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bookTitle">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Titlu </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.bookTitle}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bookDescription">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Descriere </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+        <textarea matInput>
+        {{element.bookDescription}}
+      </textarea>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="booksCategories">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Categorie </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> test</mat-cell>
+      <!-- {{element.booksCategories.Categories.categoryTitle}}  -->
+    </ng-container>
+
+
+
+
+    <ng-container matColumnDef="bookLanguage">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Limba </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.bookLanguage}} </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="bookYear">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Anul aparitiei </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.bookYear}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="numberOfPages">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Numar de pagini </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.numberOfPages}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="numberofVolumes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Numar volume </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.numberofVolumes}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bookDimension">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dimensiuni </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.bookDimension}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bookWeight">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Greutate </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.bookWeight}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="publisher">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Editura </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.publisher.publisherTitle}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bookPrice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Pret </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.bookPrice}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfBoooks">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Stoc(numar de carti) </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.numberOfBoooks}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="coverType">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Tip de coperta(paperback/hardcover) </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.coverType}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bookAuthor">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Autor </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.bookAuthor}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element" fxLayoutAlign="end center">
+        <button mat-button color="warn" (click)="DeleteBook(element)">
+          <mat-icon>delete</mat-icon>Sterge
+        </button>
+        <button mat-button color="primary" (click)="EditBook(element)">
+          <mat-icon>edit</mat-icon>Editeaza
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30, 50]" showFirstLastButtons></mat-paginator>
+</div>
