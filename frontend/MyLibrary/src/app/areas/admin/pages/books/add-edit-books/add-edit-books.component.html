@@ -1,0 +1,144 @@
+<h1 mat-dialog-title fxLayoutAlign="center center">
+  <span *ngIf="data.type=='add'">
+    Adauga carte
+  </span>
+  <span *ngIf="data.type=='edit'">
+    Editeaza carte
+  </span>
+</h1>
+<form fxLayout="column" [formGroup]="localForm" (ngSubmit)="SubmitForm()">
+  <div mat-dialog-content class="example-container" fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="input-row" *ngIf="data.type=='edit'" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Id" formControlName="bookId">
+      </mat-form-field>
+    </div>
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Titlu*" formControlName="bookTitle">
+        <mat-error *ngIf="form.bookTitle?.invalid">
+          Titlu este obligatoriu
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Limba*" formControlName="bookLanguage">
+        <mat-error *ngIf="form.bookLanguage?.invalid">
+          Limba este obligatorie
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="input-row" fxFlex="100%" fxLayout="row">
+      <mat-form-field fxFlex>
+        <input type="text" placeholder="Editura*" matInput formControlName="publisher" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnPublisher">
+          <mat-option *ngFor="let option of filteredOptionsPublisher | async" [value]="option">
+            {{option.publisherTitle}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="form.publisher?.invalid">
+          Tipul de eveniment este obligatoriu
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <a mat-button color="primary" type="button" target="_blank" [routerLink]="['/admin/edituri']"
+          [queryParams]="{action: 'add'}">
+          <mat-icon>add</mat-icon> Adauga
+        </a>
+      </div>
+      <div>
+        <button mat-button color="warn" type="button" (click)="RefreshPublishers()">
+          <mat-icon>refresh</mat-icon> Refresh
+        </button>
+      </div>
+    </div>
+
+    <div class="input-row" fxFlex="100%" fxLayout="row">
+      <mat-form-field fxFlex>
+        <mat-chip-list #chipList_autori aria-label="Autori">
+          <mat-chip *ngFor="let autor of selectedAuthors" [selectable]="selectable" [removable]="removable"
+            (removed)="RemoveAutor(autor)">
+            {{autor.firstName}} {{autor.lastName}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Autori..." #localAuthorInput formControlName="local_autori" [matAutocomplete]="auto_authors"
+            [matChipInputFor]="chipList_autori">
+        </mat-chip-list>
+        <mat-autocomplete #auto_authors="matAutocomplete" (optionSelected)="selectedAuthor($event, localAuthorInput)">
+          <mat-option *ngFor="let author of filteredOptionsAuthors | async" [value]="author">
+            {{author.firstName}} {{author.lastName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div>
+        <a mat-button color="primary" type="button" target="_blank" [routerLink]="['/admin/autori']"
+          [queryParams]="{action: 'add'}">
+          <mat-icon>add</mat-icon> Adauga
+        </a>
+      </div>
+      <div>
+        <button mat-button color="warn" type="button" (click)="RefreshAuthors()">
+          <mat-icon>refresh</mat-icon> Refresh
+        </button>
+      </div>
+    </div>
+
+    <div class="input-row" fxFlex="100%" fxLayout="row">
+      <mat-form-field fxFlex>
+        <mat-chip-list #chipList_categories aria-label="Categorii">
+          <mat-chip *ngFor="let cat of selectedCategories" [selectable]="selectable" [removable]="removable"
+            (removed)="RemoveCategory(cat)">
+            {{cat.categoryTitle}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Categorii..." #localCategoriesInput formControlName="local_categories" [matAutocomplete]="auto_categories"
+            [matChipInputFor]="chipList_categories">
+        </mat-chip-list>
+        <mat-autocomplete #auto_categories="matAutocomplete" (optionSelected)="selectedCategory($event, localCategoriesInput)">
+          <mat-option *ngFor="let cat of filteredOptionsCategories | async" [value]="cat">
+            {{cat.categoryTitle}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div>
+        <a mat-button color="primary" type="button" target="_blank" [routerLink]="['/admin/categorii']"
+          [queryParams]="{action: 'add'}">
+          <mat-icon>add</mat-icon> Adauga
+        </a>
+      </div>
+      <div>
+        <button mat-button color="warn" type="button" (click)="RefreshCategories()">
+          <mat-icon>refresh</mat-icon> Refresh
+        </button>
+      </div>
+    </div>
+
+    <div class="input-row" fxFlex>
+      <mat-form-field fxFlex class="file-field">
+        <mat-icon matPrefix matTooltip="Sterge fisier!" (click)="DeleteFile()">close</mat-icon>
+        <input type="tel" matInput disabled placeholder="Imagine bautura" [(ngModel)]="fileName" [ngModelOptions]="{standalone: true}">
+        <mat-icon matSuffix (click)="UploadFile()" matTooltip="Incarca fisier!">file_upload</mat-icon>
+        <input type="file" id="modal-file-upload-input" accept="image/*" style="visibility: hidden;display: none;" >
+      </mat-form-field>
+    </div>
+    <div class="input-row" [hidden]="!fileName">
+      <div class="img-output">
+        <img [src]="this.data.model.bookImageSrc" [hidden]="!this.data.model.bookImageSrc" class="img-fluid">
+      </div>
+    </div>
+
+  </div>
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-button color="primary" type="submit" cdkFocusInitial *ngIf="data.type=='add'">
+      <mat-icon>add</mat-icon> Adauga
+    </button>
+    <button mat-button color="primary" type="submit" cdkFocusInitial *ngIf="data.type=='edit'">
+      <mat-icon>save</mat-icon> Salveaza
+    </button>
+    <button mat-button color="warn" type="button" (click)="onNoClick()">
+      <mat-icon>close</mat-icon> Renunta
+    </button>
+  </div>
+
+</form>
