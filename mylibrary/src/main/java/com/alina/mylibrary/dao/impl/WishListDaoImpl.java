@@ -1,7 +1,9 @@
 package com.alina.mylibrary.dao.impl;
 
 import com.alina.mylibrary.dao.WishListDao;
+import com.alina.mylibrary.model.Author;
 import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.BooksAuthors;
 import com.alina.mylibrary.model.Wishlist;
 import com.alina.mylibrary.repository.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +68,24 @@ public class WishListDaoImpl implements WishListDao {
 
     @Override
     public List<Wishlist> getWishlistForBookAuthor(String firstName, String lastName) {
-        return null;
+        if((firstName.length()<2)||(lastName.length()<2)){
+            return null;
+        }
+
+        List<Wishlist> wishLists=this.wishlistRepository.findAll();
+        List<Wishlist> response=null;
+        for(Wishlist w:wishLists){
+            List<BooksAuthors> responseAuthors=w.getBookwishlist().getBookAuthor();
+            for(BooksAuthors a:responseAuthors){
+                if((a.getAuthorId().getLastName()==lastName)&&
+                        (a.getAuthorId().getFirstName()==firstName)){
+                    response.add(w);
+                }
+            }
+
+        }
+
+        return response;
     }
 
     @Override
