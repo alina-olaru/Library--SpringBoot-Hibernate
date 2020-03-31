@@ -47,7 +47,7 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     this.GetCategories();
-    this.titleService.setTitle('faGlobeEurope', 'Categorii');
+    this.titleService.setTitle('faIcons', 'Categorii');
   }
 
   applyFilter(filterValue: string) {

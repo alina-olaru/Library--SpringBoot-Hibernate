@@ -38,7 +38,7 @@ export class AuthorsComponent implements OnInit {
 
   ngOnInit() {
     this.GetAuthors();
-    this.titleService.setTitle('faGlobeEurope', 'Autori');
+    this.titleService.setTitle('faPenFancy', 'Autori');
   }
 
   applyFilter(filterValue: string) {

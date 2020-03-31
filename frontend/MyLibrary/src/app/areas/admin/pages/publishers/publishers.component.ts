@@ -40,7 +40,7 @@ export class PublishersComponent implements OnInit {
 
  ngOnInit() {
   this.GetPublishers();
-  this.titleService.setTitle('faGlobeEurope', 'Edituri');
+  this.titleService.setTitle('faPrint', 'Edituri');
 }
 
 applyFilter(filterValue: string) {

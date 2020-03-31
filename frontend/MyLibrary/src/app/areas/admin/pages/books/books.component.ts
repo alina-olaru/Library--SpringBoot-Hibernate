@@ -47,7 +47,7 @@ export class BooksComponent implements OnInit {
 
   ngOnInit() {
     this.GetBooks();
-    this.titleService.setTitle('faGlobeEurope', 'Carti');
+    this.titleService.setTitle('faBook', 'Carti');
   }
 
   applyFilter(filterValue: string) {

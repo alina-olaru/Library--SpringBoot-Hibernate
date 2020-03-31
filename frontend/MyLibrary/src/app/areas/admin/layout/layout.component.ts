@@ -1,25 +1,31 @@
-import { BookUser } from './../../../Models/BookUser';
-import { Component, OnInit } from '@angular/core';
+import { BookUser } from "./../../../Models/BookUser";
+import { Component, OnInit } from "@angular/core";
 
 import {
-
   faUserCircle,
   faTachometerAlt,
+  faPenFancy,
+  faBook,
+  faPrint,
+  faIcons,
   IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
-import { TitleServiceModel } from 'src/app/Models/admin/TitleServiceModel';
-import { TitleService } from '../services/title.service';
-import { LoginService } from '../../login/login.service';
+import { TitleServiceModel } from "src/app/Models/admin/TitleServiceModel";
+import { TitleService } from "../services/title.service";
+import { LoginService } from "../../login/login.service";
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  selector: "app-layout",
+  templateUrl: "./layout.component.html",
+  styleUrls: ["./layout.component.scss"]
 })
 export class LayoutComponent implements OnInit {
-
   faTachometerAlt = faTachometerAlt;
   faUserCircle = faUserCircle;
+  faPenFancy = faPenFancy;
+  faBook = faBook;
+  faPrint = faPrint;
+  faIcons = faIcons;
   title: TitleServiceModel;
   openSidebar = true;
   icon: IconDefinition;
@@ -49,6 +55,18 @@ export class LayoutComponent implements OnInit {
       case "faTachometerAlt":
         this.icon = faTachometerAlt;
         break;
+      case "faPenFancy":
+        this.icon = faPenFancy;
+        break;
+      case "faBook":
+        this.icon = faBook;
+        break;
+      case "faPrint":
+        this.icon = faPrint;
+        break;
+      case "faIcons":
+        this.icon = faIcons;
+        break;
       default:
         this.icon = faTachometerAlt;
     }
@@ -63,5 +81,4 @@ export class LayoutComponent implements OnInit {
   ngOnDestroy(): void {
     this.titleService.titleSubject.unsubscribe();
   }
-
 }
