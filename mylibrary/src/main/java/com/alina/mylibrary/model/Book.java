@@ -49,6 +49,8 @@ public class Book {
     @NotNull
     private String coverType;
 
+    //TODO poate de adaugat sale pt eventuala eticheta
+
     @Column
     private int numberOfReviews;
 

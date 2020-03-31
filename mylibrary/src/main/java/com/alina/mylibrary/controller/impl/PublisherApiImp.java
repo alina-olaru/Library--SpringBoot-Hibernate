@@ -48,6 +48,7 @@ public class PublisherApiImp implements PublisherApi {
         }
 
         return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,null,"Editura nu poate fi stearsa");
+
     }
 
     @Override
