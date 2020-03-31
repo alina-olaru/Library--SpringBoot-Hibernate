@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class Address {
 
+    //todo? tb api uri pt adrese?
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
