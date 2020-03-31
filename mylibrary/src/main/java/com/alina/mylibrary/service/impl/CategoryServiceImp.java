@@ -4,9 +4,11 @@ import com.alina.mylibrary.dao.CategoryDao;
 import com.alina.mylibrary.model.Category;
 import com.alina.mylibrary.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CategoryServiceImp implements CategoryService {
 
 
