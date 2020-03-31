@@ -1,3 +1,4 @@
+import { AddEditCategoryComponent } from './pages/category/add-edit-category/add-edit-category.component';
 import { AddEditPublisherComponent } from './pages/publishers/add-edit-publisher/add-edit-publisher.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -28,7 +29,8 @@ import { CategoryComponent } from './pages/category/category.component';
     BooksComponent,
     PublishersComponent,
     AddEditPublisherComponent,
-    CategoryComponent
+    CategoryComponent,
+    AddEditCategoryComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { CategoryComponent } from './pages/category/category.component';
   ],
   entryComponents:[
     AddEditAuthorComponent,
-    AddEditPublisherComponent
+    AddEditPublisherComponent,
+    AddEditCategoryComponent
   ]
 })
 export class AdminModule { }

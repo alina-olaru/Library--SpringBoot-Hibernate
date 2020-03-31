@@ -20,6 +20,7 @@ interface Data {
 })
 export class AddEditAuthorComponent implements OnInit {
   localForm: FormGroup;
+
   myControl = new FormControl();
   fileName: string;
 

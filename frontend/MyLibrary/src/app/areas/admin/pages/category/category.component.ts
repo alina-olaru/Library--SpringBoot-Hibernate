@@ -1,5 +1,3 @@
-import { AddEditCategoryComponent } from './add-edit-Category/add-edit-Category.component';
-
 import { MatTableDataSource } from '@angular/material/table';
 import { TitleService } from './../../services/title.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -14,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ApiResponse } from 'src/app/Models/general/api-response';
 import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
 import { CategoryService } from './Category.service';
+import { AddEditCategoryComponent } from './add-edit-category/add-edit-category.component';
 
 
 
@@ -190,7 +189,7 @@ export class CategoryComponent implements OnInit {
         this.loadingService.stop();
         if (response && response.status == ApiResponseType.SUCCESS) {
           this.toastr.Toast.fire({
-            title: 'categoryul a fost adaugat cu succes',
+            title: 'categoria a fost adaugata cu succes',
             icon: 'success'
 
           });

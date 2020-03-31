@@ -32,7 +32,7 @@ const routes: Routes = [
     {  path:"edituri",
     component:PublishersComponent
   },
-  {  path:"Categorii",
+  {  path:"categorii",
   component:CategoryComponent
 }
     ]
