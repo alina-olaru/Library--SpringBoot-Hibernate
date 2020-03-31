@@ -20,12 +20,16 @@ import { LoginComponent } from './areas/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoadingSpinnerComponent,
-    LoginComponent,
+    LoginComponent
+
 
   ],
   imports: [
@@ -49,6 +53,8 @@ import { HttpClientModule } from '@angular/common/http';
     ToastrService,
     LoadingService,
     RegisterService
+    //TODO ADD SERVICES
+
 
 
   ],
