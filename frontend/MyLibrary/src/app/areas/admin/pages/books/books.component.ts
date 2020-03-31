@@ -1,53 +1,117 @@
-import { Book } from './../../../../Models/admin/BookModel';
+import { Subscription } from "rxjs";
+import { Category } from "src/app/Models/admin/CategoryModel";
+import { Publisher } from "src/app/Models/admin/PublisherModel";
+import { Author } from "src/app/Models/admin/AuthorModel";
+import { PublishersService } from "./../publishers/publishers.service";
+import { CategoryService } from "./../category/category.service";
+import { AuthorsService } from "./../authors/authors.service";
+import { Book } from "./../../../../Models/admin/BookModel";
 
-import { MatTableDataSource } from '@angular/material/table';
-import { TitleService } from './../../services/title.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ToastrService } from 'src/app/services/toastr.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from "@angular/material/table";
+import { TitleService } from "./../../services/title.service";
+import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
+import { ToastrService } from "src/app/services/toastr.service";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
 
-import { LoadingService } from 'src/app/modules/loading-spinner/loading.service';
-import { MatDialog } from '@angular/material/dialog';
+import { LoadingService } from "src/app/modules/loading-spinner/loading.service";
+import { MatDialog } from "@angular/material/dialog";
 
-import { ApiResponse } from 'src/app/Models/general/api-response';
-import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
-import { BookService } from './book.service';
-import { AddEditBooksComponent } from './add-edit-books/add-edit-books.component';
+import { ApiResponse } from "src/app/Models/general/api-response";
+import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
+import { BookService } from "./book.service";
+import { AddEditBooksComponent } from "./add-edit-books/add-edit-books.component";
 
 @Component({
-  selector: 'app-books',
-  templateUrl: './books.component.html',
-  styleUrls: ['./books.component.scss']
+  selector: "app-books",
+  templateUrl: "./books.component.html",
+  styleUrls: ["./books.component.scss"]
 })
-export class BooksComponent implements OnInit {
-
-
+export class BooksComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   Books: Book[] = [];
+  authors: Author[] = [];
+  publishers: Publisher[] = [];
+  categories: Category[] = [];
+
   _addBook: Book;
-  displayedColumns: string[] = ['bookId', 'bookTitle', 'bookLanguage',
-  'bookYear','numberOfPages','numberofVolumes','bookDescription','bookDimension',
-  'bookWeight','bookPrice','coverType','numberOfBoooks',
-  'publisher','booksCategories',
-  'actions'];
+  displayedColumns: string[] = [
+    "bookId",
+    "bookTitle",
+    "bookLanguage",
+    "bookYear",
+    "numberOfPages",
+    "numberofVolumes",
+    "bookDescription",
+    "bookDimension",
+    "bookWeight",
+    "bookPrice",
+    "coverType",
+    "numberOfBoooks",
+    "publisher",
+    "booksCategories",
+    "actions"
+  ];
   dataSource: MatTableDataSource<Book> = new MatTableDataSource(this.Books);
+  subscriptions: Subscription[] = [];
 
   constructor(
     private titleService: TitleService,
     private toastr: ToastrService,
     private sanitizer: DomSanitizer,
     private loadingService: LoadingService,
-    public dialog: MatDialog,
-   public bookService:BookService
+    private dialog: MatDialog,
+    private bookService: BookService,
+    private authorsService: AuthorsService,
+    private categoryService: CategoryService,
+    private publishersService: PublishersService
   ) {}
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(e => {
+      e.unsubscribe();
+    });
+  }
 
   ngOnInit() {
     this.GetBooks();
-    this.titleService.setTitle('faBook', 'Carti');
+    this.titleService.setTitle("faBook", "Carti");
+    this.getAuthors();
+    this.getPublishers();
+    this.getCategories();
+  }
+
+  getAuthors() {
+    let autSubscriber = this.authorsService.GetAuthors().subscribe(response => {
+      if (response && response.status == ApiResponseType.SUCCESS) {
+        this.authors = response.body;
+      }
+    });
+    this.subscriptions.push(autSubscriber);
+  }
+
+  getPublishers() {
+    let pubSubscriber = this.publishersService
+      .GetPublishers()
+      .subscribe(response => {
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.publishers = response.body;
+        }
+      });
+    this.subscriptions.push(pubSubscriber);
+  }
+
+  getCategories() {
+    let catSubscriber = this.categoryService
+      .GetCategory()
+      .subscribe(response => {
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.categories = response.body;
+        }
+      });
+    this.subscriptions.push(catSubscriber);
   }
 
   applyFilter(filterValue: string) {
@@ -61,36 +125,34 @@ export class BooksComponent implements OnInit {
   }
   GetBooks() {
     this.loadingService.start();
-    this.bookService
-      .GetBook()
-      .subscribe((response: ApiResponse<Book[]>) => {
-        this.loadingService.stop();
+    this.bookService.GetBook().subscribe((response: ApiResponse<Book[]>) => {
+      this.loadingService.stop();
 
-        if (response && response.status == ApiResponseType.SUCCESS) {
-          if (response.body.length == 0) {
-            this.toastr.Toast.fire({
-              icon: 'info',
-              title: 'Nu exista carti in baza de date'
-            });
-          }
-
-          this.Books = response.body;
-          this.updateDataSouce();
+      if (response && response.status == ApiResponseType.SUCCESS) {
+        if (response.body.length == 0) {
+          this.toastr.Toast.fire({
+            icon: "info",
+            title: "Nu exista carti in baza de date"
+          });
         }
-      });
+
+        this.Books = response.body;
+        this.updateDataSouce();
+      }
+    });
   }
 
-  DeleteBook(Book:Book) {
+  DeleteBook(Book: Book) {
     this.toastr.Swal.fire({
-      title: 'Esti sigur ca vrei sa stergi aceasta categorie?',
-      html: `Id: <b>${Book.bookId}</b> - Nume: <b>${Book.bookTitle}
-      - Autor: <b>${Book.bookAuthor.firstName} ${Book.bookAuthor.lastName}</b>`,
-      icon: 'warning',
+      title: "Esti sigur ca vrei sa stergi aceasta categorie?",
+      html: `Id: <b>${Book.bookId}</b> - Nume: <b>${Book.bookTitle}`,
+      // Autor: <b>${Book.bookAuthor.firstName} ${Book.bookAuthor.lastName}</b>
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Da',
-      cancelButtonText: 'Nu'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Da",
+      cancelButtonText: "Nu"
     }).then(result => {
       if (result.value) {
         this.loadingService.start();
@@ -99,17 +161,21 @@ export class BooksComponent implements OnInit {
           .DeleteBook(Book.bookId)
           .subscribe((response: ApiResponse<boolean>) => {
             this.loadingService.stop();
-            if (response && response.status==ApiResponseType.SUCCESS && response.body == true) {
+            if (
+              response &&
+              response.status == ApiResponseType.SUCCESS &&
+              response.body == true
+            ) {
               this.toastr.Toast.fire({
-                title: 'Cartea a fost stearsa!.',
-                icon: 'success'
+                title: "Cartea a fost stearsa!.",
+                icon: "success"
               });
               this.GetBooks();
             } else {
               this.toastr.Swal.fire(
-                'Eroare!',
-                'A aparut o eroare la stergere, incearca din nou!',
-                'error'
+                "Eroare!",
+                "A aparut o eroare la stergere, incearca din nou!",
+                "error"
               );
             }
           });
@@ -117,61 +183,57 @@ export class BooksComponent implements OnInit {
     });
   }
 
-  EditBook(item:Book) {
-    const dialogRef=this.dialog.open(AddEditBooksComponent,{
-      width: '400px',
+  EditBook(item: Book) {
+    const dialogRef = this.dialog.open(AddEditBooksComponent, {
+      width: "400px",
       data: {
-        type: 'edit',
+        type: "edit",
         model: Object.assign({}, item)
       }
-
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result != undefined && result !=null){
-        this.EditBookConfirm(result,item);
+      if (result != undefined && result != null) {
+        this.EditBookConfirm(result, item);
       }
-    })
-
-
+    });
   }
 
-  EditBookConfirm(newBook:Book,oldBook:Book){
+  EditBookConfirm(newBook: Book, oldBook: Book) {
     this.loadingService.start();
 
-    this.bookService.UpdateBook(newBook,newBook.bookId).subscribe((response:ApiResponse<Book>)=> {
-      this.loadingService.stop();
-      if (response && response.status == ApiResponseType.SUCCESS) {
-        this.toastr.Toast.fire({
-          title: 'Cartea a fost editata cu succes!',
-          icon: 'success'
+    this.bookService
+      .UpdateBook(newBook, newBook.bookId)
+      .subscribe((response: ApiResponse<Book>) => {
+        this.loadingService.stop();
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.toastr.Toast.fire({
+            title: "Cartea a fost editata cu succes!",
+            icon: "success"
+          });
 
-        });
-
-        const idxOld=this.Books.indexOf(oldBook);
-        this.Books[idxOld]=newBook;
-        this.updateDataSouce();
-      }
-
-      else {
-        this.toastr.Swal.fire(
-          'Eroare!',
-          'A aparut o eroare la editare, incearca din nou!',
-          'error'
-        );
-
-
-      }
-    },
-  );
+          const idxOld = this.Books.indexOf(oldBook);
+          this.Books[idxOld] = newBook;
+          this.updateDataSouce();
+        } else {
+          this.toastr.Swal.fire(
+            "Eroare!",
+            "A aparut o eroare la editare, incearca din nou!",
+            "error"
+          );
+        }
+      });
   }
 
   AddBook() {
     const dialogRef = this.dialog.open(AddEditBooksComponent, {
-      width: '400px',
+      width: "50%",
       data: {
-        type: 'add',
-        model: this._addBook
+        type: "add",
+        model: this._addBook,
+        authors: this.authors,
+        publishers: this.publishers,
+        categories: this.categories
       }
     });
 
@@ -184,33 +246,31 @@ export class BooksComponent implements OnInit {
 
   AddBookConfirm(book: Book) {
     this.loadingService.start();
-    this.bookService
-      .AddBook(book)
-      .subscribe((response: ApiResponse<Book>) => {
+    this.bookService.AddBook(book).subscribe(
+      (response: ApiResponse<Book>) => {
         this.loadingService.stop();
         if (response && response.status == ApiResponseType.SUCCESS) {
           this.toastr.Toast.fire({
-            title: 'Cartea a fost adaugata cu succes',
-            icon: 'success'
-
+            title: "Cartea a fost adaugata cu succes",
+            icon: "success"
           });
           this.Books.push(response.body);
           this.updateDataSouce();
         } else {
           this.toastr.Swal.fire(
-            'Eroare!',
-            'A aparut o eroare la adugare, incearca din nou!',
-            'error'
+            "Eroare!",
+            "A aparut o eroare la adugare, incearca din nou!",
+            "error"
           );
-
-
         }
-      }, error => {
+      },
+      error => {
         this.toastr.Swal.fire(
-          'Eroare!',
-          'A aparut o eroare la adugare, incearca din nou!',
-          'error'
+          "Eroare!",
+          "A aparut o eroare la adugare, incearca din nou!",
+          "error"
         );
-      });
+      }
+    );
   }
 }

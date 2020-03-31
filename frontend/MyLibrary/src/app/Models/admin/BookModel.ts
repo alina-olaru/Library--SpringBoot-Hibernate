@@ -1,18 +1,20 @@
+import { BooksAuthors } from './BooksAuthorsModel';
+import { BooksCategories } from './BooksCategoriesModel';
 import { Category } from 'src/app/Models/admin/CategoryModel';
 import { Publisher } from './PublisherModel';
 
 export class Book{
   bookId:number;
-  bookTitle:String;
-  bookLanguage:String;
+  bookTitle:string;
+  bookLanguage:string;
   bookYear:number;
   numberOfPages:number;
   numberofVolumes:number;
-  bookDescription:String;
-  bookDimension:String;
+  bookDescription:string;
+  bookDimension:string;
   bookWeight:number;
   bookPrice:number;
-  coverType:String;
+  coverType:string;
   numberOfReviews:number;
   bookRating:number;
   numberOfBoooks:number;
@@ -20,10 +22,11 @@ export class Book{
   persB:any;
   wishBooks:any;
   items:any;
-  booksCategories:Category
-  bookAuthor:any;
+  booksCategories:BooksCategories[];
+  bookAuthor:BooksAuthors[];
   bookR:any;
-  bookImage:any;
+  bookImage:string;
+  bookImageSrc?: any;
   public constructor(init?: Partial<Book>) {
     Object.assign(this, init);
   }

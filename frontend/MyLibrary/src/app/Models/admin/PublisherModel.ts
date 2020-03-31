@@ -1,7 +1,7 @@
 export class Publisher{
 
 publisherId:number;
-publisherTitle:String;
+publisherTitle:string;
 public constructor(init?: Partial<Publisher>) {
   Object.assign(this, init);
 }

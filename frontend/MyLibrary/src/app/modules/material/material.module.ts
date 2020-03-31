@@ -18,7 +18,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {  MatDialogModule } from '@angular/material/dialog';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [],
@@ -41,7 +42,9 @@ import {  MatDialogModule } from '@angular/material/dialog';
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatSortModule
+    MatSortModule,
+    MatAutocompleteModule,
+    MatChipsModule
   ],
   exports: [
     MatButtonModule,
@@ -61,7 +64,9 @@ import {  MatDialogModule } from '@angular/material/dialog';
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatSortModule
+    MatSortModule,
+    MatAutocompleteModule,
+    MatChipsModule
   ]
 })
 export class MaterialModule { }
