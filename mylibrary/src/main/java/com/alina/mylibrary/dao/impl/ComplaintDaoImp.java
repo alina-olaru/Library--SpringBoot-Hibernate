@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Component
-public class CompaintDaoImp implements ComplaintDao {
+public class ComplaintDaoImp implements ComplaintDao {
 
     @Autowired
     ComplaintRepository complaintRepository;

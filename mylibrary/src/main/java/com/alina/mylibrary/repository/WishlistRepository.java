@@ -17,15 +17,14 @@ import java.util.List;
 
 public interface WishlistRepository extends JpaRepository<Wishlist, Integer> {
 
-    /*
-     List<BookUser> findByEmailAdress(String emailAdress);
-    List<BookUser> findByUsername(String username);
-     */
 
     //todo de implementat toate astea pt dashboard + populat cu date pt grafice
 
     List<Wishlist> findByuserwishlist(BookUser userwishlist);
     List<Wishlist> findBybookwishlist(Book bookwishlist);
+    Boolean deleteByBookwishlistAndUserwishlist(Book book,BookUser bookUser);
+
+
 
 }
 

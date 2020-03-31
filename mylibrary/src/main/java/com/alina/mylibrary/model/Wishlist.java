@@ -1,5 +1,9 @@
 package com.alina.mylibrary.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,6 +11,9 @@ import java.util.Objects;
 @Entity
 @Table
 @IdClass(WishlistId.class)
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Wishlist implements Serializable {
 
 
@@ -20,37 +27,4 @@ public class Wishlist implements Serializable {
     @JoinColumn(foreignKey = @ForeignKey(name="FK_USER_WISHLIST_ID"))
     private BookUser userwishlist;
 
-
-    public Wishlist() {
-    }
-
-    public Book getBookwishlist() {
-        return bookwishlist;
-    }
-
-    public void setBookwishlist(Book bookwishlist) {
-        this.bookwishlist = bookwishlist;
-    }
-
-    public BookUser getUserwishlist() {
-        return userwishlist;
-    }
-
-    public void setUserwishlist(BookUser userwishlist) {
-        this.userwishlist = userwishlist;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Wishlist wishlist = (Wishlist) o;
-        return Objects.equals(bookwishlist, wishlist.bookwishlist) &&
-                Objects.equals(userwishlist, wishlist.userwishlist);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(bookwishlist, userwishlist);
-    }
 }

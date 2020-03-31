@@ -1,6 +1,10 @@
 package com.alina.mylibrary.model;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Blob;
@@ -10,6 +14,9 @@ import java.util.Set;
 
 @Entity
 @Table
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
 
     @Id
@@ -95,216 +102,6 @@ public class Book {
         //todo de adaugat campurile noi sau de schimbat cu seterele
     }
 
-    public int getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
-
-    public String getBookTitle() {
-        return bookTitle;
-    }
-
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }
-
-    public int getBookYear() {
-        return bookYear;
-    }
-
-    public void setBookYear(int bookYear) {
-        this.bookYear = bookYear;
-    }
-
-    public int getNumberOfPages() {
-        return numberOfPages;
-    }
-
-    public void setNumberOfPages(int numberOfPages) {
-        this.numberOfPages = numberOfPages;
-    }
-
-    public int getNumberofVolumes() {
-        return numberofVolumes;
-    }
-
-    public void setNumberofVolumes(int numberofVolumes) {
-        this.numberofVolumes = numberofVolumes;
-    }
-
-    public String getBookLanguage() {
-        return bookLanguage;
-    }
-
-    public void setBookLanguage(String bookLanguage) {
-        this.bookLanguage = bookLanguage;
-    }
-
-    public String getBookDescription() {
-        return bookDescription;
-    }
-
-    public void setBookDescription(String bookDescription) {
-        this.bookDescription = bookDescription;
-    }
-
-    public String getBookDimension() {
-        return bookDimension;
-    }
-
-    public void setBookDimension(String bookDimension) {
-        this.bookDimension = bookDimension;
-    }
-
-    public float getBookWeight() {
-        return bookWeight;
-    }
-
-    public void setBookWeight(float bookWeight) {
-        this.bookWeight = bookWeight;
-    }
-
-    public float getBookPrice() {
-        return bookPrice;
-    }
-
-    public void setBookPrice(float bookPrice) {
-        this.bookPrice = bookPrice;
-    }
-
-    public String getCoverType() {
-        return coverType;
-    }
-
-    public void setCoverType(String coverType) {
-        this.coverType = coverType;
-    }
-
-    public int getNumberOfReviews() {
-        return numberOfReviews;
-    }
-
-    public void setNumberOfReviews(int numberOfReviews) {
-        this.numberOfReviews = numberOfReviews;
-    }
-
-    public float getBookRating() {
-        return bookRating;
-    }
-
-    public void setBookRating(float bookRating) {
-        this.bookRating = bookRating;
-    }
-
-    public int getNumberOfBoooks() {
-        return numberOfBoooks;
-    }
-
-    public void setNumberOfBoooks(int numberOfBoooks) {
-        this.numberOfBoooks = numberOfBoooks;
-    }
-
-    public Publisher getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
-
-    public List<PersonalBook> getPersBooks() {
-        return persBooks;
-    }
-
-    public void setPersBooks(List<PersonalBook> persBooks) {
-        this.persBooks = persBooks;
-    }
-
-    public List<Wishlist> getWishBooks() {
-        return wishBooks;
-    }
-
-    public void setWishBooks(List<Wishlist> wishBooks) {
-        this.wishBooks = wishBooks;
-    }
-
-    public List<OrderItem> getItems() {
-        return items;
-    }
-
-    public void setItems(List<OrderItem> items) {
-        this.items = items;
-    }
-
-    public List<BooksCategories> getBooksCategories() {
-        return booksCategories;
-    }
-
-    public void setBooksCategories(List<BooksCategories> booksCategories) {
-        this.booksCategories = booksCategories;
-    }
-
-    public List<BooksAuthors> getBookAuthor() {
-        return bookAuthor;
-    }
-
-    public void setBookAuthor(List<BooksAuthors> bookAuthor) {
-        this.bookAuthor = bookAuthor;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return bookId == book.bookId &&
-                bookYear == book.bookYear &&
-                numberOfPages == book.numberOfPages &&
-                numberofVolumes == book.numberofVolumes &&
-                Float.compare(book.bookWeight, bookWeight) == 0 &&
-                Float.compare(book.bookPrice, bookPrice) == 0 &&
-                numberOfReviews == book.numberOfReviews &&
-                Float.compare(book.bookRating, bookRating) == 0 &&
-                numberOfBoooks == book.numberOfBoooks &&
-                Objects.equals(bookTitle, book.bookTitle) &&
-                Objects.equals(bookLanguage, book.bookLanguage) &&
-                Objects.equals(bookDescription, book.bookDescription) &&
-                Objects.equals(bookDimension, book.bookDimension) &&
-                Objects.equals(coverType, book.coverType) &&
-                Objects.equals(bookImage, book.bookImage) &&
-                Objects.equals(publisher, book.publisher) &&
-                Objects.equals(persBooks, book.persBooks) &&
-                Objects.equals(wishBooks, book.wishBooks) &&
-                Objects.equals(items, book.items) &&
-                Objects.equals(booksCategories, book.booksCategories) &&
-                Objects.equals(bookAuthor, book.bookAuthor) &&
-                Objects.equals(reviews, book.reviews);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(bookId, bookTitle, bookYear, numberOfPages, numberofVolumes, bookLanguage, bookDescription, bookDimension, bookWeight, bookPrice, coverType, numberOfReviews, bookRating, numberOfBoooks, bookImage, publisher, persBooks, wishBooks, items, booksCategories, bookAuthor, reviews);
-    }
-
-    public Blob getBookImage() {
-        return bookImage;
-    }
-
-    public void setBookImage(Blob bookImage) {
-        this.bookImage = bookImage;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 
     @ManyToOne
     @JoinColumn(foreignKey=@ForeignKey(name = "Fk_publisher_id"))
