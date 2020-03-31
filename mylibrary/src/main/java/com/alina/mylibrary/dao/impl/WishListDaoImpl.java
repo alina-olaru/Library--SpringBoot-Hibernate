@@ -25,7 +25,7 @@ public class WishListDaoImpl implements WishListDao {
 
     @Override
     public List<Wishlist> getWhislistForaUser(BookUser bookUser) {
-        return null;
+        return this.wishlistRepository.findByuserwishlist(bookUser);
     }
 
     @Override
