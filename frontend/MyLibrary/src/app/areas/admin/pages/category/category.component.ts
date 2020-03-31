@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { TitleService } from './../../services/title.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -11,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ApiResponse } from 'src/app/Models/general/api-response';
 import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
-import { CategoryService } from './Category.service';
+import { CategoryService } from './category.service';
 import { AddEditCategoryComponent } from './add-edit-category/add-edit-category.component';
 
 
@@ -32,6 +33,7 @@ export class CategoryComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   Categories: Category[] = [];
+  fromRedirect: boolean=false;
   _addCategory: Category;
   displayedColumns: string[] = ['categoryId', 'categoryTitle', 'categoryDescription', 'actions'];
   dataSource: MatTableDataSource<Category> = new MatTableDataSource(this.Categories);
@@ -42,10 +44,23 @@ export class CategoryComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private loadingService: LoadingService,
     public dialog: MatDialog,
-    public CategoriesService: CategoryService
-  ) {}
+    public CategoriesService: CategoryService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    activatedRoute.queryParamMap.subscribe(params => {
+      if (params["action"] == "add") {
+        this.fromRedirect = true;
+      }
+      if(params["action"]==undefined && (params as any).params["action"]=="add"){
+        this.fromRedirect = true;
+      }
+    });
+  }
 
   ngOnInit() {
+    if (this.fromRedirect == true) {
+      this.AddCategory();
+    }
     this.GetCategories();
     this.titleService.setTitle('faIcons', 'Categorii');
   }

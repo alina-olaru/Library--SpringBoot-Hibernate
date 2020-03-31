@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthorsService } from './authors.service';
 import { ApiResponse } from 'src/app/Models/general/api-response';
 import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-authors',
@@ -25,6 +26,8 @@ export class AuthorsComponent implements OnInit {
   authors: Author[] = [];
   _addAuthor: Author;
   displayedColumns: string[] = ['authorId', 'firstName', 'lastName', 'actions'];
+  fromRedirect = false;
+
   dataSource: MatTableDataSource<Author> = new MatTableDataSource(this.authors);
 
   constructor(
@@ -33,10 +36,23 @@ export class AuthorsComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private loadingService: LoadingService,
     public dialog: MatDialog,
-    public authorsService: AuthorsService
-  ) {}
+    public authorsService: AuthorsService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    activatedRoute.queryParamMap.subscribe(params => {
+      if (params["action"] == "add") {
+        this.fromRedirect = true;
+      }
+      if(params["action"]==undefined && (params as any).params["action"]=="add"){
+        this.fromRedirect = true;
+      }
+    });
+  }
 
   ngOnInit() {
+    if (this.fromRedirect == true) {
+      this.AddAuthor();
+    }
     this.GetAuthors();
     this.titleService.setTitle('faPenFancy', 'Autori');
   }
@@ -71,7 +87,7 @@ export class AuthorsComponent implements OnInit {
       });
   }
 
-  DeleteAuthor(autor:Author) {
+  DeleteAuthor(autor: Author) {
     this.toastr.Swal.fire({
       title: 'Esti sigur ca vrei sa stergi acest bautura?',
       html: `Id: <b>${autor.authorId}</b> - Nume: <b>${autor.firstName} ${autor.lastName}</b>`,
@@ -89,7 +105,11 @@ export class AuthorsComponent implements OnInit {
           .DeleteAuthor(autor.authorId)
           .subscribe((response: ApiResponse<boolean>) => {
             this.loadingService.stop();
-            if (response && response.status==ApiResponseType.SUCCESS && response.body == true) {
+            if (
+              response &&
+              response.status == ApiResponseType.SUCCESS &&
+              response.body == true
+            ) {
               this.toastr.Toast.fire({
                 title: 'Autorul a fost sters.',
                 icon: 'success'
@@ -107,53 +127,46 @@ export class AuthorsComponent implements OnInit {
     });
   }
 
-  EditAuthor(item:Author) {
-    const dialogRef=this.dialog.open(AddEditAuthorComponent,{
+  EditAuthor(item: Author) {
+    const dialogRef = this.dialog.open(AddEditAuthorComponent, {
       width: '400px',
       data: {
         type: 'edit',
         model: Object.assign({}, item)
       }
-
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result!=undefined && result !=null){
-        this.EditAuthorConfirm(result,item);
+      if (result != undefined && result != null) {
+        this.EditAuthorConfirm(result, item);
       }
-    })
-
-
+    });
   }
 
-  EditAuthorConfirm(newAuthor:Author,oldAuthor:Author){
+  EditAuthorConfirm(newAuthor: Author, oldAuthor: Author) {
     this.loadingService.start();
 
-    this.authorsService.UpdateAuthor(newAuthor,newAuthor.authorId).subscribe((response:ApiResponse<Author>)=> {
-      this.loadingService.stop();
-      if (response && response.status == ApiResponseType.SUCCESS) {
-        this.toastr.Toast.fire({
-          title: 'Autorul a fost editat cu succes!',
-          icon: 'success'
+    this.authorsService
+      .UpdateAuthor(newAuthor, newAuthor.authorId)
+      .subscribe((response: ApiResponse<Author>) => {
+        this.loadingService.stop();
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.toastr.Toast.fire({
+            title: 'Autorul a fost editat cu succes!',
+            icon: 'success'
+          });
 
-        });
-
-        const idxOld=this.authors.indexOf(oldAuthor);
-        this.authors[idxOld]=newAuthor;
-        this.updateDataSouce();
-      }
-
-      else {
-        this.toastr.Swal.fire(
-          'Eroare!',
-          'A aparut o eroare la editare, incearca din nou!',
-          'error'
-        );
-
-
-      }
-    },
-  );
+          const idxOld = this.authors.indexOf(oldAuthor);
+          this.authors[idxOld] = newAuthor;
+          this.updateDataSouce();
+        } else {
+          this.toastr.Swal.fire(
+            'Eroare!',
+            'A aparut o eroare la editare, incearca din nou!',
+            'error'
+          );
+        }
+      });
   }
 
   AddAuthor() {
@@ -174,15 +187,13 @@ export class AuthorsComponent implements OnInit {
 
   AddAuthorConfirm(author: Author) {
     this.loadingService.start();
-    this.authorsService
-      .AddAuthor(author)
-      .subscribe((response: ApiResponse<Author>) => {
+    this.authorsService.AddAuthor(author).subscribe(
+      (response: ApiResponse<Author>) => {
         this.loadingService.stop();
         if (response && response.status == ApiResponseType.SUCCESS) {
           this.toastr.Toast.fire({
             title: 'Autorul a fost adaugat cu succes',
             icon: 'success'
-
           });
           this.authors.push(response.body);
           this.updateDataSouce();
@@ -192,15 +203,15 @@ export class AuthorsComponent implements OnInit {
             'A aparut o eroare la adugare, incearca din nou!',
             'error'
           );
-
-
         }
-      }, error => {
+      },
+      error => {
         this.toastr.Swal.fire(
           'Eroare!',
           'A aparut o eroare la adugare, incearca din nou!',
           'error'
         );
-      });
+      }
+    );
   }
 }

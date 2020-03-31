@@ -1,13 +1,12 @@
-import { PublishersComponent } from './pages/publishers/publishers.component';
-import { AuthorsComponent } from './pages/authors/authors.component';
+import { PublishersComponent } from "./pages/publishers/publishers.component";
+import { AuthorsComponent } from "./pages/authors/authors.component";
 
-import { LayoutComponent } from './layout/layout.component';
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { BooksComponent } from './pages/books/books.component';
-import { CategoryComponent } from './pages/category/category.component';
-
+import { LayoutComponent } from "./layout/layout.component";
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { DashboardComponent } from "./pages/dashboard/dashboard.component";
+import { BooksComponent } from "./pages/books/books.component";
+import { CategoryComponent } from "./pages/category/category.component";
 
 const routes: Routes = [
   {
@@ -19,22 +18,16 @@ const routes: Routes = [
         redirectTo: "dashboard"
       },
       {
-        path:"dashboard",
-        component:DashboardComponent
+        path: "dashboard",
+        component: DashboardComponent
       },
       {
-        path:"autori",
-        component:AuthorsComponent
+        path: "autori",
+        component: AuthorsComponent
       },
-    {  path:"carti",
-      component:BooksComponent
-    },
-    {  path:"edituri",
-    component:PublishersComponent
-  },
-  {  path:"categorii",
-  component:CategoryComponent
-}
+      { path: "carti", component: BooksComponent },
+      { path: "edituri", component: PublishersComponent },
+      { path: "categorii", component: CategoryComponent }
     ]
   }
 ];
@@ -43,4 +36,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}
