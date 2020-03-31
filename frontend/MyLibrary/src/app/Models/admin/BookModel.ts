@@ -1,3 +1,4 @@
+import { Category } from 'src/app/Models/admin/CategoryModel';
 import { Publisher } from './PublisherModel';
 
 export class Book{
@@ -19,7 +20,7 @@ export class Book{
   persB:any;
   wishBooks:any;
   items:any;
-  booksCategories:any
+  booksCategories:Category
   bookAuthor:any;
   bookR:any;
   public constructor(init?: Partial<Book>) {
