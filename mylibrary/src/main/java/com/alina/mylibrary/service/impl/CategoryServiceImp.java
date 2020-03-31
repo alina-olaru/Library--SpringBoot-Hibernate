@@ -19,15 +19,13 @@ public class CategoryServiceImp implements CategoryService {
     @Override
     public Category addCategory(Category category) {
         if (category != null) {
-            categoryDao.addCategory(category);
+
             List< com.alina.mylibrary.model.Category> categoriesWithSameTitle=this.categoryDao.getCategoriesWithcategoryTitle(category.getCategoryTitle());
             if(categoriesWithSameTitle.size()>=1){
                 return null;
                 //the you already have that category
             }
-            else{
-                this.categoryDao.addCategory(category);
-            }
+            return categoryDao.addCategory(category);
         }
         return null;
     }
