@@ -9,6 +9,7 @@ public interface WishListDao {
 
     List<Wishlist> getAllWhislists();
     List<Wishlist> getWhislistForaUser(BookUser bookUser);
+    List<Wishlist> getWhislistIncludingBookTitle(String bookTitle);
     List<Wishlist> getWishlistForBookTitle(String bookTitle);
     List<Wishlist> getWishlistForBookPublisher(String bookPublisher);
     List<Wishlist> getWishlistForBookAuthor(String firstName,String lastName);

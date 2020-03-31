@@ -17,6 +17,21 @@ public class WishListDaoImpl implements WishListDao {
     WishlistRepository wishlistRepository;
 
 
+    @Override
+    public List<Wishlist> getWhislistIncludingBookTitle(String bookTitle) {
+       if(bookTitle.length()<2){
+           return null;
+       }
+       List<Wishlist> wishLists=this.wishlistRepository.findAll();
+       List<Wishlist> response=null;
+       for(Wishlist w:wishLists){
+           if(w.getBookwishlist().getBookTitle().equals(bookTitle)){
+               response.add(w);
+           }
+       }
+
+       return response;
+    }
 
     @Override
     public List<Wishlist> getAllWhislists() {
