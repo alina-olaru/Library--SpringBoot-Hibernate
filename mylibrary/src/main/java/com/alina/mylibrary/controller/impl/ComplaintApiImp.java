@@ -6,9 +6,12 @@ import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.Complaint;
 import com.alina.mylibrary.service.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
+@Component
 public class ComplaintApiImp implements ComplaintApi {
 
     @Autowired
