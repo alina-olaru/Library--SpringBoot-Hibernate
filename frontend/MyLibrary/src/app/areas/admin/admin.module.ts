@@ -15,6 +15,8 @@ import { AuthorsComponent } from './pages/authors/authors.component';
 import { AddEditAuthorComponent } from './pages/authors/add-edit-author/add-edit-author.component';
 import { BooksComponent } from './pages/books/books.component';
 import { PublishersComponent } from './pages/publishers/publishers.component';
+import { CategoryComponent } from './pages/category/category.component';
+
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { PublishersComponent } from './pages/publishers/publishers.component';
     AddEditAuthorComponent,
     BooksComponent,
     PublishersComponent,
-    AddEditPublisherComponent],
+    AddEditPublisherComponent,
+    CategoryComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
