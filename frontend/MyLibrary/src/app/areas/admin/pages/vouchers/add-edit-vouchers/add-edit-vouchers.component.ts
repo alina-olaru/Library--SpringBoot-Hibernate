@@ -9,8 +9,10 @@ import {
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Voucher } from 'src/app/Models/admin/VoucherModel';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
-
+import { VoucherService} from ".././voucher.service";
+import { ApiResponse } from 'src/app/Models/general/api-response';
+import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
+import { ToastrService } from 'src/app/services/toastr.service';
 interface Data {
   type: string;
   model: Voucher;
@@ -31,12 +33,16 @@ export class AddEditVouchersComponent implements OnInit {
   fileName: string;
   minDate: Date;
   maxDate: Date;
-
+  vouchers:Voucher[];
+  fd:Date;
+  lD:Date;
 
   constructor(
     public dialogRef: MatDialogRef<AddEditVouchersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Data,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private voucherService : VoucherService,
+    private toastr: ToastrService
   ) {
     const currentYear = new Date().getFullYear();
     const currentDay = new Date().getDate();
@@ -47,7 +53,7 @@ export class AddEditVouchersComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.GetVoucher();
     if (this.data.model == null || this.data.model == undefined) {
       this.data.model = new Voucher();
   }
@@ -84,4 +90,36 @@ SubmitForm() {
     this.dialogRef.close(model);
   }
 }
+
+
+
+
+GetVoucher(){
+
+
+
+  this.voucherService
+  .GetVouchers()
+  .subscribe((response : ApiResponse<Voucher[]>) => {
+
+
+    if(response && response.status==ApiResponseType.SUCCESS){
+
+      if(response.body.length==0){
+        this.toastr.Toast.fire({
+          icon: 'info',
+          title: 'Nu exista vouchere in baza de date'
+        });
+      }
+      this.vouchers=response.body;
+
+
+    }
+
+  });
+
+
+}
+
+
 }
