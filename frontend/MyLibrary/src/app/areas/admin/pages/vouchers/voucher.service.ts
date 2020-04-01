@@ -38,6 +38,11 @@ baseUrl:string;
 
 
 
+  AddVoucher(voucher : Voucher){
+
+    return this.http.post<ApiResponse<Voucher>>(this.globalVarService.globalUrl + this.baseUrl , voucher);
+  }
+
 
 
 
