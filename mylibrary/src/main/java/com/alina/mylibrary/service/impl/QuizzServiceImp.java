@@ -16,7 +16,7 @@ public class QuizzServiceImp implements QuizzService {
 
     @Override
     public List<Quizz> getQuizzes() {
-        return null;
+        return this.quizzDao.getQuizzes();
     }
 
     @Override
