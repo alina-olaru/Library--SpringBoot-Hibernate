@@ -15,8 +15,8 @@ baseUrl:string;
 
   constructor(
 
-    private http: HttpClientent,
-    private globalVarService: GlobalVarServicervice
+    private http: HttpClient,
+    private globalVarService: GlobalVarService
 
   ) {
     this.baseUrl="public/api/admin/voucher";
