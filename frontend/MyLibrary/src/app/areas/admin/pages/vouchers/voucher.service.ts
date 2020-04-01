@@ -1,9 +1,46 @@
+import { Observable } from 'rxjs';
+import { ApiResponse } from './../../../../Models/general/api-response';
+import { GlobalVarService } from 'src/app/services/global-var.service';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { timingSafeEqual } from 'crypto';
+import { Voucher } from 'src/app/Models/admin/VoucherModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VoucherService {
+baseUrl:string;
 
-  constructor() { }
+
+  constructor(
+
+    private http: HttpClientent,
+    private globalVarService: GlobalVarServicervice
+
+  ) {
+    this.baseUrl="public/api/admin/voucher";
+  }
+
+
+  GetVouchers(){
+
+
+    return this.http.get<ApiResponse<Voucher[]>>(this.globalVarService.globalUrl + this.baseUrl);
+  }
+
+
+
+  DeleteVoucher(id:number):Observable<ApiResponse<boolean>>{
+    return this.http.delete<ApiResponse<boolean>>
+    (this.globalVarService.globalUrl + this.baseUrl + "/" + id);
+  }
+
+
+
+
+
+
+
+
 }
