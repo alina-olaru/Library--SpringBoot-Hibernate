@@ -20,6 +20,7 @@ import { PublishersComponent } from './pages/publishers/publishers.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { AddEditBooksComponent } from './pages/books/add-edit-books/add-edit-books.component';
 import { VouchersComponent } from './pages/vouchers/vouchers.component';
+import { AddEditVouchersComponent } from './pages/vouchers/add-edit-vouchers/add-edit-vouchers.component';
 
 
 
@@ -35,7 +36,8 @@ import { VouchersComponent } from './pages/vouchers/vouchers.component';
     CategoryComponent,
     AddEditCategoryComponent,
     AddEditBooksComponent,
-    VouchersComponent
+    VouchersComponent,
+    AddEditVouchersComponent
   ],
   imports: [
     CommonModule,
