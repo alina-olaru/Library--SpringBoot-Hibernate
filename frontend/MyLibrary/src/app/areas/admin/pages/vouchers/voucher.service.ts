@@ -19,7 +19,7 @@ baseUrl:string;
     private globalVarService: GlobalVarService
 
   ) {
-    this.baseUrl="public/api/admin/voucher";
+    this.baseUrl="/public/api/admin/voucher";
   }
 
 
