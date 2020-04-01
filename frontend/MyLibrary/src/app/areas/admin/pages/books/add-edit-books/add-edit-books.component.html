@@ -23,12 +23,95 @@
     </div>
     <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
-        <input matInput placeholder="Limba*" formControlName="bookLanguage">
+        <input matInput placeholder="Limba" formControlName="bookLanguage">
         <mat-error *ngIf="form.bookLanguage?.invalid">
           Limba este obligatorie
         </mat-error>
       </mat-form-field>
     </div>
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Stoc*" formControlName="numberOfBoooks">
+        <mat-error *ngIf="form.numberOfBoooks?.invalid">
+        Numarul de carti este obligatoriu
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Dimensiuni" formControlName="bookDimension">
+      </mat-form-field>
+    </div>
+
+
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Descriere" formControlName="bookDescription">
+      </mat-form-field>
+    </div>
+
+
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Numar volume" formControlName="numberofVolumes">
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Numar pagini" formControlName="numberOfPages">
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Anul aparitiei" formControlName="bookYear">
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Tip coperta"formControlName="coverType">
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Greutate"formControlName="bookWeight">
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Pret"formControlName="bookPrice">
+        <mat-error *ngIf="form.bookPrice?.invalid">
+          Pretul este obligatoriu
+          </mat-error>
+      </mat-form-field>
+    </div>
+
+
+
+
+
+
+
     <div class="input-row" fxFlex="100%" fxLayout="row">
       <mat-form-field fxFlex>
         <input type="text" placeholder="Editura*" matInput formControlName="publisher" [matAutocomplete]="auto">
@@ -38,7 +121,7 @@
           </mat-option>
         </mat-autocomplete>
         <mat-error *ngIf="form.publisher?.invalid">
-          Tipul de eveniment este obligatoriu
+          Editura este obligatorie
         </mat-error>
       </mat-form-field>
       <div>
@@ -127,6 +210,7 @@
         <img [src]="this.data.model.bookImageSrc" [hidden]="!this.data.model.bookImageSrc" class="img-fluid">
       </div>
     </div>
+
 
   </div>
   <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">

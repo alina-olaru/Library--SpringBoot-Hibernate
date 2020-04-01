@@ -1,5 +1,5 @@
-import { BooksCategories } from './../../../../../Models/admin/BooksCategoriesModel';
-import { BooksAuthors } from './../../../../../Models/admin/BooksAuthorsModel';
+import { BooksCategories } from "./../../../../../Models/admin/BooksCategoriesModel";
+import { BooksAuthors } from "./../../../../../Models/admin/BooksAuthorsModel";
 import { ToastrService } from "src/app/services/toastr.service";
 import { Router } from "@angular/router";
 
@@ -21,8 +21,8 @@ import { Publisher } from "src/app/Models/admin/PublisherModel";
 import { Subscription, Observable } from "rxjs";
 import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
 import { startWith, map } from "rxjs/operators";
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import { MatChipInputEvent } from "@angular/material/chips";
 
 interface Data {
   type: string;
@@ -70,47 +70,35 @@ export class AddEditBooksComponent implements OnInit {
     } else {
       this.dropdownSelectedPublisher = this.data.model.publisher;
       this.selectedAuthors = this.data.model.bookAuthor.map(e => e.authorId);
-      this.selectedCategories = this.data.model.booksCategories.map(e => e.categories);
+      this.selectedCategories = this.data.model.booksCategories.map(
+        e => e.categories
+      );
     }
     this.localForm = this.formBuilder.group({
       /*
 
-          bookId:number;
-    bookTitle:String;
-    bookLanguage:String;
-    bookYear:number;
-    numberOfPages:number;
-    numberofVolumes:number;
-    bookDescription:String;
-    bookDimension:String;
-    bookWeight:number;
-    bookPrice:number;
-    coverType:String;
-    numberOfReviews:number;
-    bookRating:number;
-    numberOfBoooks:number;
-    publisher:Publisher;
-    persB:any;
-    wishBooks:any;
-    items:any;
-    booksCategories:Category
-    bookAuthor:any;
-    bookR:any;
+
+
+
+
+
 
         */
       bookId: [{ value: this.data.model.bookId, disabled: true }],
       bookTitle: [this.data.model.bookTitle, Validators.required],
       bookLanguage: [this.data.model.bookLanguage],
-
- //     bookYear: [this.data.model.bookTitle],
-  //    numberOfPages: [this.data.model.numberOfPages],
-  //    numberofVolumes: [this.data.model.numberofVolumes],
-  //    bookDescription: [this.data.model.bookDescription],
-   //   bookDimension: [this.data.model.bookDimension, Validators.required],
-   //   numberOfBoooks: [this.data.model.numberOfBoooks, Validators.required],
+      bookPrice: [this.data.model.bookPrice, Validators.required],
+      bookWeight: [this.data.model.bookWeight],
+      bookYear: [this.data.model.bookTitle],
+      numberOfPages: [this.data.model.numberOfPages],
+      numberofVolumes: [this.data.model.numberofVolumes],
+      bookDescription: [this.data.model.bookDescription],
+      bookDimension: [this.data.model.bookDimension],
+      numberOfBoooks: [this.data.model.numberOfBoooks, Validators.required],
       publisher: [this.dropdownSelectedPublisher, Validators.required],
       local_autori: [this.selectedAuthors],
-      local_categories: [this.selectedCategories]
+      local_categories: [this.selectedCategories],
+      coverType: [this.data.model.coverType]
     });
 
     this.ConstructFilterOptionsPublishers();
@@ -124,7 +112,7 @@ export class AddEditBooksComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   get form() {
     return this.localForm.controls;
@@ -139,14 +127,18 @@ export class AddEditBooksComponent implements OnInit {
       console.log(this.localForm.value);
       let model: Book = new Book(this.localForm.value);
       model.bookId = this.data.model.bookId;
-      model.publisher = this.dropdownSelectedPublisher;
-      model.bookAuthor = this.selectedAuthors.map(e => <BooksAuthors>{ authorId: e, bookId: model });
-      model.booksCategories = this.selectedCategories.map(e => <BooksCategories>{ categories: e, booksC: model });
-      model.bookImage = this.base64 ? this.base64.replace(/^data:image\/[a-z]+;base64,/, "") : null;
+      model.bookAuthor = this.selectedAuthors.map(
+        e => <BooksAuthors>{ authorId: Object.assign({},e), bookId: Object.assign({}, model) }
+      );
+      model.booksCategories = this.selectedCategories.map(
+        e => <BooksCategories>{ categories: Object.assign({},e), booksC: Object.assign({}, model) }
+      );
+      model.bookImage = this.base64
+        ? this.base64.replace(/^data:image\/[a-z]+;base64,/, "")
+        : null;
       model.bookImageSrc = this.base64;
       this.dialogRef.close(model);
     }
-
   }
 
   displayFnPublisher(tip?: Publisher): string | undefined {
@@ -214,8 +206,12 @@ export class AddEditBooksComponent implements OnInit {
     this.authorsService.GetAuthors().subscribe(response => {
       if (response && response.status == ApiResponseType.SUCCESS) {
         this.data.authors = response.body;
-        this.selectedAuthors = this.selectedAuthors.filter(e => this.data.authors.map(z => z.authorId).indexOf(e.authorId) >= 0);
-        this.data.authors = this.data.authors.filter(e => this.selectedAuthors.map(z => z.authorId).indexOf(e.authorId) < 0);
+        this.selectedAuthors = this.selectedAuthors.filter(
+          e => this.data.authors.map(z => z.authorId).indexOf(e.authorId) >= 0
+        );
+        this.data.authors = this.data.authors.filter(
+          e => this.selectedAuthors.map(z => z.authorId).indexOf(e.authorId) < 0
+        );
         this.ConstructFilterOptionsAutori();
         this.toastr.Toast.fire({
           icon: "success",
@@ -234,8 +230,17 @@ export class AddEditBooksComponent implements OnInit {
     this.categoryService.GetCategory().subscribe(response => {
       if (response && response.status == ApiResponseType.SUCCESS) {
         this.data.categories = response.body;
-        this.selectedCategories = this.selectedCategories.filter(e => this.data.categories.map(z => z.categoryId).indexOf(e.categoryId) >= 0);
-        this.data.categories = this.data.categories.filter(e => this.selectedCategories.map(z => z.categoryId).indexOf(e.categoryId) < 0);
+        this.selectedCategories = this.selectedCategories.filter(
+          e =>
+            this.data.categories.map(z => z.categoryId).indexOf(e.categoryId) >=
+            0
+        );
+        this.data.categories = this.data.categories.filter(
+          e =>
+            this.selectedCategories
+              .map(z => z.categoryId)
+              .indexOf(e.categoryId) < 0
+        );
         this.ConstructFilterOptionsCategories();
         this.toastr.Toast.fire({
           icon: "success",
@@ -310,7 +315,8 @@ export class AddEditBooksComponent implements OnInit {
     const filterValue = name.toLowerCase();
 
     return this.data.authors.filter(
-      option => option.firstName.toLowerCase().indexOf(filterValue) === 0 ||
+      option =>
+        option.firstName.toLowerCase().indexOf(filterValue) === 0 ||
         option.lastName.toLowerCase().indexOf(filterValue) === 0
     );
   }
@@ -323,8 +329,11 @@ export class AddEditBooksComponent implements OnInit {
     );
   }
 
-  selectedAuthor(event: MatAutocompleteSelectedEvent, ele: HTMLInputElement): void {
-    ele.value = '';
+  selectedAuthor(
+    event: MatAutocompleteSelectedEvent,
+    ele: HTMLInputElement
+  ): void {
+    ele.value = "";
     ele.blur();
     this.selectedAuthors.push(event.option.value);
     let index = this.data.authors.indexOf(event.option.value);
@@ -332,8 +341,11 @@ export class AddEditBooksComponent implements OnInit {
     this.localForm.controls["local_autori"].setValue("");
   }
 
-  selectedCategory(event: MatAutocompleteSelectedEvent, ele: HTMLInputElement): void {
-    ele.value = '';
+  selectedCategory(
+    event: MatAutocompleteSelectedEvent,
+    ele: HTMLInputElement
+  ): void {
+    ele.value = "";
     ele.blur();
     this.selectedCategories.push(event.option.value);
     let index = this.data.categories.indexOf(event.option.value);
@@ -342,18 +354,20 @@ export class AddEditBooksComponent implements OnInit {
   }
 
   UploadFile() {
-    const fileUpload = document.getElementById('modal-file-upload-input') as HTMLInputElement;
+    const fileUpload = document.getElementById(
+      "modal-file-upload-input"
+    ) as HTMLInputElement;
     fileUpload.onchange = () => {
       for (let index = 0; index < fileUpload.files.length; index++) {
         const file = fileUpload.files[index];
         var myReader: FileReader = new FileReader();
         this.fileName = file.name;
-        myReader.onloadend = (e) => {
+        myReader.onloadend = e => {
           console.log(myReader.result);
           this.data.model.bookImage = <string>myReader.result;
           this.data.model.bookImageSrc = myReader.result;
           this.base64 = <string>myReader.result;
-        }
+        };
         myReader.readAsDataURL(file);
       }
     };
@@ -366,5 +380,4 @@ export class AddEditBooksComponent implements OnInit {
     this.data.model.bookImageSrc = null;
     this.base64 = null;
   }
-
 }

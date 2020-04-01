@@ -265,6 +265,7 @@ export class BooksComponent implements OnInit, OnDestroy {
         }
       },
       error => {
+        console.log(error);
         this.toastr.Swal.fire(
           "Eroare!",
           "A aparut o eroare la adugare, incearca din nou!",
