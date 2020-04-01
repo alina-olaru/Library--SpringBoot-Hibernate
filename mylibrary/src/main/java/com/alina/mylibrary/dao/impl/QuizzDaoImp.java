@@ -22,6 +22,14 @@ public class QuizzDaoImp implements QuizzDao {
         return this.quizzRepository.findAll();
     }
 
+    @Override
+    public Boolean deleteQquizz(int quizzId) {
+        if(quizzId>=1) {
+            this.quizzRepository.deleteById(quizzId);
+            return true;
+        }
+        return false;
+    }
 
 
 
