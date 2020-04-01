@@ -33,9 +33,11 @@ public class VoucherDaoImp implements VoucherDao {
 
     @Override
     public Voucher updateVoucher(Voucher voucher) {
-        return null;
+        if(voucher==null){
+            return null;
+        }
+        return this.voucherRepository.save(voucher);
     }
-
     @Override
     public Boolean deleteVoucher() {
         return null;
