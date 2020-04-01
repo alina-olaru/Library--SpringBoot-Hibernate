@@ -42,6 +42,7 @@ public class VoucherServiceImp implements VoucherService {
         if(voucherId<1){
             return null;
         }
+        return this.voucherDao.deleteVoucher(voucherId);
     }
 
     @Override
