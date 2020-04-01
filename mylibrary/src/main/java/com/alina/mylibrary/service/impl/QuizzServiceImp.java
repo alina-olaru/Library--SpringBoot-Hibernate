@@ -21,7 +21,13 @@ public class QuizzServiceImp implements QuizzService {
 
     @Override
     public Boolean deleteQquizz(int quizzId) {
-        return null;
+       if(quizzId<1){
+           return false;
+       }
+       else{
+           this.quizzDao.deleteQquizz(quizzId);
+           return true;
+       }
     }
 
     @Override
