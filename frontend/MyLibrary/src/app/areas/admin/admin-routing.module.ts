@@ -1,3 +1,4 @@
+import { QuizzezComponent } from './pages/quizzez/quizzez.component';
 import { VouchersComponent } from './pages/vouchers/vouchers.component';
 import { PublishersComponent } from "./pages/publishers/publishers.component";
 import { AuthorsComponent } from "./pages/authors/authors.component";
@@ -29,7 +30,8 @@ const routes: Routes = [
       { path: "carti", component: BooksComponent },
       { path: "edituri", component: PublishersComponent },
       { path: "categorii", component: CategoryComponent },
-      { path: "vouchere", component:VouchersComponent}
+      { path: "vouchere", component:VouchersComponent},
+      { path: "quizzuri", component:QuizzezComponent}
     ]
   }
 ];
