@@ -8,15 +8,16 @@
   </span>
 </h1>
 <form fxLayout="column" [formGroup]="localForm" (ngSubmit)="SubmitForm()">
-  <div mat-dialog-content class="example-container" fxLayout="column">
-    <div class="input-row" *ngIf="data.type=='edit'">
+  <div mat-dialog-content class="example-container" fxLayout="row wrap" fxLayoutGap="10px">
+
+    <div class="input-row" *ngIf="data.type=='edit'" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
         <input matInput placeholder="Id" formControlName="authorId">
       </mat-form-field>
     </div>
 
 
-    <div class="input-row">
+    <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
         <input matInput placeholder="Titlu*" formControlName="voucherTitle">
         <mat-error *ngIf="form.voucherTitle?.invalid">
@@ -26,7 +27,7 @@
     </div>
 
 
-    <div class="input-row">
+    <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
         <input matInput placeholder="Descriere" formControlName="voucherDescription">
 
@@ -35,7 +36,7 @@
 
 
 
-    <div class="input-row">
+    <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
         <input matInput placeholder="Nr de utilizari*" formControlName="voucherMaximumUses">
         <mat-error *ngIf="form.voucherMaximumUses?.invalid">
@@ -45,7 +46,7 @@
     </div>
 
 
-    <div class="input-row">
+    <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
         <input matInput placeholder="Valoare discount*" formControlName="voucherPrice">
         <mat-error *ngIf="form.voucherPrice?.invalid">
@@ -54,34 +55,38 @@
       </mat-form-field>
     </div>
 
-    <div class="input-row">
-    <mat-form-field class="example-full-width">
+    <div class="input-row" fxFlex="calc(50%-10px)">
+    <mat-form-field fxFlex>
       <mat-label>Data de inceput</mat-label>
-      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="voucherStartDate">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_start" formControlName="voucherStartDate" disabled>
+      <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
       <mat-error *ngIf="form.voucherStartDate?.invalid">
        Data este obligatorie
         </mat-error>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-datepicker #picker_start disabled="false"></mat-datepicker>
     </mat-form-field>
   </div>
 
 
-  <div class="input-row">
-    <mat-form-field class="example-full-width">
-      <mat-label>Data de inceput</mat-label>
-      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="voucherEndDate">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <div class="input-row"  fxFlex="calc(50%-10px)">
+    <mat-form-field fxFlex>
+      <mat-label>Data de final</mat-label>
+      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_end" formControlName="voucherEndDate" disabled>
+      <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
       <mat-error *ngIf="form.voucherEndDate?.invalid">
         Data este obligatorie
         </mat-error>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-datepicker #picker_end disabled="false"></mat-datepicker>
     </mat-form-field>
   </div>
+  <div fxFlex></div>
+
+
+
 
 
   </div>
-  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center" >
     <button mat-button color="primary" type="submit" cdkFocusInitial *ngIf="data.type=='add'">
       <mat-icon>add</mat-icon> Adauga
     </button>

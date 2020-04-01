@@ -113,7 +113,7 @@ dataSource:MatTableDataSource<Voucher>=new MatTableDataSource(this.vouchers);
 
   AddVoucher(){
     const dialogRef = this.dialog.open(AddEditVouchersComponent, {
-      width: '400px',
+      width: '40%',
       data: {
         type: 'add',
         model: this._addVoucher
