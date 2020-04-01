@@ -53,6 +53,22 @@ public class QuizzServiceImp implements QuizzService {
 
     @Override
     public Quizz addQuizz(Quizz quizz) {
-        return null;
+        if(quizz==null){
+            return null;
+        }
+
+        List<Quizz> quizzez=this.quizzDao.getQuizzes();
+        if(quizzez==null){
+            //then this is the first quizz you introduce in database-->so it's fine
+            return this.quizzDao.updateQuizz(quizz);
+        }
+
+        for(Quizz q:quizzez){
+            if(q.equals(quizz)){
+                return null;
+            }
+            return this.quizzDao.updateQuizz(quizz);
+
+        }
     }
 }
