@@ -122,13 +122,13 @@ public class Book {
 
 
     @OneToMany(mappedBy = "booksC",
-    cascade = CascadeType.ALL)
+    cascade = CascadeType.MERGE)
     private List<BooksCategories> booksCategories;
 
 
     @OneToMany(mappedBy = "bookId",
             fetch = FetchType.LAZY,
-    cascade = CascadeType.ALL)
+    cascade = CascadeType.MERGE)
     private List<BooksAuthors> bookAuthor;
 
     @OneToMany(mappedBy = "bookR")
