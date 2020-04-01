@@ -25,7 +25,11 @@ public class VoucherApiImp implements VoucherApi {
 
     @Override
     public ApiResponse<Voucher> insertVoucher(Voucher voucher) {
-        return null;
+        if(voucher==null){
+            return new ApiResponse<Voucher>(ApiResponseType.ERROR,null,"Voucherul nu s-a putut insera in baza de date");
+        }
+
+        return new ApiResponse<Voucher>(ApiResponseType.SUCCESS,this.voucherService.addVoucher(voucher),"Voucherul s-a inserat cu succes");
     }
 
     @Override
