@@ -12,7 +12,7 @@
 
     <div class="input-row" *ngIf="data.type=='edit'" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
-        <input matInput placeholder="Id" formControlName="authorId">
+        <input matInput placeholder="Id" formControlName="voucherId">
       </mat-form-field>
     </div>
 
@@ -21,7 +21,7 @@
       <mat-form-field fxFlex>
         <input matInput placeholder="Titlu*" formControlName="voucherTitle">
         <mat-error *ngIf="form.voucherTitle?.invalid">
-          Numele este obligatoriu
+          Titlul este obligatoriu
         </mat-error>
       </mat-form-field>
     </div>
