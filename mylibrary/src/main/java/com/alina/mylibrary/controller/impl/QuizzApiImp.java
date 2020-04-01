@@ -45,6 +45,12 @@ public class QuizzApiImp implements QuizzApi {
 
     @Override
     public ApiResponse<Quizz> addQuizz(Quizz quizz) {
-        return null;
+        if(quizz==null){
+            return new ApiResponse<Quizz>(ApiResponseType.ERROR,null,"nu s-a putut adauga in baza de date");
+
+        }
+        return new ApiResponse<Quizz>(ApiResponseType.SUCCESS,this.quizzService.addQuizz(quizz),"s-a adaugat in baza de date cu succes");
+
     }
+
 }
