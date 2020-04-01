@@ -43,6 +43,9 @@ public class VoucherApiImp implements VoucherApi {
 
     @Override
     public ApiResponse<Boolean> deleteVoucher(int id) {
-        return null;
+       if(id<1){
+           return new ApiResponse<Boolean>(ApiResponseType.ERROR,null,"Voucherul nu a putut fi sters din baza de date");
+       }
+       return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,this.voucherService.deleteVoucher(id),"Voucherul s-a sters din baza de date cu succes");
     }
 }
