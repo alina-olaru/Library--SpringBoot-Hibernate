@@ -5,11 +5,12 @@ import com.alina.mylibrary.model.Voucher;
 import com.alina.mylibrary.repository.VoucherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 
-@Component
+@Repository
 public class VoucherDaoImp implements VoucherDao {
 
 
@@ -20,7 +21,9 @@ public class VoucherDaoImp implements VoucherDao {
 
     @Override
     public List<Voucher> getVouchers() {
+
         return this.voucherRepository.findAll();
+
     }
 
     @Override

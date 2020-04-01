@@ -6,16 +6,17 @@ import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.Voucher;
 import com.alina.mylibrary.service.VoucherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-
 public class VoucherApiImp implements VoucherApi {
 
 
-    VoucherService voucherService;
+    @Autowired
+    private VoucherService voucherService;
 
     @Override
     public ApiResponse<List<Voucher>> getVouchers() {
