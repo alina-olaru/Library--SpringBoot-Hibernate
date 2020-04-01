@@ -35,7 +35,12 @@ public class QuizzApiImp implements QuizzApi {
 
     @Override
     public ApiResponse<Quizz> updateQuizz(Quizz quizz) {
-        return null;
+        if(quizz==null){
+            return new ApiResponse<Quizz>(ApiResponseType.ERROR,null,"nu s-a putut edita in baza de date");
+
+        }
+            return new ApiResponse<Quizz>(ApiResponseType.SUCCESS,this.quizzService.updateQuizz(quizz),"s-a editat in baza de date cu succes");
+
     }
 
     @Override
