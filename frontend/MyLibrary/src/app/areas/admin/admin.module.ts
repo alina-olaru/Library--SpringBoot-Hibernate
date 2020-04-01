@@ -54,7 +54,8 @@ import { AddEditVouchersComponent } from './pages/vouchers/add-edit-vouchers/add
     AddEditAuthorComponent,
     AddEditPublisherComponent,
     AddEditCategoryComponent,
-    AddEditBooksComponent
+    AddEditBooksComponent,
+    AddEditVouchersComponent
   ]
 })
 export class AdminModule { }
