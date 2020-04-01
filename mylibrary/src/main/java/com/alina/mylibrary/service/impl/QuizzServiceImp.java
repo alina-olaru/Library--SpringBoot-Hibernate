@@ -4,9 +4,12 @@ import com.alina.mylibrary.dao.QuizzDao;
 import com.alina.mylibrary.model.Quizz;
 import com.alina.mylibrary.service.QuizzService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+@Service
 public class QuizzServiceImp implements QuizzService {
 
 
