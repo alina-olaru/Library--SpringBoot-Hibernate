@@ -46,9 +46,10 @@ public class QuizzServiceImp implements QuizzService {
             if(q.equals(quizz)){
                 return null;
             }
-            return this.quizzDao.updateQuizz(quizz);
+
 
         }
+        return this.quizzDao.updateQuizz(quizz);
     }
 
     @Override
@@ -67,8 +68,9 @@ public class QuizzServiceImp implements QuizzService {
             if(q.equals(quizz)){
                 return null;
             }
-            return this.quizzDao.updateQuizz(quizz);
+
 
         }
+        return this.quizzDao.updateQuizz(quizz);
     }
 }
