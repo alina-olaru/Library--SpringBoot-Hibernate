@@ -40,6 +40,10 @@ public class VoucherDaoImp implements VoucherDao {
     }
     @Override
     public Boolean deleteVoucher(int id) {
-        return null;
+        if(id==0){
+            return false;
+        }
+        this.voucherRepository.deleteById(id);
+        return true;
     }
 }
