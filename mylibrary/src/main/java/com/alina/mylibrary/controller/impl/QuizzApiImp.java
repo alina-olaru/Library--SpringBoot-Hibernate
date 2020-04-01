@@ -26,7 +26,11 @@ public class QuizzApiImp implements QuizzApi {
 
     @Override
     public ApiResponse<Boolean> deleteQquizz(int quizzId) {
-        return null;
+       if(quizzId<1){
+           return new ApiResponse<Boolean>(ApiResponseType.ERROR,null,"Nu s-a putut sterge din baza de date.");
+       }
+
+       return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,this.quizzService.deleteQquizz(quizzId),"s-a sters cu succes din baza de date");
     }
 
     @Override
