@@ -47,6 +47,9 @@ public class VoucherServiceImp implements VoucherService {
 
     @Override
     public Voucher updateVoucher(Voucher voucher) {
-        return null;
+       if(voucher==null){
+           return null;
+       }
+       return this.voucherDao.updateVoucher(voucher);
     }
 }
