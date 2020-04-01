@@ -8,7 +8,8 @@ import {
   faBook,
   faPrint,
   faIcons,
-  IconDefinition
+  IconDefinition,
+  faMoneyBillAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { TitleServiceModel } from "src/app/Models/admin/TitleServiceModel";
 import { TitleService } from "../services/title.service";
@@ -26,6 +27,7 @@ export class LayoutComponent implements OnInit {
   faBook = faBook;
   faPrint = faPrint;
   faIcons = faIcons;
+  faMoneyBillAlt=faMoneyBillAlt;
   title: TitleServiceModel;
   openSidebar = true;
   icon: IconDefinition;
@@ -66,6 +68,9 @@ export class LayoutComponent implements OnInit {
         break;
       case "faIcons":
         this.icon = faIcons;
+        break;
+        case"faMoneyBillAlt":
+        this.icon=faMoneyBillAlt;
         break;
       default:
         this.icon = faTachometerAlt;
