@@ -15,7 +15,7 @@ public interface BookApi {
 
 
     @PostMapping
-    ApiResponse<Book> insertBook(Book book);
+    ApiResponse<Book> insertBook(@RequestBody Book book);
 
 
     @GetMapping
