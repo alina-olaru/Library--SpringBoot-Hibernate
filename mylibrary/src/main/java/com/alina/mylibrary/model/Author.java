@@ -31,6 +31,9 @@ public class Author {
     @Column
     private String lastName;
 
+
+   // List<Book>
+
     public static Author get_copy(Author old_author)
     {
         Author new_author = new Author();
