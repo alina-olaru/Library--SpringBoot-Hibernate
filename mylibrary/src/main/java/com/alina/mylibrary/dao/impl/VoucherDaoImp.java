@@ -39,7 +39,7 @@ public class VoucherDaoImp implements VoucherDao {
         return this.voucherRepository.save(voucher);
     }
     @Override
-    public Boolean deleteVoucher() {
+    public Boolean deleteVoucher(int id) {
         return null;
     }
 }

@@ -11,5 +11,5 @@ public interface VoucherDao {
     List<Voucher> getVouchers();
     Voucher addVoucher(Voucher voucher);
     Voucher updateVoucher(Voucher voucher);
-    Boolean deleteVoucher();
+    Boolean deleteVoucher(int id);
 }
