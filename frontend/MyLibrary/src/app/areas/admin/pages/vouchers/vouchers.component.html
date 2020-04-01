@@ -66,16 +66,13 @@
 
 
 
-
-
-
     <ng-container matColumnDef="actions">
       <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element" fxLayoutAlign="end center">
         <button mat-button color="warn" (click)="DeleteVoucher(element)">
           <mat-icon>delete</mat-icon>Sterge
         </button>
-        <button mat-button color="primary" (click)="DeleteVoucher(element)">
+        <button mat-button color="primary" (click)="UpdateVoucher(element)">
           <mat-icon>edit</mat-icon>Editeaza
         </button>
       </mat-cell>

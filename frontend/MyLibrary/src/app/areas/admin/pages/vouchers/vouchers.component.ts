@@ -36,7 +36,8 @@ displayedColumns:string[]=[
 'voucherStartDate',
 'voucherEndDate',
 'voucherMaximumUses',
-'voucherPrice'
+'voucherPrice',
+'actions'
 
 ];
 
