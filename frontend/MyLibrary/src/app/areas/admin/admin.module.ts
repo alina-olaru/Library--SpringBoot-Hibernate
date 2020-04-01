@@ -59,7 +59,8 @@ import { AddEditQuizzComponent } from './pages/quizzez/add-edit-quizz/add-edit-q
     AddEditPublisherComponent,
     AddEditCategoryComponent,
     AddEditBooksComponent,
-    AddEditVouchersComponent
+    AddEditVouchersComponent,
+    AddEditQuizzComponent
   ]
 })
 export class AdminModule { }
