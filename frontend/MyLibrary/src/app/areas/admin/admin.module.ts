@@ -22,6 +22,7 @@ import { AddEditBooksComponent } from './pages/books/add-edit-books/add-edit-boo
 import { VouchersComponent } from './pages/vouchers/vouchers.component';
 import { AddEditVouchersComponent } from './pages/vouchers/add-edit-vouchers/add-edit-vouchers.component';
 import { QuizzezComponent } from './pages/quizzez/quizzez.component';
+import { AddEditQuizzComponent } from './pages/quizzez/add-edit-quizz/add-edit-quizz.component';
 
 
 
@@ -39,7 +40,8 @@ import { QuizzezComponent } from './pages/quizzez/quizzez.component';
     AddEditBooksComponent,
     VouchersComponent,
     AddEditVouchersComponent,
-    QuizzezComponent
+    QuizzezComponent,
+    AddEditQuizzComponent
   ],
   imports: [
     CommonModule,
