@@ -36,5 +36,9 @@ public class QuizzDaoImp implements QuizzDao {
         return this.quizzRepository.save(quizz);
     }
 
+    @Override
+    public Quizz addQuizz(Quizz quizz) {
+        return this.quizzRepository.save(quizz);
 
+    }
 }
