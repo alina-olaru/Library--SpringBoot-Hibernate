@@ -44,7 +44,10 @@ baseUrl:string;
   }
 
 
-
+  UpdateVoucher(voucher:Voucher,id:number):Observable<ApiResponse<Voucher>>
+  {
+    return this.http.put<ApiResponse<Voucher>>(this.globalVarService.globalUrl + this.baseUrl + "/" + id , voucher);
+  }
 
 
 
