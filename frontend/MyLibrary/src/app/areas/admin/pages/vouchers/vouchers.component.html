@@ -36,7 +36,7 @@
 
     <ng-container matColumnDef="voucherStartDate">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Data inceput </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let element"> {{element.voucherStartDate}} </mat-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.voucherStartDate | date}} </mat-cell>
     </ng-container>
 
 
@@ -44,7 +44,7 @@
 
     <ng-container matColumnDef="voucherEndDate">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Data sfarsit </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let element"> {{element.voucherEndDate}} </mat-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.voucherEndDate | date}} </mat-cell>
     </ng-container>
 
 

@@ -76,6 +76,7 @@ onNoClick(): void {
 
 
 SubmitForm() {
+  console.log(this.localForm);
   if (this.localForm.valid) {
     console.log(this.localForm.value);
     let model: Voucher = new Voucher(this.localForm.value);
