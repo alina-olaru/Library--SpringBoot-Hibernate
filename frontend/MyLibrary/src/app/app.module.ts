@@ -18,7 +18,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from './areas/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
 
 
 
@@ -43,7 +45,10 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     FlexLayoutModule,
     SharedModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatDatepickerModule
+,MatNativeDateModule,MatInputModule
+
   ],
   providers: [
     FormBuilder,

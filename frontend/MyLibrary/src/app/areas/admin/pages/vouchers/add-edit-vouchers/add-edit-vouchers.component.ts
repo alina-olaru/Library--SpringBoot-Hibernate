@@ -8,6 +8,8 @@ import {
 } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Voucher } from 'src/app/Models/admin/VoucherModel';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 interface Data {
   type: string;
@@ -27,13 +29,22 @@ export class AddEditVouchersComponent implements OnInit {
 
   myControl = new FormControl();
   fileName: string;
+  minDate: Date;
+  maxDate: Date;
 
 
   constructor(
     public dialogRef: MatDialogRef<AddEditVouchersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Data,
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+    const currentYear = new Date().getFullYear();
+    const currentDay = new Date().getDate();
+    const currentMonth = new Date().getMonth();
+    this.minDate = new Date(currentYear,currentMonth,currentDay);
+    this.maxDate = new Date(currentYear ,currentMonth+6,currentDay);
+  }
+
 
   ngOnInit(): void {
 
@@ -46,7 +57,9 @@ export class AddEditVouchersComponent implements OnInit {
     voucherTitle: [this.data.model.voucherTitle, Validators.required],
     voucherDescription: [this.data.model.voucherDescription],
     voucherMaximumUses: [this.data.model.voucherMaximumUses, Validators.required],
-    voucherPrice: [this.data.model.voucherPrice, Validators.required]
+    voucherPrice: [this.data.model.voucherPrice, Validators.required],
+    voucherStartDate: [this.data.model.voucherStartDate, Validators.required],
+    voucherEndDate: [this.data.model.voucherStartDate, Validators.required]
 
   });
 
