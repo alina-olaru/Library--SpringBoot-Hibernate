@@ -14,7 +14,7 @@ import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
 import { ActivatedRoute } from '@angular/router';
 import { BookUser } from 'src/app/Models/BookUser';
 import { UserService } from './user.service';
-
+import { YesNoPipe } from "../../../../modules/pipes/yes-no.pipe";
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -27,7 +27,25 @@ export class UsersComponent implements OnInit {
 
   users: BookUser[] = [];
   _addUser: BookUser;
-  displayedColumns: string[] = ['authorId', 'firstName', 'lastName', 'actions'];
+
+
+
+
+  displayedColumns: string[] = [
+    "userId",
+    "firstName",
+    "lastName",
+    "emailAdress",
+    "phoneNumber",
+    "newsletter",
+    "adminPrivilege",
+    "userPrivilege",
+    "blocked",
+    "username",
+    "password",
+    "actions"
+
+  ];
   fromRedirect = false;
 
   dataSource: MatTableDataSource<BookUser> = new MatTableDataSource(this.users);
