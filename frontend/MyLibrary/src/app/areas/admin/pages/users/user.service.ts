@@ -54,6 +54,11 @@ export class UserService {
     );
   }
 
+  AddUser(user: User): Observable<ApiResponse<User>> {
+    return this.http.post<ApiResponse<User>>(
+      this.globalVarService.globalUrl + this.baseUrl,
+      user
+    );
   }
 
 
