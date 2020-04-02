@@ -1,1 +1,99 @@
-<p>add-edit-user works!</p>
+
+<h1 mat-dialog-title fxLayoutAlign="center center">
+  <span *ngIf="data.type=='add'">
+    Adauga autor
+  </span>
+  <span *ngIf="data.type=='edit'">
+    Editeaza
+  </span>
+</h1>
+<form fxLayout="column" [formGroup]="localForm" (ngSubmit)="SubmitForm()">
+  <div mat-dialog-content class="example-container" fxLayout="column">
+    <div class="input-row" *ngIf="data.type=='edit'">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Id" formControlName="userId">
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-row">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Nume*" formControlName="firstName">
+        <mat-error *ngIf="form.firstName?.invalid">
+          Numele este obligatoriu
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-row">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Prenume*" formControlName="lastName">
+        <mat-error *ngIf="form.lastName?.invalid">
+       Prenumele este obligatoriu
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="input-row">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Adresa Mail*" formControlName="emailAdress">
+        <mat-error *ngIf="form.emailAdress?.invalid">
+          Adresa este obligatorie
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-row">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Username*" formControlName="username">
+        <mat-error *ngIf="form.username?.invalid">
+    Username-ul este obligatoriu
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="input-row">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Numar telefon*" formControlName="phoneNumber">
+        <mat-error *ngIf="form.phoneNumber?.invalid">
+     Numarul de telefon este obligatoriu
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="input-row">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Parola*" formControlName="password">
+        <mat-error *ngIf="form.password?.invalid">
+        Parola este obligatorie
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+
+
+
+  </div>
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-button color="primary" type="submit" cdkFocusInitial *ngIf="data.type=='add'">
+      <mat-icon>add</mat-icon> Adauga
+    </button>
+    <button mat-button color="primary" type="submit" cdkFocusInitial *ngIf="data.type=='edit'">
+      <mat-icon>save</mat-icon> Salveaza
+    </button>
+    <button mat-button color="warn" type="button" (click)="onNoClick()">
+      <mat-icon>close</mat-icon> Renunta
+    </button>
+  </div>
+
+</form>
+
