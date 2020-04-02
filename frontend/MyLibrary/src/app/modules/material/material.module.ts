@@ -20,6 +20,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {  MatDialogModule } from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -44,7 +45,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDialogModule,
     MatSortModule,
     MatAutocompleteModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSelectModule
   ],
   exports: [
     MatButtonModule,
@@ -66,7 +68,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDialogModule,
     MatSortModule,
     MatAutocompleteModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }
