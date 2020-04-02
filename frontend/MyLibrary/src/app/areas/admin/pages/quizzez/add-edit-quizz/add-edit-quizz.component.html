@@ -1,1 +1,104 @@
-<p>add-edit-quizz works!</p>
+<h1 mat-dialog-title fxLayoutAlign="center center">
+  <span *ngIf="data.type=='add'">
+    Adauga Quizz
+  </span>
+  <span *ngIf="data.type=='edit'">
+    Editeaza
+  </span>
+</h1>
+<form fxLayout="column" [formGroup]="localForm" (ngSubmit)="SubmitForm()">
+  <div mat-dialog-content class="example-container" fxLayout="row wrap" fxLayoutGap="10px">
+
+    <div class="input-row" *ngIf="data.type=='edit'" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Id" formControlName="quizzId">
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Intrebarea*" formControlName="quizzQuestion">
+        <mat-error *ngIf="form.quizzQuestion?.invalid">
+          Intrebarea este obligatorie
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button type="button" (click)="addAnswer()"> Adauga raspuns </button>
+
+
+    <div fxFlex="calc(100%-10px)">
+      <mat-card *ngIf="answers.length > 0">
+        <mat-list role="list" fxLayout="column">
+          <mat-list-item role="listitem" *ngFor="let answer of answers; let i = index" fxFlex fxLayout="row wrap" fxLayoutGap="10px">
+
+            <div fxFlex="calc(70%-10px)" class="answer-text gap-10">
+              {{answer}}
+            </div>
+            <div fxFlex="calc(30%-10px)" class="answer-buttons gap-10">
+aaaa
+            </div>
+            <div fxFlex [hidden]="i==answers.length-1">
+              <mat-divider></mat-divider>
+            </div>
+          </mat-list-item>
+
+        </mat-list>
+      </mat-card>
+    </div>
+
+
+
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <mat-label>Data de inceput</mat-label>
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_startt" formControlName="quizzStartDate"
+          disabled>
+        <mat-datepicker-toggle matSuffix [for]="picker_startt"></mat-datepicker-toggle>
+        <mat-error *ngIf="form.quizzStartDate?.invalid">
+          Data este obligatorie
+        </mat-error>
+        <mat-datepicker #picker_startt disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <mat-label>Data de final</mat-label>
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_endd" formControlName="quizzEndDate"
+          disabled>
+        <mat-datepicker-toggle matSuffix [for]="picker_endd"></mat-datepicker-toggle>
+        <mat-error *ngIf="form.quizzEndDate?.invalid">
+          Data este obligatorie
+        </mat-error>
+        <mat-datepicker #picker_endd disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div fxFlex></div>
+
+
+
+
+
+
+
+  </div>
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-button color="primary" type="submit" cdkFocusInitial *ngIf="data.type=='add'">
+      <mat-icon>add</mat-icon> Adauga
+    </button>
+    <button mat-button color="primary" type="submit" cdkFocusInitial *ngIf="data.type=='edit'">
+      <mat-icon>save</mat-icon> Salveaza
+    </button>
+    <button mat-button color="warn" type="button" (click)="onNoClick()">
+      <mat-icon>close</mat-icon> Renunta
+    </button>
+  </div>
+
+</form>
