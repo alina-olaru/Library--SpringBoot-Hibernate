@@ -33,16 +33,22 @@ public class BookUserApiImp implements BookUserApi {
 
     @Override
     public ApiResponse<List<BookUser>> getUser() {
-        return new ApiResponse<List<BookUser>>(ApiResponseType.SUCCESS,this.bookUserService.getUsers(),"s-au adus datele cu succces)";
+        return new ApiResponse<List<BookUser>>(ApiResponseType.SUCCESS,this.bookUserService.getUsers(),"s-au adus datele cu succces");
     }
 
     @Override
     public ApiResponse<BookUser> updateUser(BookUser bookUser) {
-        return null;
+        if(bookUser==null){
+            return new ApiResponse<BookUser>(ApiResponseType.ERROR,null,"nu s-a putut adauga userul in baza de date");
+
+        }
+        return new ApiResponse<BookUser>(ApiResponseType.SUCCESS,this.bookUserService.editUser(bookUser));
+
+
     }
 
     @Override
     public ApiResponse<Boolean> deleteUser(int id) {
-        return null;
+        return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,this.bookUserService.deleteUser(id));
     }
 }
