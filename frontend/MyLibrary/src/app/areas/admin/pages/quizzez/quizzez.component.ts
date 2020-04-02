@@ -31,12 +31,21 @@ export class QuizzezComponent implements OnInit {
 
   quizzezArray: Quizzez[] = [];
   _addquizz: Quizzez;
-  displayedColumns: string[] = ["publisherId", "publisherTitle", "actions"];
+  displayedColumns: string[] = [
+
+    "quizzId",
+    "quizzQuestion",
+    "quizzCorrectAnswer",
+    "quizzStartDate",
+    "quizzEndDate"
+
+
+
+  ];
   dataSource: MatTableDataSource<Quizzez> = new MatTableDataSource(
     this.quizzezArray
   );
   fromRedirect: boolean = false;
-
 
 
   constructor(  private titleService: TitleService,
@@ -141,7 +150,7 @@ DeleteQuizzez(quizz: Quizzez) {
 
 EditQuizzez(item: Quizzez) {
     const dialogRef = this.dialog.open(AddEditQuizzComponent, {
-      width: "400px",
+      width: '40%',
       data: {
         type: "edit",
         model: Object.assign({}, item)
@@ -183,7 +192,7 @@ EditQuizzezConfirm(newQuizzez: Quizzez, oldQuizzez: Quizzez) {
 
 AddQuizzez() {
     const dialogRef = this.dialog.open(AddEditQuizzComponent, {
-      width: "400px",
+      width: '40%',
       data: {
         type: "add",
         model: this.quizzezArray
