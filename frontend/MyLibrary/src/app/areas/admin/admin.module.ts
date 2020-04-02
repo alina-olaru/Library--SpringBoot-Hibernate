@@ -66,6 +66,7 @@ import { AddEditUserComponent } from './pages/users/add-edit-user/add-edit-user.
     AddEditVouchersComponent,
     AddEditQuizzComponent,
     AddEditUserComponent
+
   ]
 })
 export class AdminModule { }
