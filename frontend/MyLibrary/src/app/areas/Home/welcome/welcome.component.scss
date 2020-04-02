@@ -2,7 +2,27 @@
 
 .margin-home{
   background-color: rgb(233, 224, 224);
+  height: 100vh;
 }
 .middle-home{
   background-color: white;
+  height: 100vh;
+
+}
+
+
+.home-header{
+  background-color: yellow;
+  height: 5em;
+}
+
+.banner-image{
+  object-fit: cover;
+  width: 120px;
+  height: 80px;
+
+}
+
+.line{
+height: 100px;
 }

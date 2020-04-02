@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { Error404Component } from './../error404/error404.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -16,7 +18,9 @@ import { Error404Component } from './../error404/error404.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-SharedModule
+    MatInputModule,
+SharedModule,
+MatIconModule
   ]
 
 })
