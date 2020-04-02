@@ -1,6 +1,6 @@
 import { ApiResponseType } from './api-response-type.enum';
 export class ApiResponse<T> {
-  message: String;
+  message: string;
   status: ApiResponseType;
   body: T;
 }

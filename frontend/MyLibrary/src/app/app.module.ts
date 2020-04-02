@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
+import { DespreComponent } from './areas/home/despre/despre.component';
 
 
 
@@ -31,7 +32,8 @@ import {MatInputModule} from '@angular/material/input';
     AppComponent,
     RegisterComponent,
     LoadingSpinnerComponent,
-    LoginComponent
+    LoginComponent,
+    DespreComponent
 
 
   ],
