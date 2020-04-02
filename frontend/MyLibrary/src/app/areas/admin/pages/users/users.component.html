@@ -1,1 +1,112 @@
-<p>users works!</p>
+<p>authors works!</p>
+<div class="p-2" fxLayout="row">
+  <mat-form-field fxFlex>
+    <input matInput placeholder="Filtreaza" (keyup)="applyFilter($event.target.value)">
+
+  </mat-form-field>
+  <div fxFlex="2 2 calc(10em + 10px)"></div>
+  <div fxFlex fxLayoutAlign="end center">
+    <button mat-button color="accent" (click)="AddUser()">
+      <mat-icon>add</mat-icon> Adauga
+    </button>
+  </div>
+</div>
+
+<div class="mat-elevation-z8 m-2" fxLayout="column" gallerize>
+  <table mat-table fxFlex [dataSource]="dataSource" matSort>
+
+<!-- TODO:sagestile se vad doar la hover,sa scot asta-->
+    <ng-container matColumnDef="userId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.userId}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nume </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Prenume </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="emailAdress">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Adresa mail </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.emailAdress}} </mat-cell>
+    </ng-container>
+
+
+
+
+
+
+    <ng-container matColumnDef="phoneNumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Numar telefon</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element" > {{element.phoneNumber}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="newsletter">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> newsletter</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element" class="privilege"> {{element.newsletter | yesNo }} </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="adminPrivilege">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Admin </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"class="privilege"> {{element.adminPrivilege | yesNo }} </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="userPrivilege">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> User </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"class="privilege"> {{element.userPrivilege | yesNo }} </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="blocked">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> blocked </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element" class="blocked"> {{element.blocked | yesNo}} </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+    </ng-container>
+
+
+
+
+    <ng-container matColumnDef="password">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Parola </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.password}} </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element" fxLayoutAlign="end center">
+        <button mat-button color="warn" (click)="DeleteUser(element)">
+          <mat-icon>delete</mat-icon>Sterge
+        </button>
+        <button mat-button color="primary" (click)="EditUser(element)">
+          <mat-icon>edit</mat-icon>Editeaza
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30, 50]" showFirstLastButtons></mat-paginator>
+</div>
