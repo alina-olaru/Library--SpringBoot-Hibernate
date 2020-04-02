@@ -8,9 +8,9 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { TitleService } from "../../services/title.service";
 import { MatDialog } from "@angular/material/dialog";
 import { LoadingService } from "src/app/modules/loading-spinner/loading.service";
-import { User } from "../../../../Models/admin/UserModel";
 import { threadId } from "worker_threads";
 import { ApiResponse } from "src/app/Models/general/api-response";
+import { BookUser } from 'src/app/Models/BookUser';
 
 @Injectable({
   providedIn: 'root'
@@ -36,14 +36,14 @@ export class UserService {
 
   {
 
-      this.baseUrl = "/public/api/admin/users";
+      this.baseUrl = "/public/api/admin/BookUsers";
    }
 
 
 
 
   GetUsers() {
-    return this.http.get<ApiResponse<User[]>>(
+    return this.http.get<ApiResponse<BookUser[]>>(
       this.globalVarService.globalUrl + this.baseUrl
     );
   }
@@ -54,17 +54,17 @@ export class UserService {
     );
   }
 
-  AddUser(user: User): Observable<ApiResponse<User>> {
-    return this.http.post<ApiResponse<User>>(
+  AddUser(BookUser: BookUser): Observable<ApiResponse<BookUser>> {
+    return this.http.post<ApiResponse<BookUser>>(
       this.globalVarService.globalUrl + this.baseUrl,
-      user
+      BookUser
     );
   }
 
-  UpdateUser(user: User, id: number): Observable<ApiResponse<User>> {
-    return this.http.put<ApiResponse<User>>(
+  UpdateUser(BookUser: BookUser, id: number): Observable<ApiResponse<BookUser>> {
+    return this.http.put<ApiResponse<BookUser>>(
       this.globalVarService.globalUrl + this.baseUrl + "/" + id,
-      user
+      BookUser
     );
   }
 }
