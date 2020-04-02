@@ -1,7 +1,7 @@
 
 <h1 mat-dialog-title fxLayoutAlign="center center">
   <span *ngIf="data.type=='add'">
-    Adauga autor
+    Adauga user
   </span>
   <span *ngIf="data.type=='edit'">
     Editeaza
@@ -78,6 +78,21 @@
       </mat-form-field>
     </div>
 
+
+    <div class="input-row">
+    <mat-form-field>
+      <mat-label>Privilegii</mat-label>
+      <mat-select formControlName="privileges" multiple>
+        <mat-select-trigger>
+          {{form.privileges.value ? form.privileges.value[0] : ''}}
+          <span *ngIf="form.privileges.value?.length > 1" class="example-additional-selection">
+            (+{{form.privileges.value.length - 1}} {{form.privileges.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let privilege of privilegesList" [value]="privilege">{{privilege}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
 
 
