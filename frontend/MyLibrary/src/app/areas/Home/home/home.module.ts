@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 
 
+
 @NgModule({
   declarations:[
     WelcomeComponent,
@@ -20,7 +21,8 @@ import {MatIconModule} from '@angular/material/icon';
     HomeRoutingModule,
     MatInputModule,
 SharedModule,
-MatIconModule
+MatIconModule,
+
   ]
 
 })
