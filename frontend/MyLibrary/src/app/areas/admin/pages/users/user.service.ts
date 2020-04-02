@@ -61,5 +61,10 @@ export class UserService {
     );
   }
 
-
+  UpdateUser(user: User, id: number): Observable<ApiResponse<User>> {
+    return this.http.put<ApiResponse<User>>(
+      this.globalVarService.globalUrl + this.baseUrl + "/" + id,
+      user
+    );
+  }
 }
