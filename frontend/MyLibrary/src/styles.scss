@@ -15,3 +15,12 @@ html, body, app-root {
 .img-fluid{
   max-width: 100%;
 }
+
+.mat-list-item-content{
+  width: 100% !important;
+
+  .gap-10{
+    margin-right: 10px;
+  }
+}
+
