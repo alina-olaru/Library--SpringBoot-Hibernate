@@ -12,4 +12,7 @@ public interface RegisterApi {
     @PostMapping("/do")
     ApiResponse<BookUser> registerUser(@RequestBody BookUser user);
 
+    @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
+    public ApiResponse<BookUser> confirmUserAccount(@RequestParam("token")String confirmationToken);
+
 }
