@@ -10,6 +10,7 @@ export class BookUser {
   blocked: boolean;
   username: String;
   password: String;
+  isEnabled:boolean;
   public constructor(init?: Partial<BookUser>) {
     Object.assign(this, init);
   }

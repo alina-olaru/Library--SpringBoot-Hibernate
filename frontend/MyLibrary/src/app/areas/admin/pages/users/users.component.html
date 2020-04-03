@@ -76,6 +76,14 @@
 
 
 
+    <ng-container matColumnDef="isEnabled">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Enabled </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element" class="blocked"> {{element.isEnabled | yesNo}} </mat-cell>
+    </ng-container>
+
+
+
+
     <ng-container matColumnDef="username">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>

@@ -65,6 +65,9 @@ public class BookUser {
     @Column
     private Boolean blocked=false;
 
+    @Column
+    private Boolean isEnabled;
+
     @OneToMany(mappedBy = "user",
     cascade = CascadeType.ALL)
     private List<PersonalBook> persBooks;

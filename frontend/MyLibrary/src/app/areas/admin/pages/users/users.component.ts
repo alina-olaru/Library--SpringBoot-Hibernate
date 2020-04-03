@@ -41,6 +41,7 @@ export class UsersComponent implements OnInit {
     "adminPrivilege",
     "userPrivilege",
     "blocked",
+    "isEnabled",
     "username",
     "password",
     "actions"
