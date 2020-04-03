@@ -1,3 +1,4 @@
+import { ConfirmationComponent } from './areas/confirmation/confirmation.component';
 import { WelcomeComponent } from '../app/areas/Home/welcome/welcome.component';
 import { LoginComponent } from './areas/login/login.component';
 import { RegisterComponent } from "./areas/register/register.component";
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent
+  },
+  {
+    path:"confirm-account",
+    component:ConfirmationComponent
   },
   {
     path: 'admin',

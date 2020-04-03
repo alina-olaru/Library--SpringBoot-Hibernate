@@ -22,6 +22,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import { DespreComponent } from './areas/home/despre/despre.component';
+import { ConfirmationComponent } from './areas/confirmation/confirmation.component';
 
 
 
@@ -33,7 +34,8 @@ import { DespreComponent } from './areas/home/despre/despre.component';
     RegisterComponent,
     LoadingSpinnerComponent,
     LoginComponent,
-    DespreComponent
+    DespreComponent,
+    ConfirmationComponent
 
 
   ],
