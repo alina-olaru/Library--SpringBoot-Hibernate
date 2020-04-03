@@ -1,3 +1,4 @@
+import { DespreComponent } from './../despre/despre.component';
 import { SharedModule } from './../../../modules/shared/shared.module';
 import { WelcomeComponent } from '../welcome/welcome.component';
 import { NgModule } from '@angular/core';
@@ -14,7 +15,8 @@ import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations:[
     WelcomeComponent,
-    Error404Component
+    Error404Component,
+    DespreComponent
   ],
   imports: [
     CommonModule,

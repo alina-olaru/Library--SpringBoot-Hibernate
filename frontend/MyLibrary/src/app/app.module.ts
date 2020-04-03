@@ -24,16 +24,14 @@ import {MatInputModule} from '@angular/material/input';
 import { ConfirmationComponent } from './areas/confirmation/confirmation.component';
 
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoadingSpinnerComponent,
     LoginComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+
 
 
   ],

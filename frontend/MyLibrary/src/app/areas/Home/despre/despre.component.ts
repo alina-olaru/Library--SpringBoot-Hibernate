@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import anime from 'animejs/lib/anime.es.js';
-
+import { Component, OnInit, HostListener, AfterViewInit } from "@angular/core";
+import anime from "animejs/lib/anime.es.js";
+import * as AOS from "aos";
 @Component({
-  selector: 'app-despre',
-  templateUrl: './despre.component.html',
-  styleUrls: ['./despre.component.scss']
+  selector: "app-despre",
+  templateUrl: "./despre.component.html",
+  styleUrls: ["./despre.component.scss"]
 })
-export class DespreComponent implements OnInit {
+export class DespreComponent implements OnInit, AfterViewInit {
+  aa: number = 1;
 
-  constructor() { }
-
-  ngOnInit(): void {
-    // anime({
-    //   targets: 'div',
-    //   translateX: 250,
-    //   rotate: '1turn',
-    //   backgroundColor: '#FFF',
-    //   duration: 800
-    // });
+  constructor() {}
+  ngAfterViewInit(): void {
+    AOS.init({
+      duration: 1200,
+      delay: 200,
+      once: true
+    });
   }
 
+  ngOnInit(): void {
+  }
 }
