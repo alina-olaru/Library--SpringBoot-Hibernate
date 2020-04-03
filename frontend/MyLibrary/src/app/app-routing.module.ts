@@ -9,6 +9,10 @@ import { AdminGuardService } from './modules/guards/admin-guard.service';
 import { HomeModule } from './areas/Home/home/home.module';
 
 const routes: Routes = [
+  // {
+  //    path: "register/:token",
+  //   component: ConfirmationComponent
+  //  },
   {
     path: "register",
     component: RegisterComponent

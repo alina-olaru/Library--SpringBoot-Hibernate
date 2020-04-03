@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           if (response && response.status == ApiResponseType.SUCCESS) {
             this.toastr.Toast.fire({
               icon: "success",
-              title: "Contul a fost creat cu succes!"
+              title: "S-a trimis codul de confirmare pe mail"
             });
           } else {
             this.toastr.Toast.fire({

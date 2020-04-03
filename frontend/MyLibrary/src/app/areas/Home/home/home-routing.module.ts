@@ -16,13 +16,13 @@ const routes: Routes = [
     component : Error404Component
   },
   {
+    path:"despre",
+    component:DespreComponent
+  },
+  {
     path: "",
     redirectTo: "/404Error",
     pathMatch: "full"
-  },
-  {
-    path:"despre",
-    component:DespreComponent
   }
 ];
 
