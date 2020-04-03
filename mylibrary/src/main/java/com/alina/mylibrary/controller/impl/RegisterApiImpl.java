@@ -59,7 +59,7 @@ public class RegisterApiImpl implements RegisterApi {
                     + "http://localhost:4200/confirm-account?token="+confirmationToken.getConfirmationToken());
 
 
-
+//TODO sa pun timp de valabilitate pt token
 
         emailSenderService.sendEmail(simpleMailMessage);
                 return new ApiResponse<BookUser>(ApiResponseType.SUCCESS, user, "S-a trimis mail-ul de confirmare");
