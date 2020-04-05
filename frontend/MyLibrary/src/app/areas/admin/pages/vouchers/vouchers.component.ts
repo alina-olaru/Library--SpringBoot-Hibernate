@@ -165,7 +165,7 @@ dataSource:MatTableDataSource<Voucher>=new MatTableDataSource(this.vouchers);
 
   UpdateVoucher(item:Voucher){
     const dialogRef = this.dialog.open(AddEditVouchersComponent, {
-      width: '400px',
+      width: '40%',
       data: {
         type: 'edit',
         model: Object.assign({}, item)

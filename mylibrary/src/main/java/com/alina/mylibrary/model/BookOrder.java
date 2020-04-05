@@ -113,13 +113,13 @@ public class BookOrder{
 
 
     @OneToMany(mappedBy = "order",
-    cascade = CascadeType.ALL)
+    cascade = CascadeType.MERGE)
     private List<OrderItem> items;
 
 
 
     @OneToOne(mappedBy = "orderWithVouchers",
-    cascade = CascadeType.ALL,
+    cascade = CascadeType.MERGE,
     fetch = FetchType.LAZY,
     optional = false)
     private VoucherUser vouchersForUser;

@@ -27,9 +27,9 @@
     </div>
 
 
-    <div class="input-row" fxFlex="calc(50%-10px)">
+    <div class="input-row" fxFlex="calc(100%-10px)">
       <mat-form-field fxFlex>
-        <input matInput placeholder="Descriere" formControlName="voucherDescription">
+        <textarea rows=3 matInput placeholder="Descriere" formControlName="voucherDescription"></textarea>
 
       </mat-form-field>
     </div>
@@ -56,7 +56,7 @@
     </div>
 
     <div class="input-row" fxFlex="calc(50%-10px)">
-    <mat-form-field fxFlex>
+    <mat-form-field fxFlex (click)="picker_start.open()">
       <mat-label>Data de inceput</mat-label>
       <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_start" formControlName="voucherStartDate" disabled>
       <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
@@ -69,7 +69,7 @@
 
 
   <div class="input-row"  fxFlex="calc(50%-10px)">
-    <mat-form-field fxFlex>
+    <mat-form-field fxFlex (click)="picker_end.open()">
       <mat-label>Data de final</mat-label>
       <!-- {{form.voucherStartDate | date }} TODO cum fac sa pun direct data pe care ai selectat o anterior -->
       <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_end" formControlName="voucherEndDate" disabled>

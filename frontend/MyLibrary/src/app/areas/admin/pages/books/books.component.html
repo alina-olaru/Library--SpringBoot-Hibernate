@@ -14,7 +14,7 @@
 <div class="mat-elevation-z8 m-2" fxLayout="column" gallerize>
   <table mat-table fxFlex [dataSource]="dataSource" matSort>
 
-<!-- TODO:sagestile se vad doar la hover,sa scot asta-->
+    <!-- TODO:sagestile se vad doar la hover,sa scot asta-->
     <ng-container matColumnDef="bookId">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element"> {{element.bookId}} </mat-cell>
@@ -29,8 +29,8 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Descriere </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element">
         <span matTooltip="{{element.bookDescription}}">
-        {{element.bookDescription | truncate: 25}}
-      </span>
+          {{element.bookDescription | truncate: 25}}
+        </span>
       </mat-cell>
     </ng-container>
 
@@ -106,12 +106,14 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element" fxLayoutAlign="end center">
-        <button mat-button color="warn" (click)="DeleteBook(element)">
-          <mat-icon>delete</mat-icon>Sterge
-        </button>
-        <button mat-button color="primary" (click)="EditBook(element)">
-          <mat-icon>edit</mat-icon>Editeaza
-        </button>
+        <div>
+          <button mat-icon-button color="warn" (click)="DeleteBook(element)" matTooltip="Sterge">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button  color="primary" (click)="EditBook(element)" matTooltip="Editeaza">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
       </mat-cell>
     </ng-container>
 

@@ -39,7 +39,7 @@ export class AddEditCategoryComponent implements OnInit {
     this.localForm = this.formBuilder.group({
       categoryId: [{ value: this.data.model.categoryId, disabled: true }],
       categoryTitle: [this.data.model.categoryTitle, Validators.required],
-      categoryDescription: [this.data.model.categoryDescription, Validators.required]
+      categoryDescription: [this.data.model.categoryDescription]
     });
   }
 

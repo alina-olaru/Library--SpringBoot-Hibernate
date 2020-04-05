@@ -149,7 +149,7 @@ public class Voucher {
 
 
     @OneToMany(mappedBy = "vouchers",
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.MERGE)
     private List<VoucherUser> userVoucherLink;
 
     @ManyToOne

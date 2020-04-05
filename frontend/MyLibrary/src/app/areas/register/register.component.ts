@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { LoadingService } from "./../../modules/loading-spinner/loading.service";
 import { BookUser } from "./../../Models/BookUser";
@@ -13,7 +14,7 @@ import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.scss"]
+  styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;
@@ -23,11 +24,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private registerService: RegisterService,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private router: Router
   ) {}
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(e => e.unsubscribe());
+    this.subscriptions.forEach((e) => e.unsubscribe());
   }
 
   ngOnInit() {
@@ -40,10 +42,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
         phoneNumber: ["", Validators.required],
         password: ["", [Validators.required, Validators.minLength(5)]],
         checkpass: ["", [Validators.required, Validators.minLength(5)]],
-        newsletter: [false]
+        newsletter: [false],
       },
       {
-        validator: MustMatch("password", "checkpass")
+        validator: MustMatch("password", "checkpass"),
       }
     );
   }
@@ -59,26 +61,32 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
       this.loading.start();
       let subs = this.registerService.RegiserUser(user).subscribe(
-        response => {
+        (response) => {
           this.loading.stop();
           if (response && response.status == ApiResponseType.SUCCESS) {
-            this.toastr.Toast.fire({
+            this.toastr.Swal.fire({
               icon: "success",
-              title: "S-a trimis codul de confirmare pe mail"
+              title: "Mail-ul pentru confirmare a fost trimis cu succes!",
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+            }).then((result) => {
+              if (result.value) {
+                this.router.navigate(["/login"]);
+              }
             });
           } else {
             this.toastr.Toast.fire({
               icon: "error",
-              title: response.message
+              title: response.message,
             });
           }
         },
-        error => {
+        (error) => {
           this.loading.stop();
           this.toastr.Toast.fire({
-            icon: 'error',
-            title: "A aparut o eroare!"
-          })
+            icon: "error",
+            title: "A aparut o eroare!",
+          });
         }
       );
       this.subscriptions.push(subs);

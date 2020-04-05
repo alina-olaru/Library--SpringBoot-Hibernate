@@ -21,7 +21,21 @@ import {  MatDialogModule } from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+
+export const APP_DATE_FORMATS =
+{
+   parse: {
+       dateInput: {month: 'short', year: 'numeric', day: 'numeric'}
+   },
+   display: {
+       // dateInput: { month: 'short', year: 'numeric', day: 'numeric' },
+       dateInput: 'input',
+       monthYearLabel: {year: 'numeric', month: 'short'},
+       dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
+       monthYearA11yLabel: {year: 'numeric', month: 'long'},
+   }
+}
 
 @NgModule({
   declarations: [],
@@ -72,6 +86,9 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatAutocompleteModule,
     MatChipsModule,
     MatSelectModule
+  ],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ]
 })
 export class MaterialModule { }

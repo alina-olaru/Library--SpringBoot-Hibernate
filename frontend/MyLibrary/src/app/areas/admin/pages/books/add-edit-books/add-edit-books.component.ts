@@ -23,7 +23,7 @@ import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
 import { startWith, map } from "rxjs/operators";
 import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import { MatChipInputEvent } from "@angular/material/chips";
-
+import * as _ from 'lodash';
 interface Data {
   type: string;
   model: Book;
@@ -45,7 +45,7 @@ export class AddEditBooksComponent implements OnInit {
   removable: boolean = true;
   selectedAuthors: Author[] = [];
   filteredOptionsAuthors: Observable<Author[]>;
-  categories: Category[] = [];
+
   selectedCategories: Category[] = [];
   filteredOptionsCategories: Observable<Category[]>;
 
@@ -53,6 +53,10 @@ export class AddEditBooksComponent implements OnInit {
 
   dropdownSelectedPublisher: Publisher;
   filteredOptionsPublisher: Observable<Publisher[]>;
+
+  authors: Author[]=[];
+  publishers: Publisher[]=[];
+  categories: Category[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<AddEditBooksComponent>,
@@ -63,33 +67,32 @@ export class AddEditBooksComponent implements OnInit {
     private publishersService: PublishersService,
     private toastr: ToastrService
   ) {
-    this.categories = data.categories;
-    this.dropdownSelectedPublisher = this.data.model?.publisher;
+
+    this.authors = _.cloneDeep(this.data.authors);
+    this.publishers = _.cloneDeep(this.data.publishers);
+    this.categories = _.cloneDeep(this.data.categories);
+
     if (this.data.model == null || this.data.model == undefined) {
       this.data.model = new Book();
+      this.dropdownSelectedPublisher = null;
+
+
     } else {
       this.dropdownSelectedPublisher = this.data.model.publisher;
       this.selectedAuthors = this.data.model.bookAuthor.map(e => e.authorId);
       this.selectedCategories = this.data.model.booksCategories.map(
         e => e.categories
       );
+      this.authors = this.authors.filter(e=>this.selectedAuthors.map(z=>z.authorId).indexOf(e.authorId) < 0);
+      this.categories = this.categories.filter(e=>this.selectedCategories.map(z=>z.categoryId).indexOf(e.categoryId) < 0);
     }
     this.localForm = this.formBuilder.group({
-      /*
-
-
-
-
-
-
-
-        */
       bookId: [{ value: this.data.model.bookId, disabled: true }],
       bookTitle: [this.data.model.bookTitle, Validators.required],
       bookLanguage: [this.data.model.bookLanguage],
       bookPrice: [this.data.model.bookPrice, Validators.required],
       bookWeight: [this.data.model.bookWeight],
-      bookYear: [this.data.model.bookTitle],
+      bookYear: [this.data.model.bookYear],
       numberOfPages: [this.data.model.numberOfPages],
       numberofVolumes: [this.data.model.numberofVolumes],
       bookDescription: [this.data.model.bookDescription],
@@ -128,10 +131,10 @@ export class AddEditBooksComponent implements OnInit {
       let model: Book = new Book(this.localForm.value);
       model.bookId = this.data.model.bookId;
       model.bookAuthor = this.selectedAuthors.map(
-        e => <BooksAuthors>{ authorId: Object.assign({},e), bookId: Object.assign({}, model) }
+        e => ({ authorId: Object.assign({},e), bookId: {} as Book} as BooksAuthors)
       );
       model.booksCategories = this.selectedCategories.map(
-        e => <BooksCategories>{ categories: Object.assign({},e), booksC: Object.assign({}, model) }
+        e => ({ categories: Object.assign({},e), booksC: {} as Book} as BooksCategories)
       );
       model.bookImage = this.base64
         ? this.base64.replace(/^data:image\/[a-z]+;base64,/, "")
@@ -148,46 +151,17 @@ export class AddEditBooksComponent implements OnInit {
   private _filterPublisher(name: string): Publisher[] {
     const filterValue = name.toLowerCase();
 
-    return this.data.publishers.filter(
+    return this.publishers.filter(
       option => option.publisherTitle.toLowerCase().indexOf(filterValue) === 0
     );
-  }
-
-  getAuthors() {
-    let autSubscriber = this.authorsService.GetAuthors().subscribe(response => {
-      if (response && response.status == ApiResponseType.SUCCESS) {
-        this.data.authors = response.body;
-      }
-    });
-    this.subscriptions.push(autSubscriber);
-  }
-
-  getPublishers() {
-    let pubSubscriber = this.publishersService
-      .GetPublishers()
-      .subscribe(response => {
-        if (response && response.status == ApiResponseType.SUCCESS) {
-          this.data.publishers = response.body;
-        }
-      });
-    this.subscriptions.push(pubSubscriber);
-  }
-
-  getCategories() {
-    let catSubscriber = this.categoryService
-      .GetCategory()
-      .subscribe(response => {
-        if (response && response.status == ApiResponseType.SUCCESS) {
-          this.categories = response.body;
-        }
-      });
-    this.subscriptions.push(catSubscriber);
   }
 
   RefreshPublishers() {
     this.publishersService.GetPublishers().subscribe(response => {
       if (response && response.status == ApiResponseType.SUCCESS) {
-        this.data.publishers = response.body;
+
+        this.publishers = response.body;
+        this.data.publishers = _.cloneDeep(response.body);
         this.ConstructFilterOptionsPublishers();
         this.toastr.Toast.fire({
           icon: "success",
@@ -205,11 +179,14 @@ export class AddEditBooksComponent implements OnInit {
   RefreshAuthors() {
     this.authorsService.GetAuthors().subscribe(response => {
       if (response && response.status == ApiResponseType.SUCCESS) {
-        this.data.authors = response.body;
+
+        this.authors = response.body;
+        this.data.authors = _.cloneDeep(response.body);
+
         this.selectedAuthors = this.selectedAuthors.filter(
-          e => this.data.authors.map(z => z.authorId).indexOf(e.authorId) >= 0
+          e => this.authors.map(z => z.authorId).indexOf(e.authorId) >= 0
         );
-        this.data.authors = this.data.authors.filter(
+        this.authors = this.authors.filter(
           e => this.selectedAuthors.map(z => z.authorId).indexOf(e.authorId) < 0
         );
         this.ConstructFilterOptionsAutori();
@@ -229,13 +206,14 @@ export class AddEditBooksComponent implements OnInit {
   RefreshCategories() {
     this.categoryService.GetCategory().subscribe(response => {
       if (response && response.status == ApiResponseType.SUCCESS) {
-        this.data.categories = response.body;
+        this.data.categories = _.cloneDeep(response.body);
+        this.categories = response.body;
         this.selectedCategories = this.selectedCategories.filter(
           e =>
-            this.data.categories.map(z => z.categoryId).indexOf(e.categoryId) >=
+            this.categories.map(z => z.categoryId).indexOf(e.categoryId) >=
             0
         );
-        this.data.categories = this.data.categories.filter(
+        this.categories = this.categories.filter(
           e =>
             this.selectedCategories
               .map(z => z.categoryId)
@@ -262,7 +240,7 @@ export class AddEditBooksComponent implements OnInit {
       startWith(""),
       map(value => (typeof value === "string" ? value : value.name)),
       map(name =>
-        name ? this._filterPublisher(name) : this.data.publishers.slice()
+        name ? this._filterPublisher(name) : this.publishers.slice()
       )
     );
   }
@@ -271,7 +249,7 @@ export class AddEditBooksComponent implements OnInit {
     const index = this.selectedAuthors.indexOf(author);
 
     if (index >= 0) {
-      this.data.authors.unshift(this.selectedAuthors[index]);
+      this.authors.unshift(this.selectedAuthors[index]);
       this.selectedAuthors.splice(index, 1);
       this.localForm.controls["local_autori"].setValue("");
     }
@@ -281,7 +259,7 @@ export class AddEditBooksComponent implements OnInit {
     const index = this.selectedCategories.indexOf(category);
 
     if (index >= 0) {
-      this.data.categories.unshift(this.selectedCategories[index]);
+      this.categories.unshift(this.selectedCategories[index]);
       this.selectedCategories.splice(index, 1);
       this.localForm.controls["local_categories"].setValue("");
     }
@@ -294,7 +272,7 @@ export class AddEditBooksComponent implements OnInit {
       startWith(""),
       map(value => (typeof value === "string" ? value : value.name)),
       map(name =>
-        name ? this._filterAuthors(name) : this.data.authors.slice()
+        name ? this._filterAuthors(name) : this.authors.slice()
       )
     );
   }
@@ -306,7 +284,7 @@ export class AddEditBooksComponent implements OnInit {
       startWith(""),
       map(value => (typeof value === "string" ? value : value.name)),
       map(name =>
-        name ? this._filterCategories(name) : this.data.categories.slice()
+        name ? this._filterCategories(name) : this.categories.slice()
       )
     );
   }
@@ -314,7 +292,7 @@ export class AddEditBooksComponent implements OnInit {
   private _filterAuthors(name: string): Author[] {
     const filterValue = name.toLowerCase();
 
-    return this.data.authors.filter(
+    return this.authors.filter(
       option =>
         option.firstName.toLowerCase().indexOf(filterValue) === 0 ||
         option.lastName.toLowerCase().indexOf(filterValue) === 0
@@ -324,7 +302,7 @@ export class AddEditBooksComponent implements OnInit {
   private _filterCategories(name: string): Category[] {
     const filterValue = name.toLowerCase();
 
-    return this.data.categories.filter(
+    return this.categories.filter(
       option => option.categoryTitle.toLowerCase().indexOf(filterValue) === 0
     );
   }
@@ -336,8 +314,8 @@ export class AddEditBooksComponent implements OnInit {
     ele.value = "";
     ele.blur();
     this.selectedAuthors.push(event.option.value);
-    let index = this.data.authors.indexOf(event.option.value);
-    this.data.authors.splice(index, 1);
+    let index = this.authors.indexOf(event.option.value);
+    this.authors.splice(index, 1);
     this.localForm.controls["local_autori"].setValue("");
   }
 
@@ -348,8 +326,8 @@ export class AddEditBooksComponent implements OnInit {
     ele.value = "";
     ele.blur();
     this.selectedCategories.push(event.option.value);
-    let index = this.data.categories.indexOf(event.option.value);
-    this.data.categories.splice(index, 1);
+    let index = this.categories.indexOf(event.option.value);
+    this.categories.splice(index, 1);
     this.localForm.controls["local_categories"].setValue("");
   }
 

@@ -185,10 +185,13 @@ export class BooksComponent implements OnInit, OnDestroy {
 
   EditBook(item: Book) {
     const dialogRef = this.dialog.open(AddEditBooksComponent, {
-      width: "400px",
+      width: "50%",
       data: {
         type: "edit",
-        model: Object.assign({}, item)
+        model: Object.assign({}, item),
+        authors: this.authors,
+        publishers: this.publishers,
+        categories: this.categories
       }
     });
 

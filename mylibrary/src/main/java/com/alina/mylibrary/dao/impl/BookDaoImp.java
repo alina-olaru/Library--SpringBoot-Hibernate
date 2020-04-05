@@ -3,6 +3,8 @@ package com.alina.mylibrary.dao.impl;
 import com.alina.mylibrary.dao.BookDao;
 import com.alina.mylibrary.model.Author;
 import com.alina.mylibrary.model.Book;
+import com.alina.mylibrary.model.BooksAuthors;
+import com.alina.mylibrary.model.BooksCategories;
 import com.alina.mylibrary.repository.AuthorRepository;
 import com.alina.mylibrary.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,8 @@ public class BookDaoImp implements BookDao {
 
     @Override
     public List<Book> getBooks() {
-        return this.bookRepository.findAll();
+        var books = this.bookRepository.findAll();
+        return books;
     }
 
     @Override
@@ -43,9 +46,22 @@ public class BookDaoImp implements BookDao {
     @Override
     public Book addBook(Book book) {
 
-        if(book!=null) {
-            this.bookRepository.save(book);
-            return book;
+        try {
+            if (book != null) {
+//                var bookAuthors = book.getBookAuthor();
+//                var bookCategories = book.getBooksCategories();
+//                 book.getBooksCategories().clear();
+//                 book.getBookAuthor().clear();
+                this.bookRepository.save(book);
+//                book.setBooksCategories(bookCategories);
+//                book.setBookAuthor(bookAuthors);
+//                book.getBooksCategories().forEach(elem -> elem.setBooksC(book));
+//                book.getBookAuthor().forEach(elem -> elem.setBookId(book));
+   //            this.bookRepository.save(book);
+                return book;
+            }
+        }catch (Exception ex) {
+            this.bookRepository.deleteById(book.getBookId());
         }
         return null;
     }

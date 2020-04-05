@@ -1,6 +1,14 @@
 package com.alina.mylibrary.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -9,6 +17,9 @@ import java.util.Set;
 
 @Entity
 @Table
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Category {
 
     @Id
@@ -21,56 +32,13 @@ public class Category {
     private String categoryTitle;
 
 
-
     @Column(columnDefinition = "NVARCHAR(MAX)")
     private String categoryDescription;
-
-    public Category() {
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryTitle() {
-        return categoryTitle;
-    }
-
-    public void setCategoryTitle(String categoryTitle) {
-        this.categoryTitle = categoryTitle;
-    }
-
-    public String getCategoryDescription() {
-        return categoryDescription;
-    }
-
-    public void setCategoryDescription(String categoryDescription) {
-        this.categoryDescription = categoryDescription;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return categoryId == category.categoryId &&
-                Objects.equals(categoryTitle, category.categoryTitle) &&
-                Objects.equals(categoryDescription, category.categoryDescription);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(categoryId, categoryTitle, categoryDescription);
-    }
-
-
+    @JsonIgnore
     @OneToMany(mappedBy = "categories",
-    cascade = CascadeType.ALL)
+            cascade = CascadeType.MERGE)
     private List<BooksCategories> booksCategories;
+
+
 
 }

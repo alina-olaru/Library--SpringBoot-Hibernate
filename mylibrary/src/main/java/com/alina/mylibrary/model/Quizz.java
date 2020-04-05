@@ -53,6 +53,6 @@ public class Quizz {
 
 
     @OneToMany(mappedBy = "quizzez",
-    cascade = CascadeType.ALL)
+    cascade = CascadeType.MERGE)
     private List<Voucher> vouchersGotByQuizz;
 }

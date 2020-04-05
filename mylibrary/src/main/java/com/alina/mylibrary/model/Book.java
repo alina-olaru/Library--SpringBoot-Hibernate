@@ -1,6 +1,10 @@
 package com.alina.mylibrary.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -72,11 +76,30 @@ public class Book {
     @Column
     @Lob
     private Blob bookImage;
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "Fk_publisher_id"))
+    private Publisher publisher;
+    @OneToMany(mappedBy = "book",
+            cascade = CascadeType.MERGE)
+    private List<PersonalBook> persBooks;
+    @OneToMany(mappedBy = "bookwishlist",
+            cascade = CascadeType.MERGE)
+    private List<Wishlist> wishBooks;
+    @OneToMany(mappedBy = "booksorder",
+            cascade = CascadeType.MERGE)
+    private List<OrderItem> items;
+    @OneToMany(mappedBy = "booksC",
+            cascade = { CascadeType.ALL },
+            orphanRemoval = true)
+    private List<BooksCategories> booksCategories;
+    @OneToMany(mappedBy = "bookId",
+            cascade = { CascadeType.ALL},
+            orphanRemoval = true)
+    private List<BooksAuthors> bookAuthor;
+    @OneToMany(mappedBy = "bookR")
+    private List<Review> reviews;
 
-
-
-    public static Book get_copy(Book old_book)
-    {
+    public static Book get_copy(Book old_book) {
         Book new_book = new Book();
         new_book.setPublisher(old_book.getPublisher());
         new_book.setBookAuthor(old_book.getBookAuthor());
@@ -101,37 +124,5 @@ public class Book {
         return new_book;
         //todo de adaugat campurile noi sau de schimbat cu seterele
     }
-
-
-    @ManyToOne
-    @JoinColumn(foreignKey=@ForeignKey(name = "Fk_publisher_id"))
-    private Publisher publisher;
-
-
-    @OneToMany(mappedBy = "book",
-    cascade = CascadeType.ALL)
-    private List<PersonalBook> persBooks;
-
-    @OneToMany(mappedBy = "bookwishlist",
-    cascade = CascadeType.ALL)
-    private List<Wishlist> wishBooks;
-
-    @OneToMany(mappedBy = "booksorder",
-    cascade = CascadeType.ALL)
-    private List<OrderItem> items;
-
-
-    @OneToMany(mappedBy = "booksC",
-    cascade = CascadeType.MERGE)
-    private List<BooksCategories> booksCategories;
-
-
-    @OneToMany(mappedBy = "bookId",
-            fetch = FetchType.LAZY,
-    cascade = CascadeType.MERGE)
-    private List<BooksAuthors> bookAuthor;
-
-    @OneToMany(mappedBy = "bookR")
-    private List<Review> reviews;
 }
 

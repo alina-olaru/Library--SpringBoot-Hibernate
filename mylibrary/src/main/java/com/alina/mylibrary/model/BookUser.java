@@ -69,16 +69,16 @@ public class BookUser {
     private Boolean isEnabled;
 
     @OneToMany(mappedBy = "user",
-    cascade = CascadeType.ALL)
+    cascade = CascadeType.MERGE)
     private List<PersonalBook> persBooks;
 
     @OneToMany(mappedBy = "userwishlist",
-    cascade = CascadeType.ALL)
+    cascade = CascadeType.MERGE)
     @JsonIgnore
     private List<Wishlist> wishBooks;
 
     @OneToMany(mappedBy = "ordersUser",
-    cascade = CascadeType.ALL)
+    cascade = CascadeType.MERGE)
     private List<BookOrder> ordersbyuser;
 
     @OneToMany(mappedBy = "com")
@@ -88,11 +88,11 @@ public class BookUser {
     private List<Review> reviewsByUser;
 
     @OneToMany(mappedBy = "usersWithVouchers",
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.MERGE)
     private List<VoucherUser> userVoucherLink;
 
     @OneToMany(mappedBy = "userAddress",
-    cascade = CascadeType.ALL)
+    cascade = CascadeType.MERGE)
     private List<Address> addresses;
 
 }

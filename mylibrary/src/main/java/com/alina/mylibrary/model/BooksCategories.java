@@ -1,5 +1,9 @@
 package com.alina.mylibrary.model;
 
+import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.ISBN;
 
 import javax.persistence.*;
@@ -7,6 +11,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @IdClass(BooksCategoriesId.class)
 public class BooksCategories implements Serializable {
 
@@ -19,39 +26,9 @@ public class BooksCategories implements Serializable {
 
     @Id
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(foreignKey = @ForeignKey(name="FK_BOOKS_ID"))
     private Book booksC;
 
-    public BooksCategories() {
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BooksCategories that = (BooksCategories) o;
-        return Objects.equals(categories, that.categories) &&
-                Objects.equals(booksC, that.booksC);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(categories, booksC);
-    }
-
-    public Category getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Category categories) {
-        this.categories = categories;
-    }
-
-    public Book getBooksC() {
-        return booksC;
-    }
-
-    public void setBooksC(Book booksC) {
-        this.booksC = booksC;
-    }
 }

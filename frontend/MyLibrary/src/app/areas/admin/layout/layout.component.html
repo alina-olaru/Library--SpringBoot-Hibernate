@@ -8,7 +8,7 @@
           </div>
         </div>
         <mat-divider></mat-divider>
-        <mat-action-list class="p-2">
+        <mat-action-list class="">
           <button mat-list-item routerLink='/admin/dashboard' [routerLinkActive]="['route-ling-selected']"
             matTooltip="Dashboard" [matTooltipPosition]="'right'">
             <fa-icon mat-list-icon [icon]="faTachometerAlt"></fa-icon>
@@ -18,8 +18,8 @@
         </mat-action-list>
 
 
-        <mat-action-list class="p-2">
-          <button mat-list-item routerLink='/admin/autori'
+        <mat-action-list class="">
+          <button mat-list-item routerLink='/admin/autori' [routerLinkActive]="['route-ling-selected']"
             matTooltip="Autori" [matTooltipPosition]="'right'">
             <fa-icon mat-list-icon [icon]="faPenFancy"></fa-icon>
             <span mat-line>Autori</span>
@@ -29,8 +29,8 @@
 
 
 
-        <mat-action-list class="p-2">
-          <button mat-list-item routerLink='/admin/carti'
+        <mat-action-list class="">
+          <button mat-list-item routerLink='/admin/carti' [routerLinkActive]="['route-ling-selected']"
             matTooltip="Carti" [matTooltipPosition]="'right'">
             <fa-icon mat-list-icon [icon]="faBook"></fa-icon>
             <span mat-line>Carti</span>
@@ -39,8 +39,8 @@
         </mat-action-list>
 
 
-        <mat-action-list class="p-2">
-          <button mat-list-item routerLink='/admin/edituri'
+        <mat-action-list class="">
+          <button mat-list-item routerLink='/admin/edituri' [routerLinkActive]="['route-ling-selected']"
             matTooltip="Edituri" [matTooltipPosition]="'right'">
             <fa-icon mat-list-icon [icon]="faPrint"></fa-icon>
             <span mat-line>Edituri</span>
@@ -50,8 +50,8 @@
 
 
 
-        <mat-action-list class="p-2">
-          <button mat-list-item routerLink='/admin/categorii'
+        <mat-action-list class="">
+          <button mat-list-item routerLink='/admin/categorii' [routerLinkActive]="['route-ling-selected']"
             matTooltip="Categorii" [matTooltipPosition]="'right'">
             <fa-icon mat-list-icon [icon]="faIcons"></fa-icon>
             <span mat-line>Categorii</span>
@@ -62,8 +62,8 @@
 
 
 
-        <mat-action-list class="p-2">
-          <button mat-list-item routerLink='/admin/vouchere'
+        <mat-action-list class="">
+          <button mat-list-item routerLink='/admin/vouchere' [routerLinkActive]="['route-ling-selected']"
             matTooltip="Vouchere" [matTooltipPosition]="'right'">
             <fa-icon mat-list-icon [icon]="faMoneyBillAlt"></fa-icon>
             <span mat-line>Vouchere</span>
@@ -71,8 +71,8 @@
 
         </mat-action-list>
 
-        <mat-action-list class="p-2">
-          <button mat-list-item routerLink='/admin/quizzuri'
+        <mat-action-list class="">
+          <button mat-list-item routerLink='/admin/quizzuri' [routerLinkActive]="['route-ling-selected']"
             matTooltip="Quizzuri" [matTooltipPosition]="'right'">
             <fa-icon mat-list-icon [icon]="faTasks"></fa-icon>
             <span mat-line>Quizzuri</span>
@@ -81,8 +81,8 @@
         </mat-action-list>
 
 
-        <mat-action-list class="p-2">
-          <button mat-list-item routerLink='/admin/useri'
+        <mat-action-list class="">
+          <button mat-list-item routerLink='/admin/useri' [routerLinkActive]="['route-ling-selected']"
             matTooltip="Useri" [matTooltipPosition]="'right'">
             <fa-icon mat-list-icon [icon]="faUser"></fa-icon>
             <span mat-line>Useri</span>
@@ -98,14 +98,13 @@
       <mat-toolbar class="mat-elevation-z1">
         <mat-toolbar-row>
           <div *ngIf="loaded">
-            <fa-icon [icon]="icon" class="mr-2"></fa-icon>
+            <fa-icon class="page-toolbar-icon" [icon]="icon"></fa-icon>
             <span>{{title.title}}</span>
           </div>
           <span class="example-spacer"></span>
           <span>
-            <fa-icon mat-list-icon [icon]="faUserCircle" size="lg"
-            matTooltip="{{user?.firstName}} {{user?.lastName}}"  [matTooltipPosition]="'left'"
-            mat-icon-button [matMenuTriggerFor]="menu"></fa-icon>
+            <fa-icon mat-list-icon [icon]="faUserCircle" size="lg" matTooltip="{{user?.firstName}} {{user?.lastName}}"
+              [matTooltipPosition]="'left'" mat-icon-button [matMenuTriggerFor]="menu"></fa-icon>
             <mat-menu #menu="matMenu">
               <!-- <button mat-menu-item>Settings</button> -->
               <button mat-menu-item (click)="LogOut()">
@@ -115,7 +114,9 @@
           </span>
         </mat-toolbar-row>
       </mat-toolbar>
-      <router-outlet></router-outlet>
+      <div class="admin-router-wrapper">
+        <router-outlet></router-outlet>
+      </div>
     </mat-drawer-content>
   </mat-drawer-container>
 </div>

@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+// import only the Bootstrap modules you need, e.g.
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@import "~bootstrap/scss/utilities/spacing";
 
 
 html, body { height: 100%; }
