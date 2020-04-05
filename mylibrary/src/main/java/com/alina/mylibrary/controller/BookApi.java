@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/public/api/books")
+@RequestMapping("/api/books")
 @CrossOrigin
 public interface BookApi {
 

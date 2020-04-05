@@ -28,7 +28,7 @@ export class CategoryService {
     private toastr: ToastrService
 
   ) {
-    this.baseUrl ="/public/api/admin/Category";
+    this.baseUrl ="/api/admin/Category";
   }
 
   GetCategory() {

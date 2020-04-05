@@ -104,7 +104,7 @@
           <span class="example-spacer"></span>
           <span>
             <fa-icon mat-list-icon [icon]="faUserCircle" size="lg"
-            matTooltip="{{user.firstName}} {{user.lastName}}"  [matTooltipPosition]="'left'"
+            matTooltip="{{user?.firstName}} {{user?.lastName}}"  [matTooltipPosition]="'left'"
             mat-icon-button [matMenuTriggerFor]="menu"></fa-icon>
             <mat-menu #menu="matMenu">
               <!-- <button mat-menu-item>Settings</button> -->

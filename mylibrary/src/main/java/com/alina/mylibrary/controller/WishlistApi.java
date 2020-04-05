@@ -12,7 +12,7 @@ import java.util.List;
 
 //todo jwt interceptor si de schimbat api urile
 @RestController
-@RequestMapping("/public/Wishlist")
+@RequestMapping("/Wishlist")
 @CrossOrigin
 public interface WishlistApi {
 

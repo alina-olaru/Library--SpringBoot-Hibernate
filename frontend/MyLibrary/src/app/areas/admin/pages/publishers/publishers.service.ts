@@ -18,7 +18,7 @@ export class PublishersService {
     private http: HttpClient,
     private globalVarService: GlobalVarService
   ) {
-    this.baseUrl = "/public/api/edituri";
+    this.baseUrl = "/api/edituri";
 
   }
 

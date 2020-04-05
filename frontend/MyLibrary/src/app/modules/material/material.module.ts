@@ -21,6 +21,7 @@ import {  MatDialogModule } from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [],
@@ -46,7 +47,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatSortModule,
     MatAutocompleteModule,
     MatChipsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatNativeDateModule
   ],
   exports: [
     MatButtonModule,

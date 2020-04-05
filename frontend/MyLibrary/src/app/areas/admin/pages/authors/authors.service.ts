@@ -26,7 +26,7 @@ export class AuthorsService {
     private sanitizer: DomSanitizer,
     private toastr: ToastrService
   ) {
-    this.baseUrl = "/public/api/author";
+    this.baseUrl = "/api/author";
   }
 
   GetAuthors() {

@@ -36,7 +36,7 @@ export class UserService {
 
   {
 
-      this.baseUrl = "/public/api/admin/users";
+      this.baseUrl = "/api/admin/users";
    }
 
 

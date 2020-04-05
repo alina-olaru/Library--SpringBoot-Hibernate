@@ -19,7 +19,7 @@ export class QuizzService {
 
     )
      {
-       this.baseUrl="/public/api/admin/Quizz";
+       this.baseUrl="/api/admin/Quizz";
 
      }
 

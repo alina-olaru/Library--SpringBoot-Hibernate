@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/public/api/author")
+@RequestMapping("/api/author")
 @CrossOrigin
 public interface AuthorApi {
 

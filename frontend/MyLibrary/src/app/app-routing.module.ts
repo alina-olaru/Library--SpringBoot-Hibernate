@@ -27,9 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => AdminModule,
-    canActivate: [AdminGuardService],
-    canActivateChild: [AdminGuardService]
+    loadChildren: () => AdminModule
   },
   // {
   //   path: "",

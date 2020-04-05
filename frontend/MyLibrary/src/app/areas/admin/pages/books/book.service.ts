@@ -29,7 +29,7 @@ export class BookService {
     private toastr: ToastrService
 
   ) {
-    this.baseUrl ="/public/api/books";
+    this.baseUrl ="/api/books";
   }
 
   GetBook() {
