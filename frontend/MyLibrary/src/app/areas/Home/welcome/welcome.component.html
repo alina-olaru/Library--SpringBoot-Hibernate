@@ -44,7 +44,7 @@
 
                 <div fxFlex fxLayout="row">
 
-                  <div fxFlex="50">
+                  <div fxFlex="40">
                     <div fxFlex fxLayout="row">
                       <div fxFlex="30" class="hero-icon mt-4">
                         <fa-icon mat-list-icon [icon]="faUser"></fa-icon>
@@ -61,7 +61,7 @@
                       </div>
                     </div>
                   </div>
-                  <div fxFlex="50">
+                  <div fxFlex="40">
                     <div fxFlex fxLayout="row">
                       <div fxFlex="30" class="hero-icon mt-4">
                         <fa-icon mat-list-icon [icon]="faShoppingCart"></fa-icon>
@@ -79,16 +79,31 @@
                     </div>
                   </div>
 
+                  <div class="menu" fxFlex>
+
+                      <app-menu></app-menu>
+
+                  </div>
+
                 </div>
               </div>
             </div>
 
           </div>
-          <div class="container" fxFlex>
+
+          <!--
+            <div class=" container menu" fxFlex>
+              <app-menu></app-menu>
+            </div> -->
+
+          <div class="container slider" fxFlex>
             <app-slider></app-slider>
           </div>
 
+
+
           <div class="container mt-4" fxFlex fxLayout="row">
+
 
             <div fxFlex="12.5%">
 
@@ -137,7 +152,7 @@
                 </div>
               </div>
             </div>
-            <div >
+            <div>
 
             </div>
 

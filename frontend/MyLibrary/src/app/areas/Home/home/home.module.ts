@@ -1,3 +1,4 @@
+import { MenuComponent } from './../menu/menu.component';
 import { SliderComponent } from './../slider/slider.component';
 import { MaterialModule } from "./../../../modules/material/material.module";
 
@@ -19,7 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     WelcomeComponent,
      Error404Component,
      DespreComponent,
-     SliderComponent
+     SliderComponent,
+     MenuComponent
     ],
   imports: [
        CommonModule,

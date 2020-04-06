@@ -1,3 +1,4 @@
+import { MenuComponent } from './../menu/menu.component';
 import { Error404Component } from './../error404/error404.component';
 import { WelcomeComponent } from '../welcome/welcome.component';
 import { NgModule, Component } from '@angular/core';
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path:"despre",
     component:DespreComponent
+  },
+  {
+    path:"menu",
+    component:MenuComponent
   },
   {
     path: "",
