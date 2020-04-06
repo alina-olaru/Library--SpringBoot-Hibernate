@@ -10,10 +10,12 @@ import com.alina.mylibrary.repository.UserMailRepository;
 import com.alina.mylibrary.service.RegisterService;
 import com.alina.mylibrary.service.impl.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.time.LocalDateTime;
 
 @Component
 public class RegisterApiImpl implements RegisterApi {
@@ -92,6 +94,7 @@ public class RegisterApiImpl implements RegisterApi {
 
         return new ApiResponse<BookUser>(ApiResponseType.ERROR, null, "Contul nu a putut fi creat, verifica datele introduse!");
     }
+
 
 
 };

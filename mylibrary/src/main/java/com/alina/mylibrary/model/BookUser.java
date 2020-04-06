@@ -95,5 +95,7 @@ public class BookUser {
     cascade = CascadeType.MERGE)
     private List<Address> addresses;
 
+
+
 }
 
