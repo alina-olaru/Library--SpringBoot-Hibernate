@@ -20,10 +20,22 @@ export class WelcomeComponent implements OnInit {
   faGiftfaGift = faGift;
   faCarSide = faCarSide;
   faBiking = faBiking;
+  open:boolean = false;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  test(){
+
+    if(this.open==false){
+      this.open=true;
+    }
+    else{
+      this.open=false;
+    }
+
+  }
 }
 
 /*

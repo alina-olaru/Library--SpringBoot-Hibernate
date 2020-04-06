@@ -79,7 +79,7 @@
                     </div>
                   </div>
 
-                  <div class="menu" fxFlex>
+                  <div [class.menu-true]="open==true" fxFlex (click)="test()">
 
                       <app-menu></app-menu>
 

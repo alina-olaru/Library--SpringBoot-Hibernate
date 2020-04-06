@@ -52,6 +52,14 @@ height: 100px;
   text-align: center;
 }
 
-.menu{
+.menu-true{
   z-index:100;
+}
+
+.menu-false{
+z-index:-1;
+}
+
+.next-icon, .ng-star-inserted , .next, .icons,.prev{
+  z-index:102;
 }

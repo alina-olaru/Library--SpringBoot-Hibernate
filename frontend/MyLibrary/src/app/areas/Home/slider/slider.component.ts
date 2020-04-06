@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgImageSliderModule } from 'ng-image-slider';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
 
 @Component({
   selector: 'app-slider',
@@ -8,7 +8,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 })
 export class SliderComponent implements OnInit {
 
-
+  @ViewChild('nav') slider: NgImageSliderComponent;
   size: any = {width: '100%', height: '50%', space: 0};
   imageObject: Array<object> = [
     {
@@ -73,4 +73,12 @@ export class SliderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  prevImageClick() {
+    this.slider.prev();
+}
+
+nextImageClick() {
+    this.slider.next();
+
+}
 }
