@@ -1,5 +1,8 @@
 
 
+body {
+  cursor:"../../../../assets/images/landingpage/cursor.png";
+}
 .margin-home{
   background-color: rgb(227, 250, 239);
   height: 100vh;
@@ -34,4 +37,17 @@ height: 100px;
 
 .page-icon{
   font-size: 62px;
+}
+
+.under-banner-icon{
+  font-size:9rem;
+  color:rgb(25, 97, 25);
+  opacity: 0.7;
+  align-self: center;;
+}
+
+.under-banner-text{
+  font-family: cursive;
+  font-size:1.3rem;
+  text-align: center;
 }
