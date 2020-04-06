@@ -1,8 +1,8 @@
-import { DespreComponent } from './../despre/despre.component';
 import { Error404Component } from './../error404/error404.component';
 import { WelcomeComponent } from '../welcome/welcome.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DespreComponent } from '../despre/despre.component';
 
 
 const routes: Routes = [

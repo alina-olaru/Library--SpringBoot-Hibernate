@@ -59,6 +59,7 @@ public class RegisterApiImpl implements RegisterApi {
             simpleMailMessage.setFrom("olarualina01@gmail.com");
             simpleMailMessage.setText("Pentru a confirma inregistrarea pe site-ul nostru,va rugam sa dati click pe link-ul de mai jos: "
                     + "http://localhost:4200/confirm-account?token="+confirmationToken.getConfirmationToken());
+                //TODO ADD HTML IN MAIL
 
 
 //TODO sa pun timp de valabilitate pt token

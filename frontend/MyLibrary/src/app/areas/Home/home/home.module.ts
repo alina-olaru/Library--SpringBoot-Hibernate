@@ -1,5 +1,6 @@
+import { SliderComponent } from './../slider/slider.component';
 import { MaterialModule } from "./../../../modules/material/material.module";
-import { DespreComponent } from "./../despre/despre.component";
+
 import { SharedModule } from "./../../../modules/shared/shared.module";
 import { WelcomeComponent } from "../welcome/welcome.component";
 import { NgModule } from "@angular/core";
@@ -9,9 +10,24 @@ import { HomeRoutingModule } from "./home-routing.module";
 import { Error404Component } from "./../error404/error404.component";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
+import { NgImageSliderModule } from 'ng-image-slider';
+import { DespreComponent } from '../despre/despre.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  declarations: [WelcomeComponent, Error404Component, DespreComponent],
-  imports: [CommonModule, HomeRoutingModule, SharedModule, MaterialModule]
+  declarations: [
+    WelcomeComponent,
+     Error404Component,
+     DespreComponent,
+     SliderComponent
+    ],
+  imports: [
+       CommonModule,
+       HomeRoutingModule,
+       SharedModule,
+       MaterialModule,
+       NgImageSliderModule,
+       FontAwesomeModule
+  ]
 })
 export class HomeModule {}

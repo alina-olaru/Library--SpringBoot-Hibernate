@@ -35,6 +35,7 @@ public class NewsletterSender {
             }
         }
 
+        //TODO ADD HTML IN MAIL
         simpleMailMessage.setFrom("olarualina01@gmail.com");
         simpleMailMessage.setSubject("Newsletter test");
         simpleMailMessage.setText("Multumim ca te-ai abonat la newsletter-ul nostru,il vei primi saptmanaal.Pt dezabonare,click mai jos");

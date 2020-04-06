@@ -34,6 +34,8 @@ import { BearerAuthInterceptorService } from './modules/interceptors/bearer-auth
     LoadingSpinnerComponent,
     LoginComponent,
     ConfirmationComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ import { BearerAuthInterceptorService } from './modules/interceptors/bearer-auth
     MaterialModule,
     SharedModule,
     FontAwesomeModule,
+
   ],
   providers: [
     FormBuilder,
