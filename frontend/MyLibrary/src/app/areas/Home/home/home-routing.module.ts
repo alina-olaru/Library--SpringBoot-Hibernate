@@ -1,3 +1,5 @@
+import { QuizzComponent } from './../quizz/quizz.component';
+import { ReviewComponent } from './../review/review.component';
 import { MenuComponent } from './../menu/menu.component';
 import { Error404Component } from './../error404/error404.component';
 import { WelcomeComponent } from '../welcome/welcome.component';
@@ -13,6 +15,10 @@ const routes: Routes = [
     component : WelcomeComponent
   },
   {
+    path:"review",
+    component:ReviewComponent
+  },
+  {
     path:"404Error",
     component : Error404Component
   },
@@ -23,6 +29,10 @@ const routes: Routes = [
   {
     path:"menu",
     component:MenuComponent
+  },
+  {
+    path:"quizz",
+    component:QuizzComponent
   },
   {
     path: "",

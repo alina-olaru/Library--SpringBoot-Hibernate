@@ -1,3 +1,5 @@
+import { QuizzComponent } from './../quizz/quizz.component';
+import { ReviewComponent } from './../review/review.component';
 import { MenuComponent } from './../menu/menu.component';
 import { SliderComponent } from './../slider/slider.component';
 import { MaterialModule } from "./../../../modules/material/material.module";
@@ -15,13 +17,18 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { DespreComponent } from '../despre/despre.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+
+
 @NgModule({
   declarations: [
     WelcomeComponent,
      Error404Component,
      DespreComponent,
      SliderComponent,
-     MenuComponent
+     MenuComponent,
+     ReviewComponent,
+     QuizzComponent
+
     ],
   imports: [
        CommonModule,
