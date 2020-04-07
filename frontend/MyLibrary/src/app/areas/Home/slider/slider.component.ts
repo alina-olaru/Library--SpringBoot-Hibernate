@@ -73,12 +73,5 @@ export class SliderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  prevImageClick() {
-    this.slider.prev();
-}
 
-nextImageClick() {
-    this.slider.next();
-
-}
 }
