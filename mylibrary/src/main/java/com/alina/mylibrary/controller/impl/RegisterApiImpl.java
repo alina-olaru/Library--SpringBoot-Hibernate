@@ -1,6 +1,7 @@
 package com.alina.mylibrary.controller.impl;
 
 import com.alina.mylibrary.controller.RegisterApi;
+import com.alina.mylibrary.exception.InvalidAccountRequestException;
 import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.BookUser;
@@ -37,11 +38,13 @@ public class RegisterApiImpl implements RegisterApi {
 
 
     @Override
-    public ApiResponse<BookUser> registerUser(@RequestBody BookUser user) {
+    public ApiResponse<BookUser> registerUser(@RequestBody BookUser user)
+    {
         if(user!=null) {
 
             BookUser existinguser = userMailRepository.findByemailAdressIgnoreCase(user.getEmailAdress());
             if (existinguser != null) {
+            //    throw new InvalidAccountRequestException();
                 return new ApiResponse<BookUser>(ApiResponseType.ERROR, null, "Adresa de email este deja inregistrata in baza de date.Introduceti alta adresa daca doriti un cont nou.");
 
             }
