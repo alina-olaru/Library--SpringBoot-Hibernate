@@ -20,7 +20,12 @@ public class AuthorDaoImp implements AuthorDao {
 
     @Override
     public List<Author> getAuthors() {
-        return this.authorRepository.findAll();
+        List<Author> result=null;
+        try {
+          result=this.authorRepository.findAll();
+          
+        }
+
     }
 
 
