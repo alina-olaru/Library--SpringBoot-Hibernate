@@ -35,6 +35,7 @@ GetBooksSF(){
 
 
   return this.http.get<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.baseUrl + '/SF');
+
 }
 
 }

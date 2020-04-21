@@ -11,8 +11,10 @@ export class Voucher {
   voucherPrice:number;
   quizzez:any;
   userVoucherLink:any;
-  firstName: any;
-  lastName: any;
+  authorlastName:string;
+  authorFirstName:string;
+  language:string;
+  Publisher:string;
 
 
   public constructor(init?: Partial<Voucher>) {

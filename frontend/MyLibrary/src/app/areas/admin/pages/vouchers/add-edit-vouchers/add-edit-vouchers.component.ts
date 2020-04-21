@@ -64,7 +64,11 @@ export class AddEditVouchersComponent implements OnInit {
       voucherPrice: [this.data.model.voucherPrice, Validators.required],
       voucherStartDate: [this.data.model.voucherStartDate, Validators.required],
       voucherEndDate: [this.data.model.voucherEndDate, Validators.required],
+      authorlastName: [this.data.model.voucherEndDate],
+      language: [this.data.model.voucherEndDate],
+      Publisher: [this.data.model.voucherEndDate],
     });
+
 
     if (this.data.type == "edit") {
       this.localForm.controls["voucherStartDate"].setValue(new Date(this.data.model.voucherStartDate));
