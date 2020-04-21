@@ -1,6 +1,6 @@
 package com.alina.mylibrary.config;
 
-import com.alina.mylibrary.service.impl.JwtUserDetailsServiceImpl;
+import com.alina.mylibrary.service.impl.Admin.JwtUserDetailsServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
