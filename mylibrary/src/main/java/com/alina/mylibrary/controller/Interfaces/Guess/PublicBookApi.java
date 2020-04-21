@@ -16,6 +16,6 @@ import java.util.List;
 @CrossOrigin
 public interface PublicBookApi {
 
-    @GetMapping
+    @GetMapping("/SF")
     ApiResponse<List<Book>> getBooksSF();
 }
