@@ -1,4 +1,4 @@
-package com.alina.mylibrary.controller.Interfaces;
+package com.alina.mylibrary.controller.Interfaces.Guess;
 
 import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.Category;

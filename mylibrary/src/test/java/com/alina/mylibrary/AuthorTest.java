@@ -1,7 +1,7 @@
 package com.alina.mylibrary;
 
 
-import com.alina.mylibrary.controller.Interfaces.AuthorApi;
+import com.alina.mylibrary.controller.Interfaces.Admin.AuthorApi;
 import com.alina.mylibrary.repository.Admin.AuthorRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;

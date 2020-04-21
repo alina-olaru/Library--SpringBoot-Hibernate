@@ -1,4 +1,4 @@
-package com.alina.mylibrary.controller.Interfaces;
+package com.alina.mylibrary.controller.Interfaces.Admin;
 
 
 import com.alina.mylibrary.model.ApiResponse;

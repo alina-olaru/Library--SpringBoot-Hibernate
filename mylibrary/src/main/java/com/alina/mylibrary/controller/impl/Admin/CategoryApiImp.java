@@ -1,6 +1,6 @@
 package com.alina.mylibrary.controller.impl.Admin;
 
-import com.alina.mylibrary.controller.Interfaces.CategoryApi;
+import com.alina.mylibrary.controller.Interfaces.Admin.CategoryApi;
 import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.Category;
