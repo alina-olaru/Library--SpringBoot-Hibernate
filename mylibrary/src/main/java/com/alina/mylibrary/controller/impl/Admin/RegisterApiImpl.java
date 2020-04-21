@@ -1,6 +1,7 @@
 package com.alina.mylibrary.controller.impl.Admin;
 
 import com.alina.mylibrary.controller.Interfaces.Admin.RegisterApi;
+import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
 import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.BookUser;
@@ -87,7 +88,13 @@ public class RegisterApiImpl implements RegisterApi {
 
 
 
-            BookUser response = this.registerService.registerUser(user);
+            BookUser response = null;
+
+            try {
+                response=this.registerService.registerUser(user);
+            }catch (FieldException f){
+                return new ApiResponse<BookUser>(ApiResponseType.ERROR,response,"Nu s-a putut inregistra userul.");
+            }
             return new ApiResponse<BookUser>(ApiResponseType.SUCCESS, response);
         }
         //TODO mesaj eroare cu detalii
