@@ -7,11 +7,13 @@ import { TitleService } from '../../admin/services/title.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { ApiResponse } from 'src/app/Models/general/api-response';
+import { Book } from 'src/app/Models/admin/BookModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LandingBooksService {
+  baseUrl:string;
 
 constructor(
 
@@ -32,7 +34,7 @@ constructor(
 GetBooksSF(){
 
 
-  return this.http.get<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.baseUr+"/SF");
+  return this.http.get<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.baseUrl + '/SF');
 }
 
 }
