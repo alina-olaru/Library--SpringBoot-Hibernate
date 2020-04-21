@@ -44,7 +44,7 @@ public class RegisterApiImpl implements RegisterApi {
 
             BookUser existinguser = userMailRepository.findByemailAdressIgnoreCase(user.getEmailAdress());
             if (existinguser != null) {
-            //    throw new InvalidAccountRequestException();
+                //throw new InvalidAccountRequestException();
                 return new ApiResponse<BookUser>(ApiResponseType.ERROR, null, "Adresa de email este deja inregistrata in baza de date.Introduceti alta adresa daca doriti un cont nou.");
 
             }
