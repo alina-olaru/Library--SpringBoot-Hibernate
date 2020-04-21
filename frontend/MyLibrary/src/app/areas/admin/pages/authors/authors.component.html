@@ -14,7 +14,6 @@
 <div class="mat-elevation-z8 m-2" fxLayout="column" gallerize>
   <table mat-table fxFlex [dataSource]="dataSource" matSort>
 
-<!-- TODO:sagestile se vad doar la hover,sa scot asta-->
     <ng-container matColumnDef="authorId">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element"> {{element.authorId}} </mat-cell>

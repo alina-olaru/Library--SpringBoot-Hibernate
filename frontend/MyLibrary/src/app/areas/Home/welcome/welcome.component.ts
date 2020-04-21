@@ -26,16 +26,7 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  test(){
 
-    if(this.open==false){
-      this.open=true;
-    }
-    else{
-      this.open=false;
-    }
-
-  }
 }
 
 /*

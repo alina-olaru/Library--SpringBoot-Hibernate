@@ -13,8 +13,8 @@ export class SliderComponent implements OnInit {
   imageObject: Array<object> = [
     {
 
-    image: '../../../../assets/images/landingpage/slider_1.png', // Support base64 image
-    thumbImage: '../../../../assets/images/landingpage/slider_1.png', // Support base64 image
+    image: '/assets/images/landingpage/slider_1.png', // Support base64 image
+    thumbImage: '/assets/images/landingpage/slider_1.png', // Support base64 image
     alt: '-25% la toate cartile editurii Leda',
     title: '-25% la toate cartile editurii Leda'
 },

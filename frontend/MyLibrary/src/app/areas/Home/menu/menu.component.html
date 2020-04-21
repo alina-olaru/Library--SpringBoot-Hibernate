@@ -1,15 +1,15 @@
 <header role="banner">
 
-  <a class="nav-btn  mt-4 mr-3" (click)="toggmenu()">
+  <a class="nav-btn" (click)="toggmenu()">
     <div class="bar"></div>
     <div class="bar"></div>
     <div class="bar"></div>
   </a>
 </header>
-<nav role="navigation" class="site-nav">
+<nav role="navigation" class="site-nav" [class.nav-container]="!myClass">
   <ul class="nav navbar-nav" routerLinkActive="active">
     <li class="nav-item menu-hero-item">
-        <a class="nav-link" routerLink="/src/app/areas/Home/welcome">
+        <a class="nav-link" [routerLink]="['welcome']">
           Home
         </a>
     </li>
@@ -19,7 +19,5 @@
     <li class="menu-hero-item"><a href="#">Despre noi</a></li>
     <li class="menu-hero-item"><a href="#">Inregistreaza-te</a></li>
     <li class="menu-hero-item"><a href="#">Contacteaza-ne</a></li>
-
-
   </ul>
 </nav>

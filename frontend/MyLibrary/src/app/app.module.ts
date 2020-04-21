@@ -26,7 +26,6 @@ import { LoginComponent } from "./areas/login/login.component";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ConfirmationComponent } from "./areas/confirmation/confirmation.component";
 import { BearerAuthInterceptorService } from './modules/interceptors/bearer-auth-interceptor.service';
-import { QuizzComponent } from './areas/home/quizz/quizz.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +34,6 @@ import { QuizzComponent } from './areas/home/quizz/quizz.component';
     LoadingSpinnerComponent,
     LoginComponent,
     ConfirmationComponent,
-    QuizzComponent,
-
-
   ],
   imports: [
     BrowserModule,
@@ -70,7 +66,6 @@ import { QuizzComponent } from './areas/home/quizz/quizz.component';
       useClass: ErrorInterceptorService,
       multi: true,
     },
-    //TODO ADD SERVICES
   ],
   bootstrap: [AppComponent],
 })

@@ -5,6 +5,7 @@
 @import "~bootstrap/scss/mixins";
 
 @import "~bootstrap/scss/utilities/spacing";
+@import "~bootstrap/scss/utilities/sizing";
 
 
 html, body { height: 100%; }
@@ -30,4 +31,13 @@ html, body, app-root {
     margin-right: 10px;
   }
 }
+
+.mat-sort-header-container:not(.mat-sort-header-sorted){
+  .mat-sort-header-arrow {
+    opacity: 0.54 !important;
+    transform: translateY(0) !important;
+  }
+}
+
+
 

@@ -9,10 +9,11 @@ import { AdminGuardService } from './modules/guards/admin-guard.service';
 import { HomeModule } from './areas/Home/home/home.module';
 
 const routes: Routes = [
-  // {
-  //    path: "register/:token",
-  //   component: ConfirmationComponent
-  //  },
+  {
+    path: "",
+    redirectTo: "home",
+    pathMatch: "full"
+  },
   {
     path: "register",
     component: RegisterComponent
@@ -44,11 +45,7 @@ const routes: Routes = [
     //canActivate: [AdminGuardService],
   // canActivateChild: [AdminGuardService]
   },
-  {
-    path: "",
-    redirectTo: "/welcome",
-    pathMatch: "full"
-  },
+
   {
     path: "**",
     component: WelcomeComponent

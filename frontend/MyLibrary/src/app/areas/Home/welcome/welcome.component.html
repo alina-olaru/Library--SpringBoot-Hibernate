@@ -1,95 +1,5 @@
 <div class="container" fxFlex fxLayout="column">
-  <div class="container  home-header">
 
-
-  </div>
-
-
-  <div class="container" fxFlex fxLayout="row">
-    <div fxFlex="20" class="margin-home" fxFlex.sm="10">
-
-
-    </div>
-
-
-    <div fxFlex="60" class="middle-home">
-      <div class="container line">
-
-
-        <div class="container" fxFlex fxLayout="column">
-          <div fxFlex fxLayout="row">
-
-            <div fxFlex="20" fxFlexOrder.sm="1" fxFlexOrder.xs="1" class="mx-5 my-2 page-icon">
-
-              <fa-icon mat-list-icon [icon]="faBookOpen"></fa-icon>
-              <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Library_building_clipart.svg/800px-Library_building_clipart.svg.png" class="banner-image"> -->
-            </div>
-
-            <div fxFlex="40" fxFlexOrder.sm="2" fxFlexOrder.xs="3" class="mt-2">
-
-
-              <mat-form-field appearance="outline">
-                <mat-label>Ce vrei sa cauti?</mat-label>
-                <input matInput placeholder="Cauta...">
-                <mat-icon matSuffix>search</mat-icon>
-
-              </mat-form-field>
-
-
-            </div>
-            <div fxFlex="30" fxFlexOrder.sm="1" fxFlexOrder.xs="2" class="cont">
-
-              <div fxFlex fxLayout="row">
-
-
-                <div fxFlex fxLayout="row">
-
-                  <div fxFlex="40">
-                    <div fxFlex fxLayout="row">
-                      <div fxFlex="30" class="hero-icon mt-4">
-                        <fa-icon mat-list-icon [icon]="faUser"></fa-icon>
-                      </div>
-                      <div fxFlex="70">
-                        <div fxFlex fxLayout="column">
-                          <div fxFlex="50" class="mt-4 mb-0">
-                            Bun venit!
-                          </div>
-                          <div fxFlex="50">
-                            Contul meu
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div fxFlex="40">
-                    <div fxFlex fxLayout="row">
-                      <div fxFlex="30" class="hero-icon mt-4">
-                        <fa-icon mat-list-icon [icon]="faShoppingCart"></fa-icon>
-                      </div>
-                      <div fxFlex="70">
-                        <div fxFlex fxLayout="column">
-                          <div fxFlex="50" class="mt-4 mb-0">
-                            Cosul meu
-                          </div>
-                          <div fxFlex="50">
-                            Total
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div [class.menu-true]="open==true" fxFlex (click)="test()">
-
-                      <app-menu></app-menu>
-
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-          </div>
 
           <div class="container slider" fxFlex>
             <app-slider></app-slider>
@@ -152,18 +62,6 @@
             </div>
 
           </div>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div fxFlex="20" class="margin-home">
-
-    </div>
-
-  </div>
 
 
 </div>

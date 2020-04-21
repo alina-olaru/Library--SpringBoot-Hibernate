@@ -1,3 +1,4 @@
+import { LayoutComponent } from './../layout/layout.component';
 import { QuizzComponent } from './../quizz/quizz.component';
 import { ReviewComponent } from './../review/review.component';
 import { MenuComponent } from './../menu/menu.component';
@@ -13,7 +14,6 @@ import { HomeRoutingModule } from "./home-routing.module";
 import { Error404Component } from "./../error404/error404.component";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
-import { NgImageSliderModule } from 'ng-image-slider';
 import { DespreComponent } from '../despre/despre.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -21,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
+    LayoutComponent,
     WelcomeComponent,
      Error404Component,
      DespreComponent,
@@ -35,7 +36,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
        HomeRoutingModule,
        SharedModule,
        MaterialModule,
-       NgImageSliderModule,
        FontAwesomeModule
   ]
 })
