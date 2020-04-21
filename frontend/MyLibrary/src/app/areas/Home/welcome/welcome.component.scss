@@ -67,3 +67,152 @@ z-index:-1;
 @media only screen and (min-width: 64em) {
 	@import "welcome.large";
 }
+
+
+
+
+.under-banner-icon{
+
+  :hover{
+    color:rgb(41, 209, 41);
+    cursor: pointer;
+
+  }
+
+}
+
+
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+*{ margin: 0; padding: 0; box-sizing: border-box; }
+*::before, *::after{ box-sizing: inherit; }
+body{ color: rgba(0,0,0,.87); font-size: 1rem; line-height: 1.5;
+  font-family: Roboto, sans-serif; background: #F5F5F5; padding: 2rem 2rem 0; }
+.wrapper{ display: flex; flex-flow: row;  flex-wrap: wrap; justify-content: center; }
+.wrapper > *{ margin: 0 1rem 2rem; }
+
+/* Not important. Text and SVG styling
+------------------------------------------ */
+.title{ display: block; color: rgba(0,0,0,1); font-size: 1.25rem; }
+.subtitle{ display: block; color: rgba(0,0,0,.7); font-size: 0.875rem;
+  margin-top: -0.25rem; margin-bottom: 0.875rem; }
+svg{ fill: currentcolor; width: 1rem; height: 1rem; }
+
+/**************************************************
+** CARDS STYLING
+***************************************************/
+/* Card outside box. Here is where the
+** dimensions, shadows and borders are set
+------------------------------------------ */
+.card{
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column;
+
+  width: 300px; /* Box dimensions */
+  height: 400px;
+
+  transition: box-shadow 0.56s ease-in-out; /* Animation */
+  border-radius: 4px; /* Styling */
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+  background-color: rgba(255,255,255,1);
+  /* background-color: rgba(0,0,0,.2); /* for debugging */
+}
+
+
+/* Card image container
+------------------------------------------ */
+.card__thumbnail{
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center; /* Horizontal center */
+  align-items: center; /* Vertical center */
+
+  width: 100%; /* Thumbnail dimensions. */
+  height: 65%; /*** This value is linked to the card body top ***/
+
+  transition: all .48s ease-in-out; /* Animation */
+  /* background-color: rgba(0,0,0,.2);  /* for debugging */
+}
+.card__thumbnail > img{ /* Tip: use 1:1 ratio images */
+  height: 100%; /* or width when img.width > img.height */
+}
+.has-full-img .card__thumbnail{
+  height: 100% !important;
+}
+
+/* Card content container
+------------------------------------------ */
+.card__body{
+  position: absolute;
+  top: calc(400px * .65); /* .65 = thumbnail.height */
+  left: 0;
+  overflow: hidden;
+
+  width: 300px; /* Content box dimensions */
+
+  transition: all .48s ease-in-out; /* Animation */
+  padding: 1rem 1rem 1rem; /* Styling */
+  background: rgba(255, 255, 255,1);
+  /* background-color: rgba(0,0,0,.2);  /* for debugging */
+}
+
+#card-2.card .card__body{
+  height: 400px;
+}
+
+.has-full-img .card__body{
+  top: 0;
+  height: 400px;
+  background: rgba(255, 255, 255,0.2);
+}
+
+.has-full-img .card__body p{
+  color: rgba(0,0,0,0);
+  transition: all .48s ease-in-out; /* Animation */
+}
+
+.has-full-img .card__body .title{
+  color: rgba(0,0,0,1);
+  font-size: 1.875rem;
+}
+
+
+.card:hover{
+  cursor: pointer;
+  box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+}
+
+/* Grow card thumbnail to 100% */
+.card:hover > .card__thumbnail{ height: 100%; }
+
+
+
+/* CARD 2 Grow card body and border */
+#card-2.card:hover > .card__body{
+  color: #fff;
+  overflow-y: auto;
+  border-radius: 2px;
+  background: rgba(216, 0, 16,.80);
+  transform: translatey(calc((400px * -.65)));
+  outline: 2px solid rgba(255,255,255,0.35);
+  outline-offset: -0.5rem;}
+
+.has-full-img.card:hover >  .card__thumbnail{
+  transform: scale(1.5);
+}
+
+.has-full-img.card:hover >  .card__body{
+  background: rgba(216, 0, 16,.50);
+}
+
+.has-full-img.card:hover > .card__body .subtitle{
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.has-full-img.card:hover > .card__body p{
+  color: rgba(255, 255, 255, 1);
+}
+

@@ -22,6 +22,7 @@
                 <div fxFlex="20%" class="under-banner-text">
                   Împachetare gratuită
 
+
                 </div>
                 <div fxFlex="20%" class="under-banner-text mb-1 mb-sm-3">
                   Vrei să faci un cadou? Ți-l împachetăm gratuit!
@@ -64,4 +65,46 @@
           </div>
 
 
+              <!-- CARTI DIN FIECARE CATEGORIE + REDIRECTIONARE -->
+          <div fxFlex fxLayout="column">
+
+            <div fxFlex>
+              SF
+            </div>
+            <div fxFlex.lt-sm="100%" fxFlex.lt-md="33%" fxFlex.lt-xl="25%" fxLayoutAlign="end center" fxLayout="row">
+
+              <div fxFlex >
+                <!-- SE ADAUGA CARTILE -->
+                <div id="card-2" class="card">
+                  <figure class="card__thumbnail">
+                    <img src=SFBooks[1].imageBook>
+                  </figure>
+                  <div class="card__body">
+                    <h3 class="title">{{SFBooks[1].bookTitle}}</h3>
+                    <span class="subtitle">SFBooks[1].bookAuthor[1]</span>
+                    <p>
+                      <svg width="16" height="16" viewBox="0 0 24 24">
+                        <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path>
+                      </svg>
+                      {{SFBooks[1].bookPrice}}
+                    </p>
+                    <p>
+                      <svg width="16" height="16" viewBox="0 0 24 24">
+                        <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path>
+                      </svg>
+                      SFBooks[1].booksCategories[1].categoryId
+                    </p>
+                  </div>
+                </div> <!-- ./ Card #2   -->
+              </div>
+
+            </div>
+
+            <div fxFlex >
+              <!-- SE ADAUGA URMATOAREA CATEGORIE -->
+            </div>
+          </div>
+
+
 </div>
+
