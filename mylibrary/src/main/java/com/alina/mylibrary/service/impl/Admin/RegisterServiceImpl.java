@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 public class RegisterServiceImpl implements RegisterService {
@@ -73,6 +74,15 @@ public class RegisterServiceImpl implements RegisterService {
         if((bookUser.getFirstName().length()<=3)||((bookUser.getLastName().length()<=3))){
             throw new FieldException("Nume prea scurt.","firstName/lastName",this.getClass().getName());
 
+        }
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if(!pat.matcher(bookUser.getEmailAdress()).matches()){
+            throw  new FieldException("Adresa de mail invalida","emailAddress",this.getClass().getName());
         }
 
 
