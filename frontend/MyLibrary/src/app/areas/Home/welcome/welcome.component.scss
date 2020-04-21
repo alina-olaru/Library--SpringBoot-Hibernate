@@ -39,18 +39,7 @@ height: 100px;
   font-size: 62px;
 }
 
-.under-banner-icon{
-  font-size:9rem;
-  color:rgb(25, 97, 25);
-  opacity: 0.7;
-  align-self: center;;
-}
 
-.under-banner-text{
-  font-family: cursive;
-  font-size:1.3rem;
-  text-align: center;
-}
 
 .menu-true{
   z-index:100;
@@ -62,4 +51,19 @@ z-index:-1;
 
 .next-icon, .ng-star-inserted , .next, .icons,.prev{
   z-index:102;
+}
+
+
+// @import "variables";
+
+@import "welcome.small";
+
+//35em is also 560px (if basefont is 16px)
+@media only screen and (min-width: 35em) {
+	@import "welcome.medium";
+}
+
+//64em is also 1028px (if basefont is 16px)
+@media only screen and (min-width: 64em) {
+	@import "welcome.large";
 }
