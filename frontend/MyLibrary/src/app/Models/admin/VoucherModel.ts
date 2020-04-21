@@ -1,3 +1,5 @@
+import { Author } from 'src/app/Models/admin/AuthorModel';
+import { Publisher } from 'src/app/Models/admin/PublisherModel';
 export class Voucher {
 
   voucherId:number;
@@ -11,11 +13,10 @@ export class Voucher {
   voucherPrice:number;
   quizzez:any;
   userVoucherLink:any;
-  authorlastName:string;
-  authorFirstName:string;
-  language:string;
-  Publisher:string;
 
+  language:string;
+  publisher_voucher:Publisher;
+  author_voucher:Author;
 
   public constructor(init?: Partial<Voucher>) {
     Object.assign(this, init);

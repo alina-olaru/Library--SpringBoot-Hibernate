@@ -63,18 +63,16 @@ public class Voucher {
 
 
     @Column
-    private String authorFirstName;
-
-    @Column
-    private String authorlastName;
-
-
-    @Column
     private String language;
 
 
-    @Column
-    private String Publisher;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_AUTHORR__ID"))
+    private Author author_voucher;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_PUBLISHERR__ID"))
+    private Publisher publisher_voucher;
 
 
     @OneToMany(mappedBy = "vouchers",

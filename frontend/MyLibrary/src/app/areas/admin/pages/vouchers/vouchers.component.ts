@@ -37,9 +37,9 @@ displayedColumns:string[]=[
 'voucherEndDate',
 'voucherMaximumUses',
 'voucherPrice',
-'authorlastName',
+'author_voucher',
 'language',
-'Publisher',
+'publisher_voucher',
 
 'actions'
 

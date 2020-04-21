@@ -13,6 +13,9 @@ import { VoucherService } from ".././voucher.service";
 import { ApiResponse } from "src/app/Models/general/api-response";
 import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
 import { ToastrService } from "src/app/services/toastr.service";
+import { Observable, Subscription } from 'rxjs';
+import { Publisher } from 'src/app/Models/admin/PublisherModel';
+import { Category } from 'src/app/Models/admin/CategoryModel';
 interface Data {
   type: string;
   model: Voucher;
@@ -33,6 +36,12 @@ export class AddEditVouchersComponent implements OnInit {
   vouchers: Voucher[];
   fd: Date;
   lD: Date;
+  base64: string;
+  selectable: boolean = true;
+  removable: boolean = true;
+
+
+
 
   constructor(
     public dialogRef: MatDialogRef<AddEditVouchersComponent>,

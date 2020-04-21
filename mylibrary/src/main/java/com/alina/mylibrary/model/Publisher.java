@@ -52,4 +52,7 @@ public class Publisher {
     }
 
 
+    @OneToOne(mappedBy = "publisher_voucher")
+    private Voucher voucher_with_a_publisher;
+
 }
