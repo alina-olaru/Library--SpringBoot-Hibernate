@@ -87,7 +87,7 @@ public class RegisterServiceImpl implements RegisterService {
 
 
         bookUser.setFirstName(DBCheck.Stringtify(bookUser.getFirstName()));
-        bookUser.setLastName(DBCheck.Stringtify(bookUser.setLastName();));
+        bookUser.setLastName(DBCheck.Stringtify(bookUser.getLastName()));
        BookUser user = this.bookUserDao.addBookUser(bookUser);
        user.setPassword(null);
        return user;
