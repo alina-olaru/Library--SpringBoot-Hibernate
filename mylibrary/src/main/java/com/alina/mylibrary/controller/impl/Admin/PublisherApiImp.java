@@ -23,7 +23,9 @@ public class PublisherApiImp implements PublisherApi {
     public ApiResponse<Publisher> inserPublisher(Publisher publisher) {
        if(publisher!=null){
            Publisher response=this.publisherService.addPublisher(publisher);
-           return new ApiResponse<Publisher>(ApiResponseType.SUCCESS,response);
+           if(response!=null) {
+               return new ApiResponse<Publisher>(ApiResponseType.SUCCESS, response);
+           }
        }
 
         return new ApiResponse<Publisher>(ApiResponseType.ERROR,null,"Editura nu poate fi adaugata");
@@ -33,7 +35,13 @@ public class PublisherApiImp implements PublisherApi {
     public ApiResponse<Publisher> updatePublisher(Publisher publisher) {
         if(publisher!=null){
             Publisher response=this.publisherService.updatePublisher(publisher);
-            return new ApiResponse<Publisher>(ApiResponseType.SUCCESS,response);
+            if(response!=null) {
+                return new ApiResponse<Publisher>(ApiResponseType.SUCCESS, response);
+            }
+            else{
+                return new ApiResponse<Publisher>(ApiResponseType.ERROR,null,"Editura exista deja");
+
+            }
         }
 
         return new ApiResponse<Publisher>(ApiResponseType.ERROR,null,"Editura nu poate fi editata");

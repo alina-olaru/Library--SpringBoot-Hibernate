@@ -1,6 +1,7 @@
 package com.alina.mylibrary.service.impl.Admin;
 
 
+import com.alina.mylibrary.config.DBCheck;
 import com.alina.mylibrary.dao.Interfaces.Admin.PublisherDao;
 import com.alina.mylibrary.model.Publisher;
 import com.alina.mylibrary.service.Interfaces.Admin.PublisherService;
@@ -29,8 +30,10 @@ public class PublisherServiceImp implements PublisherService {
             //you already inserted this publisher.
             //but you can add books to it
         }
+
         else{
             //you add that now
+            publisher.setPublisherTitle(DBCheck.Stringtify(publisher.getPublisherTitle()));
           this.publisherDao.addPublisher(publisher);
             return publisher;
         }
@@ -46,8 +49,17 @@ public class PublisherServiceImp implements PublisherService {
     @Override
     public Publisher updatePublisher(Publisher publisher) {
         if(publisher!=null) {
-            this.publisherDao.updatePublisher(publisher);
-            return publisher;
+            List<Publisher> publishersWithSameName=this.publisherDao.getPublisherBypublisherTitle(publisher.getPublisherTitle());
+            //this.publisherRepository.findrBypublisherTitle(publisher.getPublisherTitle());
+            if(publishersWithSameName.size()>=1){
+                return null;
+                //you already inserted this publisher.
+                //but you can add books to it
+            }
+            else {
+                this.publisherDao.updatePublisher(publisher);
+                return publisher;
+            }
         }
         return null;
     }

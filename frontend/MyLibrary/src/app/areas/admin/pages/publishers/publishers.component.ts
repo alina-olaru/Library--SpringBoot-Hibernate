@@ -164,7 +164,7 @@ export class PublishersComponent implements OnInit {
         } else {
           this.toastr.Swal.fire(
             "Eroare!",
-            "A aparut o eroare la editare, incearca din nou!",
+           response.message,
             "error"
           );
         }
