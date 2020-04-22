@@ -85,7 +85,15 @@ public class RegisterServiceImpl implements RegisterService {
             throw  new FieldException("Adresa de mail invalida","emailAddress",this.getClass().getName());
         }
 
+        if(DBCheck.isValidEmailAddress(bookUser.getEmailAdress())==false){
+            throw  new FieldException("Adresa de mail invalida","emailAddress",this.getClass().getName());
+        }
 
+        if(DBCheck.isValidPhoneNumber(bookUser.getPhoneNumber())==false){
+            throw  new FieldException("Nr. telefon invalid","phoneNumber",this.getClass().getName());
+        }
+
+        
         bookUser.setFirstName(DBCheck.Stringtify(bookUser.getFirstName()));
         bookUser.setLastName(DBCheck.Stringtify(bookUser.getLastName()));
        BookUser user = this.bookUserDao.addBookUser(bookUser);

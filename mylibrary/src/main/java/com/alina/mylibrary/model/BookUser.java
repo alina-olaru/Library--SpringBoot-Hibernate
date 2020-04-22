@@ -8,6 +8,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.List;
@@ -36,6 +37,7 @@ public class BookUser {
 
     @Column(length = 50, unique = true)
     @NotNull
+    @Email
     private String emailAdress;
 
     @Column(length = 11,unique = true)
