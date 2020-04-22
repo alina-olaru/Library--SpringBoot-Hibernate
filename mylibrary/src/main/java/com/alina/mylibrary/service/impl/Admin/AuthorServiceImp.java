@@ -46,6 +46,7 @@ public class AuthorServiceImp implements AuthorService {
             return null;
         }
 
+
         author.setFirstName(DBCheck.Stringtify(author.getFirstName()));
         author.setLastName(DBCheck.Stringtify(author.getLastName()));
 

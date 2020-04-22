@@ -15,6 +15,6 @@ public interface CategoryDao {
     public com.alina.mylibrary.model.Category addCategory(com.alina.mylibrary.model.Category category);
     public com.alina.mylibrary.model.Category updateCategory(com.alina.mylibrary.model.Category category);
     public Boolean deleteCategory(int categoryId);
-
+    public Boolean findById(Integer id);
 
 }

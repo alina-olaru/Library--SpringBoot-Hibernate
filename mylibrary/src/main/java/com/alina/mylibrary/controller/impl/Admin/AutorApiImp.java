@@ -52,6 +52,10 @@ public class AutorApiImp  implements AuthorApi {
                 if(response!=null) {
                     return new ApiResponse<Author>(ApiResponseType.SUCCESS, response);
                 }
+                else{
+                    return new ApiResponse<Author>(ApiResponseType.ERROR,null,"Autorul nu a putut fi editat");
+
+                }
             }
             catch (FieldException e){
                 return new ApiResponse<Author>(ApiResponseType.ERROR,response,e.getMessage());

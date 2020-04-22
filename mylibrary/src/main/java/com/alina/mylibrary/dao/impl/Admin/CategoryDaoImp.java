@@ -52,4 +52,11 @@ public class CategoryDaoImp implements CategoryDao {
     public List<Category> getCategoriesWithcategoryTitle(String categoryTitle) {
      return this.categoryRepository.findBycategoryTitle(categoryTitle);
     }
+
+    public Boolean findById(Integer id){
+       if(this.categoryRepository.findById(id).isEmpty()){
+           return false;
+       }
+       return true;
+    }
 }

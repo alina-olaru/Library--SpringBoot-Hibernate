@@ -162,7 +162,7 @@ export class AuthorsComponent implements OnInit {
         } else {
           this.toastr.Swal.fire(
             'Eroare!',
-            'A aparut o eroare la editare, incearca din nou!',
+            response.message,
             'error'
           );
         }
@@ -200,7 +200,7 @@ export class AuthorsComponent implements OnInit {
         } else {
           this.toastr.Swal.fire(
             'Eroare!',
-            'A aparut o eroare la adugare, incearca din nou!',
+           response.message,
             'error'
           );
         }
