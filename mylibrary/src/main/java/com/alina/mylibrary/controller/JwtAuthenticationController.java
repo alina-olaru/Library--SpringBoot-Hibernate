@@ -9,14 +9,16 @@ import com.alina.mylibrary.model.auth.JwtResponse;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.event.AuthenticationFailureProviderNotFoundEvent;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.AuthenticationFailedException;
+import javax.naming.AuthenticationNotSupportedException;
 import java.util.Objects;
 
 @RestController
@@ -37,19 +39,21 @@ public class JwtAuthenticationController {
     private BookUserService bookUserService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ApiResponse<JwtResponse> generateAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
-            throws Exception {
+    public ApiResponse<JwtResponse> generateAuthenticationToken(@RequestBody JwtRequest authenticationRequest) {
+        try {
+            authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+            final UserDetails userDetails = jwtInMemoryUserDetailsService
+                    .loadUserByUsername(authenticationRequest.getUsername());
 
-        final UserDetails userDetails = jwtInMemoryUserDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
+            final String token = jwtTokenUtil.generateToken(userDetails);
 
-        final String token = jwtTokenUtil.generateToken(userDetails);
+            BookUser user = this.bookUserService.GetUserByUsernameOrEmail(authenticationRequest.getUsername());
+            return new ApiResponse<JwtResponse>(ApiResponseType.SUCCESS, new JwtResponse(token, user));
+        } catch (Exception ex) {
 
-        BookUser user = this.bookUserService.GetUserByUsernameOrEmail(authenticationRequest.getUsername());
-
-        return new ApiResponse<JwtResponse>(ApiResponseType.SUCCESS, new JwtResponse(token, user));
+            return new ApiResponse<JwtResponse>(ApiResponseType.ERROR, null, ex.getMessage());
+        }
     }
 
     private void authenticate(String username, String password) throws Exception {
@@ -58,9 +62,18 @@ public class JwtAuthenticationController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
+            throw new Exception("User disabled!", e);
         } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+            throw new Exception("Credentiale gresite", e);
+        }
+            catch(AuthenticationCredentialsNotFoundException e){
+            throw new Exception("Credentiale gresite", e);
+        }
+        catch(AuthenticationServiceException e){
+            throw new AuthenticationServiceException("A aparut o eroare la autentificare!");
+        }
+        catch (Exception ex){
+            throw new Exception("A aparut o eroare la autentificare!");
         }
     }
 

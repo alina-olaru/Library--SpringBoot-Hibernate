@@ -1,6 +1,7 @@
 package com.alina.mylibrary.controller.impl.Admin;
 
 import com.alina.mylibrary.controller.Interfaces.Admin.AuthorApi;
+import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
 import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.Author;
@@ -20,9 +21,16 @@ public class AutorApiImp  implements AuthorApi {
     @Override
     public ApiResponse<Author> insertAuthor(Author author) {
         if(author!=null){
-
-            Author response=this.authorService.addAuthor(author);
-            return new ApiResponse<Author>(ApiResponseType.SUCCESS,response);
+            Author response=null;
+            try {
+                 response = this.authorService.addAuthor(author);
+                 if(response!=null) {
+                     return new ApiResponse<Author>(ApiResponseType.SUCCESS, response);
+                 }
+            }
+            catch (FieldException e){
+                return new ApiResponse<Author>(ApiResponseType.ERROR,response,e.getMessage());
+            }
         }
 
         return new ApiResponse<Author>(ApiResponseType.ERROR,null,"Autorul nu a putut fi adaugat");
@@ -37,13 +45,22 @@ public class AutorApiImp  implements AuthorApi {
 
     @Override
     public ApiResponse<Author> updateAuthor(Author author) {
-        if(author!=null)
-        {
-            Author response=this.authorService.updateAuthor(author);
-            return new ApiResponse<Author>(ApiResponseType.SUCCESS,author);
+        if(author!=null){
+            Author response=null;
+            try {
+                response = this.authorService.updateAuthor(author);
+                if(response!=null) {
+                    return new ApiResponse<Author>(ApiResponseType.SUCCESS, response);
+                }
+            }
+            catch (FieldException e){
+                return new ApiResponse<Author>(ApiResponseType.ERROR,response,e.getMessage());
+            }
         }
-        return new ApiResponse<Author>(ApiResponseType.ERROR,null,"Autorul nu a putut fi updatat");
+
+        return new ApiResponse<Author>(ApiResponseType.ERROR,null,"Autorul nu a putut fi editat");
     }
+
 
     @Override
     public ApiResponse<Boolean> deleteAuthor(int id) {
