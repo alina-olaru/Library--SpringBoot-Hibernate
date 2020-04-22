@@ -40,15 +40,17 @@ public class CategoryServiceImp implements CategoryService {
 
     @Override
     public Boolean deleteCategory(int categoryId) throws DBExceptions {
-        if(categoryId<1){
-            throw new DBExceptions("id-ul nu poate fi gasit",2,"categoryClass","categoryId","Delete");
+        if (categoryId < 1) {
+            throw new DBExceptions("id-ul nu poate fi gasit", 2, "categoryClass", "categoryId", "Delete");
         }
-        if(this.categoryDao.findById(categoryId)==false){
-            throw new DBExceptions("id-ul nu poate fi gasit",2,"categoryClass","categoryId","Delete");
+        if (this.categoryDao.findById(categoryId) == false) {
+            throw new DBExceptions("id-ul nu poate fi gasit", 2, "categoryClass", "categoryId", "Delete");
+        } else if (this.categoryDao.findById(categoryId) == true) {
+            {
+                return this.categoryDao.deleteCategory(categoryId);
+            }
         }
-        else {
-            return this.categoryDao.deleteCategory(categoryId);
-        }
+        return false;
     }
 
     @Override

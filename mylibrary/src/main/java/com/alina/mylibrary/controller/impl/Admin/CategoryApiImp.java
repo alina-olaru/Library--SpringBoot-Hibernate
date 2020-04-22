@@ -72,7 +72,11 @@ public class CategoryApiImp implements CategoryApi {
 
           Boolean response =null;
           try{
-              this.categoryService.deleteCategory(id);
+             response= this.categoryService.deleteCategory(id);
+             if(response==true){
+                 return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,response);
+             }
+
           }
           catch (DBExceptions e){
               return new ApiResponse<Boolean>(ApiResponseType.ERROR,response,e.message);
