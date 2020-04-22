@@ -1,5 +1,6 @@
 package com.alina.mylibrary.service.impl.Admin;
 
+import com.alina.mylibrary.config.DBCheck;
 import com.alina.mylibrary.dao.Interfaces.Admin.CategoryDao;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.Category;
@@ -26,6 +27,7 @@ public class CategoryServiceImp implements CategoryService {
                throw new DBExceptions("Categoria este deja inregistrata",1,category.getClass().getName(),"categoryTitle","Insert");
                 //the you already have that category
             }
+            category.setCategoryTitle(DBCheck.Stringtify(category.getCategoryTitle()));
             return categoryDao.addCategory(category);
         }
         return null;
@@ -58,6 +60,7 @@ public class CategoryServiceImp implements CategoryService {
                 throw new DBExceptions("Categoria este deja inregistrata",1,category.getClass().getName(),"categoryTitle","Insert");
                 //the you already have that category
             }
+            category.setCategoryTitle(DBCheck.Stringtify(category.getCategoryTitle()));
             return categoryDao.updateCategory(category);
         }
         return null;
