@@ -31,6 +31,9 @@ import { OrderHistoryComponent } from './areas/User/order-history/order-history.
 import { PersonalDataComponent } from './areas/User/personal-data/personal-data.component';
 import { AddressesBookComponent } from './areas/User/addresses-book/addresses-book.component';
 import { WishlistComponent } from './areas/User/wishlist/wishlist.component';
+import { MyBooksComponent } from './areas/User/my-books/my-books.component';
+import { RecommendationsComponent } from './areas/User/recommendations/recommendations.component';
+import { MyReviewsComponent } from './areas/User/my-reviews/my-reviews.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import { WishlistComponent } from './areas/User/wishlist/wishlist.component';
     PersonalDataComponent,
     AddressesBookComponent,
     WishlistComponent,
+    MyBooksComponent,
+    RecommendationsComponent,
+    MyReviewsComponent,
   ],
   imports: [
     BrowserModule,
