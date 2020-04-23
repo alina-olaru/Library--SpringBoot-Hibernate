@@ -26,14 +26,7 @@ import { LoginComponent } from "./areas/login/login.component";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ConfirmationComponent } from "./areas/confirmation/confirmation.component";
 import { BearerAuthInterceptorService } from './modules/interceptors/bearer-auth-interceptor.service';
-import { UserMenuComponent } from './areas/User/user-menu/user-menu.component';
-import { OrderHistoryComponent } from './areas/User/order-history/order-history.component';
-import { PersonalDataComponent } from './areas/User/personal-data/personal-data.component';
-import { AddressesBookComponent } from './areas/User/addresses-book/addresses-book.component';
-import { WishlistComponent } from './areas/User/wishlist/wishlist.component';
-import { MyBooksComponent } from './areas/User/my-books/my-books.component';
-import { RecommendationsComponent } from './areas/User/recommendations/recommendations.component';
-import { MyReviewsComponent } from './areas/User/my-reviews/my-reviews.component';
+
 
 @NgModule({
   declarations: [
@@ -41,15 +34,7 @@ import { MyReviewsComponent } from './areas/User/my-reviews/my-reviews.component
     RegisterComponent,
     LoadingSpinnerComponent,
     LoginComponent,
-    ConfirmationComponent,
-    UserMenuComponent,
-    OrderHistoryComponent,
-    PersonalDataComponent,
-    AddressesBookComponent,
-    WishlistComponent,
-    MyBooksComponent,
-    RecommendationsComponent,
-    MyReviewsComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,

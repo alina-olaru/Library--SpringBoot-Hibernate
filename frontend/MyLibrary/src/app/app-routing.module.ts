@@ -7,7 +7,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { AdminModule } from './areas/admin/admin.module';
 import { AdminGuardService } from './modules/guards/admin-guard.service';
 import { HomeModule } from './areas/Home/home/home.module';
-
+import { UserModule } from './areas/User/user/user.module';
 const routes: Routes = [
   {
     path: "",
@@ -44,6 +44,10 @@ const routes: Routes = [
     loadChildren: () => HomeModule
     //canActivate: [AdminGuardService],
   // canActivateChild: [AdminGuardService]
+  },
+  {
+    path:'cont',
+    loadChildren: () => UserModule
   },
 
   {
