@@ -1,3 +1,4 @@
+import { CartComponent } from './../cart/cart.component';
 import { LayoutComponent } from "./../layout/layout.component";
 import { QuizzComponent } from "./../quizz/quizz.component";
 import { ReviewComponent } from "./../review/review.component";
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: "quizz",
         component: QuizzComponent,
+      },
+      {
+        path:"cart",
+        component:CartComponent
       },
     ],
   },

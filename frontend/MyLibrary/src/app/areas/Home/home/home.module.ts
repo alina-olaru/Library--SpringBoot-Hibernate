@@ -1,3 +1,4 @@
+import { CartComponent } from './../cart/cart.component';
 import { LayoutComponent } from './../layout/layout.component';
 import { QuizzComponent } from './../quizz/quizz.component';
 import { ReviewComponent } from './../review/review.component';
@@ -28,7 +29,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
      SliderComponent,
      MenuComponent,
      ReviewComponent,
-     QuizzComponent
+     QuizzComponent,
+     CartComponent
 
     ],
   imports: [

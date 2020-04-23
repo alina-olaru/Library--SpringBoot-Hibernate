@@ -1,4 +1,5 @@
 
+@import "variables";
 @import "small_user_menu";
 
 //35em is also 560px (if basefont is 16px)
@@ -9,4 +10,43 @@
 //64em is also 1028px (if basefont is 16px)
 @media only screen and (min-width: 64em) {
   @import "large_user_menu";
+}
+
+
+.account-navigation-item{
+  color: black;
+ :active{
+   color:yellow;
+ }
+ ::marker{
+   display: none;
+ }
+
+ a{
+   text-decoration: none!important;
+   color:black;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+ }
+
+ :hover{
+  color:rgb(41, 209, 41);
+
+ }
+
+}
+
+.account-navigation-list li{
+list-style:none;
+background-image:none;
+background-repeat:none;
+background-position:0;
+  }
+
+
+  ul
+{
+    list-style-type:none;
+    padding:0px;
+    margin:0px;
 }

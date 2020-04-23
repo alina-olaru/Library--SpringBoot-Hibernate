@@ -19,11 +19,13 @@
         <div class="container" fxFlex fxLayout="column">
           <div fxFlex fxLayout="row wrap">
 
-            <div fxFlex="0 1 0%" [fxFlexOrder]="1" class="my-2 px-4 page-icon">
-
+            <div fxFlex="0 1 0%" [fxFlexOrder]="1" class="my-2 px-4 page-icon pointer account-icon-redirect">
+              <a  routerLink="/home/welcome" routerLinkActive="active">
               <fa-icon mat-list-icon [icon]="faBookOpen"></fa-icon>
               <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Library_building_clipart.svg/800px-Library_building_clipart.svg.png" class="banner-image"> -->
+              </a>
             </div>
+
 
             <div fxFlex="100" fxFlex.gt-sm="1 1 0%" [fxFlexOrder]="3" [fxFlexOrder.gt-sm]="2" class="mt-2 px-3">
 
@@ -40,17 +42,22 @@
 
             <div fxFlex="1 1 0%" fxFlex.gt-sm="0 1 0%" [fxFlexOrder]="2" [fxFlexOrder.gt-sm]="3" class="cont px-3"
               fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="30px">
-              <div fxFlex="0 1 0%">
+              <div fxFlex="0 1 0%" class="pointer account-icon-redirect">
+                <a  routerLink="/login" routerLinkActive="active">
                 <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
                   <div fxFlex class="hero-icon">
                     <fa-icon mat-list-icon [icon]="faUser"></fa-icon>
                   </div>
                   <div fxFlex fxHide.xs fxHide.sm class="white-space-nowrap">
+
                     Contul meu
+
                   </div>
                 </div>
+              </a>
               </div>
-              <div fxFlex="0 1 0%">
+              <div fxFlex="0 1 0%"  class="pointer account-icon-redirect">
+                <a  routerLink="/home/cart" routerLinkActive="active">
                 <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
                   <div fxFlex class="hero-icon">
                     <fa-icon mat-list-icon [icon]="faShoppingCart"></fa-icon>
@@ -59,10 +66,11 @@
                     Cosul meu
                   </div>
                 </div>
+                </a>
               </div>
 
-              <div class="h-50" [class.menu-true]="open==true" fxFlex="0 1 0%" fxLayout="column" fxLayoutAlign="start center" >
-                <!-- <app-menu [myClass]="open"></app-menu> -->
+              <div class="h-50" [class.menu-true]="open==true" fxFlex="0 1 0%" fxLayout="column" fxLayoutAlign="start center" (click)="test()">
+                <app-menu [myClass]="open"></app-menu>
               </div>
 
             </div>

@@ -1,3 +1,5 @@
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SharedModule } from './../../../modules/shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -27,6 +29,8 @@ import { MyReviewsComponent } from '../my-reviews/my-reviews.component';
   imports: [
     CommonModule,
     UserRoutingModule,
+    SharedModule,
+    FontAwesomeModule
 
   ],
   exports:[
