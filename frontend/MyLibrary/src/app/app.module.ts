@@ -27,6 +27,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ConfirmationComponent } from "./areas/confirmation/confirmation.component";
 import { BearerAuthInterceptorService } from './modules/interceptors/bearer-auth-interceptor.service';
 import { AccountOverviewComponent } from './areas/User/account-overview/account-overview.component';
+import { LayoutComponent } from './areas/User/layout/layout.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AccountOverviewComponent } from './areas/User/account-overview/account-
     LoadingSpinnerComponent,
     LoginComponent,
     ConfirmationComponent,
-    AccountOverviewComponent
+    AccountOverviewComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,

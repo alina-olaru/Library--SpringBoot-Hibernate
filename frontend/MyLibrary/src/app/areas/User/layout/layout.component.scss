@@ -1,0 +1,70 @@
+
+
+body {
+  cursor:"../../../../assets/images/landingpage/cursor.png";
+}
+.margin-home{
+  background-color: rgb(227, 250, 239);
+  height: 100vh;
+}
+.middle-home{
+  background-color: white;
+  height: 100vh;
+
+}
+
+
+.home-header{
+  background-color: rgb(120, 236, 145);
+  height: 5em;
+}
+
+.banner-image{
+  object-fit: cover;
+  width: 120px;
+  height: 80px;
+
+}
+
+.line{
+height: 100px;
+}
+
+
+.hero-icon{
+  font-size:28px;
+}
+
+.page-icon{
+  font-size: 62px;
+}
+
+.under-banner-icon{
+  font-size:9rem;
+  color:rgb(25, 97, 25);
+  opacity: 0.7;
+  align-self: center;;
+}
+
+.under-banner-text{
+  font-family: cursive;
+  font-size:1.3rem;
+  text-align: center;
+}
+
+
+.menu-true{
+  z-index:100;
+}
+
+.menu-false{
+z-index:-1;
+}
+
+.next-icon, .ng-star-inserted , .next, .icons,.prev{
+  z-index:102;
+}
+
+.white-space-nowrap{
+  white-space: nowrap;
+}

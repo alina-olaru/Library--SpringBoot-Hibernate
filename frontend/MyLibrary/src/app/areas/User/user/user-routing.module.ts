@@ -1,3 +1,4 @@
+import { LayoutComponent } from './../../Home/layout/layout.component';
 import { RecommendationsComponent } from './../recommendations/recommendations.component';
 import { PersonalDataComponent } from './../personal-data/personal-data.component';
 import { OrderHistoryComponent } from './../order-history/order-history.component';
@@ -10,40 +11,61 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
+  // {
+//   path: "",
+//   component: LayoutComponent,
+//   children: [
+//     {
+//       path: "",
+//       redirectTo: "welcome"
+//     },
+{
+  path:"",
+  component:LayoutComponent,
+  children:[
+    {
+      path : "accountOverview",
+      component : AccountOverviewComponent
+    }
+  ,
   {
-    path: "",
-    redirectTo: "accountOverview"
+    path:"adrese",
+    component:AddressesBookComponent
   },
-
   {
-    path : "accountOverview",
-    component : AccountOverviewComponent
+    path:"bilbiotecapersonala",
+    component:MyBooksComponent
+  },
+  {
+    path:"Recenzii",
+    component:MyReviewsComponent
+  },
+  {
+    path:"istoric",
+    component:OrderHistoryComponent
+  },
+  {
+    path:"datepersonale",
+    component:PersonalDataComponent
+  },
+  {
+  path:"recomandari",
+  component:RecommendationsComponent
   }
-,
-{
-  path:"adrese",
-  component:AddressesBookComponent
+
+
+  ]
 },
-{
-  path:"bilbiotecapersonala",
-  component:MyBooksComponent
-},
-{
-  path:"Recenzii",
-  component:MyReviewsComponent
-},
-{
-  path:"istoric",
-  component:OrderHistoryComponent
-},
-{
-  path:"datepersonale",
-  component:PersonalDataComponent
-},
-{
-path:"recomandari",
-component:RecommendationsComponent
-}
+  // {
+  //   path: "",
+  //   redirectTo: "accountOverview"
+  // },
+
+
+
+
+
+
   // {
   //   path: "register",
   //   component: RegisterComponent
