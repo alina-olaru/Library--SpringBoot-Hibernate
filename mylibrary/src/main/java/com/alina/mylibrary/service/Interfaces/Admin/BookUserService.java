@@ -14,4 +14,5 @@ public interface BookUserService {
     public BookUser addUser(BookUser bookUser);
     public BookUser editUser(BookUser bookUser);
     public Boolean deleteUser(int bookUserId);
+    public BookUser GetUserByuserId(Integer userId);
 }

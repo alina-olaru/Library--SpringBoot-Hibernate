@@ -51,4 +51,9 @@ public class BookUserServiceImpl implements BookUserService {
     public Boolean deleteUser(int id) {
         return this.bookUserDao.removeBookUser(id);
     }
+
+    @Override
+    public BookUser GetUserByuserId(Integer userId) {
+        return this.bookUserDao.getBookUserById(userId);
+    }
 }

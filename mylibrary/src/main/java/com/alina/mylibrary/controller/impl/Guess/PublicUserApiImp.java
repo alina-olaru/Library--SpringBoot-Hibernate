@@ -19,6 +19,7 @@ public class PublicUserApiImp implements PublicUserApi {
 
     @Override
     public ApiResponse<BookUser>  GetById(int id) {
+        //todo dc nu merge daca totusi e post?
         return new ApiResponse<BookUser>(ApiResponseType.SUCCESS,this.bookUserService.GetUserByuserId(id));
     }
 
