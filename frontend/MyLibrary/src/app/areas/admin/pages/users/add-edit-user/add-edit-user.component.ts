@@ -85,7 +85,7 @@ export class AddEditUserComponent implements OnInit {
       if (roles.indexOf("Admin") >= 0) model.adminPrivilege = true;
       if (roles.indexOf("User basic") >= 0) model.userPrivilege = true;
       console.log(model);
-      //this.dialogRef.close(model);
+      this.dialogRef.close(model);
     }
   }
 }

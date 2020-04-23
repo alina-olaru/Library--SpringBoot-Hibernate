@@ -7,6 +7,11 @@ import {
   faCarSide,
   faBiking,
 } from "@fortawesome/free-solid-svg-icons";
+import { GlobalVarService } from 'src/app/services/global-var.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'src/app/services/toastr.service';
+import { BookUser } from 'src/app/Models/BookUser';
 
 @Component({
   selector: 'app-home-layout',
@@ -23,7 +28,38 @@ export class LayoutComponent implements OnInit {
   faBiking = faBiking;
   open:boolean = false;
 
-  constructor() { }
+  isLogged:boolean=false;
+  private user: BookUser = null;
+  private _token: String = null;
+
+
+  constructor(
+
+
+    private gloablVarService: GlobalVarService,
+    private cookieService: CookieService,
+    private router: Router,
+    private toastr: ToastrService
+
+)
+
+  {
+    let cachedUser = this.cookieService.get("auth-user-info");
+    if (cachedUser != null && cachedUser != "") {
+      this.user = JSON.parse(cachedUser) as BookUser;
+      console.log(this.user);
+      if(this.user){
+        this.isLogged=true;
+      }
+    }
+
+    let cachedToken = this.cookieService.get("auth-token");
+    if (cachedToken != null && cachedToken != "") {
+      this._token = JSON.parse(cachedToken);
+    }
+
+
+   }
 
   ngOnInit() {
   }
@@ -40,3 +76,4 @@ export class LayoutComponent implements OnInit {
   }
 
 }
+
