@@ -1,3 +1,4 @@
+import { UserModule } from './areas/User/user/user.module';
 import { ErrorInterceptorService } from "./modules/interceptors/error-interceptor.service";
 import { LoadingService } from "./modules/loading-spinner/loading.service";
 import { ToastrService } from "./services/toastr.service";
@@ -27,7 +28,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ConfirmationComponent } from "./areas/confirmation/confirmation.component";
 import { BearerAuthInterceptorService } from './modules/interceptors/bearer-auth-interceptor.service';
 import { AccountOverviewComponent } from './areas/User/account-overview/account-overview.component';
-import { LayoutComponent } from './areas/User/layout/layout.component';
+
 
 
 @NgModule({
@@ -37,8 +38,8 @@ import { LayoutComponent } from './areas/User/layout/layout.component';
     LoadingSpinnerComponent,
     LoginComponent,
     ConfirmationComponent,
-    AccountOverviewComponent,
-    LayoutComponent
+    AccountOverviewComponent
+
   ],
   imports: [
     BrowserModule,
@@ -51,6 +52,7 @@ import { LayoutComponent } from './areas/User/layout/layout.component';
     MaterialModule,
     SharedModule,
     FontAwesomeModule,
+    UserModule
 
   ],
   providers: [

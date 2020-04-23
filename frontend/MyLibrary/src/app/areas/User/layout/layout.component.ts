@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import {
   faUser,
@@ -33,15 +33,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  test(){
-
-    if(this.open==false){
-      this.open=true;
-    }
-    else{
-      this.open=false;
-    }
-
-  }
 
 }
+
+

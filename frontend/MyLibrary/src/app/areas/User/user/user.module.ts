@@ -22,11 +22,15 @@ import { MyReviewsComponent } from '../my-reviews/my-reviews.component';
     MyBooksComponent,
     RecommendationsComponent,
     MyReviewsComponent
+
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
 
+  ],
+  exports:[
+    UserMenuComponent
   ]
 })
 export class UserModule { }
