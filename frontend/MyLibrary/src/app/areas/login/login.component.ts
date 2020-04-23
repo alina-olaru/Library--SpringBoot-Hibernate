@@ -79,8 +79,9 @@ export class LoginComponent implements OnInit {
   redirectToPage(user: BookUser) {
     if (user.adminPrivilege == true) {
       this.router.navigate(['admin']);
-    } else {
-      this.router.navigate(['home']);
+    }
+    else {
+      this.router.navigate(['/cont/accountOverview']);
     }
   }
 }
