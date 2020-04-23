@@ -1,3 +1,4 @@
+import { WishlistComponent } from './../wishlist/wishlist.component';
 import { LayoutComponent } from './../../Home/layout/layout.component';
 import { RecommendationsComponent } from './../recommendations/recommendations.component';
 import { PersonalDataComponent } from './../personal-data/personal-data.component';
@@ -37,7 +38,7 @@ const routes: Routes = [
     component:MyBooksComponent
   },
   {
-    path:"Recenzii",
+    path:"recenzii",
     component:MyReviewsComponent
   },
   {
@@ -51,6 +52,11 @@ const routes: Routes = [
   {
   path:"recomandari",
   component:RecommendationsComponent
+  },
+
+  {
+    path:"wishlist",
+    component:WishlistComponent
   }
 
 
