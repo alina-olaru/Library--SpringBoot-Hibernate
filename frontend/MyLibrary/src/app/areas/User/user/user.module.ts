@@ -13,10 +13,7 @@ import { MyReviewsComponent } from '../my-reviews/my-reviews.component';
 
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
+  declarations: [
     UserMenuComponent,
     OrderHistoryComponent,
     PersonalDataComponent,
@@ -25,6 +22,11 @@ import { MyReviewsComponent } from '../my-reviews/my-reviews.component';
     MyBooksComponent,
     RecommendationsComponent,
     MyReviewsComponent
+  ],
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+
   ]
 })
 export class UserModule { }
