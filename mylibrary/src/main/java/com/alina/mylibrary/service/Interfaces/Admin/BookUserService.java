@@ -1,6 +1,7 @@
 package com.alina.mylibrary.service.Interfaces.Admin;
 
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
+import com.alina.mylibrary.model.Address;
 import com.alina.mylibrary.model.BookUser;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,4 +20,5 @@ public interface BookUserService {
     public BookUser GetUserByuserId(Integer userId);
     public BookUser yesNewsletter(Integer userId)  throws NotFoundException, FieldException;
     public BookUser NoNewsletter(Integer userId)  throws NotFoundException, FieldException ;
+    public BookUser addAddress(Address address,BookUser bookUser)  throws NotFoundException, FieldException,NullPointerException;
 }

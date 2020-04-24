@@ -1,7 +1,9 @@
 package com.alina.mylibrary.service.impl.Admin;
 
+import com.alina.mylibrary.config.DBCheck;
 import com.alina.mylibrary.dao.Interfaces.Admin.BookUserDao;
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
+import com.alina.mylibrary.model.Address;
 import com.alina.mylibrary.model.BookUser;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
 import javassist.NotFoundException;
@@ -86,4 +88,23 @@ public class BookUserServiceImpl implements BookUserService {
         user.setNewsletter(false);
         return this.bookUserDao.updateBookUser(user);
     }
-}
+
+    @Override
+    public BookUser addAddress(Address address , BookUser bookUser) throws NotFoundException, FieldException,NullPointerException {
+       if(address.equals(null)){
+           throw new NullPointerException("Adresa este goala");
+       }
+
+
+       address.setBlock(DBCheck.Stringtify(address.getBlock()));
+        address.setCity(DBCheck.Stringtify(address.getCity()));
+        address.setProvince(DBCheck.Stringtify(address.getProvince()));
+        address.setStreetName(DBCheck.Stringtify(address.getStreetName()));
+        if(DBCheck.containNumber(address.getStreetName())){
+            throw new FieldException("Numele nu poate contine cifre","StreetName",address.getClass().getName());
+        }
+
+        bookUser.getAddresses().add(address);
+      return  this.bookUserDao.updateBookUser(bookUser);
+       }
+    }
