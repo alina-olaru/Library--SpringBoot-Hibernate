@@ -16,7 +16,7 @@ export class AccountOverviewComponent implements OnInit {
 
   public user: BookUser = null;
   private _token: String = null;
-
+  public yesNewsletter:Boolean=false;
 
   constructor(
 
@@ -38,6 +38,10 @@ export class AccountOverviewComponent implements OnInit {
     let cachedToken = this.cookieService.get("auth-token");
     if (cachedToken != null && cachedToken != "") {
       this._token = JSON.parse(cachedToken);
+    }
+
+    if(this.user.newsletter==true){
+      this.yesNewsletter=true;
     }
 
 
