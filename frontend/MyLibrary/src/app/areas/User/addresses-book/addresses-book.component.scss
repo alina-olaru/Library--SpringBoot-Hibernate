@@ -1,0 +1,130 @@
+
+@import "variables";
+@import "small";
+
+//35em is also 560px (if basefont is 16px)
+@media only screen and (min-width: 35em) {
+	@import "medium";
+}
+
+//64em is also 1028px (if basefont is 16px)
+@media only screen and (min-width: 64em) {
+  @import "large";
+}
+
+
+//titlu
+
+.account-title{
+ // font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+// font-family: Quicksand;
+font-family:Ostrich San; //Raleway;
+  color: rgb(120, 236, 145);
+}
+
+
+//buton de add
+
+.add-address-button{
+
+  background-color: rgb(120, 236, 145);
+  color:black;
+
+
+
+}
+
+
+//BOXURILE
+
+.account-overview-box{
+  background-color: rgb(227, 250, 239);
+}
+
+.account-overview-box-info{
+  color:black;
+  text-decoration: none!important;
+}
+
+
+
+
+
+
+//SCSS PENTRU BOXURI (POATE FOLOSIT PT LANDING LA PREZENTAREA CARTILOR?)
+
+
+
+
+body {
+  background: rgba(240,235,215,.5);
+}
+
+.container {
+  text-align: center;
+
+ .account-overview-box {
+    position: relative;
+    display: inline-block;
+    height: 300px;
+   // width: 460px;
+    overflow: hidden;
+    border-radius: 7px;
+    margin: 60px 15px;
+    transition: .7s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    box-shadow: 0 50px 150px -20px rgba(0, 0, 0, 0.342);
+
+    img {
+      width: 150%;
+      margin: -25% -25%;
+      min-height: 100%;
+      transition: .7s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    }
+
+    span {
+      position: absolute;
+      bottom: -20px;
+      left: 20px;
+      font-family: Arial;
+    //  color: rgba(255,255,255,0);
+
+      color:black;
+      font-size: 1.3rem;
+      transition: .8s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      background: rgba(184, 240, 212, 0.801);
+      width: 50px;
+      height: 400px;
+      transform: rotate(30deg);
+      top: -40px;
+      left: -200px;
+      transition: 1s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+      border-radius: px;
+      box-shadow: 0 20px 300px -20px rgb(75, 211, 82);
+
+      &:before {
+        content: '';
+        left: 350px;
+      }
+
+      img {
+        width: 100%;
+        margin: 0;
+        min-height: 100%;
+      }
+      span {
+      //  color: rgba(255,255,255,.8);
+      color:black;
+        bottom: 20px;
+      }
+    }
+  }
+}

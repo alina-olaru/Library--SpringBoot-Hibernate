@@ -5,10 +5,6 @@
 }
 
 
-
-
-
-
 .container{
   div{
     span{
@@ -16,10 +12,12 @@
     }
   }
   .account-overview-box {
-    width:400px;
+    width: 250px;
   }
 }
 
+
 .account-overview-box-info{
-  font-size: $BoxInfoLarge;
+  font-size: $BoxInfoSmall;
 }
+

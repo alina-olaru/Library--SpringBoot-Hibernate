@@ -1,25 +1,21 @@
 
 .account-title{
 
-  font-size:$TitlefontSizeSmall;
+  font-size:$TitlefontSizeMedium;
 }
-
-
-
-
 
 
 .container{
   div{
     span{
-      font-size:$TitlefontSizeSmall;
+      font-size:$TitlefontSizeMedium;
     }
   }
   .account-overview-box {
-    width:400px;
+    width: 380px;
   }
 }
 
 .account-overview-box-info{
-  font-size: $BoxInfoLarge;
+  font-size: $BoxInfoMedium;
 }
