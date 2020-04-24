@@ -1,3 +1,5 @@
+import { Address } from 'cluster';
+
 export class BookUser {
   userId: number;
   firstName: String;
@@ -11,6 +13,7 @@ export class BookUser {
   username: String;
   password: String;
   isEnabled:boolean;
+  addresses:Address[];
   public constructor(init?: Partial<BookUser>) {
     Object.assign(this, init);
   }
