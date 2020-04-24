@@ -1,6 +1,9 @@
 package com.alina.mylibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+@JsonFormat(shape= JsonFormat.Shape.ARRAY)
 @Entity
 @Table
 @Data
@@ -93,6 +97,9 @@ public class BookUser {
             cascade = CascadeType.MERGE)
     private List<VoucherUser> userVoucherLink;
 
+
+    @JsonProperty("addresses")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     @OneToMany(mappedBy = "userAddress",
     cascade = CascadeType.MERGE)
     private List<Address> addresses;

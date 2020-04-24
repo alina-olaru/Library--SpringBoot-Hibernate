@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { Address } from 'src/app/Models/Address';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CookieService } from 'ngx-cookie-service';
+import { BookUser } from 'src/app/Models/BookUser';
 
 
 
@@ -21,15 +23,32 @@ interface Data {
 export class AddAddressComponent implements OnInit {
 
   localForm: FormGroup;
-
+  private user: BookUser = null;
+  private _token: String = null;
 
   constructor(
     public dialogRef: MatDialogRef<AddAddressComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Data,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private addAddress:AddressServiceService
-  ) { }
+    private addAddress:AddressServiceService,
+    private cookieService: CookieService,
+  ) {
+
+
+    let cachedUser = this.cookieService.get("auth-user-info");
+    if (cachedUser != null && cachedUser != "") {
+      this.user = JSON.parse(cachedUser) as BookUser;
+    }
+
+    let cachedToken = this.cookieService.get("auth-token");
+    if (cachedToken != null && cachedToken != "")
+     {
+      this._token = JSON.parse(cachedToken);
+
+
+   }
+  }
 
   ngOnInit(): void
    {
@@ -47,11 +66,7 @@ export class AddAddressComponent implements OnInit {
       streetNumber: [this.data.model.streetNumber, Validators.required],
       floor: [this.data.model.floor, Validators.required],
       block: [this.data.model.block, Validators.required],
-      appartmentNumber: [this.data.model.appartmentNumber, Validators.required],
-      userAddress: [this.data.model.userAddress, Validators.required],
-
-
-
+      appartmentNumber: [this.data.model.appartmentNumber, Validators.required]
 
 
     });
@@ -68,7 +83,7 @@ export class AddAddressComponent implements OnInit {
       console.log(this.localForm.value);
       let model: Address = new Address(this.localForm.value);
       model.addressId = this.data.model.addressId;
-      console.log(model);
+      console.log(model+"hhhhhhhhhhhhhhhhhhhhhhhh");
       this.dialogRef.close(model);
     }
   }

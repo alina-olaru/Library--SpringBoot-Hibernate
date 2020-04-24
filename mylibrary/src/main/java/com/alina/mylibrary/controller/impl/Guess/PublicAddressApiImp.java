@@ -7,7 +7,12 @@ import com.alina.mylibrary.model.Address;
 import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.requests.UserAddressAdd;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,11 +29,16 @@ public class PublicAddressApiImp implements PublicAddressApi {
 
 
     @Override
-    public ApiResponse<BookUser> addAdress(BookUser bookUser, Address address) {
-
+    public ApiResponse<BookUser> addAdress(String body) {
         BookUser response=null;
+
         try{
-            response=this.bookUserService.addAddress(address,bookUser);
+            ObjectMapper mapper = new ObjectMapper();
+
+            UserAddressAdd obj = mapper.readValue(body, UserAddressAdd.class);
+
+            response=this.bookUserService.addAddress(obj.getAddress()
+                    , obj.getUser());
             if(response!=null){
                 return new ApiResponse<BookUser>(ApiResponseType.SUCCESS,response,"Adresa s-a adaugat cu succes!");
             }

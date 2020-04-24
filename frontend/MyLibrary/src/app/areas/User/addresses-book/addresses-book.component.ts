@@ -32,6 +32,7 @@ export class AddressesBookComponent implements OnInit {
 
 
   AddAddress(){
+    console.log("S-a intrat in functie");
     const dialogRef = this.dialog.open(AddAddressComponent, {
       width: '40%',
       data: {

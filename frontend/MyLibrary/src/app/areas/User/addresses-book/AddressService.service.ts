@@ -1,3 +1,4 @@
+import { UserAddressAdd } from './../../../Models/user/UserAddressAdd';
 import { Address } from './../../../Models/Address';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -13,7 +14,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AddressServiceService {
-  private baseUrl:string;
+  private baseUrl: string;
   private user: BookUser = null;
   private _token: String = null;
 
@@ -37,14 +38,20 @@ constructor(
   if (cachedToken != null && cachedToken != "") {
     this._token = JSON.parse(cachedToken);
   }
-  this.baseUrl="/public/api/users/address";
+  this.baseUrl = "/public/api/users/address";
+  console.log("AAAAAAAAAAAAAA"+this.user);
 
 
  }
 
-addAddress(address:Address) : Observable<ApiResponse<BookUser>>
+addAddress(address: Address) : Observable<ApiResponse<BookUser>>
 {
-  return this.httpClient.post<ApiResponse<BookUser>>(this.gloablVarService.globalUrl+this.baseUrl,[this.user,address]);
+  let body = {
+    user: this.user,
+    address
+  } as UserAddressAdd;
+  return this.httpClient.post<ApiResponse<BookUser>>(this.gloablVarService.globalUrl + this.baseUrl,
+   JSON.stringify(body));
 }
 
 }
