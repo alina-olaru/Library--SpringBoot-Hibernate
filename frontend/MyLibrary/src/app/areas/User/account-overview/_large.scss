@@ -1,11 +1,22 @@
 
-
-
-
-
-
-
 .account-title{
 
-  font-size:$TitlefontSizeLarge;
+  font-size:$TitlefontSizeSmall;
+}
+
+
+
+.container{
+  div{
+    span{
+      font-size:$TitlefontSizeSmall;
+    }
+  }
+  .account-overview-box {
+    width:400px;
+  }
+}
+
+.account-overview-box-info{
+  font-size: $BoxInfoLarge;
 }
