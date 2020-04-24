@@ -99,5 +99,8 @@ public class BookUser {
 
 
 
+    public Boolean getNews(){
+        return this.newsletter;
+    }
 }
 

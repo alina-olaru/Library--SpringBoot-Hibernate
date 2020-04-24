@@ -1,8 +1,10 @@
 package com.alina.mylibrary.service.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.BookUserDao;
+import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
 import com.alina.mylibrary.model.BookUser;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,7 @@ public class BookUserServiceImpl implements BookUserService {
         if (user == null) {
             user = this.bookUserDao.getBookUserByEmail(searchKey);
         }
-        if(user!=null){
+        if (user != null) {
             user.setPassword(null);
         }
         return user;
@@ -33,7 +35,7 @@ public class BookUserServiceImpl implements BookUserService {
 
     @Override
     public BookUser addUser(BookUser bookUser) {
-        if(bookUser==null){
+        if (bookUser == null) {
             return null;
         }
         return this.bookUserDao.addBookUser(bookUser);
@@ -41,7 +43,7 @@ public class BookUserServiceImpl implements BookUserService {
 
     @Override
     public BookUser editUser(BookUser bookUser) {
-        if(bookUser==null){
+        if (bookUser == null) {
             return null;
         }
         return this.bookUserDao.updateBookUser(bookUser);
@@ -55,5 +57,33 @@ public class BookUserServiceImpl implements BookUserService {
     @Override
     public BookUser GetUserByuserId(Integer userId) {
         return this.bookUserDao.getBookUserById(userId);
+    }
+
+    @Override
+    public BookUser yesNewsletter(Integer userId) throws NotFoundException, FieldException {
+        BookUser user = this.bookUserDao.getBookUserById(userId);
+        if (user.equals(null)) {
+            throw new NotFoundException("Nu exista user cu acest id");
+        }
+        if (user.getNews() == true) {
+            throw new FieldException("Campul este deja true,operatia nu are sens", "newsletter", user.getClass().getName());
+        }
+
+        user.setNewsletter(true);
+        return this.bookUserDao.updateBookUser(user);
+    }
+
+    @Override
+    public BookUser NoNewsletter(Integer userId) throws NotFoundException, FieldException  {
+        BookUser user = this.bookUserDao.getBookUserById(userId);
+        if (user.equals(null)) {
+            throw new NotFoundException("Nu exista user cu acest id");
+        }
+        if (user.getNews() == false) {
+            throw new FieldException("Campul este deja false,operatia nu are sens", "newsletter", user.getClass().getName());
+        }
+
+        user.setNewsletter(false);
+        return this.bookUserDao.updateBookUser(user);
     }
 }

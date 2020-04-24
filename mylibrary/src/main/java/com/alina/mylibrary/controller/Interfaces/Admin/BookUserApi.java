@@ -25,4 +25,7 @@ public interface BookUserApi {
 
     @DeleteMapping(path="/{id}")
     ApiResponse<Boolean> deleteUser(@PathVariable int id);
+
+
+
 }

@@ -2,10 +2,12 @@ package com.alina.mylibrary.controller.impl.Admin;
 
 
 import com.alina.mylibrary.controller.Interfaces.Admin.BookUserApi;
+import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
 import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.BookUser;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,4 +53,6 @@ public class BookUserApiImp implements BookUserApi {
     public ApiResponse<Boolean> deleteUser(int id) {
         return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,this.bookUserService.deleteUser(id));
     }
+
+
 }
