@@ -52,4 +52,4 @@ public class PublicAddressApiImp implements PublicAddressApi {
         return new ApiResponse<BookUser>(ApiResponseType.ERROR,response,"Nu s-a putut adauga adresa.Ne pare rau!");
 
     }
-}
+};
