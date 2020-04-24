@@ -1,1 +1,108 @@
-<p>add-address works!</p>
+
+<h1 mat-dialog-title fxLayoutAlign="center center">
+  <span >
+    Adauga adresa
+  </span>
+  </h1>
+
+  <form fxLayout="column" [formGroup]="localForm" (ngSubmit)="SubmitForm()">
+    <div mat-dialog-content class="example-container" fxLayout="row wrap" fxLayoutGap="10px">
+
+      <div class="input-row"  fxFlex="calc(50%-10px)">
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Id" formControlName="addressId">
+        </mat-form-field>
+      </div>
+    </div>
+
+
+
+  <div class="input-row" fxFlex="calc(50%-10px)">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Tara*" formControlName="country">
+      <mat-error *ngIf="form.country?.invalid">
+        Tara este obligatorie
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+
+  <div class="input-row" fxFlex="calc(50%-10px)">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Localitate*" formControlName="province">
+      <mat-error *ngIf="form.province?.invalid">
+       Localitatea este obligatorie
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+
+  <div class="input-row" fxFlex="calc(50%-10px)">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Oras*" formControlName="city">
+      <mat-error *ngIf="form.city?.invalid">
+       Orasul este obligatoriu
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+
+
+  <div class="input-row" fxFlex="calc(50%-10px)">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Nume strada*" formControlName="streetName">
+      <mat-error *ngIf="form.streetName?.invalid">
+      Datele strazii sunt obligatorii
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div class="input-row" fxFlex="calc(50%-10px)">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Numar strada*" formControlName="streetNumber">
+      <mat-error *ngIf="form.streetNumber?.invalid">
+      Datele strazii sunt obligatorii
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div class="input-row" fxFlex="calc(50%-10px)">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Etaj*" formControlName="floor">
+      <mat-error *ngIf="form.floor?.invalid">
+    Etajul este obligatoriu
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div class="input-row" fxFlex="calc(50%-10px)">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Bloc*" formControlName="block">
+      <mat-error *ngIf="form.block?.invalid">
+  Blocul este obligatoriu
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+
+  <div class="input-row" fxFlex="calc(50%-10px)">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Apartament*" formControlName="appartmentNumber">
+      <mat-error *ngIf="form.appartmentNumber?.invalid">
+ Apartamentul este obligatoriu
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+
+
+
+  </form>
