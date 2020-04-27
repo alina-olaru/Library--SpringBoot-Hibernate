@@ -12,6 +12,7 @@ import { WishlistComponent } from '../wishlist/wishlist.component';
 import { MyBooksComponent } from '../my-books/my-books.component';
 import { RecommendationsComponent } from '../recommendations/recommendations.component';
 import { MyReviewsComponent } from '../my-reviews/my-reviews.component';
+import { AddBookViaOCRComponent } from '../add-book-via-ocr/add-book-via-ocr.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MyReviewsComponent } from '../my-reviews/my-reviews.component';
     WishlistComponent,
     MyBooksComponent,
     RecommendationsComponent,
-    MyReviewsComponent
+    MyReviewsComponent,
+    AddBookViaOCRComponent
 
   ],
   imports: [
@@ -35,6 +37,10 @@ import { MyReviewsComponent } from '../my-reviews/my-reviews.component';
   ],
   exports:[
     UserMenuComponent
+  ],
+  entryComponents:[
+    AddBookViaOCRComponent
+
   ]
 })
 export class UserModule { }

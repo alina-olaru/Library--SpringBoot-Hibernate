@@ -29,6 +29,7 @@ import { ConfirmationComponent } from "./areas/confirmation/confirmation.compone
 import { BearerAuthInterceptorService } from './modules/interceptors/bearer-auth-interceptor.service';
 import { AccountOverviewComponent } from './areas/User/account-overview/account-overview.component';
 import { AddAddressComponent } from './areas/User/addresses-book/add-address/add-address.component';
+import { AddBookViaOCRComponent } from './areas/User/add-book-via-ocr/add-book-via-ocr.component';
 
 
 
@@ -40,7 +41,8 @@ import { AddAddressComponent } from './areas/User/addresses-book/add-address/add
     LoginComponent,
     ConfirmationComponent,
     AccountOverviewComponent,
-    AddAddressComponent
+    AddAddressComponent,
+    AddBookViaOCRComponent
 
   ],
   imports: [
