@@ -66,33 +66,62 @@
 
 
               <!-- CARTI DIN FIECARE CATEGORIE + REDIRECTIONARE -->
-          <div fxFlex fxLayout="column">
+          <div  fxFlex.lt-sm="100%" fxFlex fxLayout="column">
 
             <div fxFlex>
               SF
             </div>
             <div fxFlex.lt-sm="100%" fxFlex.lt-md="33%" fxFlex.lt-xl="25%" fxLayoutAlign="end center" fxLayout="row">
 
-              <div fxFlex >
+              <div fxFlex.lt-sm="100%" fxFlex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.md="space-around center" fxLayoutAlign.lt-md="space-between center" fxLayoutAlign.gt-md="space-around"  >
                 <!-- SE ADAUGA CARTILE -->
-                <div id="card-2" class="card">
-                  <figure class="card__thumbnail">
-                    <img src=SFBooks[1].imageBook>
+                <div *ngFor="let book of SFBooks" id="card-2" class="card mt-5 mt-lg-0">
+                  <figure class="card__thumbnail mt-3 mt-lg-0">
+                    <!-- <img src=book.imageBook> -->
                   </figure>
                   <div class="card__body">
-                    <h3 class="title">{{SFBooks[1].bookTitle}}</h3>
-                    <span class="subtitle">SFBooks[1].bookAuthor[1]</span>
+                    <h3 class="title">{{book.bookTitle}}</h3>
+                    <span *ngIf="book.bookAuthor[1]!=null"class="subtitle">{{book.bookAuthor[1].authorId.firstName}} {{book.bookAuthor[1].authorId.lastName}} </span>
                     <p>
                       <svg width="16" height="16" viewBox="0 0 24 24">
                         <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path>
                       </svg>
-                      {{SFBooks[1].bookPrice}}
+                      {{book.bookPrice}}
                     </p>
+                    <p  *ngIf="book.booksCategories[1]!=null">
+                      <svg width="16" height="16" viewBox="0 0 24 24">
+                        <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path>
+                      </svg>
+                     {{ book.booksCategories[1].categories.categoryTitle}}
+                    </p>
+                  </div>
+                </div> <!-- ./ Card #2   -->
+              </div>
+
+            </div>
+
+            <div fxFlex.lt-sm="100%" fxFlex.lt-md="33%" fxFlex.lt-xl="25%" fxLayoutAlign="end center" fxLayout="row">
+
+              <div fxFlex.lt-sm="100%" fxFlex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.md="space-around center" fxLayoutAlign.lt-md="space-between center" fxLayoutAlign.gt-md="space-around"  >
+                <!-- SE ADAUGA CARTILE -->
+                <div *ngFor="let book of SFBooks" id="card-2" class="card mt-5">
+                  <figure class="card__thumbnail mt-3 mt-lg-0">
+                    <!-- <img src=book.imageBook> -->
+                  </figure>
+                  <div class="card__body">
+                    <h3 class="title">{{book.bookTitle}}</h3>
+                    <span *ngIf="book.bookAuthor[1]!=null"class="subtitle">{{book.bookAuthor[1].authorId.firstName}} {{book.bookAuthor[1].authorId.lastName}} </span>
                     <p>
                       <svg width="16" height="16" viewBox="0 0 24 24">
                         <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path>
                       </svg>
-                      SFBooks[1].booksCategories[1].categoryId
+                      {{book.bookPrice}}
+                    </p>
+                    <p  *ngIf="book.booksCategories[1]!=null">
+                      <svg width="16" height="16" viewBox="0 0 24 24">
+                        <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path>
+                      </svg>
+                     {{ book.booksCategories[1].categories.categoryTitle}}
                     </p>
                   </div>
                 </div> <!-- ./ Card #2   -->
