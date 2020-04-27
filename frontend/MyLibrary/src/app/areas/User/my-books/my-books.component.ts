@@ -36,8 +36,8 @@ export class MyBooksComponent implements OnInit {
 
     if(this.isLargeScreen==true){
 
-      this.width=800;
-      this.heigth=600;
+      this.width=1100;
+      this.heigth=800;
     }
 
     if(this.isSmallScreen==true){

@@ -1,1 +1,11 @@
 @import "../user/user.module";
+
+.p-1{
+.vid{
+  background-color: red;
+  :active{
+
+    opacity: 0.1;
+  }
+}
+}

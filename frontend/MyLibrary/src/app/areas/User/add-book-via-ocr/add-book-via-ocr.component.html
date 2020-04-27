@@ -29,7 +29,7 @@
 
 
 <div [hidden]="state!=1">
-
+  <button click="selectPhoto()" mat-button class="add-address-button">Alege</button>
 <div class="container vh-100">
 	<div class="d-flex flex-column align-items-center">
 		<div class="p-1">
@@ -39,7 +39,8 @@
 			<button class="btn btn-primary" (click)="capture()">Capture Image</button>
 		</div>
 		<div class="p-1">
-			<canvas #canvas class="vid"></canvas>
+      <canvas #canvas class="vid"></canvas>
+
 		</div>
 	</div>
 </div>

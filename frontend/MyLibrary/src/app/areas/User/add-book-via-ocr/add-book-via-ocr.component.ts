@@ -5,6 +5,7 @@ import {
   ElementRef,
   Renderer2,
 } from "@angular/core";
+import { getElement, Image } from '@amcharts/amcharts4/core';
 
 @Component({
   selector: "app-add-book-via-ocr",
@@ -13,6 +14,7 @@ import {
 })
 export class AddBookViaOCRComponent implements OnInit {
   state: number;
+  images:Image[]=[];
   @ViewChild("video", { static: true }) videoElement: ElementRef;
   @ViewChild("canvas", { static: true }) canvas: ElementRef;
 
@@ -38,6 +40,11 @@ export class AddBookViaOCRComponent implements OnInit {
     //Add 'implements OnDestroy' to the class.
     this.state = 0;
     console.log(this.state + " state");
+
+    //Se opreste camera
+    this.stopCamera();
+
+
   }
 
   startCamera() {
@@ -54,6 +61,12 @@ export class AddBookViaOCRComponent implements OnInit {
     }
   }
 
+  stopCamera(){
+
+
+
+
+  }
   attachVideo(stream) {
     console.log(this.state + " state");
     this.renderer.setProperty(
@@ -61,6 +74,7 @@ export class AddBookViaOCRComponent implements OnInit {
       "srcObject",
       stream
     );
+
     this.renderer.listen(this.videoElement.nativeElement, "play", (event) => {
       this.videoHeight = this.videoElement.nativeElement.videoHeight;
       this.videoWidth = this.videoElement.nativeElement.videoWidth;
@@ -82,10 +96,19 @@ export class AddBookViaOCRComponent implements OnInit {
     this.canvas.nativeElement
       .getContext("2d")
       .drawImage(this.videoElement.nativeElement, 0, 0);
+
+
+      this.images.push(this.canvas.nativeElement.getContext('2d'));
+      console.log(this.images);
   }
 
   handleError(error) {
     console.error("EROAREEEEEEEEEEEEEEEEEE");
     console.log("Error: ", error);
+  }
+
+  selectPhoto(){
+    console.log("S-a selectat imaginea" + this.images.length+"heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeei");
+
   }
 }
