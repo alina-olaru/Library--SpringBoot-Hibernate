@@ -5,9 +5,23 @@
   <!-- <  aaaaaaadsfghfdeafdgjkgfnvddjtrgndtrj> -->
   <app-user-menu></app-user-menu>
 
-  </div>
-  <div fxFlex>
-    <!-- bbbb111111111111111111111111111111111111111111 -->
-  </div>
+
   </div>
 
+
+  <div fxLayout="column" [fxFlex.lt-lg]="60" [fxFlex.lt-md]="60" [fxFlex.lt-sm]="100" fxFlex class="mt-2">
+
+    <div fxFlex fxLayoutAlign="center start" class="account-title mt-5 mt-lg-3">
+      <p>
+       BIBLIOTECA TA PERSONALA!
+      </p>
+    </div>
+
+    <div fxFlex fxLayoutAlign="center start" class="account-title mt-5 mt-lg-4"  >
+
+      <button (click)="AddBook()" mat-button class="add-address-button">Adauga o noua carte!</button>
+       </div>
+
+
+
+  </div>

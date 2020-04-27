@@ -49,7 +49,7 @@
 
     <div fxFlex (click)="YesToNews()">
 
-      <div *ngIf="yesNewsletter" class="container">
+      <div *ngIf="!yesNewsletter" class="container">
 
         <div class="account-overview-box mt-lg-5">
 
@@ -68,7 +68,7 @@
 
     <div fxFlex (click)="NoToNews()">
 
-      <div *ngIf="!yesNewsletter" class="container">
+      <div *ngIf="yesNewsletter" class="container">
 
         <div class="account-overview-box mt-lg-5">
 

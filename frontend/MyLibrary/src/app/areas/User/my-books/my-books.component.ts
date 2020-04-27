@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyBooksComponent implements OnInit {
 
-  constructor() { }
+  UrlOCR:string;
+  constructor() {
+    this.UrlOCR="https://api.ocr.space/parse/image";
+   }
 
   ngOnInit(): void {
   }
 
+  AddBook(){
+
+  }
 }
