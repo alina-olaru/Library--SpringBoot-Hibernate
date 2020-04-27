@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-@JsonFormat(shape= JsonFormat.Shape.ARRAY)
 @Entity
 @Table
 @Data
@@ -99,7 +98,6 @@ public class BookUser {
 
 
     @JsonProperty("addresses")
-    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     @OneToMany(mappedBy = "userAddress",
     cascade = CascadeType.MERGE)
     private List<Address> addresses;

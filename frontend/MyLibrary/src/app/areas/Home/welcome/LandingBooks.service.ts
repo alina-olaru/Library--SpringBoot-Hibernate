@@ -34,7 +34,7 @@ constructor(
 GetBooksSF(){
 
 
-  return this.http.get<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.baseUrl + '/SF');
+  return this.http.get<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.baseUrl + '/all');
 
 }
 

@@ -1,6 +1,6 @@
 package com.alina.mylibrary.service.impl.Guess;
 
-import com.alina.mylibrary.dao.Interfaces.Guess.PublicBookDao;
+import com.alina.mylibrary.dao.Interfaces.Guest.PublicBookDao;
 import com.alina.mylibrary.model.Book;
 import com.alina.mylibrary.service.Interfaces.Guess.PublicBookService;
 import org.springframework.beans.factory.annotation.Autowired;

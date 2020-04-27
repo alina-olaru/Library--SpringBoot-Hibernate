@@ -96,13 +96,15 @@ public class BookUserServiceImpl implements BookUserService {
        }
 
 
-       address.setBlock(DBCheck.Stringtify(address.getBlock()));
+        address.setBlock(DBCheck.Stringtify(address.getBlock()));
         address.setCity(DBCheck.Stringtify(address.getCity()));
         address.setProvince(DBCheck.Stringtify(address.getProvince()));
         address.setStreetName(DBCheck.Stringtify(address.getStreetName()));
         if(DBCheck.containNumber(address.getStreetName())){
             throw new FieldException("Numele nu poate contine cifre","StreetName",address.getClass().getName());
         }
+
+        address.setUserAddress(bookUser);
 
         bookUser.getAddresses().add(address);
       return  this.bookUserDao.updateBookUser(bookUser);

@@ -69,6 +69,9 @@ export class AddAddressComponent implements OnInit {
       appartmentNumber: [this.data.model.appartmentNumber, Validators.required]
 
 
+
+
+
     });
 
 
@@ -83,7 +86,6 @@ export class AddAddressComponent implements OnInit {
       console.log(this.localForm.value);
       let model: Address = new Address(this.localForm.value);
       model.addressId = this.data.model.addressId;
-      console.log(model+"hhhhhhhhhhhhhhhhhhhhhhhh");
       this.dialogRef.close(model);
     }
   }

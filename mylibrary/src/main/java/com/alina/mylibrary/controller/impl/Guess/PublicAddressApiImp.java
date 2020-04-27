@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.SQLException;
 
@@ -29,16 +30,12 @@ public class PublicAddressApiImp implements PublicAddressApi {
 
 
     @Override
-    public ApiResponse<BookUser> addAdress(String body) {
+    public ApiResponse<BookUser> addAddress(@RequestBody UserAddressAdd user) {
         BookUser response=null;
 
         try{
-            ObjectMapper mapper = new ObjectMapper();
-
-            UserAddressAdd obj = mapper.readValue(body, UserAddressAdd.class);
-
-            response=this.bookUserService.addAddress(obj.getAddress()
-                    , obj.getUser());
+            response=this.bookUserService.addAddress(user.getAddress()
+                    , user.getUser());
             if(response!=null){
                 return new ApiResponse<BookUser>(ApiResponseType.SUCCESS,response,"Adresa s-a adaugat cu succes!");
             }

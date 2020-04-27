@@ -1,3 +1,4 @@
+import { LoginService } from './../../login/login.service';
 import { NewsletterServiceService } from './NewsletterService.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -27,21 +28,12 @@ export class AccountOverviewComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router,
     private toastr: ToastrService,
-    private newsletterService:NewsletterServiceService
+    private newsletterService:NewsletterServiceService,
+    private authService: LoginService
 
 )
-
   {
-    let cachedUser = this.cookieService.get("auth-user-info");
-    if (cachedUser != null && cachedUser != "") {
-      this.user = JSON.parse(cachedUser) as BookUser;
-      console.log(this.user);
-    }
-
-    let cachedToken = this.cookieService.get("auth-token");
-    if (cachedToken != null && cachedToken != "") {
-      this._token = JSON.parse(cachedToken);
-    }
+    this.user = this.authService.getUser();
 
     if(this.user.newsletter==true){
       this.yesNewsletter=true;

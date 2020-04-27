@@ -1,6 +1,5 @@
-package com.alina.mylibrary.repository.Guess;
+package com.alina.mylibrary.repository.Guest;
 
-import com.alina.mylibrary.model.Publisher;
 import com.alina.mylibrary.model.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

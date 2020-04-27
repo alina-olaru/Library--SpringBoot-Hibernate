@@ -1,3 +1,4 @@
+import { LoginService } from './../../login/login.service';
 import { ApiResponse } from './../../../Models/general/api-response';
 import { AddressServiceService } from './AddressService.service';
 import { Address } from './../../../Models/Address';
@@ -22,7 +23,8 @@ export class AddressesBookComponent implements OnInit {
     private toastr: ToastrService,
     private sanitizer: DomSanitizer,
     private loadingService: LoadingService,
-    public dialog: MatDialog,) {
+    public dialog: MatDialog,
+    private authService: LoginService) {
 
 
      }
@@ -50,7 +52,7 @@ export class AddressesBookComponent implements OnInit {
   AddConfirm(address:Address) {
     //this.loadingService.start();
 
-    this.adressService.addAddress(address).subscribe((response:ApiResponse<BookUser>) =>{
+    this.adressService.addAddress(address, this.authService.getUser()).subscribe((response:ApiResponse<BookUser>) =>{
       if (response && response.status == ApiResponseType.SUCCESS) {
         this.toastr.Toast.fire({
           title: 'Vouchcerul a fost editat cu succes!',

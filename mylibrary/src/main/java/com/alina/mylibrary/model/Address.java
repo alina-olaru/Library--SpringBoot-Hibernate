@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@JsonFormat(shape= JsonFormat.Shape.ARRAY)
 @Entity
 @Table
 @Data
@@ -19,7 +18,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class Address {
 
-    //todo? tb api uri pt adrese?
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)

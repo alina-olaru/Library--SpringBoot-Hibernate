@@ -15,6 +15,5 @@ import org.springframework.web.bind.annotation.*;
 public interface PublicAddressApi {
 
     @PostMapping
-    ApiResponse<BookUser> addAdress(@RequestBody String body);
-//    ApiResponse<BookUser> addAdress(@RequestParam BookUser bookUser, @RequestParam  Address address);
+    ApiResponse<BookUser> addAddress(@RequestBody UserAddressAdd user);
 }

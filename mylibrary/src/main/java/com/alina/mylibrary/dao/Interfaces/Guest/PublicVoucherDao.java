@@ -1,4 +1,4 @@
-package com.alina.mylibrary.dao.Interfaces.Guess;
+package com.alina.mylibrary.dao.Interfaces.Guest;
 
 
 import org.springframework.stereotype.Repository;

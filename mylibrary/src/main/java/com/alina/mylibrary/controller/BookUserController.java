@@ -3,7 +3,7 @@ package com.alina.mylibrary.controller;
 
 import com.alina.mylibrary.model.*;
 import com.alina.mylibrary.repository.Admin.*;
-import com.alina.mylibrary.repository.Guess.*;
+import com.alina.mylibrary.repository.Guest.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
