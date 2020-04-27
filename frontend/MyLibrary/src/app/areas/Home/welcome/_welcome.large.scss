@@ -20,3 +20,11 @@
   font-size:1.3rem;
   text-align: center;
 }
+
+
+.card__body{
+  top: calc(360px * .65);
+  :hover{
+    top: calc(500px * .65);
+  }
+}
