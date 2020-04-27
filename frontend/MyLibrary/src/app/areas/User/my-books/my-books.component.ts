@@ -1,3 +1,4 @@
+import { MyLibraryService } from './my-library.service';
 import { AddBookViaOCRComponent } from './../add-book-via-ocr/add-book-via-ocr.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,7 +23,8 @@ export class MyBooksComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public breakpointObserver:BreakpointObserver
+    public breakpointObserver:BreakpointObserver,
+   public libraryService:MyLibraryService
   ) {
     this.UrlOCR="https://api.ocr.space/parse/image";
     this.isSmallScreen = breakpointObserver.isMatched('(max-width: 599px)');
@@ -50,6 +52,8 @@ export class MyBooksComponent implements OnInit {
       this.width=350;
       this.heigth=440;
     }
+
+    this.GetText();
   }
 
   AddBook(){
@@ -67,7 +71,13 @@ export class MyBooksComponent implements OnInit {
       //   model: Object.assign({}, item)
       // }
     });
-
-
   }
-}
+
+    GetText(){
+      this.libraryService.GetText().subscribe((response) => {
+        console.log(response);
+      });
+
+    }
+  }
+
