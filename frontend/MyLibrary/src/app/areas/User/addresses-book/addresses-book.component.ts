@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./addresses-book.component.scss']
 })
 export class AddressesBookComponent implements OnInit {
+user:BookUser;
 
   constructor(
     public  adressService: AddressServiceService,
@@ -24,9 +25,11 @@ export class AddressesBookComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private loadingService: LoadingService,
     public dialog: MatDialog,
-    private authService: LoginService) {
+    private authService: LoginService,
+    private login:LoginService) {
 
 
+      this.user=this.login.getUser();
      }
 
   ngOnInit(): void {
