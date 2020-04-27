@@ -23,8 +23,12 @@
 
 
 .card__body{
-  top: calc(360px * .65);
-  :hover{
-    top: calc(500px * .65);
-  }
+  top: calc(430px * .65);
+
+}
+
+
+#card-2{
+width: 300px;
+height: 400px;
 }
