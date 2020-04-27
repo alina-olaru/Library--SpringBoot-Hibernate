@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddBookViaOCRComponent implements OnInit {
 
-  constructor() { }
+  state:number;
+
+
+  constructor() {
+    this.state=0;
+
+  }
 
   ngOnInit(): void {
   }
 
+
+  openCamera(){
+    this.state=1;
+    console.log("Camera will open");
+  }
 }

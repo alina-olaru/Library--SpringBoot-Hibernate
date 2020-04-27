@@ -13,6 +13,9 @@ import { MyBooksComponent } from '../my-books/my-books.component';
 import { RecommendationsComponent } from '../recommendations/recommendations.component';
 import { MyReviewsComponent } from '../my-reviews/my-reviews.component';
 import { AddBookViaOCRComponent } from '../add-book-via-ocr/add-book-via-ocr.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from 'src/app/modules/material/material.module';
 
 
 @NgModule({
@@ -32,7 +35,11 @@ import { AddBookViaOCRComponent } from '../add-book-via-ocr/add-book-via-ocr.com
     CommonModule,
     UserRoutingModule,
     SharedModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    MaterialModule,
 
   ],
   exports:[
