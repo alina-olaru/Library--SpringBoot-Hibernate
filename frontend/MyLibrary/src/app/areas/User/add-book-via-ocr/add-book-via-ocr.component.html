@@ -1,19 +1,47 @@
-<div mat-dialog-content class="h-100">
+
+
+
+<!-- STATE 0 --------------------INITIAL -->
+
+
+
+
+<div *ngIf="state==0" mat-dialog-content class="h-100">
   <div fxFlex fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-around center">
 
 
       <button mat-button class="add-address-button">Galerie</button>
 
-      <button mat-button class="add-address-button" (click)="openCamera()">Camera</button>
+      <button mat-button class="add-address-button" (click)="startCamera()">Camera</button>
 
 
 
   </div>
 </div>
 
-<!-- <div class="container mt-4" fxFlex fxLayout="row" fxLayout.lt-sm="column">
 
 
-  <div fxFlex="12.5%">
 
-  </div> -->
+
+<!-- STATE 0 --------------------UPLOAD VIA CAMERA/WEBCAM-->
+
+
+
+
+<div [hidden]="state!=1">
+
+<div class="container vh-100">
+	<div class="d-flex flex-column align-items-center">
+		<div class="p-1">
+			<video #video class="vid" autoplay></video>
+		</div>
+		<div class="pb-2">
+			<button class="btn btn-primary" (click)="capture()">Capture Image</button>
+		</div>
+		<div class="p-1">
+			<canvas #canvas class="vid"></canvas>
+		</div>
+	</div>
+</div>
+
+</div>
