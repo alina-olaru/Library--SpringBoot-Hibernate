@@ -1,5 +1,6 @@
 package com.alina.mylibrary.dao.Interfaces.Admin;
 
+import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.model.Publisher;
 import org.springframework.stereotype.Repository;
 
@@ -14,10 +15,10 @@ public interface PublisherDao {
 
     public   List< Publisher> getPublisherBypublisherTitle(String publisherTitle);
 
-    public Publisher addPublisher(Publisher publisher);
+    public Publisher addPublisher(Publisher publisher)  throws DaoException;
 
-    public Publisher updatePublisher(Publisher publisher);
+    public Publisher updatePublisher(Publisher publisher)  throws DaoException;
 
-    public Boolean deletePublusher(int publisherId);
+    public Boolean deletePublusher(int publisherId)  throws DaoException;
 
 }

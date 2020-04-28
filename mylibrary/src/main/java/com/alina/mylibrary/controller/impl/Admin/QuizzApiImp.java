@@ -2,6 +2,8 @@ package com.alina.mylibrary.controller.impl.Admin;
 
 
 import com.alina.mylibrary.controller.Interfaces.Admin.QuizzApi;
+import com.alina.mylibrary.exception.DaoException;
+import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.Quizz;
@@ -30,7 +32,15 @@ public class QuizzApiImp implements QuizzApi {
            return new ApiResponse<Boolean>(ApiResponseType.ERROR,null,"Nu s-a putut sterge din baza de date.");
        }
 
-       return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,this.quizzService.deleteQquizz(quizzId),"s-a sters cu succes din baza de date");
+       Boolean response=false;
+       try{
+           response=this.quizzService.deleteQquizz(quizzId);
+       }
+       catch(DBExceptions e){
+           return new ApiResponse<Boolean>(ApiResponseType.ERROR,null,e.getMessage());
+
+       }
+       return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,response,"s-a sters cu succes din baza de date");
     }
 
     @Override
@@ -39,7 +49,15 @@ public class QuizzApiImp implements QuizzApi {
             return new ApiResponse<Quizz>(ApiResponseType.ERROR,null,"nu s-a putut edita in baza de date");
 
         }
-            return new ApiResponse<Quizz>(ApiResponseType.SUCCESS,this.quizzService.updateQuizz(quizz),"s-a editat in baza de date cu succes");
+       Quizz response=null;
+        try{
+            response=this.quizzService.updateQuizz(quizz);
+        }catch (DBExceptions e){
+            return new ApiResponse<Quizz>(ApiResponseType.ERROR,null,e.getMessage());
+
+
+        }
+            return new ApiResponse<Quizz>(ApiResponseType.SUCCESS,response,"s-a editat in baza de date cu succes");
 
     }
 
@@ -49,7 +67,15 @@ public class QuizzApiImp implements QuizzApi {
             return new ApiResponse<Quizz>(ApiResponseType.ERROR,null,"nu s-a putut adauga in baza de date");
 
         }
-        return new ApiResponse<Quizz>(ApiResponseType.SUCCESS,this.quizzService.addQuizz(quizz),"s-a adaugat in baza de date cu succes");
+        Quizz response=null;
+        try {
+            this.quizzService.addQuizz(quizz);
+        }
+        catch (DBExceptions e){
+            return new ApiResponse<Quizz>(ApiResponseType.ERROR,null,e.getMessage());
+
+        }
+        return new ApiResponse<Quizz>(ApiResponseType.SUCCESS,response,"s-a adaugat in baza de date cu succes");
 
     }
 
