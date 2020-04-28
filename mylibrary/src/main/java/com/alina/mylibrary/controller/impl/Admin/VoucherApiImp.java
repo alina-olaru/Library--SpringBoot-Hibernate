@@ -2,6 +2,7 @@ package com.alina.mylibrary.controller.impl.Admin;
 
 
 import com.alina.mylibrary.controller.Interfaces.Admin.VoucherApi;
+import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.Voucher;
@@ -29,8 +30,14 @@ public class VoucherApiImp implements VoucherApi {
         if(voucher==null){
             return new ApiResponse<Voucher>(ApiResponseType.ERROR,null,"Voucherul nu s-a putut insera in baza de date");
         }
+        Voucher response=null;
+        try{
+            response=this.voucherService.addVoucher(voucher);
+        }catch(DBExceptions e){
+            return new ApiResponse<Voucher>(ApiResponseType.ERROR,response,e.message);
+        }
 
-        return new ApiResponse<Voucher>(ApiResponseType.SUCCESS,this.voucherService.addVoucher(voucher),"Voucherul s-a inserat cu succes");
+        return new ApiResponse<Voucher>(ApiResponseType.SUCCESS,response,"Voucherul s-a inserat cu succes");
 
     }
 
@@ -39,8 +46,14 @@ public class VoucherApiImp implements VoucherApi {
         if(voucher==null){
             return new ApiResponse<Voucher>(ApiResponseType.ERROR,null,"Voucherul nu a putut fi editat in baza de date");
         }
+        Voucher response=null;
+        try{
+            response=this.voucherService.addVoucher(voucher);
+        }catch(DBExceptions e){
+            return new ApiResponse<Voucher>(ApiResponseType.ERROR,response,e.message);
+        }
 
-        return new ApiResponse<Voucher>(ApiResponseType.SUCCESS,this.voucherService.updateVoucher(voucher),"Voucherul a fost editat cu succes");
+        return new ApiResponse<Voucher>(ApiResponseType.SUCCESS,response,"Voucherul a fost editat cu succes");
     }
 
     @Override
@@ -48,6 +61,16 @@ public class VoucherApiImp implements VoucherApi {
        if(id<1){
            return new ApiResponse<Boolean>(ApiResponseType.ERROR,null,"Voucherul nu a putut fi sters din baza de date");
        }
-       return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,this.voucherService.deleteVoucher(id),"Voucherul s-a sters din baza de date cu succes");
+
+
+       Boolean response=false;
+        try{
+            response=this.voucherService.deleteVoucher(id);
+        }catch(DBExceptions e){
+            return new ApiResponse<Boolean>(ApiResponseType.ERROR,response,e.message);
+        }
+
+
+       return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,response,"Voucherul s-a sters din baza de date cu succes");
     }
 }

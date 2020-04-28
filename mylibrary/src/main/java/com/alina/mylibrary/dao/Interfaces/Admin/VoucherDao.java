@@ -1,5 +1,6 @@
 package com.alina.mylibrary.dao.Interfaces.Admin;
 
+import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.model.Voucher;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public interface VoucherDao {
 
     List<Voucher> getVouchers();
-    Voucher addVoucher(Voucher voucher);
-    Voucher updateVoucher(Voucher voucher);
-    Boolean deleteVoucher(int id);
+    Voucher addVoucher(Voucher voucher)  throws DaoException;
+    Voucher updateVoucher(Voucher voucher)  throws DaoException;
+    Boolean deleteVoucher(int id)  throws DaoException;
 }

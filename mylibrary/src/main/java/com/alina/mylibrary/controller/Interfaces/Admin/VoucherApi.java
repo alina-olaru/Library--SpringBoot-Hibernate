@@ -19,7 +19,7 @@ public interface VoucherApi {
     ApiResponse<List<Voucher>> getVouchers();
 
     @PostMapping
-    ApiResponse<Voucher> insertVoucher(@RequestBody Voucher voucher);
+    ApiResponse<Voucher> insertVoucher(@RequestBody Voucher voucher) ;
 
     @PutMapping(path="/{id}")
     ApiResponse<Voucher> updateVoucher (@RequestBody Voucher voucher);

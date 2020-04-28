@@ -1,6 +1,7 @@
 package com.alina.mylibrary.service.Interfaces.Admin;
 
 
+import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.Voucher;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,9 @@ import java.util.List;
 public interface VoucherService {
 
     public List<Voucher> getVoucher();
-    public Voucher addVoucher(Voucher voucher);
-    public Boolean deleteVoucher(int voucherId);
-    public Voucher updateVoucher(Voucher voucher );
+    public Voucher addVoucher(Voucher voucher)  throws DBExceptions;
+    public Boolean deleteVoucher(int voucherId)  throws DBExceptions;
+    public Voucher updateVoucher(Voucher voucher )  throws DBExceptions;
 
 
 
