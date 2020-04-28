@@ -31,6 +31,7 @@ public class VoucherApiImp implements VoucherApi {
         }
 
         return new ApiResponse<Voucher>(ApiResponseType.SUCCESS,this.voucherService.addVoucher(voucher),"Voucherul s-a inserat cu succes");
+
     }
 
     @Override

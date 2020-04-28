@@ -18,6 +18,7 @@ public class WishListDaoImpl implements WishListDao {
 
     @Override
     public List<Wishlist> getAllWhislists() {
+
         return this.wishlistRepository.findAll();
     }
 

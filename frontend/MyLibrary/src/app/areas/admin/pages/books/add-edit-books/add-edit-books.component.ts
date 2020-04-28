@@ -1,28 +1,28 @@
-import { BooksCategories } from "./../../../../../Models/admin/BooksCategoriesModel";
-import { BooksAuthors } from "./../../../../../Models/admin/BooksAuthorsModel";
-import { ToastrService } from "src/app/services/toastr.service";
-import { Router } from "@angular/router";
+import { BooksCategories } from './../../../../../Models/admin/BooksCategoriesModel';
+import { BooksAuthors } from './../../../../../Models/admin/BooksAuthorsModel';
+import { ToastrService } from 'src/app/services/toastr.service';
+import { Router } from '@angular/router';
 
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component, OnInit, Inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   FormBuilder,
   Validators
-} from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Category } from "src/app/Models/admin/CategoryModel";
-import { Book } from "src/app/Models/admin/BookModel";
-import { AuthorsService } from "../../authors/authors.service";
-import { CategoryService } from "../../category/category.service";
-import { PublishersService } from "../../publishers/publishers.service";
-import { Author } from "src/app/Models/admin/AuthorModel";
-import { Publisher } from "src/app/Models/admin/PublisherModel";
-import { Subscription, Observable } from "rxjs";
-import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
-import { startWith, map } from "rxjs/operators";
-import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
-import { MatChipInputEvent } from "@angular/material/chips";
+} from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Category } from 'src/app/Models/admin/CategoryModel';
+import { Book } from 'src/app/Models/admin/BookModel';
+import { AuthorsService } from '../../authors/authors.service';
+import { CategoryService } from '../../category/category.service';
+import { PublishersService } from '../../publishers/publishers.service';
+import { Author } from 'src/app/Models/admin/AuthorModel';
+import { Publisher } from 'src/app/Models/admin/PublisherModel';
+import { Subscription, Observable } from 'rxjs';
+import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
+import { startWith, map } from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 import * as _ from 'lodash';
 interface Data {
   type: string;
@@ -33,9 +33,9 @@ interface Data {
 }
 
 @Component({
-  selector: "app-add-edit-books",
-  templateUrl: "./add-edit-books.component.html",
-  styleUrls: ["./add-edit-books.component.scss"]
+  selector: 'app-add-edit-books',
+  templateUrl: './add-edit-books.component.html',
+  styleUrls: ['./add-edit-books.component.scss']
 })
 export class AddEditBooksComponent implements OnInit {
   localForm: FormGroup;
@@ -137,7 +137,7 @@ export class AddEditBooksComponent implements OnInit {
         e => ({ categories: Object.assign({},e), booksC: {} as Book} as BooksCategories)
       );
       model.bookImage = this.base64
-        ? this.base64.replace(/^data:image\/[a-z]+;base64,/, "")
+        ? this.base64.replace(/^data:image\/[a-z]+;base64,/, '')
         : null;
       model.bookImageSrc = this.base64;
       this.dialogRef.close(model);
@@ -164,13 +164,13 @@ export class AddEditBooksComponent implements OnInit {
         this.data.publishers = _.cloneDeep(response.body);
         this.ConstructFilterOptionsPublishers();
         this.toastr.Toast.fire({
-          icon: "success",
-          title: "Datele au fost actualizate cu succes!"
+          icon: 'success',
+          title: 'Datele au fost actualizate cu succes!'
         });
       } else {
         this.toastr.Toast.fire({
-          icon: "error",
-          title: "A aparut o eroare la preluarea datelor depsre edituri!"
+          icon: 'error',
+          title: 'A aparut o eroare la preluarea datelor depsre edituri!'
         });
       }
     });
@@ -191,13 +191,13 @@ export class AddEditBooksComponent implements OnInit {
         );
         this.ConstructFilterOptionsAutori();
         this.toastr.Toast.fire({
-          icon: "success",
-          title: "Datele au fost actualizate cu succes!"
+          icon: 'success',
+          title: 'Datele au fost actualizate cu succes!'
         });
       } else {
         this.toastr.Toast.fire({
-          icon: "error",
-          title: "A aparut o eroare la preluarea datelor depsre autori!"
+          icon: 'error',
+          title: 'A aparut o eroare la preluarea datelor depsre autori!'
         });
       }
     });
@@ -221,13 +221,13 @@ export class AddEditBooksComponent implements OnInit {
         );
         this.ConstructFilterOptionsCategories();
         this.toastr.Toast.fire({
-          icon: "success",
-          title: "Datele au fost actualizate cu succes!"
+          icon: 'success',
+          title: 'Datele au fost actualizate cu succes!'
         });
       } else {
         this.toastr.Toast.fire({
-          icon: "error",
-          title: "A aparut o eroare la preluarea datelor depsre categorii!"
+          icon: 'error',
+          title: 'A aparut o eroare la preluarea datelor depsre categorii!'
         });
       }
     });
@@ -235,10 +235,10 @@ export class AddEditBooksComponent implements OnInit {
 
   ConstructFilterOptionsPublishers() {
     this.filteredOptionsPublisher = this.localForm.controls[
-      "publisher"
+      'publisher'
     ].valueChanges.pipe(
-      startWith(""),
-      map(value => (typeof value === "string" ? value : value.name)),
+      startWith(''),
+      map(value => (typeof value === 'string' ? value : value.name)),
       map(name =>
         name ? this._filterPublisher(name) : this.publishers.slice()
       )
@@ -251,7 +251,7 @@ export class AddEditBooksComponent implements OnInit {
     if (index >= 0) {
       this.authors.unshift(this.selectedAuthors[index]);
       this.selectedAuthors.splice(index, 1);
-      this.localForm.controls["local_autori"].setValue("");
+      this.localForm.controls['local_autori'].setValue('');
     }
   }
 
@@ -261,16 +261,16 @@ export class AddEditBooksComponent implements OnInit {
     if (index >= 0) {
       this.categories.unshift(this.selectedCategories[index]);
       this.selectedCategories.splice(index, 1);
-      this.localForm.controls["local_categories"].setValue("");
+      this.localForm.controls['local_categories'].setValue('');
     }
   }
 
   ConstructFilterOptionsAutori() {
     this.filteredOptionsAuthors = this.localForm.controls[
-      "local_autori"
+      'local_autori'
     ].valueChanges.pipe(
-      startWith(""),
-      map(value => (typeof value === "string" ? value : value.name)),
+      startWith(''),
+      map(value => (typeof value === 'string' ? value : value.name)),
       map(name =>
         name ? this._filterAuthors(name) : this.authors.slice()
       )
@@ -279,10 +279,10 @@ export class AddEditBooksComponent implements OnInit {
 
   ConstructFilterOptionsCategories() {
     this.filteredOptionsCategories = this.localForm.controls[
-      "local_categories"
+      'local_categories'
     ].valueChanges.pipe(
-      startWith(""),
-      map(value => (typeof value === "string" ? value : value.name)),
+      startWith(''),
+      map(value => (typeof value === 'string' ? value : value.name)),
       map(name =>
         name ? this._filterCategories(name) : this.categories.slice()
       )
@@ -311,29 +311,29 @@ export class AddEditBooksComponent implements OnInit {
     event: MatAutocompleteSelectedEvent,
     ele: HTMLInputElement
   ): void {
-    ele.value = "";
+    ele.value = '';
     ele.blur();
     this.selectedAuthors.push(event.option.value);
     let index = this.authors.indexOf(event.option.value);
     this.authors.splice(index, 1);
-    this.localForm.controls["local_autori"].setValue("");
+    this.localForm.controls['local_autori'].setValue('');
   }
 
   selectedCategory(
     event: MatAutocompleteSelectedEvent,
     ele: HTMLInputElement
   ): void {
-    ele.value = "";
+    ele.value = '';
     ele.blur();
     this.selectedCategories.push(event.option.value);
     let index = this.categories.indexOf(event.option.value);
     this.categories.splice(index, 1);
-    this.localForm.controls["local_categories"].setValue("");
+    this.localForm.controls['local_categories'].setValue('');
   }
 
   UploadFile() {
     const fileUpload = document.getElementById(
-      "modal-file-upload-input"
+      'modal-file-upload-input'
     ) as HTMLInputElement;
     fileUpload.onchange = () => {
       for (let index = 0; index < fileUpload.files.length; index++) {

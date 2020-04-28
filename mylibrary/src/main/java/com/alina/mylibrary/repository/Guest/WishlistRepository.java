@@ -1,5 +1,6 @@
 package com.alina.mylibrary.repository.Guest;
 
+import com.alina.mylibrary.exception.ServiceExceptions.RepositoryException;
 import com.alina.mylibrary.model.Book;
 import com.alina.mylibrary.model.BookUser;
 import com.alina.mylibrary.model.Wishlist;
@@ -19,9 +20,9 @@ public interface WishlistRepository extends JpaRepository<Wishlist, Integer> {
 
     //todo de implementat toate astea pt dashboard + populat cu date pt grafice
 
-    List<Wishlist> findByuserwishlist(BookUser userwishlist);
-    List<Wishlist> findBybookwishlist(Book bookwishlist);
-    Boolean deleteByBookwishlistAndUserwishlist(Book book,BookUser bookUser);
+    List<Wishlist> findByuserwishlist(BookUser userwishlist) throws RepositoryException;
+    List<Wishlist> findBybookwishlist(Book bookwishlist) throws RepositoryException;
+    Boolean deleteByBookwishlistAndUserwishlist(Book book,BookUser bookUser) throws RepositoryException;
 
 
 

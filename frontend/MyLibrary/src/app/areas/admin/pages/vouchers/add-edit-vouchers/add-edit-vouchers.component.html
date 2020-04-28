@@ -95,6 +95,19 @@
 
 
 
+  <mat-form-field fxFlex>
+    <input type="text" placeholder="Autor" matInput formControlName="author_voucher" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnAuthor">
+      <mat-option *ngFor="let option of filteredOptionsAuthors | async" [value]="option">
+        {{option.firstName}}
+      </mat-option>
+    </mat-autocomplete>
+    <!-- <mat-error *ngIf="form.publisher?.invalid">
+      Editura este obligatorie
+    </mat-error> -->
+  </mat-form-field>
+
+
 
 
 
