@@ -22,7 +22,7 @@ public class ComplaintApiImp implements ComplaintApi {
      *<p>Rest api for user complaints(from user interface) </p>
      * <p>each user can send a complaint / a message to the
      * library via this future</p>
-     * @ seet <a href=""></a>
+     *@see <a href=""></a>
      * since 3.0.0
      */
 

@@ -36,7 +36,7 @@ public class NewsletterSender {
     @Scheduled(cron = "0 45 13 ? * MON")
     public void create() {
         final LocalDateTime start = LocalDateTime.now();
-      
+
         SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
 
         List<BookUser> users=bookUserService.getUsers();

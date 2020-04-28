@@ -18,7 +18,7 @@ public class AutorApiImp  implements AuthorApi {
      *
      *
      *<p>Rest api for authors(only CRUD operations ) from admin interfaces</p>
-     * @ seet <a href="http://localhost:4200/admin/autori"></a>
+     *@see <a href="http://localhost:4200/admin/autori"></a>
      * since 1.0.0
      */
     @Autowired

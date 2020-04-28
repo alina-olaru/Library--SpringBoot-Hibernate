@@ -19,7 +19,7 @@ public class CategoryApiImp implements CategoryApi {
      *
      *
      *<p>Rest api for categories(only CRUD operations ) from admin interfaces</p>
-     * @ seet <a href="http://localhost:4200/admin/categorii"></a>
+     * @see <a href="http://localhost:4200/admin/categorii"></a>
      * since 1.0.0
      */
 

@@ -16,6 +16,18 @@ import java.util.List;
 @Component
 public class QuizzApiImp implements QuizzApi {
 
+
+    /**
+     *
+     *
+     *<p>Rest api for quizzez(only CRUD operations ) from admin interfaces</p>
+     * <p>This controller is for admin interface only</p>
+     * @see <a href="http://localhost:4200/admin/quizzuri"></a>
+     * since 1.3.0
+     */
+
+
+
     @Autowired
     private QuizzService quizzService;
 

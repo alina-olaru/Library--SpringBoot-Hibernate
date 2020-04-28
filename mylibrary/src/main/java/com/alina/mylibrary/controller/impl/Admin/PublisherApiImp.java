@@ -15,6 +15,14 @@ import java.util.List;
 public class PublisherApiImp implements PublisherApi {
 
 
+    /**
+     *
+     *
+     *<p>Rest api for publishers(only CRUD operations ) from admin interfaces</p>
+     * @see <a href="http://localhost:4200/admin/edituri"></a>
+     * since 1.0.0
+     */
+
 
     @Autowired
     private PublisherService publisherService;
