@@ -6,9 +6,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DBCheck {
+    /**
+     *
+     * <p>This is a class for checking and formating data in the proper way for our database</p>
+     * since 2.0.0
+     *
+     *
+
+     */
 
    static public String Stringtify(String name){
 
+       /**
+        * @param String name represents a string field from one of tables
+        * @return Stringtify method returns the String formated
+        * (first letter->upperCase and the rest->lowerCase)
+        * since 2.0.0
+        *
+        *
+        */
 
         String s1 = name.substring(0, 1).toUpperCase();
         String s2=name.substring(1).toLowerCase();
@@ -17,6 +33,18 @@ public class DBCheck {
     }
 
     public static boolean isValidEmailAddress(String email) {
+
+        /**
+         * @param String email represents a field from BookUser table
+         *  and it represents a way of signing in
+         * @return isValidEmailAddress method checkes if the String
+         * has email format and returns true or false
+         * since 2.0.0
+         *
+         *
+         */
+
+
         boolean result = true;
         try {
             InternetAddress emailAddr = new InternetAddress(email);
