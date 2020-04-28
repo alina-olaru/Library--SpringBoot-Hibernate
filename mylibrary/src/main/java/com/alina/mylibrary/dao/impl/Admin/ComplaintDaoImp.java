@@ -1,6 +1,7 @@
 package com.alina.mylibrary.dao.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.ComplaintDao;
+import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.model.Complaint;
 import com.alina.mylibrary.repository.Guest.ComplaintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,15 @@ public class ComplaintDaoImp implements ComplaintDao {
     }
 
     @Override
-    public Complaint addComplaint(Complaint complaint) {
+    public Complaint addComplaint(Complaint complaint)  throws DaoException {
 
         if(complaint==null) {
-            return null;
+          throw  new DaoException(1);
         }
-        return this.complaintRepository.save(complaint);
+        try {
+            return this.complaintRepository.save(complaint);
+        }catch(Exception e){
+            throw  new DaoException(1);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.alina.mylibrary.controller.impl.Admin;
 
 import com.alina.mylibrary.controller.Interfaces.Guess.ComplaintApi;
+import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.Complaint;
@@ -8,6 +9,7 @@ import com.alina.mylibrary.service.Interfaces.Admin.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -27,11 +29,28 @@ public class ComplaintApiImp implements ComplaintApi {
 
     @Override
     public ApiResponse<Complaint> insertComplaint(Complaint complaint) {
-        if(complaint==null){
-            return new ApiResponse<Complaint>(ApiResponseType.ERROR,null,"Nu s-a putut adauga plangerea,ne pare rau.");
+
+
+        Complaint response=null;
+        try {
+            response = this.complaintService.addComplaint(complaint);
+            if(response!=null){
+                return new ApiResponse<Complaint>(ApiResponseType.SUCCESS,response,"S-a adaugat plangerea cu succes");
+
+            }
+        }catch (DBExceptions e){
+            return new ApiResponse<Complaint>(ApiResponseType.ERROR,null,e.message);
+
+        }catch (SQLException e){
+            return new ApiResponse<Complaint>(ApiResponseType.ERROR,null,e.getMessage());
         }
 
-        Complaint reponse=this.complaintService.addComplaint(complaint);
-        return new ApiResponse<Complaint>(ApiResponseType.ERROR,reponse,"Cererea s-a trimis.");
+        catch (Exception e){
+            return new ApiResponse<Complaint>(ApiResponseType.ERROR,null,"Cererea nu a putut fi inregistrata");
+
+        }
+        return new ApiResponse<Complaint>(ApiResponseType.ERROR,response,"Cererea nu a putut fi inregistrata");
+
     }
-}
+    }
+

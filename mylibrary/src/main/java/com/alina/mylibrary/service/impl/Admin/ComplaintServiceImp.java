@@ -1,6 +1,8 @@
 package com.alina.mylibrary.service.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.ComplaintDao;
+import com.alina.mylibrary.exception.DaoException;
+import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.Complaint;
 import com.alina.mylibrary.service.Interfaces.Admin.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,25 @@ public class ComplaintServiceImp implements ComplaintService {
 
 
     @Override
-    public Complaint addComplaint(Complaint complaint) {
+    public Complaint addComplaint(Complaint complaint)  throws DBExceptions,Exception {
         if(complaint==null) {
-            return null;
+            throw new DBExceptions("Obiectul trimis este gol", 404, this.getClass().getName(), "Complaint obj", "Insert");
         }
-        return this.complaintDao.addComplaint(complaint);
+
+        Complaint rez=null;
+        try {
+           rez= this.complaintDao.addComplaint(complaint);
+           if(rez!=null)
+           {
+               return rez;
+           }
+        }catch (DaoException e){
+            throw new DBExceptions(e.getMessage(), 400, this.getClass().getName(), "complaint obj", "Insert");
+        }
+        catch(Exception e){
+            throw  new Exception(e.getMessage());
+        }
+        return rez;
     }
 
     @Override
