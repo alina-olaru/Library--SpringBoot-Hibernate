@@ -18,6 +18,8 @@ public class AutorApiImp  implements AuthorApi {
      *
      *
      *<p>Rest api for author(only CRUD operations ) from admin interfaces</p>
+     * @ seet <a href=""></a>
+     * since 1.0.0
      */
     @Autowired
     private AuthorService authorService;
