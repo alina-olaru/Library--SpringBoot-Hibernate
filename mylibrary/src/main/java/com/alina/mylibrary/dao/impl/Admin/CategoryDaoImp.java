@@ -1,6 +1,7 @@
 package com.alina.mylibrary.dao.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.CategoryDao;
+import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.model.Category;
 import com.alina.mylibrary.repository.Admin.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,30 +23,38 @@ public class CategoryDaoImp implements CategoryDao {
     }
 
     @Override
-    public Category addCategory(Category category) {
-        if(category!=null){
-            this.categoryRepository.save(category);
-            return category;
-        }
-        return null;
+    public Category addCategory(Category category) throws DaoException {
+       try {
+           this.categoryRepository.save(category);
+           return category;
+       }catch(Exception e){
+           throw new DaoException(1);
+       }
+
+
     }
 
     @Override
-    public Category updateCategory(Category category) {
-        if(category!=null){
+    public Category updateCategory(Category category) throws DaoException {
+        try {
             this.categoryRepository.save(category);
             return category;
+        }catch(Exception e){
+            throw new DaoException(2);
         }
-        return null;
+
+
     }
 
     @Override
-    public Boolean deleteCategory(int categoryId) {
-        if(categoryId>=1){
+    public Boolean deleteCategory(int categoryId) throws DaoException{
+    try{
             this.categoryRepository.deleteById(categoryId);
             return true;
-        }
-        return false;
+        }catch (Exception e){
+        throw new DaoException(4);
+    }
+
     }
 
     @Override
@@ -53,10 +62,15 @@ public class CategoryDaoImp implements CategoryDao {
      return this.categoryRepository.findBycategoryTitle(categoryTitle);
     }
 
-    public Boolean findById(Integer id){
-       if(this.categoryRepository.findById(id).isEmpty()){
-           return false;
+    public Boolean findById(Integer id)throws DaoException{
+        try {
+            this.categoryRepository.findById(id);
+            return true;
+        }catch (Exception e){
+            throw new DaoException(3);
+        }
+
        }
-       return true;
+
     }
-}
+
