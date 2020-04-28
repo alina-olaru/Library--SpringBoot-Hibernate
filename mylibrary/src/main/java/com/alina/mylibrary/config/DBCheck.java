@@ -75,6 +75,19 @@ public class DBCheck {
     }
 
     public static boolean containNumber(String strNum) {
+
+        /**
+         * @param String strNum represents a basic string
+         *  and it can represent a field from one of tables
+         * @return containNumber method checkes if the String
+         * contains number ( that would mean that is an invalid format)
+         * and returns true or false
+         * since 2.0.0
+         *
+         *
+         */
+
+
         if (strNum == null) {
             return false;
         }
