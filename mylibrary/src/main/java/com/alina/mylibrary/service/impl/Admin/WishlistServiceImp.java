@@ -2,6 +2,7 @@ package com.alina.mylibrary.service.impl.Admin;
 
 
 import com.alina.mylibrary.dao.Interfaces.Admin.WishListDao;
+import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.Wishlist;
 import com.alina.mylibrary.model.view.dashboard.DashboardWishAuthorCount;
@@ -54,14 +55,34 @@ public class WishlistServiceImp implements WishlistService {
             throw new DBExceptions("Obiectul trimis este gol",400,this.getClass().getName(),"wishlist obj","Insert");
 
         }
-        return this.wishListDao.addWishlist(wishlist);
+        Wishlist response=null;
+        try {
+            response = wishListDao.addWishlist(wishlist);
+        }catch(DaoException e){
+            throw new DBExceptions(e.getMessage(),400,this.getClass().getName(),"wishlist obj","insert");
+
+        }catch (Exception e){
+            throw new DBExceptions(e.getMessage(),500,this.getClass().getName(),"wishlist obj","insert");
+
+        }
+        return response;
     }
 
     @Override
     public Boolean DeleteWishlits(int wishlistId)throws DBExceptions {
         if(wishlistId==0)
             return false;
-        return wishListDao.deleteWishlist(wishlistId);
+        Boolean response=false;
+        try {
+            response = wishListDao.deleteWishlist(wishlistId);
+        }catch(DaoException e){
+            throw new DBExceptions(e.getMessage(),400,this.getClass().getName(),"wishlist obj","delete");
+
+        }catch (Exception e){
+            throw new DBExceptions(e.getMessage(),500,this.getClass().getName(),"wishlist obj","delete");
+
+        }
+        return response;
     }
 
     @Override
