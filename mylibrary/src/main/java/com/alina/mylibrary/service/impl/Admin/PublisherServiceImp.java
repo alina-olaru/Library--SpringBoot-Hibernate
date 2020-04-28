@@ -3,6 +3,8 @@ package com.alina.mylibrary.service.impl.Admin;
 
 import com.alina.mylibrary.config.DBCheck;
 import com.alina.mylibrary.dao.Interfaces.Admin.PublisherDao;
+import com.alina.mylibrary.exception.DaoException;
+import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.Publisher;
 import com.alina.mylibrary.service.Interfaces.Admin.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,11 @@ public class PublisherServiceImp implements PublisherService {
 
 
     @Override
-    public Publisher addPublisher(Publisher publisher) {
+    public Publisher addPublisher(Publisher publisher)  throws DBExceptions {
 
         if(publisher==null){
-            return null;
+            throw new DBExceptions("Obiectul trimis este gol", 404, this.getClass().getName(), "Publisher obj", "Insert");
+
         }
         List<Publisher> publishersWithSameName=this.publisherDao.getPublisherBypublisherTitle(publisher.getPublisherTitle());
                 //this.publisherRepository.findrBypublisherTitle(publisher.getPublisherTitle());
@@ -34,20 +37,33 @@ public class PublisherServiceImp implements PublisherService {
         else{
             //you add that now
             publisher.setPublisherTitle(DBCheck.Stringtify(publisher.getPublisherTitle()));
-          this.publisherDao.addPublisher(publisher);
-            return publisher;
+            Publisher response=null;
+            try {
+
+
+               response= this.publisherDao.addPublisher(publisher);
+            }catch (DaoException e){
+                throw new DBExceptions(e.getMessage(), 400, this.getClass().getName(), "publisher obj", "Insert");
+            }
+            return response;
         }
 
     }
 
     @Override
-    public Boolean deletePublisher(int publisherId) {
+    public Boolean deletePublisher(int publisherId) throws DBExceptions {
       //  this.publisherRepository.deleteP
+        try{
        return this.publisherDao.deletePublusher(publisherId);
+        }catch (DaoException e){
+            throw new DBExceptions(e.getMessage(), 400, this.getClass().getName(), "publisher obj", "delete");
+
+        }
     }
 
     @Override
-    public Publisher updatePublisher(Publisher publisher) {
+    public Publisher updatePublisher(Publisher publisher)  throws DBExceptions{
+        Publisher response=null;
         if(publisher!=null) {
             List<Publisher> publishersWithSameName=this.publisherDao.getPublisherBypublisherTitle(publisher.getPublisherTitle());
             //this.publisherRepository.findrBypublisherTitle(publisher.getPublisherTitle());
@@ -56,9 +72,19 @@ public class PublisherServiceImp implements PublisherService {
                 //you already inserted this publisher.
                 //but you can add books to it
             }
+
             else {
-                this.publisherDao.updatePublisher(publisher);
-                return publisher;
+                try{
+                response=this.publisherDao.updatePublisher(publisher);
+                if(response!=null){
+                    return response;
+                }
+                }catch (DaoException e){
+                    throw new DBExceptions(e.getMessage(), 400, this.getClass().getName(), "quizzr obj", "update");
+
+                }
+
+                return response;
             }
         }
         return null;
