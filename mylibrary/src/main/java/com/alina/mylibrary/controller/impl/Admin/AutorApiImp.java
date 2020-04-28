@@ -14,7 +14,11 @@ import java.util.List;
 @Component
 public class AutorApiImp  implements AuthorApi {
 
-
+    /**
+     *
+     *
+     *<p>Rest api for author(only CRUD operations ) from admin interfaces</p>
+     */
     @Autowired
     private AuthorService authorService;
 
