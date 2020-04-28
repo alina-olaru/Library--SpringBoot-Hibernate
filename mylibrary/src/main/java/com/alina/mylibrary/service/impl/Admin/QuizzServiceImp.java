@@ -1,6 +1,8 @@
 package com.alina.mylibrary.service.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.QuizzDao;
+import com.alina.mylibrary.exception.DaoException;
+import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.Quizz;
 import com.alina.mylibrary.service.Interfaces.Admin.QuizzService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,57 +25,80 @@ public class QuizzServiceImp implements QuizzService {
     }
 
     @Override
-    public Boolean deleteQquizz(int quizzId) {
+    public Boolean deleteQquizz(int quizzId)  throws DBExceptions {
        if(quizzId<1){
            return false;
        }
-       else{
-           this.quizzDao.deleteQquizz(quizzId);
-           return true;
-       }
+
+       Boolean b=false;
+     try {
+       b= this.quizzDao.deleteQquizz(quizzId);
+        if(b==true){
+            return true;
+        }
+     }catch (DaoException e){
+         throw new DBExceptions(e.getMessage(), 400, this.getClass().getName(), "quizzr obj", "delete");
+
+     }
+     return b;
     }
 
     @Override
-    public Quizz updateQuizz(Quizz quizz) {
+    public Quizz updateQuizz(Quizz quizz) throws DBExceptions {
         if(quizz==null){
             return null;
         }
 
         List<Quizz> quizzez=this.quizzDao.getQuizzes();
-        if(quizzez==null){
-            //then this is the first quizz you introduce in database-->so it's fine
-            return this.quizzDao.updateQuizz(quizz);
-        }
+
 
         for(Quizz q:quizzez){
             if(q.equals(quizz)){
-                return null;
+                throw new DBExceptions("Quizz deja inregistrat in baza de date", 400, this.getClass().getName(), "quizzr obj", "update");
             }
 
 
         }
-        return this.quizzDao.updateQuizz(quizz);
+        Quizz response=null;
+        try{
+            response= this.quizzDao.updateQuizz(quizz);
+            if(!response.equals(null)){
+                return response;
+            }
+        }catch (DaoException e){
+            throw new DBExceptions(e.getMessage(), 400, this.getClass().getName(), "quizzr obj", "update");
+
+        }
+
+        return response;
     }
 
     @Override
-    public Quizz addQuizz(Quizz quizz) {
+    public Quizz addQuizz(Quizz quizz) throws DBExceptions {
         if(quizz==null){
-            return null;
+            throw new DBExceptions("Obiectul trimis este gol", 404, this.getClass().getName(), "quizzr obj", "Insert");
+
         }
 
         List<Quizz> quizzez=this.quizzDao.getQuizzes();
-        if(quizzez==null){
-            //then this is the first quizz you introduce in database-->so it's fine
-            return this.quizzDao.updateQuizz(quizz);
-        }
 
         for(Quizz q:quizzez){
             if(q.equals(quizz)){
-                return null;
+                throw new DBExceptions("Quizz deja inregistrat in baza de date", 400, this.getClass().getName(), "quizzr obj", "Insert");
             }
 
 
         }
-        return this.quizzDao.updateQuizz(quizz);
+        Quizz response=null;
+        try{
+        response= this.quizzDao.addQuizz(quizz);
+        if(!response.equals(null)){
+            return response;
+        }
+        }catch (DaoException e){
+            throw new DBExceptions(e.getMessage(), 400, this.getClass().getName(), "quizzr obj", "Insert");
+
+        }
+        return response;
     }
 }
