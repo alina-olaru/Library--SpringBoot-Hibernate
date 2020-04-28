@@ -57,6 +57,18 @@ public class DBCheck {
     public static boolean isValidPhoneNumber(String s)
     {
 
+        /**
+         * @param String s represents a field from BookUser table(phoneNumber)
+         *  and it represents a not null field for signing in
+         * @return isValidPhoneNumber method checkes if the String
+         * has phone number format and returns true or false
+         * since 2.0.0
+         *
+         *
+         */
+
+
+
         Pattern p = Pattern.compile("(0/91)?[7-9][0-9]{9}");
         Matcher m = p.matcher(s);
         return (m.find() && m.group().equals(s));
