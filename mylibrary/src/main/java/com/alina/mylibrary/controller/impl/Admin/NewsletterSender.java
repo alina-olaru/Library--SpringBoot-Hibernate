@@ -15,16 +15,28 @@ import java.util.List;
 @Component
 public class NewsletterSender {
 
+    /**
+     *
+     *
+     *<p>Weekly newsletter sender service</p>
+     * <p>For users that confirm that (field is true)</p>
+     * since 2.5.0
+     */
+
     @Autowired
     EmailSenderService emailSenderService;
 
     @Autowired
     BookUserService bookUserService;
 
+    /**
+     *
+     * <h1>Using cron to send the mail every monday at 13:45</h1>
+     */
     @Scheduled(cron = "0 45 13 ? * MON")
     public void create() {
         final LocalDateTime start = LocalDateTime.now();
-        System.out.println(start+"blablablaaaa");
+      
         SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
 
         List<BookUser> users=bookUserService.getUsers();
