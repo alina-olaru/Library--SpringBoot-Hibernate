@@ -17,6 +17,16 @@ import java.util.List;
 public class BookUserApiImp implements BookUserApi {
 
 
+    /**
+     *
+     *
+     *<p>Rest api for users(only CRUD operations ) from admin interfaces</p>
+     * @ seet <a href="http://localhost:4200/admin/useri"></a>
+     * since 1.0.0
+     */
+
+
+
     @Autowired
     BookUserService bookUserService;
 

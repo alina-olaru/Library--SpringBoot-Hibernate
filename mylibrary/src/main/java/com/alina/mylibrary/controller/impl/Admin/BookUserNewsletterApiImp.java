@@ -13,6 +13,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class BookUserNewsletterApiImp implements BookUserNewsletterApi {
 
+    /**
+     *
+     *
+     *<p>Rest api for users(to disable/disable weekly mail neewsletter )
+     *  from admin interfaces</p>
+     * since 2.1.0
+     */
 
 
     @Autowired
