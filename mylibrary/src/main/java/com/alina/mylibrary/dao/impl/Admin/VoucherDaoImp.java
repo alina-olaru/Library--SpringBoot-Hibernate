@@ -39,11 +39,21 @@ public class VoucherDaoImp implements VoucherDao {
         if(voucher==null){
             throw new DaoException(2);
         }
+
+        List<Voucher> allVouchers=this.voucherRepository.findAll();
+        for(Voucher v:allVouchers){
+            if(v.equals(voucher)){
+                throw new DaoException(2);
+            }
+        }
         return this.voucherRepository.save(voucher);
     }
     @Override
     public Boolean deleteVoucher(int id) throws DaoException{
         if(id==0){
+            throw new DaoException(4);
+        }
+        if(this.voucherRepository.findById(id).equals(null)){
             throw new DaoException(4);
         }
 

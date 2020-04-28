@@ -1,6 +1,7 @@
 package com.alina.mylibrary.dao.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.WishListDao;
+import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.model.*;
 import com.alina.mylibrary.repository.Guest.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,14 @@ public class WishListDaoImpl implements WishListDao {
     }
 
     @Override
-    public Boolean deleteWishlist(int wishlistId) {
+    public Boolean deleteWishlist(int wishlistId) throws DaoException {
+        if(wishlistId==0){
+            throw new DaoException(4);
+        }
+        if(this.wishlistRepository.findById(wishlistId).equals(null)){
+            throw new DaoException(4);
+        }
+
         try {
 
             this.wishlistRepository.deleteById(wishlistId);
@@ -39,7 +47,10 @@ public class WishListDaoImpl implements WishListDao {
     }
 
     @Override
-    public Wishlist addWishlist(Wishlist wishlist) {
+    public Wishlist addWishlist(Wishlist wishlist) throws DaoException {
+        if(wishlist.equals(null)){
+            throw new DaoException(1);
+        }
         try{
             this.wishlistRepository.save(wishlist);
             return wishlist;
