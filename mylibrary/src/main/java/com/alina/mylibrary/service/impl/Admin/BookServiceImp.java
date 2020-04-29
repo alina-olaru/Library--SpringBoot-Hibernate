@@ -3,12 +3,16 @@ package com.alina.mylibrary.service.impl.Admin;
 import com.alina.mylibrary.dao.Interfaces.Admin.BookDao;
 import com.alina.mylibrary.dao.Interfaces.Admin.BooksAuthorsDao;
 import com.alina.mylibrary.dao.Interfaces.Admin.BooksCategoriesDao;
+import com.alina.mylibrary.exception.DaoException;
+import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.Book;
+import com.alina.mylibrary.model.BooksCategories;
 import com.alina.mylibrary.service.Interfaces.Admin.BookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -84,4 +88,35 @@ public class BookServiceImp implements BookService {
     public List<Book> getBook() {
        return this.bookDao.getBooks();
     }
+
+    @Override
+    public List<Book> getBookByCategory(String category) throws DBExceptions {
+        if(category.equals(null)){
+            throw new DBExceptions("Obiectul trimis este gol", 400, this.getClass().getName(), "Category obj", "get");
+
+        }
+     List<Book> books=this.bookDao.getBooks();
+     List<Book> result=new ArrayList<>();
+     for(Book b:books){
+        List<BooksCategories> bc= b.getBooksCategories();
+        for(BooksCategories y:bc){
+            if(y.getCategories().getCategoryTitle().toLowerCase().equals(category)){
+                result.add(b);
+            }
+        }
+         //for( com.alina.mylibrary.model.Category c:b){
+
+
+        // }
+     }
+     if(result.size()!=0) {
+         return result;
+     }
+     else{
+         throw new DBExceptions("Nu exista carti cu categoria data in baza de date", 404, this.getClass().getName(), "Category obj", "get");
+
+     }
+    }
+
+
 }

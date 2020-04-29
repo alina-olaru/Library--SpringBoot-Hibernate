@@ -46,7 +46,8 @@ public class QuizzServiceImp implements QuizzService {
     @Override
     public Quizz updateQuizz(Quizz quizz) throws DBExceptions {
         if(quizz==null){
-            return null;
+            throw new DBExceptions("Obiectul trimis este gol", 400, this.getClass().getName(), "QUIZZ obj", "update");
+
         }
 
         List<Quizz> quizzez=this.quizzDao.getQuizzes();
