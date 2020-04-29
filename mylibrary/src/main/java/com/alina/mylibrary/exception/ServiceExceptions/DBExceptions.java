@@ -52,4 +52,9 @@ public class DBExceptions extends Exception {
         this.field = field;
         this.operationAffected = operationAffected;
     }
+
+    @Override
+    public String getMessage() {
+        return this.message;
+    }
 }

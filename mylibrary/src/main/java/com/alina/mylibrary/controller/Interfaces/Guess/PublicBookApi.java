@@ -4,10 +4,7 @@ package com.alina.mylibrary.controller.Interfaces.Guess;
 import com.alina.mylibrary.model.ApiResponse;
 import com.alina.mylibrary.model.Book;
 import com.alina.mylibrary.model.Complaint;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +16,8 @@ public interface PublicBookApi {
 //    @GetMapping("/SF")
 //    ApiResponse<List<Book>> getBooksSF();
 
-    @GetMapping("/all")
-    ApiResponse<List<Book>> getBooks();
+    @PostMapping("/category")
+    ApiResponse<List<Book>> getBooks(@RequestParam String category);
 
 
 }
