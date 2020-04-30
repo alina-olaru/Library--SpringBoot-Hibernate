@@ -1,4 +1,4 @@
-
+<!--
 <h1 mat-dialog-title fxLayoutAlign="center center">
   <span *ngIf="data.type=='add'">
     Adauga Voucher
@@ -71,7 +71,7 @@
   <div class="input-row"  fxFlex="calc(50%-10px)">
     <mat-form-field fxFlex (click)="picker_end.open()">
       <mat-label>Data de final</mat-label>
-      <!-- {{form.voucherStartDate | date }} TODO cum fac sa pun direct data pe care ai selectat o anterior -->
+      {{form.voucherStartDate | date }} TODO cum fac sa pun direct data pe care ai selectat o anterior
       <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_end" formControlName="voucherEndDate" disabled>
       <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
       <mat-error *ngIf="form.voucherEndDate?.invalid">
@@ -102,9 +102,9 @@
         {{option.firstName}}
       </mat-option>
     </mat-autocomplete>
-    <!-- <mat-error *ngIf="form.publisher?.invalid">
+    <mat-error *ngIf="form.publisher?.invalid">
       Editura este obligatorie
-    </mat-error> -->
+    </mat-error>
   </mat-form-field>
 
 
@@ -123,10 +123,10 @@
       <mat-icon>save</mat-icon> Salveaza
     </button>
     <button mat-button color="warn" type="button" >
-      <!-- (click)="onNoClick()" -->
+      (click)="onNoClick()"
       <mat-icon>close</mat-icon> Renunta
     </button>
   </div>
 
 </form>
-
+ -->

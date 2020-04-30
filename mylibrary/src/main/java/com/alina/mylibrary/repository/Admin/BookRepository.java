@@ -33,6 +33,7 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
             " and lower(c.categoryTitle)=lower(:title)"
     )
     List<Book> getBooksByQuery(@Param("title") String title);
+    //TODO vezi de ce nu merge
 
 }
 
