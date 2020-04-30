@@ -16,4 +16,5 @@ public interface BookService {
     public boolean deleteBook(int bookId);
     public List<Book> getBook();
     public List<Book> getBookByCategory(String category) throws DBExceptions;
+    List<Book> getBooksByQuery(String title)  throws DBExceptions ,Exception;
 }

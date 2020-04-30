@@ -1,6 +1,7 @@
 package com.alina.mylibrary.dao.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.BookDao;
+import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.model.Book;
 import com.alina.mylibrary.repository.Admin.AuthorRepository;
 import com.alina.mylibrary.repository.Admin.BookRepository;
@@ -83,5 +84,14 @@ public class BookDaoImp implements BookDao {
        }
        this.bookRepository.save(book);
        return book;
+    }
+
+    @Override
+    public List<Book> getBooksByQuery(String title) throws DaoException {
+        try {
+            return this.bookRepository.getBooksByQuery(title);
+        }catch (Exception e){
+            throw new DaoException(3);
+        }
     }
 }

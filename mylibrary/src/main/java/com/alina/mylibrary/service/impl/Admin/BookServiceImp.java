@@ -8,12 +8,21 @@ import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.Book;
 import com.alina.mylibrary.model.BooksCategories;
 import com.alina.mylibrary.service.Interfaces.Admin.BookService;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import org.hibernate.SQLQuery;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Session;
 
 @Service
 public class BookServiceImp implements BookService {
@@ -118,5 +127,33 @@ public class BookServiceImp implements BookService {
      }
     }
 
+    @Override
+    public List<Book> getBooksByQuery(String title) throws DBExceptions ,Exception{
 
-}
+
+        List<Book> response=new ArrayList<>();
+        try {
+            response = this.bookDao.getBooksByQuery(title);
+            if(response.size()>0){
+                return response;
+            }
+        }catch (DaoException e){
+            throw new DBExceptions(e.getMessage(), 404, this.getClass().getName(), "Book obj", "get");
+
+        }catch (HttpMessageConversionException e){
+            throw new DBExceptions(e.getMessage() + " Problema de mapare "+e.getLocalizedMessage(), 404, this.getClass().getName(), "Book obj", "get");
+        }
+        catch (Exception e){
+            throw new DBExceptions(e.getMessage(), 404, this.getClass().getName(), "Book obj", "get");
+
+        }
+        if(response.size()==0){
+            throw new DBExceptions("Service issues(BookService)", 400, this.getClass().getName(), "Book obj", "get");
+
+        }
+        return response;
+        }
+    }
+
+
+

@@ -8,6 +8,7 @@ import com.alina.mylibrary.model.ApiResponseType;
 import com.alina.mylibrary.model.Book;
 import com.alina.mylibrary.service.Interfaces.Admin.BookService;
 import com.alina.mylibrary.service.Interfaces.Guess.PublicBookService;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,5 +37,24 @@ public class PublicBookApiImp implements PublicBookApi {
         }
         return new ApiResponse<List<Book>>(ApiResponseType.SUCCESS,result,"s-au adus cartile cu succes");
     }
+
+    @Override
+    public ApiResponse<List<Book>> test(String title) {
+
+        List<Book>response = null;
+        try {
+            response=this.bookService.getBooksByQuery(title);
+            if(response.size()>0){
+                return new ApiResponse<List<Book>>(ApiResponseType.SUCCESS,response,"Carti aduse cu succes dupa categorie");
+            }
+        }catch (DBExceptions e){
+            return new ApiResponse<List<Book>>(ApiResponseType.ERROR,null,e.message);
+        }catch (Exception e){
+            return new ApiResponse<List<Book>>(ApiResponseType.ERROR,null,e.getMessage());
+        }
+        return new ApiResponse<List<Book>>(ApiResponseType.SUCCESS,response,"totul e bine");
+    }
+
+
 }
 

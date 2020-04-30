@@ -19,5 +19,8 @@ public interface PublicBookApi {
     @PostMapping("/category")
     ApiResponse<List<Book>> getBooks(@RequestParam String category);
 
+    @GetMapping("/test")
+    ApiResponse<List<Book>> test(@RequestParam String title);
+
 
 }
