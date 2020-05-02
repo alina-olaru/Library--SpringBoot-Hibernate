@@ -39,6 +39,8 @@ public class Category {
             cascade = CascadeType.MERGE)
     private List<BooksCategories> booksCategories;
 
-
+    @OneToMany(mappedBy = "category_voucher",
+    fetch = FetchType.LAZY)
+    private List<Voucher> category_vouchers;
 
 }

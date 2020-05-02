@@ -48,7 +48,8 @@ public class Author {
         return new_author;
     }
 
-    @OneToOne(mappedBy = "author_voucher")
-    private Voucher voucher_with_an_author;
+    @OneToMany(mappedBy = "author_voucher",
+    fetch = FetchType.LAZY)
+    private List<Voucher> author_vouchers;
 
 }

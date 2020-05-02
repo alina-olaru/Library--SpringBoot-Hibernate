@@ -9,6 +9,7 @@ import com.alina.mylibrary.model.Voucher;
 import com.alina.mylibrary.service.Interfaces.Admin.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class VoucherApiImp implements VoucherApi {
     }
 
     @Override
-    public ApiResponse<Voucher> insertVoucher(Voucher voucher) {
+    public ApiResponse<Voucher> insertVoucher(@RequestBody Voucher voucher) {
         if(voucher==null){
             return new ApiResponse<Voucher>(ApiResponseType.ERROR,null,"Voucherul nu s-a putut insera in baza de date");
         }
@@ -42,7 +43,7 @@ public class VoucherApiImp implements VoucherApi {
     }
 
     @Override
-    public ApiResponse<Voucher> updateVoucher(Voucher voucher) {
+    public ApiResponse<Voucher> updateVoucher(@RequestBody Voucher voucher) {
         if(voucher==null){
             return new ApiResponse<Voucher>(ApiResponseType.ERROR,null,"Voucherul nu a putut fi editat in baza de date");
         }

@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { LoadingService } from 'src/app/modules/loading-spinner/loading.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Quizzez } from 'src/app/Models/admin/QuizzezModel';
+import { Quizz } from 'src/app/Models/admin/QuizzModel';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
 import { ApiResponse } from 'src/app/Models/general/api-response';
@@ -15,7 +15,7 @@ import { ApiResponse } from 'src/app/Models/general/api-response';
 })
 export class QuizzComponent implements OnInit {
 
-  quizzezArray: Quizzez[] = [];
+  quizzezArray: Quizz[] = [];
   Day:any;
   Month:any;
   Year:any;
@@ -39,7 +39,7 @@ export class QuizzComponent implements OnInit {
     this.loadingService.start();
     this.quizzService
       .GetQuizzez()
-      .subscribe((response: ApiResponse<Quizzez[]>) => {
+      .subscribe((response: ApiResponse<Quizz[]>) => {
         this.loadingService.stop();
 
         if (response && response.status == ApiResponseType.SUCCESS) {

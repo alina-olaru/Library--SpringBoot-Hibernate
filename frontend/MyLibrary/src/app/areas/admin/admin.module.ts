@@ -56,7 +56,7 @@ import { AddEditUserComponent } from './pages/users/add-edit-user/add-edit-user.
     FlexLayoutModule,
     MaterialModule,
     FontAwesomeModule,
-    SharedModule
+    SharedModule,
   ],
   entryComponents:[
     AddEditAuthorComponent,

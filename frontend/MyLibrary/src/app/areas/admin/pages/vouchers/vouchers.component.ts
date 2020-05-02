@@ -2,7 +2,7 @@ import { AddEditVouchersComponent } from './add-edit-vouchers/add-edit-vouchers.
 import { Voucher } from 'src/app/Models/admin/VoucherModel';
 import { MatTableDataSource } from '@angular/material/table';
 import { TitleService } from './../../services/title.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,40 +14,49 @@ import { ApiResponse } from 'src/app/Models/general/api-response';
 import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
 import { ActivatedRoute } from '@angular/router';
 import { VoucherService } from './voucher.service';
+import { Publisher } from 'src/app/Models/admin/PublisherModel';
+import { Category } from 'src/app/Models/admin/CategoryModel';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { PublishersService } from '../publishers/publishers.service';
+import { CategoryService } from '../category/category.service';
+import { AuthorsService } from '../authors/authors.service';
 
 @Component({
   selector: 'app-vouchers',
   templateUrl: './vouchers.component.html',
-  styleUrls: ['./vouchers.component.scss']
+  styleUrls: ['./vouchers.component.scss'],
 })
-export class VouchersComponent implements OnInit {
+export class VouchersComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
+  vouchers: Voucher[] = [];
+  authors: Author[] = [];
+  publishers: Publisher[] = [];
+  categories: Category[] = [];
+  _addVoucher: Voucher;
 
+  displayedColumns: string[] = [
+    'voucherId',
+    'voucherTitle',
+    'voucherDescription',
+    // 'voucherImage',
+    'voucherStartDate',
+    'voucherEndDate',
+    'voucherMaximumUses',
+    'voucherPrice',
+    'author_voucher',
+    'language',
+    'publisher_voucher',
+'voucherImage',
+    'actions',
+  ];
 
-vouchers:Voucher[]=[];
-_addVoucher:Voucher;
-displayedColumns:string[]=[
-'voucherId',
-'voucherTitle',
-'voucherDescription',
-//'voucherImage',
-'voucherStartDate',
-'voucherEndDate',
-'voucherMaximumUses',
-'voucherPrice',
-'author_voucher',
-'language',
-'publisher_voucher',
-
-'actions'
-
-];
-
-fromRedirect=false;
-dataSource:MatTableDataSource<Voucher>=new MatTableDataSource(this.vouchers);
-
+  fromRedirect = false;
+  dataSource: MatTableDataSource<Voucher> = new MatTableDataSource(
+    this.vouchers
+  );
+  subscriptions: Subscription[] = [];
 
   constructor(
     private titleService: TitleService,
@@ -56,19 +65,28 @@ dataSource:MatTableDataSource<Voucher>=new MatTableDataSource(this.vouchers);
     private loadingService: LoadingService,
     public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
-    private voucherService:VoucherService
+    private voucherService: VoucherService,
+    private authorsService: AuthorsService,
+    private categoryService: CategoryService,
+    private publishersService: PublishersService
   ) {
-
-    activatedRoute.queryParamMap.subscribe(params => {
-      if (params["action"] == "add") {
+    activatedRoute.queryParamMap.subscribe((params) => {
+      if (params['action'] == 'add') {
         this.fromRedirect = true;
       }
-      if(params["action"]==undefined && (params as any).params["action"]=="add"){
+      if (
+        params['action'] == undefined &&
+        (params as any).params['action'] == 'add'
+      ) {
         this.fromRedirect = true;
       }
     });
+  }
 
-
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((e) => {
+      e.unsubscribe();
+    });
   }
 
   ngOnInit(): void {
@@ -77,7 +95,44 @@ dataSource:MatTableDataSource<Voucher>=new MatTableDataSource(this.vouchers);
     }
     this.GetVoucher();
     this.titleService.setTitle('faMoneyBillAlt', 'Vouchere');
+    this.getAuthors();
+    this.getPublishers();
+    this.getCategories();
   }
+
+  getAuthors() {
+    const autSubscriber = this.authorsService
+      .GetAuthors()
+      .subscribe((response) => {
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.authors = response.body;
+        }
+      });
+    this.subscriptions.push(autSubscriber);
+  }
+
+  getPublishers() {
+    const pubSubscriber = this.publishersService
+      .GetPublishers()
+      .subscribe((response) => {
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.publishers = response.body;
+        }
+      });
+    this.subscriptions.push(pubSubscriber);
+  }
+
+  getCategories() {
+    const catSubscriber = this.categoryService
+      .GetCategory()
+      .subscribe((response) => {
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.categories = response.body;
+        }
+      });
+    this.subscriptions.push(catSubscriber);
+  }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -88,95 +143,96 @@ dataSource:MatTableDataSource<Voucher>=new MatTableDataSource(this.vouchers);
     this.dataSource.paginator = this.paginator;
   }
 
-  GetVoucher(){
-
+  GetVoucher() {
     this.loadingService.start();
 
     this.voucherService
-    .GetVouchers()
-    .subscribe((response : ApiResponse<Voucher[]>) => {
-      this.loadingService.stop();
+      .GetVouchers()
+      .subscribe((response: ApiResponse<Voucher[]>) => {
+        this.loadingService.stop();
 
-      if(response && response.status==ApiResponseType.SUCCESS){
-
-        if(response.body.length==0){
-          this.toastr.Toast.fire({
-            icon: 'info',
-            title: 'Nu exista vouchere in baza de date'
-          });
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          if (response.body.length == 0) {
+            this.toastr.Toast.fire({
+              icon: 'info',
+              title: 'Nu exista vouchere in baza de date',
+            });
+            return;
+          }
+          this.vouchers = response.body;
+          this.vouchers.forEach(e => {
+            if (e.voucherImage) {
+              const objectURL = 'data:image/png;base64,' + e.voucherImage;
+              e.voucherImageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
+                objectURL
+              );
+            }
+          })
+          this.updateDataSouce();
         }
-        this.vouchers=response.body;
-        this.updateDataSouce();
-      }
-    });
-
-
+      });
   }
 
-
-
-
-  AddVoucher(){
+  AddVoucher() {
     const dialogRef = this.dialog.open(AddEditVouchersComponent, {
       width: '40%',
       data: {
         type: 'add',
-        model: this._addVoucher
-      }
+        model: this._addVoucher,
+        authors: this.authors,
+        publishers: this.publishers,
+        categories: this.categories
+      },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result != undefined && result != null) {
         this.AddVoucherrConfirm(result);
       }
     });
-
   }
 
-
-  AddVoucherrConfirm(voucher:Voucher){
+  AddVoucherrConfirm(voucher: Voucher) {
     this.loadingService.start();
-    this.voucherService.AddVoucher(voucher)
-    .subscribe((response:ApiResponse<Voucher>) => {
-      this.loadingService.stop();
+    this.voucherService.AddVoucher(voucher).subscribe(
+      (response: ApiResponse<Voucher>) => {
+        this.loadingService.stop();
 
-      if (response && response.status == ApiResponseType.SUCCESS) {
-
-        this.toastr.Toast.fire({
-          title: 'Voucherul a fost adaugat cu succes',
-          icon: 'success'
-        });
-        this.vouchers.push(response.body);
-        this.updateDataSouce();
-      } else {
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.toastr.Toast.fire({
+            title: 'Voucherul a fost adaugat cu succes',
+            icon: 'success',
+          });
+          this.vouchers.push(response.body);
+          this.updateDataSouce();
+        } else {
+          this.toastr.Swal.fire(
+            'Eroare!',
+            'A aparut o eroare la adaugare, incearca din nou!',
+            'error'
+          );
+        }
+      },
+      (error) => {
         this.toastr.Swal.fire(
           'Eroare!',
           'A aparut o eroare la adaugare, incearca din nou!',
           'error'
         );
       }
-    },
-    error => {
-      this.toastr.Swal.fire(
-        'Eroare!',
-        'A aparut o eroare la adaugare, incearca din nou!',
-        'error'
-      );
-    }
-  );
-}
+    );
+  }
 
-
-  UpdateVoucher(item:Voucher){
+  UpdateVoucher(item: Voucher) {
     const dialogRef = this.dialog.open(AddEditVouchersComponent, {
       width: '40%',
       data: {
         type: 'edit',
-        model: Object.assign({}, item)
-      }
+        model: Object.assign({}, item),
+      },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result != undefined && result != null) {
         this.EditVoucherConfirm(result, item);
       }
@@ -193,7 +249,7 @@ dataSource:MatTableDataSource<Voucher>=new MatTableDataSource(this.vouchers);
         if (response && response.status == ApiResponseType.SUCCESS) {
           this.toastr.Toast.fire({
             title: 'Vouchcerul a fost editat cu succes!',
-            icon: 'success'
+            icon: 'success',
           });
 
           const idxOld = this.vouchers.indexOf(oldVoucher);
@@ -209,7 +265,7 @@ dataSource:MatTableDataSource<Voucher>=new MatTableDataSource(this.vouchers);
       });
   }
 
-  DeleteVoucher(voucher:Voucher){
+  DeleteVoucher(voucher: Voucher) {
     this.toastr.Swal.fire({
       title: 'Esti sigur ca vrei sa stergi acest bautura?',
       html: `Id: <b>${voucher.voucherId}</b> - Nume: <b>${voucher.voucherTitle}</b>`,
@@ -218,8 +274,8 @@ dataSource:MatTableDataSource<Voucher>=new MatTableDataSource(this.vouchers);
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Da',
-      cancelButtonText: 'Nu'
-    }).then(result => {
+      cancelButtonText: 'Nu',
+    }).then((result) => {
       if (result.value) {
         this.loadingService.start();
 
@@ -234,7 +290,7 @@ dataSource:MatTableDataSource<Voucher>=new MatTableDataSource(this.vouchers);
             ) {
               this.toastr.Toast.fire({
                 title: 'Voucherul a fost sters.',
-                icon: 'success'
+                icon: 'success',
               });
               this.GetVoucher();
             } else {
@@ -248,6 +304,4 @@ dataSource:MatTableDataSource<Voucher>=new MatTableDataSource(this.vouchers);
       }
     });
   }
-
-
 }

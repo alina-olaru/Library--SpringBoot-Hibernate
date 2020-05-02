@@ -1,5 +1,5 @@
 import { AddEditQuizzComponent } from './add-edit-quizz/add-edit-quizz.component';
-import { Quizzez } from './../../../../Models/admin/QuizzezModel';
+import { Quizz } from '../../../../Models/admin/QuizzModel';
 import { ActivatedRoute } from "@angular/router";
 
 import { Component, OnInit, ViewChild } from "@angular/core";
@@ -29,8 +29,8 @@ export class QuizzezComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
 
-  quizzezArray: Quizzez[] = [];
-  _addquizz: Quizzez;
+  quizzezArray: Quizz[] = [];
+  _addquizz: Quizz;
   displayedColumns: string[] = [
 
     "quizzId",
@@ -42,7 +42,7 @@ export class QuizzezComponent implements OnInit {
 
 
   ];
-  dataSource: MatTableDataSource<Quizzez> = new MatTableDataSource(
+  dataSource: MatTableDataSource<Quizz> = new MatTableDataSource(
     this.quizzezArray
   );
   fromRedirect: boolean = false;
@@ -91,7 +91,7 @@ GetQuizzezs() {
     this.loadingService.start();
     this.quizzService
       .GetQuizzez()
-      .subscribe((response: ApiResponse<Quizzez[]>) => {
+      .subscribe((response: ApiResponse<Quizz[]>) => {
         this.loadingService.stop();
 
         if (response && response.status == ApiResponseType.SUCCESS) {
@@ -108,7 +108,7 @@ GetQuizzezs() {
       });
   }
 
-DeleteQuizzez(quizz: Quizzez) {
+DeleteQuizzez(quizz: Quizz) {
     this.toastr.Swal.fire({
       title: "Esti sigur ca vrei sa stergi acest quizz?",
       html: `Id: <b>${quizz.quizzId}</b> - Nume: <b>${quizz.quizzQuestion}</b>`,
@@ -148,7 +148,7 @@ DeleteQuizzez(quizz: Quizzez) {
     });
   }
 
-EditQuizzez(item: Quizzez) {
+EditQuizzez(item: Quizz) {
     const dialogRef = this.dialog.open(AddEditQuizzComponent, {
       width: '40%',
       data: {
@@ -164,12 +164,12 @@ EditQuizzez(item: Quizzez) {
     });
   }
 
-EditQuizzezConfirm(newQuizzez: Quizzez, oldQuizzez: Quizzez) {
+EditQuizzezConfirm(newQuizzez: Quizz, oldQuizzez: Quizz) {
     this.loadingService.start();
 
     this.quizzService
       .UpdateQuizzez(newQuizzez, newQuizzez.quizzId)
-      .subscribe((response: ApiResponse<Quizzez>) => {
+      .subscribe((response: ApiResponse<Quizz>) => {
         this.loadingService.stop();
         if (response && response.status == ApiResponseType.SUCCESS) {
           this.toastr.Toast.fire({
@@ -206,10 +206,10 @@ AddQuizzez() {
     });
   }
 
-AddQuizzezConfirm(publisher: Quizzez) {
+AddQuizzezConfirm(publisher: Quizz) {
     this.loadingService.start();
     this.quizzService.AddQuizzez(publisher).subscribe(
-      (response: ApiResponse<Quizzez>) => {
+      (response: ApiResponse<Quizz>) => {
         this.loadingService.stop();
         if (response && response.status == ApiResponseType.SUCCESS) {
           this.toastr.Toast.fire({

@@ -7,48 +7,44 @@ import { timingSafeEqual } from 'crypto';
 import { Voucher } from 'src/app/Models/admin/VoucherModel';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VoucherService {
-baseUrl:string;
-
+  baseUrl: string;
 
   constructor(
-
     private http: HttpClient,
     private globalVarService: GlobalVarService
-
   ) {
-    this.baseUrl="/api/admin/voucher";
+    this.baseUrl = '/api/admin/voucher';
   }
 
-
-  GetVouchers(){
-
-
-    return this.http.get<ApiResponse<Voucher[]>>(this.globalVarService.globalUrl + this.baseUrl);
+  GetVouchers() {
+    return this.http.get<ApiResponse<Voucher[]>>(
+      this.globalVarService.globalUrl + this.baseUrl
+    );
   }
 
-
-
-  DeleteVoucher(id:number):Observable<ApiResponse<boolean>>{
-    return this.http.delete<ApiResponse<boolean>>
-    (this.globalVarService.globalUrl + this.baseUrl + "/" + id);
+  DeleteVoucher(id: number): Observable<ApiResponse<boolean>> {
+    return this.http.delete<ApiResponse<boolean>>(
+      this.globalVarService.globalUrl + this.baseUrl + '/' + id
+    );
   }
 
-
-
-  AddVoucher(voucher : Voucher){
-
-    return this.http.post<ApiResponse<Voucher>>(this.globalVarService.globalUrl + this.baseUrl , voucher);
+  AddVoucher(voucher: Voucher) {
+    return this.http.post<ApiResponse<Voucher>>(
+      this.globalVarService.globalUrl + this.baseUrl,
+      voucher
+    );
   }
 
-
-  UpdateVoucher(voucher:Voucher,id:number):Observable<ApiResponse<Voucher>>
-  {
-    return this.http.put<ApiResponse<Voucher>>(this.globalVarService.globalUrl + this.baseUrl + "/" + id , voucher);
+  UpdateVoucher(
+    voucher: Voucher,
+    id: number
+  ): Observable<ApiResponse<Voucher>> {
+    return this.http.put<ApiResponse<Voucher>>(
+      this.globalVarService.globalUrl + this.baseUrl + '/' + id,
+      voucher
+    );
   }
-
-
-
 }

@@ -5,8 +5,11 @@ import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.model.Voucher;
 import com.alina.mylibrary.repository.Admin.VoucherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.support.lob.DefaultLobHandler;
+import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.stereotype.Repository;
 
+import java.util.Base64;
 import java.util.List;
 
 
@@ -18,42 +21,52 @@ public class VoucherDaoImp implements VoucherDao {
     private VoucherRepository voucherRepository;
 
 
-
     @Override
     public List<Voucher> getVouchers() {
-
-        return this.voucherRepository.findAll();
-
+        LobHandler blobHandler = new DefaultLobHandler();
+        var x = this.voucherRepository.findAll();
+        x.forEach(voucher -> {
+            if (voucher.getVoucherImageDb() != null)
+                voucher.setVoucherImage(Base64.getEncoder().encodeToString(voucher.getVoucherImageDb()));
+        });
+        return x;
     }
 
     @Override
-    public Voucher addVoucher(Voucher voucher)  throws DaoException {
-        if(voucher==null){
+    public Voucher addVoucher(Voucher voucher) throws DaoException {
+        if (voucher == null) {
             throw new DaoException(1);
+        }
+        if(!(voucher.getVoucherImage() == null || voucher.getVoucherImage().isEmpty())){
+            voucher.setVoucherImageDb(org.apache.tomcat.util.codec.binary.Base64.decodeBase64(voucher.getVoucherImage()));
         }
         return this.voucherRepository.save(voucher);
     }
 
     @Override
     public Voucher updateVoucher(Voucher voucher) throws DaoException {
-        if(voucher==null){
+        if (voucher == null) {
             throw new DaoException(2);
         }
 
-        List<Voucher> allVouchers=this.voucherRepository.findAll();
-        for(Voucher v:allVouchers){
-            if(v.equals(voucher)){
+        List<Voucher> allVouchers = this.voucherRepository.findAll();
+        for (Voucher v : allVouchers) {
+            if (v.equals(voucher)) {
                 throw new DaoException(2);
             }
         }
+        if(!(voucher.getVoucherImage() == null || voucher.getVoucherImage().isEmpty())){
+            voucher.setVoucherImageDb(org.apache.tomcat.util.codec.binary.Base64.decodeBase64(voucher.getVoucherImage()));
+        }
         return this.voucherRepository.save(voucher);
     }
+
     @Override
-    public Boolean deleteVoucher(int id) throws DaoException{
-        if(id==0){
+    public Boolean deleteVoucher(int id) throws DaoException {
+        if (id == 0) {
             throw new DaoException(4);
         }
-        if(this.voucherRepository.findById(id).equals(null)){
+        if (this.voucherRepository.findById(id).equals(null)) {
             throw new DaoException(4);
         }
 

@@ -1,9 +1,9 @@
 import { Voucher } from './VoucherModel';
 
-export class Quizzez {
+export class Quizz {
 
 
-  public constructor(init?: Partial<Quizzez>) {
+  public constructor(init?: Partial<Quizz>) {
     Object.assign(this, init);
   }
 

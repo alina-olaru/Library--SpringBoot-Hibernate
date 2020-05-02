@@ -52,7 +52,8 @@ public class Publisher {
     }
 
 
-    @OneToOne(mappedBy = "publisher_voucher")
-    private Voucher voucher_with_a_publisher;
+    @OneToMany(mappedBy = "publisher_voucher",
+    fetch = FetchType.LAZY)
+    private List<Voucher> publisher_vouchers;
 
 }

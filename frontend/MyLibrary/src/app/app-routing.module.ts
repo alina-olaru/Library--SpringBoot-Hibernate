@@ -1,63 +1,57 @@
-import { ConfirmationComponent } from './areas/confirmation/confirmation.component';
-import { WelcomeComponent } from '../app/areas/Home/welcome/welcome.component';
-import { LoginComponent } from './areas/login/login.component';
+import { UserGuardService } from './modules/guards/user-guard.service';
+import { ConfirmationComponent } from "./areas/confirmation/confirmation.component";
+import { WelcomeComponent } from "../app/areas/Home/welcome/welcome.component";
+import { LoginComponent } from "./areas/login/login.component";
 import { RegisterComponent } from "./areas/register/register.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { AdminModule } from './areas/admin/admin.module';
-import { AdminGuardService } from './modules/guards/admin-guard.service';
-import { HomeModule } from './areas/Home/home/home.module';
-import { UserModule } from './areas/User/user/user.module';
+import { AdminModule } from "./areas/admin/admin.module";
+import { AdminGuardService } from "./modules/guards/admin-guard.service";
+import { HomeModule } from "./areas/Home/home/home.module";
+import { UserModule } from "./areas/User/user/user.module";
 const routes: Routes = [
   {
     path: "",
     redirectTo: "home",
-    pathMatch: "full"
+    pathMatch: "full",
   },
   {
     path: "register",
-    component: RegisterComponent
+    component: RegisterComponent,
   },
   {
     path: "login",
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
-    path:"confirm-account",
-    component:ConfirmationComponent
+    path: "confirm-account",
+    component: ConfirmationComponent,
   },
   {
-    path: 'admin',
-    loadChildren: () => AdminModule
+    path: "admin",
+    loadChildren: () => AdminModule,
+    canActivate: [AdminGuardService],
+    canActivateChild: [AdminGuardService],
   },
-  // {
-  //   path: "",
-  //   redirectTo: "/register",
-  //   pathMatch: "full"
-  // },
-  // {
-  //   path: "**",
-  //   component: RegisterComponent
-  // },
   {
-    path: 'home',
+    path: "home",
     loadChildren: () => HomeModule
-    //canActivate: [AdminGuardService],
-  // canActivateChild: [AdminGuardService]
   },
   {
-    path:'cont',
-    loadChildren: () => UserModule
+    path: "cont",
+    loadChildren: () => UserModule,
+    canActivate: [UserGuardService],
+    canActivateChild: [UserGuardService],
   },
 
   {
     path: "**",
-    component: WelcomeComponent
-  }
+    component: WelcomeComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

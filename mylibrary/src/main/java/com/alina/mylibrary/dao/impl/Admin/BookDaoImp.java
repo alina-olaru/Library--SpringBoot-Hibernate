@@ -88,10 +88,12 @@ public class BookDaoImp implements BookDao {
 
     @Override
     public List<Book> getBooksByQuery(String title) throws DaoException {
-        try {
-            return this.bookRepository.getBooksByQuery(title);
-        }catch (Exception e){
-            throw new DaoException(3);
-        }
+//        try {
+//            return this.bookRepository.getBooksByQuery(title);
+//        }catch (Exception e){
+//            throw new DaoException(3);
+//        }
+
+        return new ArrayList<>();
     }
 }

@@ -39,7 +39,7 @@ public class JwtAuthenticationController {
     private BookUserService bookUserService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ApiResponse<JwtResponse> generateAuthenticationToken(@RequestBody JwtRequest authenticationRequest) {
+        public ApiResponse<JwtResponse> generateAuthenticationToken(@RequestBody JwtRequest authenticationRequest) {
         try {
             authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 

@@ -35,7 +35,7 @@
       <mat-form-field fxFlex>
         <input matInput placeholder="Stoc*" formControlName="numberOfBoooks">
         <mat-error *ngIf="form.numberOfBoooks?.invalid">
-        Numarul de carti este obligatoriu
+          Numarul de carti este obligatoriu
         </mat-error>
       </mat-form-field>
     </div>
@@ -44,15 +44,6 @@
     <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
         <input matInput placeholder="Dimensiuni" formControlName="bookDimension">
-      </mat-form-field>
-    </div>
-
-
-
-
-    <div class="input-row" fxFlex="calc(50%-10px)">
-      <mat-form-field fxFlex>
-        <input matInput placeholder="Descriere" formControlName="bookDescription">
       </mat-form-field>
     </div>
 
@@ -83,7 +74,7 @@
 
     <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
-        <input matInput placeholder="Tip coperta"formControlName="coverType">
+        <input matInput placeholder="Tip coperta" formControlName="coverType">
       </mat-form-field>
     </div>
 
@@ -91,7 +82,7 @@
 
     <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
-        <input matInput placeholder="Greutate"formControlName="bookWeight">
+        <input matInput placeholder="Greutate" formControlName="bookWeight">
       </mat-form-field>
     </div>
 
@@ -99,15 +90,20 @@
 
     <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
-        <input matInput placeholder="Pret"formControlName="bookPrice">
+        <input matInput placeholder="Pret" formControlName="bookPrice">
         <mat-error *ngIf="form.bookPrice?.invalid">
           Pretul este obligatoriu
-          </mat-error>
+        </mat-error>
       </mat-form-field>
     </div>
 
 
-
+    <div class="input-row" fxFlex="100%">
+      <mat-form-field fxFlex>
+        <textarea rows="3" matInput placeholder="Descriere" formControlName="bookDescription">
+          </textarea>
+      </mat-form-field>
+    </div>
 
 
 
@@ -145,8 +141,8 @@
             {{autor.firstName}} {{autor.lastName}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
-          <input placeholder="Autori..." #localAuthorInput formControlName="local_autori" [matAutocomplete]="auto_authors"
-            [matChipInputFor]="chipList_autori">
+          <input placeholder="Autori..." #localAuthorInput formControlName="local_autori"
+            [matAutocomplete]="auto_authors" [matChipInputFor]="chipList_autori">
         </mat-chip-list>
         <mat-autocomplete #auto_authors="matAutocomplete" (optionSelected)="selectedAuthor($event, localAuthorInput)">
           <mat-option *ngFor="let author of filteredOptionsAuthors | async" [value]="author">
@@ -175,10 +171,11 @@
             {{cat.categoryTitle}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
-          <input placeholder="Categorii..." #localCategoriesInput formControlName="local_categories" [matAutocomplete]="auto_categories"
-            [matChipInputFor]="chipList_categories">
+          <input placeholder="Categorii..." #localCategoriesInput formControlName="local_categories"
+            [matAutocomplete]="auto_categories" [matChipInputFor]="chipList_categories">
         </mat-chip-list>
-        <mat-autocomplete #auto_categories="matAutocomplete" (optionSelected)="selectedCategory($event, localCategoriesInput)">
+        <mat-autocomplete #auto_categories="matAutocomplete"
+          (optionSelected)="selectedCategory($event, localCategoriesInput)">
           <mat-option *ngFor="let cat of filteredOptionsCategories | async" [value]="cat">
             {{cat.categoryTitle}}
           </mat-option>
@@ -200,9 +197,10 @@
     <div class="input-row" fxFlex>
       <mat-form-field fxFlex class="file-field">
         <mat-icon matPrefix matTooltip="Sterge fisier!" (click)="DeleteFile()">close</mat-icon>
-        <input type="tel" matInput disabled placeholder="Imagine bautura" [(ngModel)]="fileName" [ngModelOptions]="{standalone: true}">
+        <input type="tel" matInput disabled placeholder="Imagine bautura" [(ngModel)]="fileName"
+          [ngModelOptions]="{standalone: true}">
         <mat-icon matSuffix (click)="UploadFile()" matTooltip="Incarca fisier!">file_upload</mat-icon>
-        <input type="file" id="modal-file-upload-input" accept="image/*" style="visibility: hidden;display: none;" >
+        <input type="file" id="modal-file-upload-input" accept="image/*" style="visibility: hidden;display: none;">
       </mat-form-field>
     </div>
     <div class="input-row" [hidden]="!fileName">

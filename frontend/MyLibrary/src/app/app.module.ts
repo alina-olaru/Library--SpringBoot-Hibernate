@@ -50,7 +50,6 @@ import { AddAddressComponent } from './areas/User/addresses-book/add-address/add
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     MaterialModule,
     SharedModule,
     FontAwesomeModule,

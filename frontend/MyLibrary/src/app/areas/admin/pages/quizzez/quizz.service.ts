@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { GlobalVarService } from 'src/app/services/global-var.service';
 import { ApiResponse } from 'src/app/Models/general/api-response';
 import { Observable } from 'rxjs';
-import { Quizzez } from 'src/app/Models/admin/QuizzezModel';
+import { Quizz } from 'src/app/Models/admin/QuizzModel';
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class QuizzService {
 
 
   GetQuizzez() {
-    return this.http.get<ApiResponse<Quizzez[]>>(
+    return this.http.get<ApiResponse<Quizz[]>>(
       this.globalVarService.globalUrl + this.baseUrl
     );
   }
@@ -38,15 +39,15 @@ export class QuizzService {
     );
   }
 
-  AddQuizzez(publisher: Quizzez): Observable<ApiResponse<Quizzez>> {
-    return this.http.post<ApiResponse<Quizzez>>(
+  AddQuizzez(publisher: Quizz): Observable<ApiResponse<Quizz>> {
+    return this.http.post<ApiResponse<Quizz>>(
       this.globalVarService.globalUrl + this.baseUrl,
       publisher
     );
   }
 
-  UpdateQuizzez(publisher:Quizzez ,id: number): Observable<ApiResponse<Quizzez>> {
-    return this.http.put<ApiResponse<Quizzez>>(
+  UpdateQuizzez(publisher:Quizz ,id: number): Observable<ApiResponse<Quizz>> {
+    return this.http.put<ApiResponse<Quizz>>(
       this.globalVarService.globalUrl + this.baseUrl + "/" + id,
       publisher
     );

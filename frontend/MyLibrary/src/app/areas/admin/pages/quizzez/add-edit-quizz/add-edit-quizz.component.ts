@@ -1,7 +1,5 @@
 import { ToastrService } from './../../../../../services/toastr.service';
-import { Quizzez } from './../../../../../Models/admin/QuizzezModel';
-
-
+import { Quizz } from '../../../../../Models/admin/QuizzModel';
 
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
@@ -18,21 +16,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 interface Data {
   type: string;
-  model: Quizzez;
+  model: Quizz;
 }
-
-
-
 @Component({
   selector: 'app-add-edit-quizz',
   templateUrl: './add-edit-quizz.component.html',
   styleUrls: ['./add-edit-quizz.component.scss']
 })
 export class AddEditQuizzComponent implements OnInit {
-
-
-
-
   localForm: FormGroup;
   myControl = new FormControl();
   minDate: Date;
@@ -56,7 +47,7 @@ export class AddEditQuizzComponent implements OnInit {
 
 
     if (this.data.model == null || this.data.model == undefined) {
-      this.data.model = new Quizzez();
+      this.data.model = new Quizz();
   }
     this.localForm = this.formBuilder.group({
       quizzId: [{ value: this.data.model.quizzId, disabled: true }],
@@ -102,7 +93,7 @@ export class AddEditQuizzComponent implements OnInit {
   SubmitForm() {
     if (this.localForm.valid) {
       console.log(this.localForm.value);
-      const model: Quizzez = new Quizzez(this.localForm.value);
+      const model: Quizz = new Quizz(this.localForm.value);
       model.quizzId = this.data.model.quizzId;
       this.dialogRef.close(model);
     }

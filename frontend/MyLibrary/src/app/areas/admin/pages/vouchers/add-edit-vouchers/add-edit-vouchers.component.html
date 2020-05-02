@@ -1,22 +1,18 @@
-<!--
 <h1 mat-dialog-title fxLayoutAlign="center center">
   <span *ngIf="data.type=='add'">
-    Adauga Voucher
+    Adauga voucher
   </span>
   <span *ngIf="data.type=='edit'">
-    Editeaza
+    Editeaza voucher
   </span>
 </h1>
 <form fxLayout="column" [formGroup]="localForm" (ngSubmit)="SubmitForm()">
   <div mat-dialog-content class="example-container" fxLayout="row wrap" fxLayoutGap="10px">
-
     <div class="input-row" *ngIf="data.type=='edit'" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
         <input matInput placeholder="Id" formControlName="voucherId">
       </mat-form-field>
     </div>
-
-
     <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
         <input matInput placeholder="Titlu*" formControlName="voucherTitle">
@@ -25,20 +21,9 @@
         </mat-error>
       </mat-form-field>
     </div>
-
-
-    <div class="input-row" fxFlex="calc(100%-10px)">
-      <mat-form-field fxFlex>
-        <textarea rows=3 matInput placeholder="Descriere" formControlName="voucherDescription"></textarea>
-
-      </mat-form-field>
-    </div>
-
-
-
     <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
-        <input matInput placeholder="Nr de utilizari*" formControlName="voucherMaximumUses">
+        <input matInput type="number" placeholder="Numar maxim utilizari*" formControlName="voucherMaximumUses">
         <mat-error *ngIf="form.voucherMaximumUses?.invalid">
           Numarul maxim de utilizari este obligatoriu
         </mat-error>
@@ -48,85 +33,119 @@
 
     <div class="input-row" fxFlex="calc(50%-10px)">
       <mat-form-field fxFlex>
-        <input matInput placeholder="Valoare discount*" formControlName="voucherPrice">
+        <input matInput type="number" placeholder="Valoare*" formControlName="voucherPrice">
         <mat-error *ngIf="form.voucherPrice?.invalid">
-        Valoarea discountului este obligatorie
+        Valoarea voucherului este obligatoriu
         </mat-error>
       </mat-form-field>
     </div>
 
+
     <div class="input-row" fxFlex="calc(50%-10px)">
-    <mat-form-field fxFlex (click)="picker_start.open()">
-      <mat-label>Data de inceput</mat-label>
-      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_start" formControlName="voucherStartDate" disabled>
-      <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
-      <mat-error *ngIf="form.voucherStartDate?.invalid">
-       Data este obligatorie
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Limba" formControlName="language">
+      </mat-form-field>
+    </div>
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <mat-label>Data de inceput*</mat-label>
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_startt" formControlName="voucherStartDate"
+          disabled>
+        <mat-datepicker-toggle matSuffix [for]="picker_startt"></mat-datepicker-toggle>
+        <mat-error *ngIf="form.voucherStartDate?.invalid">
+          Data de inceput este obligatorie
         </mat-error>
-      <mat-datepicker #picker_start disabled="false"></mat-datepicker>
-    </mat-form-field>
-  </div>
+        <mat-datepicker #picker_startt disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
 
 
-  <div class="input-row"  fxFlex="calc(50%-10px)">
-    <mat-form-field fxFlex (click)="picker_end.open()">
-      <mat-label>Data de final</mat-label>
-      {{form.voucherStartDate | date }} TODO cum fac sa pun direct data pe care ai selectat o anterior
-      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_end" formControlName="voucherEndDate" disabled>
-      <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
-      <mat-error *ngIf="form.voucherEndDate?.invalid">
-        Data este obligatorie
+
+    <div class="input-row" fxFlex="calc(50%-10px)">
+      <mat-form-field fxFlex>
+        <mat-label>Data de final*</mat-label>
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_endd" formControlName="voucherEndDate"
+          disabled>
+        <mat-datepicker-toggle matSuffix [for]="picker_endd"></mat-datepicker-toggle>
+        <mat-error *ngIf="form.voucherEndDate?.invalid">
+          Data de sfarsit este obligatorie
         </mat-error>
-      <mat-datepicker #picker_end disabled="false"></mat-datepicker>
-    </mat-form-field>
+        <mat-datepicker #picker_endd disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-row" fxFlex="100%">
+      <mat-form-field fxFlex>
+        <textarea rows="3" matInput placeholder="Descriere" formControlName="voucherDescription">
+          </textarea>
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-row" fxFlex="100%" fxLayout="row">
+      <mat-form-field fxFlex>
+        <input type="text" placeholder="Editura" matInput formControlName="publisher_voucher" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnPublisher">
+          <mat-option *ngFor="let option of filteredOptionsPublisher | async" [value]="option">
+            {{option.publisherTitle}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <div class="input-row" fxFlex="100%" fxLayout="row">
+      <mat-form-field fxFlex>
+        <input type="text" placeholder="Categorie" matInput formControlName="category_voucher" [matAutocomplete]="auto_category">
+        <mat-autocomplete #auto_category="matAutocomplete" [displayWith]="displayFnCategory">
+          <mat-option *ngFor="let option of filteredOptionsCategory | async" [value]="option">
+            {{option.categoryTitle}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-row" fxFlex="100%" fxLayout="row">
+      <mat-form-field fxFlex>
+        <input type="text" placeholder="Autor" matInput formControlName="author_voucher" [matAutocomplete]="auto_authors">
+        <mat-autocomplete #auto_authors="matAutocomplete" [displayWith]="displayFnAuthor">
+          <mat-option *ngFor="let option of filteredOptionsAuthor | async" [value]="option">
+            {{option.firstName}} {{option.lastName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-row" fxFlex="100%">
+      <mat-form-field fxFlex class="file-field">
+        <mat-icon matPrefix matTooltip="Sterge fisier!" (click)="DeleteFile()">close</mat-icon>
+        <input type="tel" matInput disabled placeholder="Imagine bautura" [(ngModel)]="fileName" [ngModelOptions]="{standalone: true}">
+        <mat-icon class="upload-file-icon" matSuffix (click)="UploadFile()" matTooltip="Incarca fisier!">file_upload</mat-icon>
+        <input type="file" id="modal-file-upload-input" accept="image/*" style="visibility: hidden;display: none;" >
+      </mat-form-field>
+    </div>
+
+    <div class="input-row" [hidden]="!fileName" fxFlex="100%" fxLayoutAlign="center center">
+        <img [src]="this.data.model.voucherImageSrc"
+        [hidden]="!this.data.model.voucherImageSrc"
+        class="voucher-image">
+    </div>
+
+
   </div>
-  <div fxFlex></div>
-
-
-
-  <div class="input-row" fxFlex="calc(50%-10px)">
-    <mat-form-field fxFlex>
-      <input matInput placeholder="Limba*" formControlName="language">
-
-    </mat-form-field>
-  </div>
-
-
-
-
-
-  <mat-form-field fxFlex>
-    <input type="text" placeholder="Autor" matInput formControlName="author_voucher" [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnAuthor">
-      <mat-option *ngFor="let option of filteredOptionsAuthors | async" [value]="option">
-        {{option.firstName}}
-      </mat-option>
-    </mat-autocomplete>
-    <mat-error *ngIf="form.publisher?.invalid">
-      Editura este obligatorie
-    </mat-error>
-  </mat-form-field>
-
-
-
-
-
-
-
-
-  </div>
-  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center" >
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
     <button mat-button color="primary" type="submit" cdkFocusInitial *ngIf="data.type=='add'">
       <mat-icon>add</mat-icon> Adauga
     </button>
     <button mat-button color="primary" type="submit" cdkFocusInitial *ngIf="data.type=='edit'">
       <mat-icon>save</mat-icon> Salveaza
     </button>
-    <button mat-button color="warn" type="button" >
-      (click)="onNoClick()"
+    <button mat-button color="warn" type="button" (click)="onNoClick()">
       <mat-icon>close</mat-icon> Renunta
     </button>
   </div>
 
 </form>
- -->

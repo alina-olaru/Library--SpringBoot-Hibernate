@@ -1,5 +1,6 @@
 package com.alina.mylibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
 
 @Entity
 @Table
@@ -37,8 +39,10 @@ public class Voucher {
 
     @Column
     @Lob
-    private Blob voucherImage;
+    @JsonIgnore
+    private byte[] voucherImageDb;
 
+    private String voucherImage;
 
     @Column
     @NotNull
@@ -65,20 +69,24 @@ public class Voucher {
     private String language;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_AUTHORR__ID"))
     private Author author_voucher;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_PUBLISHERR__ID"))
     private Publisher publisher_voucher;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_CATEGORYY__ID"))
+    private com.alina.mylibrary.model.Category category_voucher;
+
 
     @OneToMany(mappedBy = "vouchers",
-            cascade = CascadeType.MERGE)
+    fetch = FetchType.LAZY)
     private List<VoucherUser> userVoucherLink;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_QUIZZ_ID"))
     private Quizz quizzez;
 }

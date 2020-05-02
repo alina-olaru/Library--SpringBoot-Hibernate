@@ -87,6 +87,13 @@
       <mat-cell mat-cell *matCellDef="let element"> {{element.publisher_voucher}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="voucherImage">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Imagine </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+      <img class="image-voucher" *ngIf="element.voucherImageSrc"
+      [src]="element.voucherImageSrc">
+       </mat-cell>
+    </ng-container>
 
 
 

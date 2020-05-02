@@ -43,23 +43,23 @@ public class BookUser {
     @Email
     private String emailAdress;
 
-    @Column(length = 11,unique = true)
+    @Column(length = 11, unique = true)
     @NotNull
     private String phoneNumber;
 
     @Column
     @NotNull
-    private boolean newsletter=false;
+    private boolean newsletter = false;
 
 
     @Column
     @NotNull
-    private boolean adminPrivilege=false;
+    private boolean adminPrivilege = false;
 
 
     @Column
     @NotNull
-    private boolean userPrivilege =false;
+    private boolean userPrivilege = false;
 
     @Column
     private String password;
@@ -68,28 +68,33 @@ public class BookUser {
     private String username;
 
     @Column
-    private Boolean blocked=false;
+    private Boolean blocked = false;
 
     @Column
     private Boolean isEnabled;
 
     @OneToMany(mappedBy = "user",
-    cascade = CascadeType.MERGE)
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY)
     private List<PersonalBook> persBooks;
 
     @OneToMany(mappedBy = "userwishlist",
-    cascade = CascadeType.MERGE)
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Wishlist> wishBooks;
 
     @OneToMany(mappedBy = "ordersUser",
-    cascade = CascadeType.MERGE)
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY)
     private List<BookOrder> ordersbyuser;
 
-    @OneToMany(mappedBy = "com")
+    @OneToMany(mappedBy = "com",
+            fetch = FetchType.LAZY)
     private List<Complaint> userComplaints;
 
-    @OneToMany(mappedBy = "userReviewMaker")
+    @OneToMany(mappedBy = "userReviewMaker",
+            fetch = FetchType.LAZY)
     private List<Review> reviewsByUser;
 
     @OneToMany(mappedBy = "usersWithVouchers",
@@ -99,12 +104,11 @@ public class BookUser {
 
     @JsonProperty("addresses")
     @OneToMany(mappedBy = "userAddress",
-    cascade = CascadeType.MERGE)
+            cascade = CascadeType.MERGE)
     private List<Address> addresses;
 
 
-
-    public Boolean getNews(){
+    public Boolean getNews() {
         return this.newsletter;
     }
 }

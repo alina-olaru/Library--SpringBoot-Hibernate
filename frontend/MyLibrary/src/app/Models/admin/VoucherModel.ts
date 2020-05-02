@@ -1,25 +1,27 @@
-import { Author } from 'src/app/Models/admin/AuthorModel';
-import { Publisher } from 'src/app/Models/admin/PublisherModel';
+import { Category } from "./CategoryModel";
+import { Author } from "src/app/Models/admin/AuthorModel";
+import { Publisher } from "src/app/Models/admin/PublisherModel";
+import { VoucherUser } from './VoucherUserModel';
+import { Quizz } from './QuizzModel';
 export class Voucher {
-
-  voucherId:number;
-  voucherTitle:string;
-  voucherDescription:string;
-  voucherImage:string;
+  voucherId: number;
+  voucherTitle: string;
+  voucherDescription: string;
+  voucherImage: string;
   voucherImageSrc?: any;
-  voucherStartDate:Date;
-  voucherEndDate:Date;
-  voucherMaximumUses:number;
-  voucherPrice:number;
-  quizzez:any;
-  userVoucherLink:any;
+  voucherStartDate: Date;
+  voucherEndDate: Date;
+  voucherMaximumUses: number;
+  voucherPrice: number;
+  quizzez: Quizz[];
+  userVoucherLink: VoucherUser[];
 
-  language:string;
-  publisher_voucher:Publisher;
-  author_voucher:Author;
+  language: string;
+  publisher_voucher: Publisher;
+  author_voucher: Author;
+  category_voucher: Category;
 
   public constructor(init?: Partial<Voucher>) {
     Object.assign(this, init);
   }
-
 }
