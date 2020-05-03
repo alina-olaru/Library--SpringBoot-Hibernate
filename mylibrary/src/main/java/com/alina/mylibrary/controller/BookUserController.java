@@ -1,7 +1,7 @@
 package com.alina.mylibrary.controller;
 
 
-import com.alina.mylibrary.model.*;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.repository.Admin.*;
 import com.alina.mylibrary.repository.Guest.*;
 import org.springframework.beans.factory.annotation.Autowired;

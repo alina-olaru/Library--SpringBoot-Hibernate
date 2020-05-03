@@ -2,9 +2,9 @@ package com.alina.mylibrary.controller.impl.Admin;
 
 import com.alina.mylibrary.controller.Interfaces.Admin.AuthorApi;
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.ApiResponseType;
-import com.alina.mylibrary.model.Author;
+import com.alina.mylibrary.model.view.ApiResponse;
+import com.alina.mylibrary.model.view.ApiResponseType;
+import com.alina.mylibrary.model.db.Author;
 import com.alina.mylibrary.service.Interfaces.Admin.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

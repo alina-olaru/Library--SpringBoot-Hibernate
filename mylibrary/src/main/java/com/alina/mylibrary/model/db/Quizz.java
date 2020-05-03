@@ -1,9 +1,9 @@
-package com.alina.mylibrary.model;
+package com.alina.mylibrary.model.db;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -49,9 +49,9 @@ public class Quizz {
 
     private Date quizzEndDate;
 
-
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"quizzez"}, allowSetters = true)
     @OneToMany(mappedBy = "quizzez",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    fetch = FetchType.EAGER)
     /**
      * Un quizz are unul/mai multe vouchere -->voucher = child , quizz=parent
      *

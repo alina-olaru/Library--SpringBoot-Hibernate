@@ -24,6 +24,7 @@ import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import * as _ from 'lodash';
+import { SafeResourceUrl } from '@angular/platform-browser';
 interface Data {
   type: string;
   model: Book;
@@ -136,9 +137,17 @@ export class AddEditBooksComponent implements OnInit {
       model.booksCategories = this.selectedCategories.map(
         e => ({ categories: Object.assign({},e), booksC: {} as Book} as BooksCategories)
       );
+
+      if(typeof this.base64 == "string"){
       model.bookImage = this.base64
         ? this.base64.replace(/^data:image\/[a-z]+;base64,/, '')
         : null;
+      } else
+      {
+        model.bookImage = this.base64
+        ? (this.base64 as any).changingThisBreaksApplicationSecurity.replace(/^data:image\/[a-z]+;base64,/, '')
+        : null;
+      }
       model.bookImageSrc = this.base64;
       this.dialogRef.close(model);
     }

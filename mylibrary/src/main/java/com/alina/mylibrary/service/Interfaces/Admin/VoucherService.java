@@ -2,7 +2,7 @@ package com.alina.mylibrary.service.Interfaces.Admin;
 
 
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
-import com.alina.mylibrary.model.Voucher;
+import com.alina.mylibrary.model.db.Voucher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

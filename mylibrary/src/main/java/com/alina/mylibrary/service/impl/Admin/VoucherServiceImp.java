@@ -3,7 +3,7 @@ package com.alina.mylibrary.service.impl.Admin;
 import com.alina.mylibrary.dao.Interfaces.Admin.VoucherDao;
 import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
-import com.alina.mylibrary.model.Voucher;
+import com.alina.mylibrary.model.db.Voucher;
 import com.alina.mylibrary.service.Interfaces.Admin.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

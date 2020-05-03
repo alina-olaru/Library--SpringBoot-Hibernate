@@ -3,7 +3,7 @@ package com.alina.mylibrary.service.impl.Admin;
 import com.alina.mylibrary.config.DBCheck;
 import com.alina.mylibrary.dao.Interfaces.Admin.BookUserDao;
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.service.Interfaces.Admin.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

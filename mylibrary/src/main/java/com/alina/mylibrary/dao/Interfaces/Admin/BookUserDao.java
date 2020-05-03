@@ -1,7 +1,6 @@
 package com.alina.mylibrary.dao.Interfaces.Admin;
 
-import com.alina.mylibrary.exception.DaoException;
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.db.BookUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

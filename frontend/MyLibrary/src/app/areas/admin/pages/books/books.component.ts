@@ -53,6 +53,7 @@ export class BooksComponent implements OnInit, OnDestroy {
     "numberOfBoooks",
     "publisher",
     "booksCategories",
+    "bookImage",
     "actions"
   ];
   dataSource: MatTableDataSource<Book> = new MatTableDataSource(this.Books);
@@ -134,9 +135,19 @@ export class BooksComponent implements OnInit, OnDestroy {
             icon: "info",
             title: "Nu exista carti in baza de date"
           });
+          return;
         }
-
         this.Books = response.body;
+        this.Books.forEach((e) => {
+          if (e.bookImage) {
+            const objectURL = 'data:image/png;base64,' + e.bookImage;
+            e.bookImageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
+              objectURL
+            );
+          }
+        });
+
+
         this.updateDataSouce();
       }
     });
@@ -257,7 +268,14 @@ export class BooksComponent implements OnInit, OnDestroy {
             title: "Cartea a fost adaugata cu succes",
             icon: "success"
           });
-          this.Books.push(response.body);
+          if (response.body.bookImage) {
+            const objectURL =
+              'data:image/png;base64,' + response.body.bookImage;
+            response.body.bookImageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
+              objectURL
+            );
+          }
+          this.Books.unshift(response.body);
           this.updateDataSouce();
         } else {
           this.toastr.Swal.fire(

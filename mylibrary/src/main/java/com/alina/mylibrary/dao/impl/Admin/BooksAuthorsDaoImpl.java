@@ -1,9 +1,9 @@
 package com.alina.mylibrary.dao.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.BooksAuthorsDao;
-import com.alina.mylibrary.model.Author;
-import com.alina.mylibrary.model.Book;
-import com.alina.mylibrary.model.BooksAuthors;
+import com.alina.mylibrary.model.db.Author;
+import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.BooksAuthors;
 import com.alina.mylibrary.repository.Admin.BooksAuthorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

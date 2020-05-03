@@ -1,10 +1,7 @@
 package com.alina.mylibrary.dao.Interfaces.Admin;
 
 import com.alina.mylibrary.exception.DaoException;
-import com.alina.mylibrary.model.Author;
-import com.alina.mylibrary.model.Book;
-import com.alina.mylibrary.model.BookUser;
-import com.alina.mylibrary.model.Wishlist;
+import com.alina.mylibrary.model.db.Wishlist;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package com.alina.mylibrary.service.Interfaces.Admin;
 
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
-import com.alina.mylibrary.model.Address;
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.db.Address;
+import com.alina.mylibrary.model.db.BookUser;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 

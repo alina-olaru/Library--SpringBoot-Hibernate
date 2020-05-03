@@ -2,8 +2,7 @@ package com.alina.mylibrary.service.Interfaces.Admin;
 
 
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
-import com.alina.mylibrary.model.Quizz;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.alina.mylibrary.model.db.Quizz;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

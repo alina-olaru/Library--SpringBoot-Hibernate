@@ -48,7 +48,7 @@
     </div>
 
     <div class="input-row" fxFlex="calc(50%-10px)">
-      <mat-form-field fxFlex>
+      <mat-form-field fxFlex (click)="picker_startt.open()">
         <mat-label>Data de inceput*</mat-label>
         <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_startt" formControlName="voucherStartDate"
           disabled>
@@ -63,7 +63,7 @@
 
 
     <div class="input-row" fxFlex="calc(50%-10px)">
-      <mat-form-field fxFlex>
+      <mat-form-field fxFlex (click)="picker_endd.open()">
         <mat-label>Data de final*</mat-label>
         <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_endd" formControlName="voucherEndDate"
           disabled>
@@ -92,6 +92,7 @@
             {{option.publisherTitle}}
           </mat-option>
         </mat-autocomplete>
+        <mat-icon class="pointer" matSuffix matTooltip="Sterge editura!" *ngIf="form.publisher_voucher.value" (click)="form.publisher_voucher.setValue(null)">close</mat-icon>
       </mat-form-field>
     </div>
 
@@ -103,6 +104,7 @@
             {{option.categoryTitle}}
           </mat-option>
         </mat-autocomplete>
+        <mat-icon class="pointer" matSuffix matTooltip="Sterge categorie!" *ngIf="form.category_voucher.value" (click)="form.category_voucher.setValue(null)">close</mat-icon>
       </mat-form-field>
     </div>
 
@@ -115,6 +117,7 @@
             {{option.firstName}} {{option.lastName}}
           </mat-option>
         </mat-autocomplete>
+        <mat-icon class="pointer" matSuffix matTooltip="Sterge autor!" *ngIf="form.author_voucher.value" (click)="form.author_voucher.setValue(null)">close</mat-icon>
       </mat-form-field>
     </div>
 

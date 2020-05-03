@@ -1,17 +1,13 @@
 package com.alina.mylibrary.controller.impl.Guess;
 
 import com.alina.mylibrary.controller.Interfaces.Guess.PublicBookApi;
-import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.ApiResponseType;
-import com.alina.mylibrary.model.Book;
+import com.alina.mylibrary.model.view.ApiResponse;
+import com.alina.mylibrary.model.view.ApiResponseType;
+import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.service.Interfaces.Admin.BookService;
-import com.alina.mylibrary.service.Interfaces.Guess.PublicBookService;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

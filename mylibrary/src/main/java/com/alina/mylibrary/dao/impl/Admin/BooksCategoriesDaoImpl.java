@@ -1,9 +1,9 @@
 package com.alina.mylibrary.dao.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.BooksCategoriesDao;
-import com.alina.mylibrary.model.Book;
-import com.alina.mylibrary.model.BooksCategories;
-import com.alina.mylibrary.model.Category;
+import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.BooksCategories;
+import com.alina.mylibrary.model.db.Category;
 import com.alina.mylibrary.repository.Admin.BooksCategoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -5,16 +5,10 @@ import com.alina.mylibrary.dao.Interfaces.Admin.BooksAuthorsDao;
 import com.alina.mylibrary.dao.Interfaces.Admin.BooksCategoriesDao;
 import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
-import com.alina.mylibrary.model.Book;
-import com.alina.mylibrary.model.BooksCategories;
+import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.BooksCategories;
 import com.alina.mylibrary.service.Interfaces.Admin.BookService;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import org.hibernate.SQLQuery;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.stereotype.Service;
@@ -22,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookServiceImp implements BookService {
@@ -88,7 +82,19 @@ public class BookServiceImp implements BookService {
     }
 
     @Override
+    @Transactional
     public boolean deleteBook(int bookId) {
+        var book = this.bookDao.getBookbyId(bookId);
+        if(book.getBooksCategories().size() > 0){
+            book.getBooksCategories().forEach(booksCategories -> {
+                this.booksCategoriesDao.deleteBooksCategories(booksCategories);
+            });
+        }
+        if(book.getBookAuthor().size() > 0){
+            book.getBookAuthor().forEach(booksAuthors -> {
+                this.booksAuthorsDao.delteBooksAuthors(booksAuthors);
+            });
+        }
         this.bookDao.deleteBook(bookId);
         return true;
     }
@@ -113,7 +119,7 @@ public class BookServiceImp implements BookService {
                 result.add(b);
             }
         }
-         //for( com.alina.mylibrary.model.Category c:b){
+         //for( com.alina.mylibrary.model.db.Category c:b){
 
 
         // }

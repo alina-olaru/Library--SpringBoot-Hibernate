@@ -1,6 +1,6 @@
 package com.alina.mylibrary.model.auth;
 
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.db.BookUser;
 import lombok.Data;
 
 import java.io.Serializable;

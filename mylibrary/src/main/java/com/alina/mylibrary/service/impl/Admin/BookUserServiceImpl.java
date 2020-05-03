@@ -3,8 +3,8 @@ package com.alina.mylibrary.service.impl.Admin;
 import com.alina.mylibrary.config.DBCheck;
 import com.alina.mylibrary.dao.Interfaces.Admin.BookUserDao;
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
-import com.alina.mylibrary.model.Address;
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.db.Address;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +67,7 @@ public class BookUserServiceImpl implements BookUserService {
         if (user.equals(null)) {
             throw new NotFoundException("Nu exista user cu acest id");
         }
-        if (user.getNews() == true) {
+        if (user.isNewsletter() == true) {
             throw new FieldException("Campul este deja true,operatia nu are sens", "newsletter", user.getClass().getName());
         }
 
@@ -81,7 +81,7 @@ public class BookUserServiceImpl implements BookUserService {
         if (user.equals(null)) {
             throw new NotFoundException("Nu exista user cu acest id");
         }
-        if (user.getNews() == false) {
+        if (user.isNewsletter() == false) {
             throw new FieldException("Campul este deja false,operatia nu are sens", "newsletter", user.getClass().getName());
         }
 

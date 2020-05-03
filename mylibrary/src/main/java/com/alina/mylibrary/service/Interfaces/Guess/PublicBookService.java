@@ -1,7 +1,7 @@
 package com.alina.mylibrary.service.Interfaces.Guess;
 
 
-import com.alina.mylibrary.model.Book;
+import com.alina.mylibrary.model.db.Book;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

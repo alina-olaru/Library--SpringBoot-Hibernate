@@ -1,18 +1,15 @@
-package com.alina.mylibrary.model;
+package com.alina.mylibrary.model.db;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 
 @Entity
@@ -42,6 +39,7 @@ public class Voucher {
     @JsonIgnore
     private byte[] voucherImageDb;
 
+    @Transient
     private String voucherImage;
 
     @Column
@@ -69,23 +67,27 @@ public class Voucher {
     private String language;
 
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"author_vouchers"}, allowSetters = true)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_AUTHORR__ID"))
     private Author author_voucher;
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"publisher_vouchers"}, allowSetters = true)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_PUBLISHERR__ID"))
     private Publisher publisher_voucher;
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"category_vouchers"}, allowSetters = true)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_CATEGORYY__ID"))
-    private com.alina.mylibrary.model.Category category_voucher;
+    private Category category_voucher;
 
-
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"vouchers"}, allowSetters = true)
     @OneToMany(mappedBy = "vouchers",
     fetch = FetchType.LAZY)
     private List<VoucherUser> userVoucherLink;
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"vouchersGotByQuizz"}, allowSetters = true)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_QUIZZ_ID"))
     private Quizz quizzez;

@@ -4,12 +4,14 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Arrays;
 
 @Configuration
 
 @EnableScheduling
+@EnableTransactionManagement
 public class MyLibraryConfiguration {
 
     @Bean(name = "org.dozer.Mapper")

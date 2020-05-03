@@ -1,8 +1,7 @@
 package com.alina.mylibrary.repository.Admin;
 
 
-import com.alina.mylibrary.model.Book;
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.db.BookUser;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

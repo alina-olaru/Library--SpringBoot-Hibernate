@@ -1,5 +1,6 @@
 package com.alina.mylibrary.model;
 
+import com.alina.mylibrary.model.db.BookUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

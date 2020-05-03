@@ -1,7 +1,7 @@
 package com.alina.mylibrary.dao.impl;
 
 import com.alina.mylibrary.dao.Interfaces.Guest.PublicBookDao;
-import com.alina.mylibrary.model.Book;
+import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.repository.Guest.PublicBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

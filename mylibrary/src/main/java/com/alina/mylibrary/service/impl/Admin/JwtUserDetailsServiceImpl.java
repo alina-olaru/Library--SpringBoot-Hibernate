@@ -1,6 +1,6 @@
 package com.alina.mylibrary.service.impl.Admin;
 
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.repository.Admin.BookUserRepository;
 import com.alina.mylibrary.service.Interfaces.Admin.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

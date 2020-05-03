@@ -1,13 +1,12 @@
 package com.alina.mylibrary.controller.impl.Guess;
 
 import com.alina.mylibrary.controller.Interfaces.Guess.PublicUserApi;
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.ApiResponseType;
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.view.ApiResponse;
+import com.alina.mylibrary.model.view.ApiResponseType;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
 
 @Component
 public class PublicUserApiImp implements PublicUserApi {

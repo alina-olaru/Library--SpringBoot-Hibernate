@@ -2,7 +2,7 @@ package com.alina.mylibrary.service.Interfaces.Admin;
 
 
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
-import com.alina.mylibrary.model.Author;
+import com.alina.mylibrary.model.db.Author;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

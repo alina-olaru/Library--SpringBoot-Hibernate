@@ -4,7 +4,7 @@ package com.alina.mylibrary.service.impl.Admin;
 import com.alina.mylibrary.dao.Interfaces.Admin.WishListDao;
 import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
-import com.alina.mylibrary.model.Wishlist;
+import com.alina.mylibrary.model.db.Wishlist;
 import com.alina.mylibrary.model.view.dashboard.DashboardWishAuthorCount;
 import com.alina.mylibrary.service.Interfaces.Admin.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;

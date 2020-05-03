@@ -151,9 +151,17 @@ export class AddEditVouchersComponent implements OnInit {
     if (this.localForm.valid) {
       let model: Voucher = new Voucher(this.localForm.value);
       model.voucherId = this.data.model.voucherId;
-      model.voucherImage = this.base64
-      ? this.base64.replace(/^data:image\/[a-z]+;base64,/, '')
-      : null;
+
+      if(typeof this.base64 == "string"){
+        model.voucherImage = this.base64
+          ? this.base64.replace(/^data:image\/[a-z]+;base64,/, '')
+          : null;
+        } else
+        {
+          model.voucherImage = this.base64
+          ? (this.base64 as any).changingThisBreaksApplicationSecurity.replace(/^data:image\/[a-z]+;base64,/, '')
+          : null;
+        }
       model.voucherImageSrc = this.base64;
       this.dialogRef.close(model);
     }

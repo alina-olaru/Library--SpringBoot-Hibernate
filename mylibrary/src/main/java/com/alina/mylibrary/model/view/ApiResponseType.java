@@ -1,4 +1,4 @@
-package com.alina.mylibrary.model;
+package com.alina.mylibrary.model.view;
 
 public enum ApiResponseType {
     SUCCESS,

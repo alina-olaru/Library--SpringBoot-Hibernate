@@ -40,15 +40,15 @@ export class VouchersComponent implements OnInit, OnDestroy {
     'voucherId',
     'voucherTitle',
     'voucherDescription',
-    // 'voucherImage',
     'voucherStartDate',
     'voucherEndDate',
     'voucherMaximumUses',
     'voucherPrice',
-    'author_voucher',
     'language',
     'publisher_voucher',
-'voucherImage',
+    'author_voucher',
+    'category_voucher',
+    'voucherImage',
     'actions',
   ];
 
@@ -160,14 +160,14 @@ export class VouchersComponent implements OnInit, OnDestroy {
             return;
           }
           this.vouchers = response.body;
-          this.vouchers.forEach(e => {
+          this.vouchers.forEach((e) => {
             if (e.voucherImage) {
               const objectURL = 'data:image/png;base64,' + e.voucherImage;
               e.voucherImageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
                 objectURL
               );
             }
-          })
+          });
           this.updateDataSouce();
         }
       });
@@ -181,7 +181,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
         model: this._addVoucher,
         authors: this.authors,
         publishers: this.publishers,
-        categories: this.categories
+        categories: this.categories,
       },
     });
 
@@ -203,7 +203,14 @@ export class VouchersComponent implements OnInit, OnDestroy {
             title: 'Voucherul a fost adaugat cu succes',
             icon: 'success',
           });
-          this.vouchers.push(response.body);
+          if (response.body.voucherImage) {
+            const objectURL =
+              'data:image/png;base64,' + response.body.voucherImage;
+            response.body.voucherImageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
+              objectURL
+            );
+          }
+          this.vouchers.unshift(response.body);
           this.updateDataSouce();
         } else {
           this.toastr.Swal.fire(
@@ -229,6 +236,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
       data: {
         type: 'edit',
         model: Object.assign({}, item),
+        authors: this.authors,
+        publishers: this.publishers,
+        categories: this.categories
       },
     });
 

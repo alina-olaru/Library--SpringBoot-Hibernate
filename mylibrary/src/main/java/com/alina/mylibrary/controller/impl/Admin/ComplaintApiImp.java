@@ -2,9 +2,9 @@ package com.alina.mylibrary.controller.impl.Admin;
 
 import com.alina.mylibrary.controller.Interfaces.Guess.ComplaintApi;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.ApiResponseType;
-import com.alina.mylibrary.model.Complaint;
+import com.alina.mylibrary.model.view.ApiResponse;
+import com.alina.mylibrary.model.view.ApiResponseType;
+import com.alina.mylibrary.model.db.Complaint;
 import com.alina.mylibrary.service.Interfaces.Admin.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -2,7 +2,7 @@ package com.alina.mylibrary.dao.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.PublisherDao;
 import com.alina.mylibrary.exception.DaoException;
-import com.alina.mylibrary.model.Publisher;
+import com.alina.mylibrary.model.db.Publisher;
 import com.alina.mylibrary.repository.Admin.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,8 @@ public class PublisherDaoImpl implements PublisherDao {
 
     @Override
     public List<Publisher> getPublishers() {
-        return this.publisherRepository.findAll();
+        var x = this.publisherRepository.findAll();
+        return x;
     }
 
     @Override

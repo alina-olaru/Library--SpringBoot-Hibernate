@@ -1,7 +1,7 @@
 package com.alina.mylibrary.model.requests;
 
-import com.alina.mylibrary.model.Address;
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.db.Address;
+import com.alina.mylibrary.model.db.BookUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,12 +1,9 @@
 package com.alina.mylibrary.controller.Interfaces.Guess;
 
 
-import com.alina.mylibrary.model.Address;
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.BookUser;
-import com.alina.mylibrary.model.Complaint;
+import com.alina.mylibrary.model.view.ApiResponse;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.requests.UserAddressAdd;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

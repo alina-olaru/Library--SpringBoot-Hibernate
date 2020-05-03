@@ -1,7 +1,6 @@
 package com.alina.mylibrary.repository.Admin;
 
-import com.alina.mylibrary.model.Author;
-import com.alina.mylibrary.model.Publisher;
+import com.alina.mylibrary.model.db.Publisher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,11 +1,14 @@
-package com.alina.mylibrary.model;
+package com.alina.mylibrary.model.db;
 
+
+import lombok.Data;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@Data
 public class BooksCategoriesId implements Serializable {
     private int categories;
     private int booksC;

@@ -1,14 +1,12 @@
-package com.alina.mylibrary.model;
+package com.alina.mylibrary.model.db;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.ISBN;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Data
@@ -18,15 +16,16 @@ import java.util.Objects;
 public class BooksCategories implements Serializable {
 
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"booksCategories"}, allowSetters = true)
     @Id
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name="FK_CATEGORIES__ID"))
     private Category categories;
 
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"booksCategories"}, allowSetters = true)
     @Id
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(foreignKey = @ForeignKey(name="FK_BOOKS_ID"))
     private Book booksC;
 

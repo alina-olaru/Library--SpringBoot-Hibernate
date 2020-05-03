@@ -1,8 +1,8 @@
 package com.alina.mylibrary.dao.Interfaces.Admin;
 
-import com.alina.mylibrary.model.Book;
-import com.alina.mylibrary.model.Category;
-import com.alina.mylibrary.model.BooksCategories;
+import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.Category;
+import com.alina.mylibrary.model.db.BooksCategories;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

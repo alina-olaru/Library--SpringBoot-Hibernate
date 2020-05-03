@@ -5,7 +5,7 @@ import com.alina.mylibrary.config.DBCheck;
 import com.alina.mylibrary.dao.Interfaces.Admin.PublisherDao;
 import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
-import com.alina.mylibrary.model.Publisher;
+import com.alina.mylibrary.model.db.Publisher;
 import com.alina.mylibrary.service.Interfaces.Admin.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

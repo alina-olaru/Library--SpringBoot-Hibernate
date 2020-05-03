@@ -1,9 +1,6 @@
-package com.alina.mylibrary.model;
+package com.alina.mylibrary.model.db;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -56,7 +53,7 @@ public class Address {
     @Column
     private int appartmentNumber;
 
-    @JsonIgnore
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"addresses"}, allowSetters = true)
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_ADDRESS_BOOK_USER"))
     private BookUser userAddress;

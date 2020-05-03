@@ -2,8 +2,7 @@ package com.alina.mylibrary.dao.Interfaces.Admin;
 
 
 import com.alina.mylibrary.exception.DaoException;
-import com.alina.mylibrary.model.Complaint;
-import org.springframework.stereotype.Component;
+import com.alina.mylibrary.model.db.Complaint;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

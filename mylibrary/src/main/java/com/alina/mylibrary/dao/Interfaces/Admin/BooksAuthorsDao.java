@@ -1,8 +1,8 @@
 package com.alina.mylibrary.dao.Interfaces.Admin;
 
-import com.alina.mylibrary.model.Author;
-import com.alina.mylibrary.model.Book;
-import com.alina.mylibrary.model.BooksAuthors;
+import com.alina.mylibrary.model.db.Author;
+import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.BooksAuthors;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

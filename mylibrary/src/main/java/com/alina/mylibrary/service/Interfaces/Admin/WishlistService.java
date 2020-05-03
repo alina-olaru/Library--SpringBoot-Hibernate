@@ -1,13 +1,11 @@
 package com.alina.mylibrary.service.Interfaces.Admin;
 
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
-import com.alina.mylibrary.model.Author;
-import com.alina.mylibrary.model.Wishlist;
+import com.alina.mylibrary.model.db.Wishlist;
 import com.alina.mylibrary.model.view.dashboard.DashboardWishAuthorCount;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface WishlistService {

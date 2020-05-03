@@ -1,24 +1,19 @@
 package com.alina.mylibrary.controller;
 
 import com.alina.mylibrary.config.JwtTokenUtil;
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.ApiResponseType;
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.view.ApiResponse;
+import com.alina.mylibrary.model.view.ApiResponseType;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.auth.JwtRequest;
 import com.alina.mylibrary.model.auth.JwtResponse;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.*;
-import org.springframework.security.authentication.event.AuthenticationFailureProviderNotFoundEvent;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.AuthenticationFailedException;
-import javax.naming.AuthenticationNotSupportedException;
 import java.util.Objects;
 
 @RestController

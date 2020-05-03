@@ -1,7 +1,7 @@
 package com.alina.mylibrary.repository.Guest;
 
 
-import com.alina.mylibrary.model.Book;
+import com.alina.mylibrary.model.db.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

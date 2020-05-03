@@ -2,7 +2,7 @@ package com.alina.mylibrary.dao.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.VoucherDao;
 import com.alina.mylibrary.exception.DaoException;
-import com.alina.mylibrary.model.Voucher;
+import com.alina.mylibrary.model.db.Voucher;
 import com.alina.mylibrary.repository.Admin.VoucherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
@@ -34,6 +34,8 @@ public class VoucherDaoImp implements VoucherDao {
 
     @Override
     public Voucher addVoucher(Voucher voucher) throws DaoException {
+        try {
+
         if (voucher == null) {
             throw new DaoException(1);
         }
@@ -41,6 +43,12 @@ public class VoucherDaoImp implements VoucherDao {
             voucher.setVoucherImageDb(org.apache.tomcat.util.codec.binary.Base64.decodeBase64(voucher.getVoucherImage()));
         }
         return this.voucherRepository.save(voucher);
+        } catch (Exception ex){
+
+            var x = new Voucher();
+            x.setVoucherDescription(ex.getMessage());
+            return x;
+        }
     }
 
     @Override

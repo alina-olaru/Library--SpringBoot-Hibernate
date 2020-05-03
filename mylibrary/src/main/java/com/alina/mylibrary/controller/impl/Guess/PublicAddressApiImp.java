@@ -3,22 +3,15 @@ package com.alina.mylibrary.controller.impl.Guess;
 
 import com.alina.mylibrary.controller.Interfaces.Guess.PublicAddressApi;
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
-import com.alina.mylibrary.model.Address;
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.ApiResponseType;
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.view.ApiResponse;
+import com.alina.mylibrary.model.view.ApiResponseType;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.requests.UserAddressAdd;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.sql.SQLException;
 
 
 @Component

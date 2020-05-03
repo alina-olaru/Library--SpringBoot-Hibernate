@@ -2,7 +2,7 @@ package com.alina.mylibrary.dao.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.WishListDao;
 import com.alina.mylibrary.exception.DaoException;
-import com.alina.mylibrary.model.*;
+import com.alina.mylibrary.model.db.Wishlist;
 import com.alina.mylibrary.repository.Guest.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

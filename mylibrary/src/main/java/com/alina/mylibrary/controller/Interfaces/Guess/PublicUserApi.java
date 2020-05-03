@@ -1,8 +1,8 @@
 package com.alina.mylibrary.controller.Interfaces.Guess;
 
 
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.BookUser;
+import com.alina.mylibrary.model.view.ApiResponse;
+import com.alina.mylibrary.model.db.BookUser;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

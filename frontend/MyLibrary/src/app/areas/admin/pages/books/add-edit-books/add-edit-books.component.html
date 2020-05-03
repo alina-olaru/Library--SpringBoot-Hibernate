@@ -194,19 +194,17 @@
       </div>
     </div>
 
-    <div class="input-row" fxFlex>
+    <div class="input-row" fxFlex="100%">
       <mat-form-field fxFlex class="file-field">
         <mat-icon matPrefix matTooltip="Sterge fisier!" (click)="DeleteFile()">close</mat-icon>
         <input type="tel" matInput disabled placeholder="Imagine bautura" [(ngModel)]="fileName"
           [ngModelOptions]="{standalone: true}">
-        <mat-icon matSuffix (click)="UploadFile()" matTooltip="Incarca fisier!">file_upload</mat-icon>
+        <mat-icon class="pointer" matSuffix (click)="UploadFile()" matTooltip="Incarca fisier!">file_upload</mat-icon>
         <input type="file" id="modal-file-upload-input" accept="image/*" style="visibility: hidden;display: none;">
       </mat-form-field>
     </div>
-    <div class="input-row" [hidden]="!fileName">
-      <div class="img-output">
-        <img [src]="this.data.model.bookImageSrc" [hidden]="!this.data.model.bookImageSrc" class="img-fluid">
-      </div>
+    <div class="input-row" [hidden]="!fileName" fxFlex="100%" fxLayoutAlign="center center">
+      <img class="book-image" [src]="this.data.model.bookImageSrc" [hidden]="!this.data.model.bookImageSrc">
     </div>
 
 

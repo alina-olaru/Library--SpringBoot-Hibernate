@@ -3,9 +3,9 @@ package com.alina.mylibrary.controller.impl.Admin;
 
 import com.alina.mylibrary.controller.Interfaces.Guess.WishlistApi;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.ApiResponseType;
-import com.alina.mylibrary.model.Wishlist;
+import com.alina.mylibrary.model.view.ApiResponse;
+import com.alina.mylibrary.model.view.ApiResponseType;
+import com.alina.mylibrary.model.db.Wishlist;
 import com.alina.mylibrary.model.view.dashboard.DashboardWishAuthorCount;
 import com.alina.mylibrary.service.Interfaces.Admin.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;

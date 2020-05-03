@@ -2,7 +2,7 @@ package com.alina.mylibrary.dao.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.CategoryDao;
 import com.alina.mylibrary.exception.DaoException;
-import com.alina.mylibrary.model.Category;
+import com.alina.mylibrary.model.db.Category;
 import com.alina.mylibrary.repository.Admin.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

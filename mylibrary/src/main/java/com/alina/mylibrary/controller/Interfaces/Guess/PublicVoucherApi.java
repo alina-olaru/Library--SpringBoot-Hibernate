@@ -1,8 +1,7 @@
 package com.alina.mylibrary.controller.Interfaces.Guess;
 
 
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.Book;
+import com.alina.mylibrary.model.view.ApiResponse;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,15 +1,12 @@
-package com.alina.mylibrary.model;
+package com.alina.mylibrary.model.db;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 
 @Entity
@@ -20,15 +17,16 @@ import java.util.Objects;
 @IdClass(BooksAuthorsId.class)
 public class BooksAuthors implements Serializable {
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"bookAuthor"}, allowSetters = true)
     @Id
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name="FK_AUTHOR_AB_ID"))
     private Author authorId = new Author();
 
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"bookAuthor"}, allowSetters = true)
     @Id
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JsonIgnore
+    @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name="FK_BOOKS_AB_ID"))
     private Book bookId = new Book();
 

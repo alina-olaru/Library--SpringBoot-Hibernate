@@ -1,22 +1,14 @@
-package com.alina.mylibrary.model;
+package com.alina.mylibrary.model.db;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table
@@ -51,11 +43,9 @@ public class BookUser {
     @NotNull
     private boolean newsletter = false;
 
-
     @Column
     @NotNull
     private boolean adminPrivilege = false;
-
 
     @Column
     @NotNull
@@ -73,43 +63,38 @@ public class BookUser {
     @Column
     private Boolean isEnabled;
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"user"}, allowSetters = true)
     @OneToMany(mappedBy = "user",
-            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY)
     private List<PersonalBook> persBooks;
 
-    @OneToMany(mappedBy = "userwishlist",
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"userwishlist"}, allowSetters = true)
+    @OneToMany(mappedBy = "userwishlist")
     private List<Wishlist> wishBooks;
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"ordersUser"}, allowSetters = true)
     @OneToMany(mappedBy = "ordersUser",
-            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY)
     private List<BookOrder> ordersbyuser;
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"com"}, allowSetters = true)
     @OneToMany(mappedBy = "com",
             fetch = FetchType.LAZY)
     private List<Complaint> userComplaints;
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"userReviewMaker"}, allowSetters = true)
     @OneToMany(mappedBy = "userReviewMaker",
             fetch = FetchType.LAZY)
     private List<Review> reviewsByUser;
 
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"usersWithVouchers"}, allowSetters = true)
     @OneToMany(mappedBy = "usersWithVouchers",
-            cascade = CascadeType.MERGE)
+            fetch = FetchType.LAZY)
     private List<VoucherUser> userVoucherLink;
 
-
-    @JsonProperty("addresses")
-    @OneToMany(mappedBy = "userAddress",
-            cascade = CascadeType.MERGE)
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"userAddress"}, allowSetters = true)
+    @OneToMany(mappedBy = "userAddress")
     private List<Address> addresses;
 
-
-    public Boolean getNews() {
-        return this.newsletter;
-    }
 }
 

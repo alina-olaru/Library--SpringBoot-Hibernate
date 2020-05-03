@@ -1,9 +1,8 @@
 package com.alina.mylibrary.controller.Interfaces.Admin;
 
 
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.Book;
-import com.alina.mylibrary.model.Category;
+import com.alina.mylibrary.model.db.Category;
+import com.alina.mylibrary.model.view.ApiResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,10 +20,10 @@ public interface CategoryApi {
 
 
     @PostMapping
-    ApiResponse<com.alina.mylibrary.model.Category> insertCategory(@RequestBody com.alina.mylibrary.model.Category category);
+    ApiResponse<Category> insertCategory(@RequestBody Category category);
 
     @PutMapping(path="/{id}")
-    ApiResponse<com.alina.mylibrary.model.Category> updateCategory (@RequestBody com.alina.mylibrary.model.Category category);
+    ApiResponse<Category> updateCategory (@RequestBody Category category);
 
     @DeleteMapping(path="/{id}")
     ApiResponse<Boolean> deleteCategory(@PathVariable int id);

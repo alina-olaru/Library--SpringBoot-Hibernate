@@ -1,8 +1,8 @@
 package com.alina.mylibrary.controller.Interfaces.Admin;
 
 
-import com.alina.mylibrary.model.ApiResponse;
-import com.alina.mylibrary.model.Quizz;
+import com.alina.mylibrary.model.view.ApiResponse;
+import com.alina.mylibrary.model.db.Quizz;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

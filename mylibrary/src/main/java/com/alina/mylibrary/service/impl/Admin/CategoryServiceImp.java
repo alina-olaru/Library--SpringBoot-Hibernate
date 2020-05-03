@@ -4,7 +4,7 @@ import com.alina.mylibrary.config.DBCheck;
 import com.alina.mylibrary.dao.Interfaces.Admin.CategoryDao;
 import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
-import com.alina.mylibrary.model.Category;
+import com.alina.mylibrary.model.db.Category;
 import com.alina.mylibrary.service.Interfaces.Admin.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class CategoryServiceImp implements CategoryService {
         }
         if (category != null) {
 
-            List< com.alina.mylibrary.model.Category> categoriesWithSameTitle=new ArrayList<>();
+            List<Category> categoriesWithSameTitle=new ArrayList<>();
             try {
                categoriesWithSameTitle= this.categoryDao.getCategoriesWithcategoryTitle(category.getCategoryTitle());
             }catch (DaoException e){
@@ -40,7 +40,7 @@ public class CategoryServiceImp implements CategoryService {
                 //the you already have that category
             }
             category.setCategoryTitle(DBCheck.Stringtify(category.getCategoryTitle()));
-            com.alina.mylibrary.model.Category response=null;
+            Category response=null;
             try {
                 response = categoryDao.addCategory(category);
                 if(response!=null){
@@ -95,7 +95,7 @@ public class CategoryServiceImp implements CategoryService {
     }
         if (category != null) {
 
-            List< com.alina.mylibrary.model.Category> categoriesWithSameTitle=new ArrayList<>();
+            List<Category> categoriesWithSameTitle=new ArrayList<>();
             try {
                 categoriesWithSameTitle= this.categoryDao.getCategoriesWithcategoryTitle(category.getCategoryTitle());
             }catch (DaoException e){
@@ -107,7 +107,7 @@ public class CategoryServiceImp implements CategoryService {
                 //the you already have that category
             }
             category.setCategoryTitle(DBCheck.Stringtify(category.getCategoryTitle()));
-            com.alina.mylibrary.model.Category response=null;
+            Category response=null;
             try {
                 response = categoryDao.updateCategory(category);
                 if(response!=null){

@@ -1,4 +1,4 @@
-package com.alina.mylibrary.model;
+package com.alina.mylibrary.model.db;
 
 
 import com.fasterxml.jackson.annotation.*;
@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Blob;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table
@@ -72,27 +69,42 @@ public class Book {
 
     @Column
     @Lob
-    private Blob bookImage;
+    private byte[] bookImageDb;
+
+    @Transient
+    private String bookImage;
+
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"book"}, allowSetters = true)
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_publisher_id"))
     private Publisher publisher;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "book",
-            cascade = CascadeType.MERGE)
+            fetch = FetchType.LAZY)
     private List<PersonalBook> persBooks;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "bookwishlist",
-            cascade = CascadeType.MERGE)
+            fetch = FetchType.LAZY)
     private List<Wishlist> wishBooks;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "booksorder",
-            cascade = CascadeType.MERGE)
+            fetch = FetchType.LAZY)
     private List<OrderItem> items;
+
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"booksC"}, allowSetters = true)
     @OneToMany(mappedBy = "booksC",
-            cascade = { CascadeType.ALL },
-            orphanRemoval = true)
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<BooksCategories> booksCategories;
+
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"bookId"}, allowSetters = true)
     @OneToMany(mappedBy = "bookId",
-            cascade = { CascadeType.ALL},
-            orphanRemoval = true)
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<BooksAuthors> bookAuthor;
+
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"bookR"}, allowSetters = true)
     @OneToMany(mappedBy = "bookR")
     private List<Review> reviews;
 
@@ -119,7 +131,6 @@ public class Book {
         new_book.setPersBooks(old_book.getPersBooks());
         new_book.setWishBooks(old_book.getWishBooks());
         return new_book;
-        //todo de adaugat campurile noi sau de schimbat cu seterele
     }
 }
 

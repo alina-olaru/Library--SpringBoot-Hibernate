@@ -1,8 +1,8 @@
-package com.alina.mylibrary.model;
+package com.alina.mylibrary.model.db;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table
@@ -34,11 +32,14 @@ public class Author {
     private String lastName;
 
 
-    // List<Book>
-    @JsonIgnore
-    @OneToMany(mappedBy = "authorId",
-            cascade = CascadeType.MERGE)
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"authorId"}, allowSetters = true)
+    @OneToMany(mappedBy = "authorId")
     private List<BooksAuthors> bookAuthor;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "author_voucher",
+                fetch = FetchType.LAZY)
+    private List<Voucher> author_vouchers;
 
     public static Author get_copy(Author old_author) {
         Author new_author = new Author();
@@ -47,9 +48,5 @@ public class Author {
         new_author.setFirstName(old_author.getFirstName());
         return new_author;
     }
-
-    @OneToMany(mappedBy = "author_voucher",
-    fetch = FetchType.LAZY)
-    private List<Voucher> author_vouchers;
 
 }

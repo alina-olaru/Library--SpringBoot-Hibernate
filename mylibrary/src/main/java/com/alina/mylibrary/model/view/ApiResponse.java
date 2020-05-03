@@ -1,6 +1,5 @@
-package com.alina.mylibrary.model;
+package com.alina.mylibrary.model.view;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data

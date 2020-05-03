@@ -1,8 +1,8 @@
 package com.alina.mylibrary.repository.Admin;
 
-import com.alina.mylibrary.model.Book;
-import com.alina.mylibrary.model.BooksCategories;
-import com.alina.mylibrary.model.Category;
+import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.BooksCategories;
+import com.alina.mylibrary.model.db.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
