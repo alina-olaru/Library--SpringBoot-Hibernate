@@ -1,19 +1,19 @@
-import { Address } from 'cluster';
+import { Address } from "./Address";
 
 export class BookUser {
   userId: number;
-  firstName: String;
-  lastName: String;
-  emailAdress: String;
-  phoneNumber: String;
+  firstName: string;
+  lastName: string;
+  emailAdress: string;
+  phoneNumber: string;
   newsletter: boolean;
   adminPrivilege: boolean;
   userPrivilege: boolean;
   blocked: boolean;
-  username: String;
-  password: String;
-  isEnabled:boolean;
-  addresses:Address[];
+  username: string;
+  password: string;
+  isEnabled: boolean;
+  addresses: Address[];
   public constructor(init?: Partial<BookUser>) {
     Object.assign(this, init);
   }

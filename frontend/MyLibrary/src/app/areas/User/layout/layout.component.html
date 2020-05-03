@@ -1,98 +1,10 @@
-<div class="container" fxFlex fxLayout="column">
-  <div class="container  home-header">
-
-
+<div fxFlex fxLayout="row wrap" class="mt-lg-5">
+  <div fxFlex="100"  [fxFlex.gt-xs]="40" [fxFlex.gt-sm]="30" [fxFlex.gt-sm]="30" [fxFlex.gt-md]="20" class="px-2">
+    <app-user-menu></app-user-menu>
   </div>
 
 
-  <div class="container" fxFlex fxLayout="row">
-    <div fxHide.xs [fxFlex.lg]="10" [fxFlex.xl]="20" class="margin-home">
-
-
-    </div>
-
-
-    <div fxFlex="100" [fxFlex.lg]="80" [fxFlex.xl]="60" class="middle-home">
-      <div class="container line">
-
-
-        <div class="container" fxFlex fxLayout="column">
-          <div fxFlex fxLayout="row wrap">
-
-            <div fxFlex="0 1 0%" [fxFlexOrder]="1" class="my-2 px-4 page-icon pointer account-icon-redirect">
-              <a  routerLink="/home/welcome" routerLinkActive="active">
-              <fa-icon mat-list-icon [icon]="faBookOpen"></fa-icon>
-              <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Library_building_clipart.svg/800px-Library_building_clipart.svg.png" class="banner-image"> -->
-              </a>
-            </div>
-
-
-            <div fxFlex="100" fxFlex.gt-sm="1 1 0%" [fxFlexOrder]="3" [fxFlexOrder.gt-sm]="2" class="mt-2 px-3">
-
-
-              <mat-form-field fxFlex appearance="outline">
-                <mat-label>Ce vrei sa cauti?</mat-label>
-                <input matInput placeholder="Cauta...">
-                <mat-icon matSuffix>search</mat-icon>
-
-              </mat-form-field>
-
-
-            </div>
-
-            <div fxFlex="1 1 0%" fxFlex.gt-sm="0 1 0%" [fxFlexOrder]="2" [fxFlexOrder.gt-sm]="3" class="cont px-3"
-              fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="30px">
-              <div fxFlex="0 1 0%" class="pointer account-icon-redirect">
-                <a  routerLink="/login" routerLinkActive="active">
-                <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-                  <div fxFlex class="hero-icon">
-                    <fa-icon mat-list-icon [icon]="faUser"></fa-icon>
-                  </div>
-                  <div fxFlex fxHide.xs fxHide.sm class="white-space-nowrap">
-
-                    Contul meu
-
-                  </div>
-                </div>
-              </a>
-              </div>
-              <div fxFlex="0 1 0%"  class="pointer account-icon-redirect">
-                <a  routerLink="/home/cart" routerLinkActive="active">
-                <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-                  <div fxFlex class="hero-icon">
-                    <fa-icon mat-list-icon [icon]="faShoppingCart"></fa-icon>
-                  </div>
-                  <div fxHide.xs fxHide.sm fxFlex.gt-sm class="white-space-nowrap">
-                    Cosul meu
-                  </div>
-                </div>
-                </a>
-              </div>
-
-              <div class="h-50" [class.menu-true]="open==true" fxFlex="0 1 0%" fxLayout="column" fxLayoutAlign="start center" (click)="test()">
-                <app-menu [myClass]="open"></app-menu>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div fxFlex>
-            <router-outlet></router-outlet>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div fxHide.xs [fxFlex.lg]="10" [fxFlex.xl]="20" class="margin-home">
-
-    </div>
-
+  <div fxFlex="100" [fxFlex.gt-xs]="60" [fxFlex.gt-sm]="70"  [fxFlex.gt-md]="80" fxLayout="column">
+    <router-outlet></router-outlet>
   </div>
-
-
 </div>

@@ -1,52 +1,49 @@
-
 @import "variables";
 @import "small_user_menu";
 
-//35em is also 560px (if basefont is 16px)
-@media only screen and (min-width: 35em) {
-	@import "medium_user_menu";
+//960px is also 560px (if basefont is 16px)
+@media only screen and (min-width: 960px) {
+  @import "medium_user_menu";
 }
 
-//64em is also 1028px (if basefont is 16px)
-@media only screen and (min-width: 64em) {
+//1280px is also 1028px (if basefont is 16px)
+@media only screen and (min-width: 1280px) {
   @import "large_user_menu";
 }
 
-
-.account-navigation-item{
+.account-navigation-item {
   color: black;
- :active{
-   color:yellow;
- }
- ::marker{
-   display: none;
- }
+  cursor: pointer;
 
- a{
-   text-decoration: none!important;
-   color:black;
-   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
- }
-
- :hover{
-  color:rgb(41, 209, 41);
-
- }
-
-}
-
-.account-navigation-list li{
-list-style:none;
-background-image:none;
-background-repeat:none;
-background-position:0;
+  ::marker {
+    display: none;
   }
 
+  a {
+    text-decoration: none !important;
+    color: black;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
 
-  ul
-{
-    list-style-type:none;
-    padding:0px;
-    margin:0px;
+  :hover {
+    color: rgb(41, 209, 41);
+
+    a {
+      color: rgb(41, 209, 41);
+    }
+  }
+}
+
+.account-navigation-list li {
+  list-style: none;
+  background-image: none;
+  background-repeat: none;
+  background-position: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
 }

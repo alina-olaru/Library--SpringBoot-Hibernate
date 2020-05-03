@@ -1,3 +1,4 @@
+import { LayoutComponent } from './../layout/layout.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from './../../../modules/shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -28,8 +29,8 @@ import { MaterialModule } from 'src/app/modules/material/material.module';
     MyBooksComponent,
     RecommendationsComponent,
     MyReviewsComponent,
-    AddBookViaOCRComponent
-
+    AddBookViaOCRComponent,
+    LayoutComponent
   ],
   imports: [
     CommonModule,

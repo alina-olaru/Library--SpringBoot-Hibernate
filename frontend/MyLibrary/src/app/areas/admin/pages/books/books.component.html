@@ -33,16 +33,6 @@
       </mat-cell>
     </ng-container>
 
-
-    <ng-container matColumnDef="booksCategories">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Categorie </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let element"> test</mat-cell>
-      <!-- {{element.booksCategories.Categories.categoryTitle}}  -->
-    </ng-container>
-
-
-
-
     <ng-container matColumnDef="bookLanguage">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Limba </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element"> {{element.bookLanguage}} </mat-cell>
@@ -76,11 +66,6 @@
       <mat-cell mat-cell *matCellDef="let element"> {{element.bookWeight}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="publisher">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Editura </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let element"> {{element.publisher.publisherTitle}} </mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="bookPrice">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Pret </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element"> {{element.bookPrice}} </mat-cell>
@@ -96,9 +81,32 @@
       <mat-cell mat-cell *matCellDef="let element"> {{element.coverType}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="publisher">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Editura </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> <b>{{element.publisher.publisherTitle}}</b> </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="bookAuthor">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Autor </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let element"> {{element.bookAuthor}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Autori </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+        <mat-chip-list aria-label="Autori">
+          <mat-chip *ngFor="let ba of element.bookAuthor" >
+            {{ba.authorId.firstName}} {{ba.authorId.lastName}}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="booksCategories">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Categorii </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+        <mat-chip-list aria-label="Categorii">
+          <mat-chip *ngFor="let bc of element.booksCategories" >
+            {{bc.categories.categoryTitle}}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="bookImage">

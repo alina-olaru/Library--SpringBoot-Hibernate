@@ -1,3 +1,4 @@
+import { LayoutComponent as UserLayoutComponent } from './../layout/layout.component';
 import { WishlistComponent } from './../wishlist/wishlist.component';
 import { LayoutComponent } from './../../Home/layout/layout.component';
 import { RecommendationsComponent } from './../recommendations/recommendations.component';
@@ -10,76 +11,55 @@ import { AccountOverviewComponent } from './../account-overview/account-overview
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-
 const routes: Routes = [
-  // {
-//   path: "",
-//   component: LayoutComponent,
-//   children: [
-//     {
-//       path: "",
-//       redirectTo: "welcome"
-//     },
-{
-  path:"",
-  component:LayoutComponent,
-  children:[
-    {
-      path : "accountOverview",
-      component : AccountOverviewComponent
-    }
-  ,
   {
-    path:"adrese",
-    component:AddressesBookComponent
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        component: UserLayoutComponent,
+        children: [
+          {
+            path: 'adrese',
+            component: AddressesBookComponent,
+          },
+          {
+            path: 'bilbiotecapersonala',
+            component: MyBooksComponent,
+          },
+          {
+            path: 'recenzii',
+            component: MyReviewsComponent,
+          },
+          {
+            path: 'istoric',
+            component: OrderHistoryComponent,
+          },
+          {
+            path: 'datepersonale',
+            component: PersonalDataComponent,
+          },
+          {
+            path: 'recomandari',
+            component: RecommendationsComponent,
+          },
+          {
+            path: 'wishlist',
+            component: WishlistComponent,
+          },
+          {
+            path: 'accountOverview',
+            component: AccountOverviewComponent
+          }
+        ]
+      },
+    ],
   },
-  {
-    path:"bilbiotecapersonala",
-    component:MyBooksComponent
-  },
-  {
-    path:"recenzii",
-    component:MyReviewsComponent
-  },
-  {
-    path:"istoric",
-    component:OrderHistoryComponent
-  },
-  {
-    path:"datepersonale",
-    component:PersonalDataComponent
-  },
-  {
-  path:"recomandari",
-  component:RecommendationsComponent
-  },
-
-  {
-    path:"wishlist",
-    component:WishlistComponent
-  }
-
-
-  ]
-},
-  // {
-  //   path: "",
-  //   redirectTo: "accountOverview"
-  // },
-
-
-
-
-
-
-  // {
-  //   path: "register",
-  //   component: RegisterComponent
-  // },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {}

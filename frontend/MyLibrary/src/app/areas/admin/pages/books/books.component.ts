@@ -52,6 +52,7 @@ export class BooksComponent implements OnInit, OnDestroy {
     "coverType",
     "numberOfBoooks",
     "publisher",
+    "bookAuthor",
     "booksCategories",
     "bookImage",
     "actions"

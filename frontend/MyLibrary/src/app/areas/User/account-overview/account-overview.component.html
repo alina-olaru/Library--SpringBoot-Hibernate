@@ -1,91 +1,63 @@
-
-
-<div fxFlex fxLayout="row wrap" class="mt-lg-5">
-  <div FxFlex [fxFlex.lt-sm]="20" [fxFlex.lg]="10"></div>
-  <div FxFlex [fxFlex.lt-sm]="80" fxLayoutAlign.lt-sm="center center" [fxFlex.lt-md]="30" [fxFlex.lt-lg]="30"
-    [fxFlex.lt-xl]="45" class="mx-5 ">
-    <!-- <  aaaaaaadsfghfdeafdgjkgfnvddjtrgndtrj> -->
-    <app-user-menu></app-user-menu>
-
+<div fxFlex fxLayout="column">
+  <div fxFlex fxLayoutAlign="center start" class="account-title mt-5 mt-lg-1">
+    <p>
+      Bine ai venit, {{user.firstName}}!
+    </p>
   </div>
+<!--
+  <div fxFlex>
 
+    <div class="container">
 
-  <div fxLayout="column" [fxFlex.lt-lg]="60" [fxFlex.lt-md]="60" [fxFlex.lt-sm]="100" fxFlex class="mt-2">
-
-    <div fxFlex fxLayoutAlign="center start" class="account-title mt-5 mt-lg-1">
-      <p>
-        Bine ai venit, {{user.firstName}}!
-      </p>
-    </div>
-
-    <!-- DE AICI INCEP CASUTELE -->
-    <!-- <div fxFlex fxLayout="column">
-
-
-    <!-- prima -->
-    <div fxFlex>
-
-      <div class="container">
-
-        <div class="account-overview-box mt-lg-5">
-          <a  routerLink="/cont/accountOverview" routerLinkActive="active">
+      <div class="account-overview-box mt-lg-5">
+        <a routerLink="/cont/accountOverview" routerLinkActive="active">
           <span>Vezi mai mult</span>
           <div FxFlex fxLayoutAlign="center center" fxLayout="column wrap" class="mr-sm-5 mr-md-0 h-100 w-100">
-            <div class="account-overview-box-info" FxFlex> Nume:   {{user.firstName}} {{user.lastName}} </div>
-            <div  class="account-overview-box-info" FxFlex>Email:   {{user.emailAdress}} </div>
+            <div class="account-overview-box-info" FxFlex> Nume: {{user.firstName}} {{user.lastName}} </div>
+            <div class="account-overview-box-info" FxFlex>Email: {{user.emailAdress}} </div>
           </div>
 
-
-          <!-- <div>Nume: {{user.firstName}} {{user.lastName}}</div>
-          <div>Adresa: {{user.emailAdress}} </div> -->
-
-          </a>
-        </div>
+        </a>
       </div>
-
-
     </div>
 
 
-    <div fxFlex (click)="YesToNews()">
+  </div> -->
 
-      <div *ngIf="!yesNewsletter" class="container">
+<!--
+  <div fxFlex (click)="YesToNews()">
 
-        <div class="account-overview-box mt-lg-5">
+    <div *ngIf="!yesNewsletter" class="container">
 
-          <div FxFlex fxLayoutAlign="center center" fxLayout="column wrap" class="mr-sm-5 mr-md-0 h-100 w-100">
-            <div class="account-overview-box-info" FxFlex>ABONEAZA-TE LA NEWSLETTER </div>
-          </div>
-          <!-- todo ADD FUNCTIONALITATE -->
+      <div class="account-overview-box mt-lg-5">
 
-
+        <div FxFlex fxLayoutAlign="center center" fxLayout="column wrap" class="mr-sm-5 mr-md-0 h-100 w-100">
+          <div class="account-overview-box-info" FxFlex>ABONEAZA-TE LA NEWSLETTER </div>
         </div>
+
+
       </div>
-
-
     </div>
-
-
-    <div fxFlex (click)="NoToNews()">
-
-      <div *ngIf="yesNewsletter" class="container">
-
-        <div class="account-overview-box mt-lg-5">
-
-          <div FxFlex fxLayoutAlign="center center" fxLayout="column wrap" class="mr-sm-5 mr-md-0 h-100 w-100">
-            <div class="account-overview-box-info" FxFlex>DEZABONARE NEWSLETTER </div>
-          </div>
-<!-- todo ADD FUNCTIONALITATE -->
-
-
-        </div>
-      </div>
-
-
-    </div>
-
-
 
 
   </div>
+
+
+  <div fxFlex (click)="NoToNews()">
+
+    <div *ngIf="yesNewsletter" class="container">
+
+      <div class="account-overview-box mt-lg-5">
+
+        <div FxFlex fxLayoutAlign="center center" fxLayout="column wrap" class="mr-sm-5 mr-md-0 h-100 w-100">
+          <div class="account-overview-box-info" FxFlex>DEZABONARE NEWSLETTER </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </div> -->
+
 </div>

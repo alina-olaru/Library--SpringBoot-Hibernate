@@ -1,150 +1,59 @@
 <div class="container">
   <ul class="account-navigation-list">
-
-
-
-    <li class="account-navigation-item"  >
-      <div fxLayout="row">
-      <div fxFlex>
-      <a  routerLink="/cont/accountOverview" routerLinkActive="active">
-   Contul meu
-     </a>
-    </div>
-
-     <div FxFlex fxLayoutAlign="end end"  fxHide.xs fxHide.sm   fxHide.xs fxHide.sm  class="account-navigation-icon">
-      <fa-icon [icon]="faArrowRight"></fa-icon>
-
-     </div>
-    </div>
+    <li class="account-navigation-item">
+        <a fxFlex fxLayout="row" fxLayoutAlign="space-between center" routerLink="/cont/accountOverview" [routerLinkActive]="['active']">
+          <span fxFlex> Contul meu</span>
+          <fa-icon [icon]="faArrowRight"></fa-icon>
+        </a>
     </li>
 
-
-
-    <li class="account-navigation-item"  >
-      <div fxLayout="row">
-      <div fxFlex>
-      <a  routerLink="/cont/istoric" routerLinkActive="active">
-     Istoric comenzi
-     </a>
-    </div>
-
-     <div FxFlex fxLayoutAlign="end end"  fxHide.xs fxHide.sm  class="account-navigation-icon">
-      <fa-icon [icon]="faArrowRight"></fa-icon>
-
-     </div>
-    </div>
+    <li class="account-navigation-item">
+      <a fxFlex fxLayout="row" fxLayoutAlign="space-between center" routerLink="/cont/istoric" [routerLinkActive]="['active']">
+        <span fxFlex> Istoric comenzi</span>
+        <fa-icon [icon]="faArrowRight"></fa-icon>
+      </a>
     </li>
 
-
-
-
-
-
-    <li class="account-navigation-item"  >
-      <div fxLayout="row">
-      <div fxFlex>
-        <a  routerLink="/cont/adrese" routerLinkActive="active">
-          Adresele mele
-          </a>
-    </div>
-
-     <div FxFlex fxLayoutAlign="end end"   fxHide.xs fxHide.sm  class="account-navigation-icon">
-      <fa-icon [icon]="faArrowRight"></fa-icon>
-
-     </div>
-    </div>
+    <li class="account-navigation-item">
+      <a fxFlex fxLayout="row" fxLayoutAlign="space-between adrese" routerLink="/cont/istoric" [routerLinkActive]="['active']">
+        <span fxFlex> Adresele mele</span>
+        <fa-icon [icon]="faArrowRight"></fa-icon>
+      </a>
     </li>
 
-
-
-
-    <li class="account-navigation-item"  >
-      <div fxLayout="row">
-      <div fxFlex>
-        <a  routerLink="/cont/bilbiotecapersonala" routerLinkActive="active">
-          Bilioteca personala
-          </a>
-    </div>
-
-     <div FxFlex fxLayoutAlign="end end"   fxHide.xs fxHide.sm  class="account-navigation-icon">
-      <fa-icon [icon]="faArrowRight"></fa-icon>
-
-     </div>
-    </div>
+    <li class="account-navigation-item">
+      <a fxFlex fxLayout="row" fxLayoutAlign="space-between center" routerLink="/cont/bilbiotecapersonala" [routerLinkActive]="['active']">
+        <span fxFlex> Bilioteca personala</span>
+        <fa-icon [icon]="faArrowRight"></fa-icon>
+      </a>
     </li>
 
-
-
-
-
-    <li class="account-navigation-item"  >
-      <div fxLayout="row">
-      <div fxFlex>
-        <a  routerLink="/cont/recenzii" routerLinkActive="active">
-          Recenziile mele
-           </a>
-    </div>
-
-     <div FxFlex fxLayoutAlign="end end"   fxHide.xs fxHide.sm  class="account-navigation-icon">
-      <fa-icon [icon]="faArrowRight"></fa-icon>
-
-     </div>
-    </div>
+    <li class="account-navigation-item">
+      <a fxFlex fxLayout="row" fxLayoutAlign="space-between center" routerLink="/cont/recenzii" [routerLinkActive]="['active']">
+        <span fxFlex> Recenziile mele</span>
+        <fa-icon [icon]="faArrowRight"></fa-icon>
+      </a>
     </li>
 
-
-
-    <li class="account-navigation-item"  >
-      <div fxLayout="row">
-      <div fxFlex>
-        <a  routerLink="/cont/datepersonale" routerLinkActive="active">
-          Datele mele
-            </a>
-    </div>
-
-     <div FxFlex fxLayoutAlign="end end"   fxHide.xs fxHide.sm  class="account-navigation-icon">
-      <fa-icon [icon]="faArrowRight"></fa-icon>
-
-     </div>
-    </div>
+    <li class="account-navigation-item">
+      <a fxFlex fxLayout="row" fxLayoutAlign="space-between center" routerLink="/cont/datepersonale" [routerLinkActive]="['active']">
+        <span fxFlex> Datele mele</span>
+        <fa-icon [icon]="faArrowRight"></fa-icon>
+      </a>
     </li>
 
-
-    <li class="account-navigation-item"  >
-      <div fxLayout="row">
-      <div fxFlex>
-        <a  routerLink="/cont/wishlist" routerLinkActive="active">
-          Wishlist
-             </a>
-    </div>
-
-     <div FxFlex fxLayoutAlign="end end"   fxHide.xs fxHide.sm  class="account-navigation-icon">
-      <fa-icon [icon]="faArrowRight"></fa-icon>
-
-     </div>
-    </div>
+    <li class="account-navigation-item">
+      <a fxFlex fxLayout="row" fxLayoutAlign="space-between center" routerLink="/cont/wishlist" [routerLinkActive]="['active']">
+        <span fxFlex> Wishlist</span>
+        <fa-icon [icon]="faArrowRight"></fa-icon>
+      </a>
     </li>
 
-
-
-    <li class="account-navigation-item"  >
-      <div fxLayout="row">
-      <div fxFlex>
-        <a  routerLink="/cont/recomandari" routerLinkActive="active">
-          Recomandari
-             </a>
-    </div>
-
-     <div FxFlex fxLayoutAlign="end end"   fxHide.xs fxHide.sm  class="account-navigation-icon">
-      <fa-icon [icon]="faArrowRight"></fa-icon>
-
-     </div>
-    </div>
+    <li class="account-navigation-item">
+      <a fxFlex fxLayout="row" fxLayoutAlign="space-between center" routerLink="/cont/recomandari" [routerLinkActive]="['active']">
+        <span fxFlex> Recomandari</span>
+        <fa-icon [icon]="faArrowRight"></fa-icon>
+      </a>
     </li>
-
-
-
-
-
   </ul>
 </div>

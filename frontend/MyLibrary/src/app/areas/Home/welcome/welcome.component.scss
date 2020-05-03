@@ -58,13 +58,13 @@ z-index:-1;
 
 @import "welcome.small";
 
-//35em is also 560px (if basefont is 16px)
-@media only screen and (min-width: 35em) {
+//960px is also 560px (if basefont is 16px)
+@media only screen and (min-width: 960px) {
 	@import "welcome.medium";
 }
 
-//64em is also 1028px (if basefont is 16px)
-@media only screen and (min-width: 64em) {
+//1280px is also 1028px (if basefont is 16px)
+@media only screen and (min-width: 1280px) {
 	@import "welcome.large";
 }
 
