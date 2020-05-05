@@ -1,6 +1,7 @@
 package com.alina.mylibrary.repository.Admin;
 
 import com.alina.mylibrary.model.db.Book;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,7 +29,7 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
             "where lower(bc.categories.categoryTitle)=lower(:title)" +
             " and lower(c.categoryTitle)=lower(:title)"
     )
-    List<Book> getBooksByQuery(@Param("title") String title);
+    List<Book> getBooksByQuery(@Param("title") String title, Pageable pageable);
     //TODO vezi de ce nu merge
 
 }

@@ -35,11 +35,11 @@ public class PublicBookApiImp implements PublicBookApi {
     }
 
     @Override
-    public ApiResponse<List<Book>> test(String title) {
+    public ApiResponse<List<Book>> test(String title, int count) {
 
         List<Book>response = null;
         try {
-            response=this.bookService.getBooksByQuery(title);
+            response=this.bookService.getBooksByQuery(title, count);
             if(response.size()>0){
                 return new ApiResponse<List<Book>>(ApiResponseType.SUCCESS,response,"Carti aduse cu succes dupa categorie");
             }

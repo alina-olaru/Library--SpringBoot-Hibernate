@@ -2,6 +2,7 @@ package com.alina.mylibrary.dao.Interfaces.Admin;
 
 
 import com.alina.mylibrary.exception.DaoException;
+import com.alina.mylibrary.model.db.Author;
 import com.alina.mylibrary.model.db.Book;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -17,5 +18,6 @@ public interface BookDao {
     public Book addBook(Book book);
     public boolean deleteBook(int bookId);
     public Book updateBook(Book book);
-    public  List<Book> getBooksByQuery(@Param("title") String title)  throws DaoException;
+    public  List<Book> getBooksByQuery(@Param("title") String title, @Param("count") int count)  throws DaoException;
+    public List<Book> deleteBookByAuthor(Author author) throws DaoException;
 }

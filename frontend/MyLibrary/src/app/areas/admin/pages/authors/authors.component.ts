@@ -13,6 +13,7 @@ import { AuthorsService } from './authors.service';
 import { ApiResponse } from 'src/app/Models/general/api-response';
 import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
 import { ActivatedRoute } from '@angular/router';
+import { Book } from 'src/app/Models/admin/BookModel';
 
 @Component({
   selector: 'app-authors',
@@ -102,13 +103,13 @@ export class AuthorsComponent implements OnInit {
         this.loadingService.start();
 
         this.authorsService
-          .DeleteAuthor(autor.authorId)
-          .subscribe((response: ApiResponse<boolean>) => {
+          .DeleteBookByAuthor(autor)
+          .subscribe((response: ApiResponse<Book[]>) => {
             this.loadingService.stop();
             if (
               response &&
               response.status == ApiResponseType.SUCCESS &&
-              response.body == true
+              response.body.length > 0
             ) {
               this.toastr.Toast.fire({
                 title: 'Autorul a fost sters.',

@@ -1,18 +1,19 @@
-import { Observable } from "rxjs";
-import { getTestBed } from "@angular/core/testing";
-import { GlobalVarService } from "./../../../../services/global-var.service";
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { ToastrService } from "src/app/services/toastr.service";
-import { DomSanitizer } from "@angular/platform-browser";
-import { TitleService } from "../../services/title.service";
-import { MatDialog } from "@angular/material/dialog";
-import { LoadingService } from "src/app/modules/loading-spinner/loading.service";
-import { Author } from "../../../../Models/admin/AuthorModel";
-import { threadId } from "worker_threads";
-import { ApiResponse } from "src/app/Models/general/api-response";
+import { Observable } from 'rxjs';
+import { getTestBed } from '@angular/core/testing';
+import { GlobalVarService } from './../../../../services/global-var.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { ToastrService } from 'src/app/services/toastr.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { TitleService } from '../../services/title.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LoadingService } from 'src/app/modules/loading-spinner/loading.service';
+import { Author } from '../../../../Models/admin/AuthorModel';
+import { threadId } from 'worker_threads';
+import { ApiResponse } from 'src/app/Models/general/api-response';
+import { Book } from 'src/app/Models/admin/BookModel';
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthorsService {
   baseUrl: string;
@@ -26,7 +27,7 @@ export class AuthorsService {
     private sanitizer: DomSanitizer,
     private toastr: ToastrService
   ) {
-    this.baseUrl = "/api/author";
+    this.baseUrl = '/api/author';
   }
 
   GetAuthors() {
@@ -37,7 +38,13 @@ export class AuthorsService {
 
   DeleteAuthor(id: number): Observable<ApiResponse<boolean>> {
     return this.http.delete<ApiResponse<boolean>>(
-      this.globalVarService.globalUrl + this.baseUrl + "/" + id
+      this.globalVarService.globalUrl + this.baseUrl + '/' + id
+    );
+  }
+
+  DeleteBookByAuthor(author: Author): Observable<ApiResponse<Book[]>> {
+    return this.http.post<ApiResponse<Book[]>>(
+      this.globalVarService.globalUrl + this.baseUrl + '/byAuthor', author
     );
   }
 
@@ -50,7 +57,7 @@ export class AuthorsService {
 
   UpdateAuthor(author: Author, id: number): Observable<ApiResponse<Author>> {
     return this.http.put<ApiResponse<Author>>(
-      this.globalVarService.globalUrl + this.baseUrl + "/" + id,
+      this.globalVarService.globalUrl + this.baseUrl + '/' + id,
       author
     );
   }

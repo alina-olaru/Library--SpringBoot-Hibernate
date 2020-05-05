@@ -1,139 +1,159 @@
 <div class="container" fxFlex fxLayout="column">
 
 
-          <div class="container slider" fxFlex>
-            <app-slider></app-slider>
+  <div class="container slider" fxFlex>
+    <app-slider></app-slider>
+  </div>
+
+
+
+  <div class="container mt-4" fxFlex fxLayout="row" fxLayout.lt-sm="column">
+
+
+    <div fxFlex="12.5%">
+
+    </div>
+
+    <div fxFlex="25%" fxFlex.lt-sm="100%">
+      <div class="container" fxFlex fxLayout="column">
+        <div fxFlex="60%" class="under-banner-icon mb-4">
+          <fa-icon mat-list-icon [icon]="faGiftfaGift"></fa-icon>
+        </div>
+        <div fxFlex="20%" class="under-banner-text">
+          Împachetare gratuită
+
+
+        </div>
+        <div fxFlex="20%" class="under-banner-text mb-1 mb-sm-3">
+          Vrei să faci un cadou? Ți-l împachetăm gratuit!
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="25%" fxFlex.lt-sm="100%">
+      <div class="container" fxFlex fxLayout="column">
+        <div fxFlex="60%" class="under-banner-icon mb-4">
+          <fa-icon mat-list-icon [icon]="faCarSide"></fa-icon>
+
+        </div>
+        <div fxFlex="20%" class="under-banner-text" (click)="t()">
+          Livrare în 24h
+        </div>
+        <div fxFlex="20%" class="under-banner-text  mb-1 mb-sm-3">
+          pentru peste 63.000 de produse!
+        </div>
+      </div>
+    </div>
+    <div fxFlex="25%" fxFlex.lt-sm="100%">
+      <div class="container" fxFlex fxLayout="column">
+        <div fxFlex="60%" class="under-banner-icon mb-4">
+          <fa-icon mat-list-icon [icon]="faBiking"></fa-icon>
+
+        </div>
+        <div fxFlex="20%" class="under-banner-text">
+          Livrare cu bicicleta în aceeași zi
+        </div>
+        <div fxFlex="20%" class="under-banner-text  mb-1 mb-sm-3">
+          în București, pentru produsele marcate „24h”
+        </div>
+      </div>
+    </div>
+    <div>
+
+    </div>
+
+  </div>
+
+
+  <!-- CARTI DIN FIECARE CATEGORIE + REDIRECTIONARE -->
+  <div fxFlex.lt-sm="100%" fxFlex fxLayout="column" *ngFor="let cat of Categories">
+
+    <div fxFlex>
+      {{  cat.categoryTitle }}
+    </div>
+    <div fxFlex.lt-sm="100%" fxFlex.lt-md="33%" fxFlex-mt-md="20%" fxLayoutAlign="end center" fxLayout="row">
+
+      <div fxFlex.lt-sm="100%" fxFlex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.md="space-around center"
+        fxLayoutAlign.lt-md="space-between center" fxLayoutAlign.gt-md="space-around">
+        <!-- SE ADAUGA CARTILE -->
+        <div *ngFor="let book of cat.categoryBooks" id="card-2" class="card mt-5 mt-lg-0"
+        [ngStyle]="{'background-image': getUrlImageForBook(book)}">
+          <figure class="card__thumbnail mt-3 mt-lg-0">
+            <!-- <img src=book.imageBook> -->
+          </figure>
+          <div class="card__body">
+            <h3 class="title">{{book.bookTitle}}</h3>
+            <!-- <div class="pointer add-to-whishlist-icon">
+            <fa-icon  mat-list-icon [icon]="faHeart"></fa-icon>
+          </div> -->
+            <span *ngFor="let auth of book.bookAuthor" class="subtitle">{{auth.authorId.firstName}}
+              {{auth.authorId.lastName}} </span>
+            <p>
+              <svg width="16" height="16" viewBox="0 0 24 24">
+                <path
+                  d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+                </path>
+              </svg>
+              Pret : {{book.bookPrice}}
+            </p>
+
+            <p>
+              <svg width="16" height="16" viewBox="0 0 24 24">
+                <path
+                  d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+                </path>
+              </svg>
+              Nr pagini : {{book.numberOfPages}}
+            </p>
+
+            <p>
+              <svg width="16" height="16" viewBox="0 0 24 24">
+                <path
+                  d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+                </path>
+              </svg>
+              Coperta : {{book.coverType}}
+            </p>
+
+            <p>
+              <svg width="16" height="16" viewBox="0 0 24 24">
+                <path
+                  d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+                </path>
+              </svg>
+              Anul aparitiei : {{book.bookYear}}
+            </p>
+
+            <p>
+              <svg width="16" height="16" viewBox="0 0 24 24">
+                <path
+                  d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+                </path>
+              </svg>
+              Nr volume : {{book.numberofVolumes}}
+            </p>
+
+
+            <p *ngFor=" let cat of book.booksCategories">
+              <svg width="16" height="16" viewBox="0 0 24 24">
+                <path
+                  d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+                </path>
+              </svg>
+              {{cat.categories.categoryTitle}}
+            </p>
           </div>
+        </div> <!-- ./ Card #2   -->
+      </div>
+
+    </div>
 
 
 
-          <div class="container mt-4" fxFlex fxLayout="row" fxLayout.lt-sm="column">
-
-
-            <div fxFlex="12.5%">
-
-            </div>
-
-            <div fxFlex="25%"  fxFlex.lt-sm="100%">
-              <div class="container" fxFlex fxLayout="column">
-                <div fxFlex="60%" class="under-banner-icon mb-4">
-                  <fa-icon mat-list-icon [icon]="faGiftfaGift"></fa-icon>
-                </div>
-                <div fxFlex="20%" class="under-banner-text">
-                  Împachetare gratuită
-
-
-                </div>
-                <div fxFlex="20%" class="under-banner-text mb-1 mb-sm-3">
-                  Vrei să faci un cadou? Ți-l împachetăm gratuit!
-                </div>
-              </div>
-            </div>
-
-            <div fxFlex="25%"  fxFlex.lt-sm="100%">
-              <div class="container" fxFlex fxLayout="column">
-                <div fxFlex="60%" class="under-banner-icon mb-4">
-                  <fa-icon mat-list-icon [icon]="faCarSide"></fa-icon>
-
-                </div>
-                <div fxFlex="20%" class="under-banner-text">
-                  Livrare în 24h
-                </div>
-                <div fxFlex="20%" class="under-banner-text  mb-1 mb-sm-3">
-                  pentru peste 63.000 de produse!
-                </div>
-              </div>
-            </div>
-            <div fxFlex="25%"  fxFlex.lt-sm="100%">
-              <div class="container" fxFlex fxLayout="column">
-                <div fxFlex="60%" class="under-banner-icon mb-4">
-                  <fa-icon mat-list-icon [icon]="faBiking"></fa-icon>
-
-                </div>
-                <div fxFlex="20%" class="under-banner-text">
-                  Livrare cu bicicleta în aceeași zi
-                </div>
-                <div fxFlex="20%" class="under-banner-text  mb-1 mb-sm-3">
-                  în București, pentru produsele marcate „24h”
-                </div>
-              </div>
-            </div>
-            <div>
-
-            </div>
-
-          </div>
-
-
-              <!-- CARTI DIN FIECARE CATEGORIE + REDIRECTIONARE -->
-          <div  fxFlex.lt-sm="100%" fxFlex fxLayout="column">
-
-            <div fxFlex>
-              SF
-            </div>
-            <div fxFlex.lt-sm="100%" fxFlex.lt-md="33%" fxFlex.lt-xl="25%" fxLayoutAlign="end center" fxLayout="row">
-
-              <div fxFlex.lt-sm="100%" fxFlex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.md="space-around center" fxLayoutAlign.lt-md="space-between center" fxLayoutAlign.gt-md="space-around"  >
-                <!-- SE ADAUGA CARTILE -->
-                <div *ngFor="let book of SFBooks" id="card-2" class="card mt-5 mt-lg-0">
-                  <figure class="card__thumbnail mt-3 mt-lg-0">
-                    <!-- <img src=book.imageBook> -->
-                  </figure>
-                  <div class="card__body">
-                    <h3 class="title">{{book.bookTitle}}</h3>
-                    <span *ngIf="book.bookAuthor[1]!=null"class="subtitle">{{book.bookAuthor[1].authorId.firstName}} {{book.bookAuthor[1].authorId.lastName}} </span>
-                    <p>
-                      <svg width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path>
-                      </svg>
-                      {{book.bookPrice}}
-                    </p>
-                    <p  *ngIf="book.booksCategories[1]!=null">
-                      <svg width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path>
-                      </svg>
-                     {{ book.booksCategories[1].categories.categoryTitle}}
-                    </p>
-                  </div>
-                </div> <!-- ./ Card #2   -->
-              </div>
-
-            </div>
-
-            <div fxFlex.lt-sm="100%" fxFlex.lt-md="33%" fxFlex.lt-xl="25%" fxLayoutAlign="end center" fxLayout="row">
-
-              <div fxFlex.lt-sm="100%" fxFlex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.md="space-around center" fxLayoutAlign.lt-md="space-between center" fxLayoutAlign.gt-md="space-around"  >
-                <!-- SE ADAUGA CARTILE -->
-                <div *ngFor="let book of SFBooks" id="card-2" class="card mt-5">
-                  <figure class="card__thumbnail mt-3 mt-lg-0">
-                    <!-- <img src=book.imageBook> -->
-                  </figure>
-                  <div class="card__body">
-                    <h3 class="title">{{book.bookTitle}}</h3>
-                    <span *ngIf="book.bookAuthor[1]!=null"class="subtitle">{{book.bookAuthor[1].authorId.firstName}} {{book.bookAuthor[1].authorId.lastName}} </span>
-                    <p>
-                      <svg width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path>
-                      </svg>
-                      {{book.bookPrice}}
-                    </p>
-                    <p  *ngIf="book.booksCategories[1]!=null">
-                      <svg width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path>
-                      </svg>
-                     {{ book.booksCategories[1].categories.categoryTitle}}
-                    </p>
-                  </div>
-                </div> <!-- ./ Card #2   -->
-              </div>
-
-            </div>
-
-            <div fxFlex >
-              <!-- SE ADAUGA URMATOAREA CATEGORIE -->
-            </div>
-          </div>
+    <div fxFlex>
+      <!-- SE ADAUGA URMATOAREA CATEGORIE -->
+    </div>
+  </div>
 
 
 </div>
-

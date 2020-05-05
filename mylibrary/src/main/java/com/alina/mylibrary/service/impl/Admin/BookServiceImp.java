@@ -5,6 +5,7 @@ import com.alina.mylibrary.dao.Interfaces.Admin.BooksAuthorsDao;
 import com.alina.mylibrary.dao.Interfaces.Admin.BooksCategoriesDao;
 import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
+import com.alina.mylibrary.model.db.Author;
 import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.model.db.BooksCategories;
 import com.alina.mylibrary.service.Interfaces.Admin.BookService;
@@ -134,12 +135,12 @@ public class BookServiceImp implements BookService {
     }
 
     @Override
-    public List<Book> getBooksByQuery(String title) throws DBExceptions ,Exception{
+    public List<Book> getBooksByQuery(String title, int count) throws DBExceptions ,Exception{
 
 
         List<Book> response=new ArrayList<>();
         try {
-            response = this.bookDao.getBooksByQuery(title);
+            response = this.bookDao.getBooksByQuery(title, count);
             if(response.size()>0){
                 return response;
             }
@@ -159,7 +160,36 @@ public class BookServiceImp implements BookService {
         }
         return response;
         }
+
+    @Override
+    public List<Book> deleteBookByAuthor(Author author) throws DBExceptions,Exception {
+
+        if(author.equals(null)){
+            throw new DBExceptions("Obiectul trimis este gol", 400, this.getClass().getName(), "Category obj", "get");
+
+        }
+        List<Book> response=new ArrayList<>();
+        try{
+            response=this.bookDao.deleteBookByAuthor(author);
+            if(response.size()>0){
+                return response;
+            }
+            if(response.size()==0){
+                throw new DBExceptions("Service issues(BookService)", 400, this.getClass().getName(), "Book obj", "get");
+
+            }
+        }catch (DaoException e){
+            throw new DBExceptions("Am prins eroarea DAO(delete by author)", 400, this.getClass().getName(), "Book obj", "get");
+
+        }catch (Exception e){
+            throw new DBExceptions("Service issues(BookService),am prins o eroare", 400, this.getClass().getName(), "Book obj", "get");
+
+        }
+        return response;
+
     }
+    }
+
 
 
 

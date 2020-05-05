@@ -21,4 +21,7 @@ public interface BookUserService {
     public BookUser yesNewsletter(Integer userId)  throws NotFoundException, FieldException;
     public BookUser NoNewsletter(Integer userId)  throws NotFoundException, FieldException ;
     public BookUser addAddress(Address address,BookUser bookUser)  throws NotFoundException, FieldException,NullPointerException;
+
+    public void createPasswordResetTokenForUser(BookUser user, String token);
+
 }

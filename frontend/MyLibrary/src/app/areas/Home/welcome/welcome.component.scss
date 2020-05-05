@@ -160,7 +160,7 @@ svg{ fill: currentcolor; width: 1rem; height: 1rem; }
 }
 
 #card-2.card .card__body{
-  height: 400px;
+  height: 400px;;
 }
 
 .has-full-img .card__body{
@@ -188,6 +188,9 @@ svg{ fill: currentcolor; width: 1rem; height: 1rem; }
 /* Grow card thumbnail to 100% */
 .card:hover > .card__thumbnail{ height: 100%; }
 
+#card-2{
+  background-size: cover !important
+}
 
 
 /* CARD 2 Grow card body and border */
@@ -196,7 +199,7 @@ svg{ fill: currentcolor; width: 1rem; height: 1rem; }
   overflow-y: auto;
   border-radius: 2px;
   background: rgba(216, 0, 16,.80);
-  transform: translatey(calc((400px * -.65)));
+  transform: translatey(calc((400px * -.70)));
   outline: 2px solid rgba(255,255,255,0.35);
   outline-offset: -0.5rem;
 
@@ -218,3 +221,6 @@ svg{ fill: currentcolor; width: 1rem; height: 1rem; }
   color: rgba(255, 255, 255, 1);
 }
 
+.whislist-item{
+  color: red!important;
+}

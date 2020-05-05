@@ -2,13 +2,16 @@ package com.alina.mylibrary.controller.impl.Admin;
 
 import com.alina.mylibrary.controller.Interfaces.Admin.AuthorApi;
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
+import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.model.view.ApiResponse;
 import com.alina.mylibrary.model.view.ApiResponseType;
 import com.alina.mylibrary.model.db.Author;
 import com.alina.mylibrary.service.Interfaces.Admin.AuthorService;
+import com.alina.mylibrary.service.Interfaces.Admin.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -23,6 +26,9 @@ public class AutorApiImp  implements AuthorApi {
      */
     @Autowired
     private AuthorService authorService;
+
+    @Autowired
+    private BookService bookService;
 
     @Override
     public ApiResponse<Author> insertAuthor(Author author) {
@@ -78,4 +84,20 @@ public class AutorApiImp  implements AuthorApi {
         boolean response=this.authorService.deleteAuthor(id);
         return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,response);
     }
-}
+
+    @Override
+    public ApiResponse<List<Book>> deleteBooksByAuthor(Author author) {
+
+
+
+            List<Book> response=new ArrayList<>();
+            try {
+                response = this.bookService.deleteBookByAuthor(author);
+            }catch (Exception e){
+                return new ApiResponse<List<Book>>(ApiResponseType.ERROR,null,e.getMessage());
+            }
+            return new ApiResponse<List<Book>>(ApiResponseType.SUCCESS,response);
+        }
+
+
+    }

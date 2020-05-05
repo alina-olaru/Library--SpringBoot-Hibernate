@@ -12,6 +12,7 @@ import { LoadingService } from "src/app/modules/loading-spinner/loading.service"
 import { threadId } from "worker_threads";
 import { ApiResponse } from "src/app/Models/general/api-response";
 import { Book } from './../../../../Models/admin/BookModel';
+import { Author } from 'src/app/Models/admin/AuthorModel';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,11 +39,7 @@ export class BookService {
     );
   }
 
-  DeleteBook(id: number): Observable<ApiResponse<boolean>> {
-    return this.http.delete<ApiResponse<boolean>>(
-      this.globalVarService.globalUrl + this.baseUrl + "/" + id
-    );
-  }
+
 
   AddBook(Book: Book): Observable<ApiResponse<Book>> {
     return this.http.post<ApiResponse<Book>>(
@@ -57,4 +54,12 @@ export class BookService {
       Book
     );
   }
+
+  DeleteBook(id: number): Observable<ApiResponse<boolean>> {
+    return this.http.delete<ApiResponse<boolean>>(
+      this.globalVarService.globalUrl + this.baseUrl + "/" + id
+    );
+  }
+
+
 }

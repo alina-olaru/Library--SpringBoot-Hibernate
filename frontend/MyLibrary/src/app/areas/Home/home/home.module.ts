@@ -30,7 +30,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
      MenuComponent,
      ReviewComponent,
      QuizzComponent,
-     CartComponent
+     CartComponent,
 
     ],
   imports: [

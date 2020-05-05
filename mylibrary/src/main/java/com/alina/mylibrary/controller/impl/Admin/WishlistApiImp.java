@@ -3,6 +3,8 @@ package com.alina.mylibrary.controller.impl.Admin;
 
 import com.alina.mylibrary.controller.Interfaces.Guess.WishlistApi;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
+import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.view.ApiResponse;
 import com.alina.mylibrary.model.view.ApiResponseType;
 import com.alina.mylibrary.model.db.Wishlist;
@@ -67,5 +69,10 @@ public class WishlistApiImp implements WishlistApi {
     @Override
     public ApiResponse<List<DashboardWishAuthorCount>> getDashboardCountForAuthors(int limit) {
         return new ApiResponse<List<DashboardWishAuthorCount>>(ApiResponseType.SUCCESS, this.wishlistService.GetDashboardCountForAuthors(limit));
+    }
+
+    @Override
+    public ApiResponse<Boolean> deleteWishItem(BookUser user, Book book) {
+        return null;
     }
 }

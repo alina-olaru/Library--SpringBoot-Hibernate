@@ -19,7 +19,7 @@ public interface PublicBookApi {
     ApiResponse<List<Book>> getBooks(@RequestParam String category);
 
     @GetMapping("/test")
-    ApiResponse<List<Book>> test(@RequestParam String title);
+    ApiResponse<List<Book>> test(@RequestParam String title, @RequestParam int count);
 
 
 }

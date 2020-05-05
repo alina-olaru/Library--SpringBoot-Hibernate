@@ -12,6 +12,7 @@ import com.alina.mylibrary.service.Interfaces.Admin.RegisterService;
 import com.alina.mylibrary.service.impl.Admin.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -42,7 +43,8 @@ public class RegisterApiImpl implements RegisterApi {
     @Autowired
     private EmailSenderService emailSenderService;
 
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public ApiResponse<BookUser> registerUser(@RequestBody BookUser user)
@@ -66,6 +68,8 @@ public class RegisterApiImpl implements RegisterApi {
 
         else{
 
+           String password = passwordEncoder.encode(user.getPassword());
+           user.setPassword(password);
             this.userMailRepository.save(user);
             ConfirmationToken confirmationToken=new ConfirmationToken(user);
             confirmationTokenMailRepository.save(confirmationToken);

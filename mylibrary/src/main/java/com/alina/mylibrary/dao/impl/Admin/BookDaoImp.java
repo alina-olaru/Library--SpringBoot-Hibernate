@@ -2,10 +2,14 @@ package com.alina.mylibrary.dao.impl.Admin;
 
 import com.alina.mylibrary.dao.Interfaces.Admin.BookDao;
 import com.alina.mylibrary.exception.DaoException;
+import com.alina.mylibrary.exception.QueryCustomException;
+import com.alina.mylibrary.model.db.Author;
 import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.repository.Admin.AuthorRepository;
+import com.alina.mylibrary.repository.Admin.BookCustomRepository;
 import com.alina.mylibrary.repository.Admin.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -18,6 +22,9 @@ public class BookDaoImp implements BookDao {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private BookCustomRepository bookCustomRepository;
 
 
     @Autowired
@@ -100,11 +107,33 @@ public class BookDaoImp implements BookDao {
     }
 
     @Override
-    public List<Book> getBooksByQuery(String title) throws DaoException {
+    public List<Book> getBooksByQuery(String title, int count) throws DaoException {
         try {
-            return this.bookRepository.getBooksByQuery(title);
+            var books = this.bookRepository.getBooksByQuery(title, PageRequest.of(0,count));
+            books.forEach(book -> {
+                if(book.getBookImageDb()!= null){
+                    book.setBookImage(Base64.getEncoder().encodeToString(book.getBookImageDb()));
+                }
+            });
+            return books;
         }catch (Exception e){
             throw new DaoException(3);
         }
     }
-}
+
+    @Override
+    public List<Book> deleteBookByAuthor(Author author) throws DaoException{
+        List<Book> response=new ArrayList<>();
+        try {
+            response = this.bookCustomRepository.deleteBookByAuthor(author);
+            if(response.size()>0){
+                return response;
+            }
+        }catch (QueryCustomException e){
+
+            throw new DaoException(1);
+        }
+        return response;
+        }
+    }
+

@@ -1,3 +1,4 @@
+import { ChangePasswordComponent } from './areas/change-password/change-password.component';
 import { UserGuardService } from './modules/guards/user-guard.service';
 import { ConfirmationComponent } from "./areas/confirmation/confirmation.component";
 import { WelcomeComponent } from "../app/areas/Home/welcome/welcome.component";
@@ -9,6 +10,7 @@ import { AdminModule } from "./areas/admin/admin.module";
 import { AdminGuardService } from "./modules/guards/admin-guard.service";
 import { HomeModule } from "./areas/Home/home/home.module";
 import { UserModule } from "./areas/User/user/user.module";
+import { ForgetPasswordComponent } from './areas/forget-password/forget-password.component';
 const routes: Routes = [
   {
     path: "",
@@ -26,6 +28,16 @@ const routes: Routes = [
   {
     path: "confirm-account",
     component: ConfirmationComponent,
+  },
+  {
+
+    path:'forget-password',
+    component:ForgetPasswordComponent
+  },
+  {
+
+    path:'change-password',
+    component:ChangePasswordComponent
   },
   {
     path: "admin",

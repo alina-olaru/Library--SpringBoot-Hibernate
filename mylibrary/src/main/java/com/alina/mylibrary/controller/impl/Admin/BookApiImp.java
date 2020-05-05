@@ -1,13 +1,16 @@
 package com.alina.mylibrary.controller.impl.Admin;
 
 import com.alina.mylibrary.controller.Interfaces.Admin.BookApi;
+import com.alina.mylibrary.model.db.Author;
 import com.alina.mylibrary.model.view.ApiResponse;
 import com.alina.mylibrary.model.view.ApiResponseType;
 import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.service.Interfaces.Admin.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -60,4 +63,6 @@ public class BookApiImp implements BookApi {
       boolean response= this.bookService.deleteBook(id);
       return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,response);
     }
+
+
 }

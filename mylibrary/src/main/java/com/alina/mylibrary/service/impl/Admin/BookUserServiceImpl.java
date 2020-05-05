@@ -5,6 +5,8 @@ import com.alina.mylibrary.dao.Interfaces.Admin.BookUserDao;
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
 import com.alina.mylibrary.model.db.Address;
 import com.alina.mylibrary.model.db.BookUser;
+import com.alina.mylibrary.model.db.PasswordResetToken;
+import com.alina.mylibrary.repository.Admin.passwordTokenRepository;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class BookUserServiceImpl implements BookUserService {
 
     @Autowired
     private BookUserDao bookUserDao;
+
+    @Autowired
+    private passwordTokenRepository passwordTokenRepository;
 
     @Override
     public BookUser GetUserByUsernameOrEmail(String searchKey) {
@@ -109,4 +114,12 @@ public class BookUserServiceImpl implements BookUserService {
         bookUser.getAddresses().add(address);
       return  this.bookUserDao.updateBookUser(bookUser);
        }
+
+    @Override
+    public void createPasswordResetTokenForUser(BookUser user, String token) {
+        PasswordResetToken myToken=new PasswordResetToken(token,user);
+
+        this.passwordTokenRepository.save(myToken);
+
     }
+}

@@ -1,3 +1,5 @@
+import { Category } from 'src/app/Models/admin/CategoryModel';
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GlobalVarService } from 'src/app/services/global-var.service';
@@ -14,6 +16,7 @@ import { Book } from 'src/app/Models/admin/BookModel';
 })
 export class LandingBooksService {
   baseUrl:string;
+  baseUrlCat:string;
 
 constructor(
 
@@ -28,13 +31,26 @@ constructor(
 
 )   {
   this.baseUrl="/public/api/landing/book";
+  this.baseUrlCat="/api/admin/Category";
 }
 
 
-GetBooksSF(){
+GetCategories(){
 
+  return this.http.get <ApiResponse<Category[]>>(this.globalVarService.globalUrl +this.baseUrlCat);
+}
+GetBooksSF(title: string, count: number){
 
-  return this.http.get<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.baseUrl + '/all');
+  // const params1=new HttpParams();
+  // const body=null;
+  // params1.set('title' , 'SF');
+
+  let params1 = new HttpParams().
+  set("title", title)
+  .append("count", count.toString());
+
+  return this.http.get<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.baseUrl + '/test' ,
+  { params: params1 });
 
 }
 
