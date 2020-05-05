@@ -1,1 +1,157 @@
-<p>book-details works!</p>
+<div fxFlex fxLayout="column">
+  <div FxFlex>
+<div class="mt-lg-5 mt-0 container">
+<div fxFlex fxLayout="row wrap">
+  <div fxFlex="40%" fxFlex.lt-sm="100%" fxFlex.mt-sm="50%" >
+
+   <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="">
+    <img [src]="book.bookImageSrc" class="image-book">
+   </div>
+
+  </div>
+  <div  fxLayoutAlign="start center" fxFlex="60%" fxFlex.lt-sm="100%" fxFlex.mt-sm="50%" class="book-details">
+   <div fxFlex fxLayout="column">
+      <div fxFlex fxLayout="row" class="ml-4">
+
+        <div fxFlex="30%">
+          Titlu:
+        </div>
+        <div fxFlex="70%" class="ml-1">
+          {{book.bookTitle}}
+        </div>
+      </div>
+
+<!-- autori -->
+     <div fxFlex fxLayout="row" class="ml-4">
+
+      <div fxFlex="30%">
+       Autori:
+      </div>
+      <div fxFlex="30%" fxLayout="row wrap">
+       <div *ngFor="let author of book.bookAuthor" class="ml-1">{{author.authorId.firstName}} {{author.authorId.lastName}} </div>
+      </div>
+
+    </div>
+
+    <div fxFlex fxLayout="row" class="ml-4">
+
+      <div  *ngIf="book.publisher" fxFlex="30%">
+       Editura:
+      </div>
+      <div fxFlex="30%" fxLayout="row wrap">
+       <div *ngFor="let pub of book.publisher" class="ml-1"> {{pub.publisherTitle}} </div>
+      </div>
+
+    </div>
+
+    <div  *ngIf="book.booksCategories" fxFlex fxLayout="row" class="ml-4">
+
+      <div fxFlex="30%">
+       Categorii:
+      </div>
+      <div fxFlex="30%" fxLayout="row wrap">
+       <div *ngFor="let cat of book.booksCategories" class="ml-1">{{cat.categories.categoryTitle}} </div>
+      </div>
+
+    </div>
+
+    <!-- cu verificare -->
+    <div  *ngIf="book.bookDimension" fxFlex fxLayout="row" class="ml-4">
+
+      <div fxFlex="30%">
+        Dimensiune:
+      </div>
+      <div fxFlex="70%" class="ml-1">
+        {{book.bookDimension}}
+      </div>
+    </div>
+
+    <div *ngIf="book.bookLanguage" fxFlex fxLayout="row" class="ml-4">
+
+      <div fxFlex="30%">
+        Limba:
+      </div>
+      <div  fxFlex="70%" class="ml-1">
+        {{book.bookLanguage}}
+      </div>
+    </div>
+
+    <div  *ngIf="book.bookPrice" fxFlex fxLayout="row" class="ml-4">
+
+      <div fxFlex="30%">
+        Pret:
+      </div>
+      <div fxFlex="70%" class="ml-1">
+        {{book.bookPrice}}
+      </div>
+    </div>
+
+    <div *ngIf="book.bookRating" fxFlex fxLayout="row" class="ml-4">
+
+      <div fxFlex="30%">
+       Rating:
+      </div>
+      <div  fxFlex="70%" class="ml-1">
+        {{book.bookRating}}
+      </div>
+    </div>
+
+    <div *ngIf="book.bookWeight" fxFlex fxLayout="row" class="ml-4">
+
+      <div fxFlex="30%">
+       Greutate:
+      </div>
+      <div  fxFlex="70%" class="ml-1">
+        {{book.bookWeight}}
+      </div>
+    </div>
+
+    <div  *ngIf="book.coverType" fxFlex fxLayout="row" class="ml-4">
+
+      <div fxFlex="30%">
+       Coperta:
+      </div>
+      <div fxFlex="70%" class="ml-1">
+        {{book.coverType}}
+      </div>
+    </div>
+
+    <div *ngIf="book.numberOfBoooks" fxFlex fxLayout="row" class="ml-4">
+
+      <div fxFlex="30%">
+       STOC:
+      </div>
+      <div fxFlex="70%" class="ml-1">
+        {{book.numberOfBoooks}}
+      </div>
+    </div>
+
+    <div  *ngIf="book.numberOfPages"fxFlex fxLayout="row" class="ml-4">
+
+      <div fxFlex="30%">
+     Numar pagini:
+      </div>
+      <div  fxFlex="70%" class="ml-1">
+        {{book.numberOfPages}}
+      </div>
+    </div>
+
+    <div *ngIf="book.numberofVolumes" fxFlex fxLayout="row" class="ml-4">
+
+      <div fxFlex="30%">
+     Numar volume:
+      </div>
+      <div  fxFlex="70%" class="ml-1">
+        {{book.numberofVolumes}}
+      </div>
+    </div>
+
+   </div>
+  </div>
+</div>
+</div>
+</div>
+<div FxFlex>
+ {{book.bookDescription}}
+</div>
+</div>

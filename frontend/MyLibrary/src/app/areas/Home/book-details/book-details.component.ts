@@ -1,3 +1,4 @@
+import { DomSanitizer } from '@angular/platform-browser';
 import { ApiResponse } from "./../../../Models/general/api-response";
 import { LandingBooksService } from "./../welcome/LandingBooks.service";
 import { Component, OnInit } from "@angular/core";
@@ -18,7 +19,8 @@ export class BookDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private landingBooksService: LandingBooksService
+    private landingBooksService: LandingBooksService,
+    private domSanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +36,11 @@ export class BookDetailsComponent implements OnInit {
       .subscribe((response: ApiResponse<Book>) => {
         if (response && response.status == ApiResponseType.SUCCESS) {
           this.book = response.body;
+          if(this.book.bookImage){
+            this.book.bookImageSrc = this.domSanitizer.bypassSecurityTrustResourceUrl(
+              "data:image/jpg;base64,"+this.book.bookImage
+            )
+          }
           console.log(this.book);
         } else {
           this.toastr.Toast.fire({
@@ -48,5 +55,13 @@ export class BookDetailsComponent implements OnInit {
           title: "A aparut o eroare",
         });
       };
+  }
+
+
+  getUrlImageForBook(){
+    {
+      return "url('data:image/jpg;base64," + this.book.bookImage + "')";
+        }
+
   }
 }

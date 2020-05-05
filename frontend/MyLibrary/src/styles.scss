@@ -46,3 +46,8 @@ html, body, app-root {
 .pointer{
   cursor: pointer !important;
 }
+
+.router-wrapper>*:nth-child(2){
+  display:flex;
+  flex: 1 1 auto;
+}
