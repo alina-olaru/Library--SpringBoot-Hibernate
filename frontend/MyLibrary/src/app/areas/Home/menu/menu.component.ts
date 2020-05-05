@@ -17,13 +17,7 @@ export class MenuComponent implements OnInit {
 
 
 
-   toggmenu()
-   {
-     console.log("click");
-    $(this).toggleClass('nb-open');
-    $('.site-nav').toggleClass('sn-open');
-    $('.bar').toggleClass('b-open');
-  }
+
 }
 
 
