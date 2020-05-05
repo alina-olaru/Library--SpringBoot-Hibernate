@@ -54,4 +54,9 @@ GetBooksSF(title: string, count: number){
 
 }
 
+
+GetDetails(id : number){
+  return this.http.get<ApiResponse<Book>>(this.globalVarService.globalUrl+this.baseUrl+"/details/" + id);
+}
+
 }

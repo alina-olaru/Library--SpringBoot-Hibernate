@@ -67,7 +67,8 @@ export class WelcomeComponent implements OnInit {
             //Nu ai si tb scoasa din view coloana
           }
           this.Categories = response.body;
-          console.log(this.Categories + "OBIECTE SUS");
+
+
 
           this.Categories.forEach((element) => {
             this.CategoriesTitles.push(element.categoryTitle);
@@ -77,7 +78,7 @@ export class WelcomeComponent implements OnInit {
         }
       });
 
-    console.log(this.Categories + "OBIECTE JOS");
+
   }
   GetBooksForCategories() {
     this.Categories.forEach((e) => {
@@ -99,21 +100,12 @@ return "url('data:image/jpg;base64," + book.bookImage + "')";
   }
 
 
-  t() {
-    console.log("OBIECTELE: " + this.Categories.length);
-    this.Categories.forEach((element) => {
-      console.log(element);
-    });
-    console.log("TITLURILE: " + this.CategoriesTitles.length);
-    this.CategoriesTitles.forEach((element) => {
-      console.log(element);
-    });
-  }
+
 
 
   AddToWhishlist(){
 
-    console.log("click");
+
     var x = document.getElementsByClassName("add-to-whishlist-icon");
     $(".add-to-whishlist-icon").addClass("whislist-item");
 
@@ -122,8 +114,8 @@ return "url('data:image/jpg;base64," + book.bookImage + "')";
   }
 
   viewDetails(bookId : number){
-    console.log("clicked");
-    this.router.navigate(['/welcome/book'], {queryParams : { id: bookId}});
+
+    this.router.navigate(['/home', 'book',  bookId]);
   }
 }
 
