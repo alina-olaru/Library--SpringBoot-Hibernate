@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { getElement } from '@amcharts/amcharts4/core';
 import { Category } from "src/app/Models/admin/CategoryModel";
 import { LoadingService } from "src/app/modules/loading-spinner/loading.service";
@@ -29,7 +30,7 @@ export class WelcomeComponent implements OnInit {
   faGiftfaGift = faGift;
   faCarSide = faCarSide;
   faBiking = faBiking;
-  faHeart=faHeart;
+  faHeart = faHeart;
   open: boolean = false;
   SFBooks: Book[];
 
@@ -44,7 +45,8 @@ export class WelcomeComponent implements OnInit {
 
   constructor(
     public landingBookService: LandingBooksService,
-    public loadingService: LoadingService
+    public loadingService: LoadingService,
+    public router: Router
   ) {
     this.countOfBooks = 2;
   }
@@ -82,7 +84,7 @@ export class WelcomeComponent implements OnInit {
       this.loadingService.start();
       this.landingBookService.GetBooksSF(e.categoryTitle, this.countOfBooks).subscribe(
         response => {
-          if(response.status == ApiResponseType.SUCCESS){
+          if (response.status == ApiResponseType.SUCCESS){
             e.categoryBooks = response.body;
           }
 
@@ -93,35 +95,9 @@ export class WelcomeComponent implements OnInit {
   }
 
   getUrlImageForBook(book: Book){
-return "url('data:image/jpg;base64,"+book.bookImage+"')";
+return "url('data:image/jpg;base64," + book.bookImage + "')";
   }
 
-  // GetSF() {
-  //   this.loadingService.start();
-
-  //   this.landingBookService
-  //     .GetBooksSF()
-  //     .subscribe((response: ApiResponse<Book[]>) => {
-  //       this.loadingService.stop();
-
-  //       // tslint:disable-next-line: triple-equals
-  //       if (response && response.status == ApiResponseType.SUCCESS) {
-  //         if (response.body.length == 0) {
-  //           //Nu ai si tb scoasa din view coloana
-  //         }
-  //         this.SFBooks = response.body;
-  //         // console.log("body " + response.body+ " SFBOOKS"+ this.SFBooks);
-  //         this.SFBooks.forEach((Book) => {
-  //           console.log(Book);
-  //         });
-  //       }
-  //     });
-  // }
-
-  // GetBooks() {
-  //   this.GetSF();
-  //   // console.log(this.SFBooks);
-  // }
 
   t() {
     console.log("OBIECTELE: " + this.Categories.length);
@@ -141,10 +117,13 @@ return "url('data:image/jpg;base64,"+book.bookImage+"')";
     var x = document.getElementsByClassName("add-to-whishlist-icon");
     $(".add-to-whishlist-icon").addClass("whislist-item");
 
-1
 
 
+  }
 
+  viewDetails(bookId : number){
+    console.log("clicked");
+    this.router.navigate(['/welcome/book'], {queryParams : { id: bookId}});
   }
 }
 

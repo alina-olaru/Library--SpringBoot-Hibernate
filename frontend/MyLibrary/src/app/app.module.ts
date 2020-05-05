@@ -45,7 +45,7 @@ import { ChangePasswordComponent } from './areas/change-password/change-password
     AccountOverviewComponent,
     AddAddressComponent,
     ForgetPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
 
   ],
   imports: [

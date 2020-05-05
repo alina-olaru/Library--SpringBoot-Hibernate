@@ -17,6 +17,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { DespreComponent } from '../despre/despre.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BookDetailsComponent } from '../book-details/book-details.component';
 
 
 
@@ -31,6 +32,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
      ReviewComponent,
      QuizzComponent,
      CartComponent,
+
+    BookDetailsComponent
 
     ],
   imports: [

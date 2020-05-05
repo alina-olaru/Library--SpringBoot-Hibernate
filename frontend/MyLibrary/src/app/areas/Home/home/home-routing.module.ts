@@ -8,6 +8,7 @@ import { WelcomeComponent } from "../welcome/welcome.component";
 import { NgModule, Component } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { DespreComponent } from "../despre/despre.component";
+import { BookDetailsComponent } from '../book-details/book-details.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,10 @@ const routes: Routes = [
         path:"cart",
         component:CartComponent
       },
+      {
+        path:"book/:id",
+        component:BookDetailsComponent
+      }
     ],
   },
   {
