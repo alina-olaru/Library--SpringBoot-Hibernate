@@ -106,6 +106,18 @@ public class BookServiceImp implements BookService {
     }
 
     @Override
+    public Book getBookById(int id) throws DBExceptions {
+        Book response=null;
+        try{
+            response=this.bookDao.getBookbyId(id);
+        }catch (Exception e){
+            throw new DBExceptions(e.getMessage(), 404, this.getClass().getName(), "book obj", "get");
+        }
+
+        return response;
+    }
+
+    @Override
     public List<Book> getBookByCategory(String category) throws DBExceptions {
         if(category.equals(null)){
             throw new DBExceptions("Obiectul trimis este gol", 400, this.getClass().getName(), "Category obj", "get");

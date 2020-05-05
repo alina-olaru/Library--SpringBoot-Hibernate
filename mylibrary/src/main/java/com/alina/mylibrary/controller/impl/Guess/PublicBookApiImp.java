@@ -51,6 +51,22 @@ public class PublicBookApiImp implements PublicBookApi {
         return new ApiResponse<List<Book>>(ApiResponseType.SUCCESS,response,"totul e bine");
     }
 
+    @Override
+    public ApiResponse<Book> getBookById(int id) {
+
+        Book response=null;
+        try{
+            response=this.bookService.getBookById(id);
+        }catch (DBExceptions ex){
+            return new ApiResponse<Book>(ApiResponseType.ERROR,null, ex.getMessage());
+        }
+        catch (Exception ex){
+            return new ApiResponse<Book>(ApiResponseType.ERROR,null, ex.getMessage());
+        }
+
+        return new ApiResponse<Book>(ApiResponseType.SUCCESS,response,"S-a adus cartea cu id-ul dat din baza de date cu succs");
+    }
+
 
 }
 
