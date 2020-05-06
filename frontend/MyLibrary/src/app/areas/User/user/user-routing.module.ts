@@ -25,7 +25,7 @@ const routes: Routes = [
             component: AddressesBookComponent,
           },
           {
-            path: 'bilbiotecapersonala',
+            path: 'bibiotecapersonala',
             component: MyBooksComponent,
           },
           {

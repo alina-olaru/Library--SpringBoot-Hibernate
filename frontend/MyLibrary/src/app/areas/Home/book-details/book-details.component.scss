@@ -8,3 +8,21 @@
   max-width: 90%;
   height: auto;
 }
+
+
+.user-actions-class{
+  @media(min-width:1200px){
+    max-height: 30%!important;
+    margin-top: 212px!important;
+
+  }
+}
+
+
+.already-in-whishlist{
+  color:rgb(255, 0, 0);
+}
+
+.already-saved{
+  color:rgb(16, 233, 16);
+}

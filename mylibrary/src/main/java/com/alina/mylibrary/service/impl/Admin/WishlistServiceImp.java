@@ -51,8 +51,12 @@ public class WishlistServiceImp implements WishlistService {
 
     @Override
     public Wishlist AddWishlist(Wishlist wishlist) throws DBExceptions {
-        if(wishlist.equals(null)){
-            throw new DBExceptions("Obiectul trimis este gol",400,this.getClass().getName(),"wishlist obj","Insert");
+        if(wishlist.getBookwishlist().equals(null)){
+            throw new DBExceptions("Obiectul carte trimis este gol",400,this.getClass().getName(),"wishlist obj","Insert");
+
+        }
+        if(wishlist.getUserwishlist().equals(null)){
+            throw new DBExceptions("Obiectul user trimis este gol",400,this.getClass().getName(),"wishlist obj","Insert");
 
         }
         Wishlist response=null;

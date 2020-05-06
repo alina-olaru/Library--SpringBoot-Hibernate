@@ -18,7 +18,7 @@ import java.util.List;
 public interface WishlistApi {
 
     @PostMapping
-    ApiResponse<Wishlist> inserWishlist(@RequestBody Wishlist wishlist);
+    ApiResponse<Wishlist> insertWishlist(@RequestBody Wishlist wishlist);
 
 
     @DeleteMapping(path = "/{id}")
