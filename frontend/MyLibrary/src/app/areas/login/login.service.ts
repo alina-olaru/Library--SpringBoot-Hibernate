@@ -26,8 +26,7 @@ export class LoginService {
     private httpClient: HttpClient,
     private gloablVarService: GlobalVarService,
     private cookieService: CookieService,
-    private router: Router,
-    private toastr: ToastrService
+    private router: Router
   ) {
 
     this.baseUrl = "";
@@ -81,19 +80,6 @@ export class LoginService {
               );
             }
           }
-          if (x.status == ApiResponseType.ERROR){
-            //
-            this.toastr.Swal.fire({
-              icon: "error",
-              title: x.message,
-              allowOutsideClick: false,
-              allowEscapeKey: false,
-            }).then((result) => {
-              if (result.value) {
-                this.router.navigate(["/login"]);
-              }
-            });
-            }
         })
       );
   }

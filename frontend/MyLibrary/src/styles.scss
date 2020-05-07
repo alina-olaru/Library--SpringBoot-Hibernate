@@ -50,4 +50,5 @@ html, body, app-root {
 .router-wrapper>*:nth-child(2){
   display:flex;
   flex: 1 1 auto;
+  flex-direction: column;
 }

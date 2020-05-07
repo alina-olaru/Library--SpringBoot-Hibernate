@@ -1,25 +1,27 @@
-import { JwtResponse } from './../../Models/general/jwt-response';
-import { JwtRequest } from './../../Models/general/jwt-request';
-import { Component, OnInit } from '@angular/core';
-import { BookUser } from 'src/app/Models/BookUser';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LoginService } from './login.service';
-import { ToastrService } from 'src/app/services/toastr.service';
-import { CookieService } from 'ngx-cookie-service';
-import { ApiResponse } from 'src/app/Models/general/api-response';
-import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
+import { Subscription } from "rxjs";
+import { JwtResponse } from "./../../Models/general/jwt-response";
+import { JwtRequest } from "./../../Models/general/jwt-request";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { BookUser } from "src/app/Models/BookUser";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { LoginService } from "./login.service";
+import { ToastrService } from "src/app/services/toastr.service";
+import { CookieService } from "ngx-cookie-service";
+import { ApiResponse } from "src/app/Models/general/api-response";
+import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
+  private $subscription: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,6 +31,9 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService,
     private cookieService: CookieService
   ) {}
+  ngOnDestroy(): void {
+    this.$subscription.unsubscribe();
+  }
 
   ngOnInit() {
     if (this.loginService.getUser() != null) {
@@ -36,8 +41,8 @@ export class LoginComponent implements OnInit {
     }
 
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ["", Validators.required],
+      password: ["", Validators.required],
     });
   }
 
@@ -48,22 +53,34 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) {
       const reqeust: JwtRequest = new JwtRequest(this.loginForm.value);
-      this.loginService
-        .loginUser(reqeust)
-        .subscribe((response: ApiResponse<JwtResponse>) => {
+      this.$subscription = this.loginService.loginUser(reqeust).subscribe(
+        (response: ApiResponse<JwtResponse>) => {
           if (response && response.status == ApiResponseType.SUCCESS) {
             this.toastr.Toast.fire({
-              icon: 'success',
-              title: 'Autentificare cu succes!'
+              icon: "success",
+              title: "Autentificare cu succes!",
             });
             this.redirectToPage(response.body.bookUser);
           } else {
-            this.toastr.Toast.fire({
-              icon: 'error',
-              title: 'Utilizator sau parola incorecte'
+            this.toastr.Swal.fire({
+              icon: "error",
+              title: response.message,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+            }).then((result) => {
+              if (result.value) {
+                this.router.navigate(["/login"]);
+              }
             });
           }
-        });
+        },
+        (error) => {
+          this.toastr.Toast.fire({
+            icon: "error",
+            title: "A aparut o eroare la executarea autentificarii!",
+          });
+        }
+      );
     }
 
     // this.submitted = true;
@@ -78,10 +95,9 @@ export class LoginComponent implements OnInit {
 
   redirectToPage(user: BookUser) {
     if (user.adminPrivilege == true) {
-      this.router.navigate(['admin']);
-    }
-    else {
-      this.router.navigate(['/cont/accountOverview']);
+      this.router.navigate(["admin"]);
+    } else {
+      this.router.navigate(["/cont/accountOverview"]);
     }
   }
 }

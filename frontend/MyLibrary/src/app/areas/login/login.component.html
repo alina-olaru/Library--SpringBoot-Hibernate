@@ -25,8 +25,8 @@
               </mat-form-field>
 
 
-              <div fxFlex fxLayout="row">
-                <div fxFlex class="">
+              <div fxFlex fxLayout="row" fxLayoutGap="30px">
+                <div fxFlex>
                   <button fxFlex mat-raised-button color="primary" type="button" [disabled]="!loginForm.valid"
                     (click)="onSubmit()">
                     Login
@@ -37,9 +37,9 @@
                     Inregistrare
                   </a>
                 </div>
-                       <div fxFlex>
-                  <a  [routerLink]="['/forget-password']"  fxFlex mat-raised-button color="accent" type="button">
-                   Mi-am uitat parola
+                <div fxFlex>
+                  <a [routerLink]="['/forget-password']" fxFlex mat-raised-button color="accent" type="button">
+                    Mi-am uitat parola
                   </a>
                 </div>
               </div>

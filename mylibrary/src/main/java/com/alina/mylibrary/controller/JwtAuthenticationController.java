@@ -1,9 +1,9 @@
 package com.alina.mylibrary.controller;
 
 import com.alina.mylibrary.config.JwtTokenUtil;
+import com.alina.mylibrary.model.db.*;
 import com.alina.mylibrary.model.view.ApiResponse;
 import com.alina.mylibrary.model.view.ApiResponseType;
-import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.auth.JwtRequest;
 import com.alina.mylibrary.model.auth.JwtResponse;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 @RestController
@@ -48,6 +49,11 @@ public class JwtAuthenticationController {
             final String token = jwtTokenUtil.generateToken(userDetails);
 
             BookUser user = this.bookUserService.GetUserByUsernameOrEmail(authenticationRequest.getUsername());
+            user.setWishBooks(new ArrayList<Wishlist>());
+            user.setReviewsByUser(new ArrayList<Review>());
+            user.setPersBooks(new ArrayList<PersonalBook>());
+            user.setUserComplaints(new ArrayList<Complaint>());
+            user.setUserVoucherLink(new ArrayList<VoucherUser>());
             return new ApiResponse<JwtResponse>(ApiResponseType.SUCCESS, new JwtResponse(token, user));
         } catch (Exception ex) {
 
