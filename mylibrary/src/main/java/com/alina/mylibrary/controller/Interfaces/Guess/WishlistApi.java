@@ -27,6 +27,9 @@ public interface WishlistApi {
     @GetMapping
     ApiResponse<List<Wishlist>> getWhislists();
 
+    @GetMapping(path="/{id}")
+    ApiResponse<List<Book>> getWhishForUser(@PathVariable int id);
+
     @GetMapping(path = "/dashboard/author")
     ApiResponse<List<DashboardWishAuthorCount>> getDashboardCountForAuthors(@RequestParam int limit);
 

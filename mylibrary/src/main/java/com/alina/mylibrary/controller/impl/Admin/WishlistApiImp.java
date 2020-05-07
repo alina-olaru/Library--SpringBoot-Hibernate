@@ -69,7 +69,13 @@ public class WishlistApiImp implements WishlistApi {
     }
 
     @Override
-    public ApiResponse<List<DashboardWishAuthorCount>> getDashboardCountForAuthors(int limit) {
+    public   ApiResponse<List<Book>>  getWhishForUser(int id) {
+        return new   ApiResponse<List<Book>>(ApiResponseType.SUCCESS,this.wishlistService.getBooksWishForUser(id));
+    }
+
+    @Override
+    public ApiResponse<List<DashboardWishAuthorCount>> getDashboardCountForAuthors(int limit)
+    {
         return new ApiResponse<List<DashboardWishAuthorCount>>(ApiResponseType.SUCCESS, this.wishlistService.GetDashboardCountForAuthors(limit));
     }
 

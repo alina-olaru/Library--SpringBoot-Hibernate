@@ -16,6 +16,7 @@ public interface WishListDao {
     Wishlist getWishlistById(int wishlistId);
     Boolean deleteWishlist(int wishlistId) throws DaoException;
     Wishlist addWishlist(Wishlist wishlist) throws DaoException;
+    List<Book> getBooksWishForUser(Integer id);
 
 
 

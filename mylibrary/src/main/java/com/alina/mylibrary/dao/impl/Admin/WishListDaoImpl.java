@@ -9,6 +9,7 @@ import com.alina.mylibrary.repository.Guest.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -61,6 +62,17 @@ public class WishListDaoImpl implements WishListDao {
         }
     }
 
+    @Override
+    public List<Book> getBooksWishForUser(Integer id) {
+        List<Wishlist> wishlists=this.wishlistRepository.findAll();
+        List<Book> response=new ArrayList<>();
+        for(Wishlist w :wishlists){
+            if(w.getUserwishlist().getUserId()==id){
+                response.add(w.getBookwishlist());
+            }
+        }
+        return response;
+    }
 
 
 }
