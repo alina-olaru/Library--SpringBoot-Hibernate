@@ -7,6 +7,16 @@ public class QueryCustomException extends Exception {
     private String className;
     private String operation;
 
+    public QueryCustomException(String message) {
+        this.message = message;
+    }
+    public QueryCustomException(){
+        this.className="";
+        this.error_name="";
+        this.operation="";
+        this.query_affected="";
+        this.message="";
+    }
 
     public QueryCustomException(String message, String error_name, String query_affected, String className, String operation) {
         this.message = message;

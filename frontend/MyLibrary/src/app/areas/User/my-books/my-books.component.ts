@@ -1,8 +1,17 @@
+import { ApiResponse } from 'src/app/Models/general/api-response';
+import { LoginService } from 'src/app/areas/login/login.service';
+import { PersonalBookService } from './../../Home/book-details/personalBook.service';
 import { MyLibraryService } from './my-library.service';
 import { AddBookViaOCRComponent } from './../add-book-via-ocr/add-book-via-ocr.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import { PersonalBook } from 'src/app/Models/home/PersonalBook';
+import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
+import { Router } from '@angular/router';
+import { ToastrService } from 'src/app/services/toastr.service';
+import { LandingBooksService } from '../../Home/welcome/LandingBooks.service';
+import { Book } from 'src/app/Models/admin/BookModel';
 
 @Component({
   selector: 'app-my-books',
@@ -19,12 +28,18 @@ export class MyBooksComponent implements OnInit {
   isMediumeScreen:Boolean;
   x:string;
   y:string;
+  books:PersonalBook[];
 
 
   constructor(
     public dialog: MatDialog,
     public breakpointObserver:BreakpointObserver,
-   public libraryService:MyLibraryService
+   public libraryService:MyLibraryService,
+   public personalBookS:PersonalBookService,
+   public auth:LoginService,
+   public router:Router,
+   private toastr: ToastrService,
+   private landingBooksService: LandingBooksService,
   ) {
     this.UrlOCR="https://api.ocr.space/parse/image";
     this.isSmallScreen = breakpointObserver.isMatched('(max-width: 599px)');
@@ -34,7 +49,7 @@ export class MyBooksComponent implements OnInit {
 
    }
 
-  ngOnInit(): void {
+ngOnInit(): void {
 
     if(this.isLargeScreen==true){
 
@@ -53,7 +68,14 @@ export class MyBooksComponent implements OnInit {
       this.heigth=440;
     }
 
-    this.GetText();
+    // this.GetText();
+    /**
+ *
+ *Aduc cartile pe rand,prima data le aduc pe cele adaugate din interfata(existente in librarie)
+ *
+ */
+
+    this.getMyBooksFromLibrary();
   }
 
   AddBook(){
@@ -73,11 +95,57 @@ export class MyBooksComponent implements OnInit {
     });
   }
 
-    GetText(){
-      this.libraryService.GetText().subscribe((response) => {
-        console.log(response);
-      });
+    // GetText(){
+    //   this.libraryService.GetText().subscribe((response) => {
+    //     console.log(response);
+    //   });
 
+    // }
+
+    getMyBooksFromLibrary(){
+    //TODO ADD LOADING PESTE TOT
+      this.personalBookS.getBooks(1,this.auth.getUser().userId).subscribe((response:ApiResponse<PersonalBook[]>) => {
+
+
+    if (response && response.status == ApiResponseType.SUCCESS) {
+
+    //  this.books=response.body;
+    response.body.forEach(element => {
+      this.books.push(element);
+    })
     }
-  }
+         else {
+          {//TODO ADD POPUPUL ASTA GENERAL PESTE TOT
+            this.toastr.Swal.fire({
+              icon: "error",
+              title: "Au aparut probleme cu serverul nostru.Contacteaza-ne pentru detalii!",
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+            }).then((result) => {
+              if (result.value) {
+                this.router.navigate(["/home/welcome"]);
+              }
+            });
+          }
+        }
+
+
+
+
+      })
+    }
+
+
+  getUrlImageForBook(book: Book){
+    return "url('data:image/jpg;base64," + book.bookImage + "')";
+      }
+
+      viewDetails(bookId : number){
+
+        this.router.navigate(['/home', 'book',  bookId]);
+      }
+    }
+
+
+
 

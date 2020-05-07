@@ -1,10 +1,12 @@
 package com.alina.mylibrary.service.impl.Admin;
 
 
+import com.alina.mylibrary.dao.Interfaces.Admin.BookUserDao;
 import com.alina.mylibrary.dao.Interfaces.Admin.WishListDao;
 import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.db.Wishlist;
 import com.alina.mylibrary.model.view.dashboard.DashboardWishAuthorCount;
 import com.alina.mylibrary.service.Interfaces.Admin.WishlistService;
@@ -19,6 +21,9 @@ public class WishlistServiceImp implements WishlistService {
 
     @Autowired
     private WishListDao wishListDao;
+
+    @Autowired
+    private BookUserDao bookUserDao;
 
     @Override
     public List<Wishlist> GetAllWishlists() {
@@ -42,11 +47,6 @@ public class WishlistServiceImp implements WishlistService {
         }
 
 
-//        public String message;
-//        public Integer code;
-//        public String className;
-//        public String field;
-//        public String operationAffected;
         return w;
     }
 
@@ -74,21 +74,31 @@ public class WishlistServiceImp implements WishlistService {
     }
 
     @Override
-    public Boolean DeleteWishlits(int wishlistId)throws DBExceptions {
-        if(wishlistId==0)
-            return false;
-        Boolean response=false;
+    public Boolean DeleteWishlits(Wishlist wishlistId) throws DBExceptions {
         try {
-            response = wishListDao.deleteWishlist(wishlistId);
-        }catch(DaoException e){
+            return this.wishListDao.deleteWishlist(wishlistId);
+        }catch (Exception e){
             throw new DBExceptions(e.getMessage(),400,this.getClass().getName(),"wishlist obj","delete");
 
-        }catch (Exception e){
-            throw new DBExceptions(e.getMessage(),500,this.getClass().getName(),"wishlist obj","delete");
-
         }
-        return response;
     }
+
+//    @Override
+//    public Boolean DeleteWishlits(int wishlistId)throws DBExceptions {
+//        if(wishlistId==0)
+//            return false;
+//        Boolean response=false;
+//        try {
+//            response = wishListDao.deleteWishlist(wishlistId);
+//        }catch(DaoException e){
+//            throw new DBExceptions(e.getMessage(),400,this.getClass().getName(),"wishlist obj","delete");
+//
+//        }catch (Exception e){
+//            throw new DBExceptions(e.getMessage(),500,this.getClass().getName(),"wishlist obj","delete");
+//
+//        }
+//        return response;
+//    }
 
     @Override
     public List<DashboardWishAuthorCount> GetDashboardCountForAuthors(int limit) {
@@ -104,7 +114,21 @@ public class WishlistServiceImp implements WishlistService {
 
     @Override
     public List<Book> getBooksWishForUser(Integer id) {
-        return this.wishListDao.getBooksWishForUser(id);
+
+        BookUser user = this.bookUserDao.getBookUserById(id);
+
+        return this.wishListDao.getBooksWishForUser(user);
+
+    }
+
+    @Override
+    public Boolean checkIfWish(Integer userId, Integer bookId) {
+        return this.wishListDao.checkIfWish(userId,bookId);
+    }
+
+    @Override
+    public Wishlist findByUserwishlistAndBookwishlist(BookUser bookUser, Book book) {
+       return this.wishListDao.findByUserwishlistAndBookwishlist(bookUser,book);
     }
 
 }

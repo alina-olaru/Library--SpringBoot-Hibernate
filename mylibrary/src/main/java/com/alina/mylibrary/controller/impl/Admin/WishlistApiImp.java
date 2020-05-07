@@ -9,6 +9,8 @@ import com.alina.mylibrary.model.view.ApiResponse;
 import com.alina.mylibrary.model.view.ApiResponseType;
 import com.alina.mylibrary.model.db.Wishlist;
 import com.alina.mylibrary.model.view.dashboard.DashboardWishAuthorCount;
+import com.alina.mylibrary.service.Interfaces.Admin.BookService;
+import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
 import com.alina.mylibrary.service.Interfaces.Admin.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +23,12 @@ public class WishlistApiImp implements WishlistApi {
 
     @Autowired
     private WishlistService wishlistService;
+
+    @Autowired
+    private BookUserService bookUserService;
+
+    @Autowired
+    private BookService bookService;
 
     @Override
     public ApiResponse<Wishlist> insertWishlist(@RequestBody Wishlist wishlist) {
@@ -43,25 +51,9 @@ public class WishlistApiImp implements WishlistApi {
         return new  ApiResponse<Wishlist>(ApiResponseType.ERROR,null,"A aparut o eroare interna");
     }
 
-    @Override
-    public ApiResponse<Boolean> deleteWishlist(int id) {
-       Boolean response=false;
-       try{
-           response=this.wishlistService.DeleteWishlits(id);
-           if(response!=null){
-               return new  ApiResponse<Boolean>(ApiResponseType.SUCCESS,response,"S-a sters cu succes din baza de date");
 
-           }
-       }catch(DBExceptions e){
-           return new  ApiResponse<Boolean>(ApiResponseType.ERROR,null,e.message);
 
-       }
-       catch(Exception e){
-           return new  ApiResponse<Boolean>(ApiResponseType.ERROR,null,e.getMessage());
 
-       }
-        return new  ApiResponse<Boolean>(ApiResponseType.ERROR,null,"A aparut o eroare interna");
-    }
 
     @Override
     public ApiResponse<List<Wishlist>> getWhislists() {
@@ -80,7 +72,35 @@ public class WishlistApiImp implements WishlistApi {
     }
 
     @Override
-    public ApiResponse<Boolean> deleteWishItem(@RequestBody BookUser user, Book book) {
-        return null;
+    public ApiResponse<Boolean> deleteWishItem(int bookId, int userId) {
+        Book book=null;
+        BookUser user=null;
+        try {
+            book = this.bookService.getBookById(bookId);
+        }catch (Exception ex){
+            return new ApiResponse<Boolean>(ApiResponseType.ERROR,false);
+        }
+        try {
+            user=this.bookUserService.GetUserByuserId(userId);
+        }catch (Exception ex){
+            return new ApiResponse<Boolean>(ApiResponseType.ERROR,false);
+        }
+
+Boolean response=false;
+        Wishlist w=this.wishlistService.findByUserwishlistAndBookwishlist(user,book);
+        try {
+            response=this.wishlistService.DeleteWishlits(w);
+          return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,response);
+        }catch (Exception e){
+            return new ApiResponse<Boolean>(ApiResponseType.ERROR,false);
+        }
+        //return new ApiResponse<Boolean>(ApiResponseType.ERROR,false);
+    }
+
+
+
+    @Override
+    public ApiResponse<Boolean> checkIfExists(int bookId, int userId) {
+        return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,this.wishlistService.checkIfWish(userId,bookId));
     }
 }

@@ -156,22 +156,27 @@
           <div fxLayoutAlign="center center"  fxLayoutAlign.lt-md="start start" fxFlex class="mr-lg-0 mr-sm-3 pl-4 pl-lg-0">
 
 
-            <button mat-raised-button color="warn" (click)="AddToWhishlist()">
-              <mat-icon>bookmarks</mat-icon>
+            <button *ngIf="alreadyInWishlist" mat-raised-button color="warn" (click)="AddToWhishlist()">
+              <mat-icon>favorite</mat-icon>
               Adauga in whishlist
           </button>
+
+          <button *ngIf="!alreadyInWishlist" mat-raised-button color="warn" (click)="DeleteFromWishlist()">
+            <mat-icon>favorite</mat-icon>
+           Sterge din whishlist
+        </button>
 
         </div>
         <div fxLayoutAlign="center center"  fxLayoutAlign.lt-md="start start" fxFlex>
 
           <button mat-raised-button color="primary" >
-            <mat-icon>favorite</mat-icon>
+            <mat-icon>add_shopping_cart</mat-icon>
             Adauga in cos
         </button>
         </div>
         <div fxLayoutAlign="center center"  fxLayoutAlign.lt-md="start start" fxFlex>
 
-          <button mat-raised-button color="default">
+          <button mat-raised-button color="default" (click)="AddToPersonal()">
             <mat-icon>bookmarks</mat-icon>
            Adauga in biblioteca personala
         </button>
@@ -187,3 +192,6 @@
     {{book.bookDescription}}
   </div>
 </div>
+
+
+<!-- //TODO ADD BUTON DE BACK -->

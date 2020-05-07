@@ -23,6 +23,8 @@ public interface WishlistRepository extends JpaRepository<Wishlist, Integer> {
     List<Wishlist> findByuserwishlist(BookUser userwishlist) throws RepositoryException;
     List<Wishlist> findBybookwishlist(Book bookwishlist) throws RepositoryException;
     Boolean deleteByBookwishlistAndUserwishlist(Book book,BookUser bookUser) throws RepositoryException;
+    Wishlist findByUserwishlistAndBookwishlist(BookUser bookUser,Book book);
+
 
 
 

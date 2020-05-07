@@ -21,9 +21,6 @@ public interface WishlistApi {
     ApiResponse<Wishlist> insertWishlist(@RequestBody Wishlist wishlist);
 
 
-    @DeleteMapping(path = "/{id}")
-    ApiResponse<Boolean> deleteWishlist(@PathVariable int id);
-
     @GetMapping
     ApiResponse<List<Wishlist>> getWhislists();
 
@@ -34,7 +31,10 @@ public interface WishlistApi {
     ApiResponse<List<DashboardWishAuthorCount>> getDashboardCountForAuthors(@RequestParam int limit);
 
 
-    @DeleteMapping("/deleteItem")
-    ApiResponse<Boolean> deleteWishItem(@RequestBody BookUser user,@RequestBody Book book);
+    @DeleteMapping
+    ApiResponse<Boolean> deleteWishItem(@RequestParam int bookId, @RequestParam int userId);
+
+    @GetMapping("/exists")
+    ApiResponse<Boolean> checkIfExists(@RequestParam int bookId, @RequestParam int userId);
 
 }

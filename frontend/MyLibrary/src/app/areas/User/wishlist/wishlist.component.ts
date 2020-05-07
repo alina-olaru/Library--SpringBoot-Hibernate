@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Book } from 'src/app/Models/admin/BookModel';
 import { BookUser } from 'src/app/Models/BookUser';
 import { LoginService } from 'src/app/areas/login/login.service';
@@ -15,7 +16,8 @@ user:BookUser;
 books:Book[];
 
   constructor(public wishlistService:WishlistService,
-              public auth:LoginService) { }
+              public auth:LoginService,
+              public router:Router) { }
 
   ngOnInit(): void {
     this.user=this.auth.getUser();
@@ -30,4 +32,15 @@ books:Book[];
     }))
 
   }
+
+  getUrlImageForBook(book: Book){
+    return "url('data:image/jpg;base64," + book.bookImage + "')";
+      }
+
+      viewDetails(bookId : number){
+
+        this.router.navigate(['/home', 'book',  bookId]);
+      }
+
+
 }

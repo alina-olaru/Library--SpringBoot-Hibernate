@@ -15,7 +15,7 @@
     </div>
 
     <div fxFlex="25%" fxFlex.lt-sm="100%">
-      <div class="container" fxFlex fxLayout="column">
+      <div class="container mb-5" fxFlex fxLayout="column">
         <div fxFlex="60%" class="under-banner-icon mb-4">
           <fa-icon mat-list-icon [icon]="faGiftfaGift"></fa-icon>
         </div>
@@ -31,7 +31,7 @@
     </div>
 
     <div fxFlex="25%" fxFlex.lt-sm="100%">
-      <div class="container" fxFlex fxLayout="column">
+      <div class="container mb-5" fxFlex fxLayout="column">
         <div fxFlex="60%" class="under-banner-icon mb-4">
           <fa-icon mat-list-icon [icon]="faCarSide"></fa-icon>
 
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div fxFlex="25%" fxFlex.lt-sm="100%">
-      <div class="container" fxFlex fxLayout="column">
+      <div class="container mb-5" fxFlex fxLayout="column">
         <div fxFlex="60%" class="under-banner-icon mb-4">
           <fa-icon mat-list-icon [icon]="faBiking"></fa-icon>
 
@@ -67,11 +67,11 @@
 
   <!-- CARTI DIN FIECARE CATEGORIE + REDIRECTIONARE -->
   <div fxFlex.lt-sm="100%" fxFlex fxLayout="column" *ngFor="let cat of Categories">
-
+<div *ngIf="Categories.length > 0"
     <div fxFlex>
       {{  cat.categoryTitle }}
     </div>
-    <div fxFlex.lt-sm="100%" fxFlex.lt-md="33%" fxFlex-mt-md="20%" fxLayoutAlign="end center" fxLayout="row">
+    <div fxFlex.lt-sm="100%" fxFlex.lt-md="33%" fxFlex-mt-md="20%" fxLayoutAlign="end center" fxLayout="row" class="mb-5">
 
       <div fxFlex.lt-sm="100%" fxFlex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.md="space-around center"
         fxLayoutAlign.lt-md="space-between center" fxLayoutAlign.gt-md="space-around">
@@ -151,10 +151,8 @@
 
 
 
-    <div fxFlex>
-      <!-- SE ADAUGA URMATOAREA CATEGORIE -->
-    </div>
   </div>
-
-
 </div>
+
+
+
