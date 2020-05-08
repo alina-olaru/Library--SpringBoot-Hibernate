@@ -86,10 +86,10 @@ public class WishlistApiImp implements WishlistApi {
             return new ApiResponse<Boolean>(ApiResponseType.ERROR,false);
         }
 
-Boolean response=false;
+            Boolean response=false;
         Wishlist w=this.wishlistService.findByUserwishlistAndBookwishlist(user,book);
         try {
-            response=this.wishlistService.DeleteWishlits(w);
+            response=this.wishlistService.DeleteWishlits(user,book);
           return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,response);
         }catch (Exception e){
             return new ApiResponse<Boolean>(ApiResponseType.ERROR,false);
@@ -98,9 +98,10 @@ Boolean response=false;
     }
 
 
-
     @Override
-    public ApiResponse<Boolean> checkIfExists(int bookId, int userId) {
+    public ApiResponse<Boolean> checkIfExists(int bookId, int userId)
+    {
+
         return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,this.wishlistService.checkIfWish(userId,bookId));
     }
 }

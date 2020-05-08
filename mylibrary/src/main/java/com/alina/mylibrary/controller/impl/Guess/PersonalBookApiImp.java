@@ -49,4 +49,18 @@ public class PersonalBookApiImp implements PersonalBookApi {
            return new  ApiResponse<List<PersonalBook>>(ApiResponseType.ERROR,null,"a aparut o eroare in getMyBooks"+e.getMessage());
        }
     }
+
+    @Override
+    public ApiResponse<Boolean> checkIfPersonal(Integer bookId, Integer userId) {
+        Boolean response=false;
+        try{
+            response = this.personalBookService.checkIfIsMyBook(userId , bookId);
+            return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,response);
+        }catch (DBExceptions ex){
+            return new ApiResponse<Boolean>(ApiResponseType.ERROR,response,"DBExceptions prinsa");
+
+        }catch (Exception ex){
+            return new ApiResponse<Boolean>(ApiResponseType.ERROR,response,"Exception prinsa");
+        }
+    }
 }

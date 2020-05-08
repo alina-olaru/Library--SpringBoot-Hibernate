@@ -27,7 +27,17 @@ export class WishlistService {
     );
   }
 
-  DeleteWishlist(wishlist: Wishlist) {}
+  DeleteWishlist(userId: number, bookId: number) {
+    const params = new HttpParams()
+    .set('bookId', bookId.toString())
+    .append('userId', userId.toString());
+
+  return this.httpClient.delete<ApiResponse<boolean>>(
+    this.globalVarService.globalUrl + this.baseUrl ,
+    { params }
+  );
+
+  }
 
   GetWishlistById(id: number) {
     return this.httpClient.get<ApiResponse<Book[]>>(

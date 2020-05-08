@@ -14,9 +14,9 @@ public interface WishlistService {
     public List<Wishlist> GetAllWishlists();
     public Wishlist GetWishlistById(int wishlistId) throws DBExceptions;
     public Wishlist AddWishlist(Wishlist wishlist) throws DBExceptions;
-    public Boolean DeleteWishlits(Wishlist wishlistId) throws DBExceptions;
+    public Boolean DeleteWishlits(BookUser bookUser, Book book) throws DBExceptions;
     public List<DashboardWishAuthorCount> GetDashboardCountForAuthors(int limit);
     List<Book> getBooksWishForUser(Integer id);
     public Boolean checkIfWish(Integer userId, Integer bookId);
-    public    Wishlist findByUserwishlistAndBookwishlist(BookUser bookUser, Book book);
+    public Wishlist findByUserwishlistAndBookwishlist(BookUser bookUser, Book book);
 }

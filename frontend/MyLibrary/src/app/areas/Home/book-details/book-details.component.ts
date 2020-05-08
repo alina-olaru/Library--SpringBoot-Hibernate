@@ -26,7 +26,8 @@ export class BookDetailsComponent implements OnInit {
   bookId: number;
   wishlist : Wishlist;
   user : BookUser;
-  alreadyInWishlist : Boolean=false;
+  alreadyInWishlist : Boolean = false;
+  alreadyInMyBooks : Boolean = false;
   personalBook : PersonalBook;
   stringFinal:string=" ";
   subscriptions: Subscription[] = [];
@@ -39,22 +40,26 @@ export class BookDetailsComponent implements OnInit {
     private wishService:WishlistService,
     private router:Router,
     private personalBookService:PersonalBookService
-  ) {}
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.bookId = parseInt(this.route.snapshot.paramMap.get("id"));
     this.GetBookById(this.bookId);
     this.user=this.auth.getUser();
     this.checkIfWish();
+    this.checkIPers();
 
   }
-
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((e) => {
       e.unsubscribe();
     });
   }
+
+  // ---------------------------------BOOK-----------------------------------------------------------
 
   GetBookById(id: number) {
     this.bookId = id;
@@ -98,8 +103,10 @@ export class BookDetailsComponent implements OnInit {
 
   }
 
+  // ---------------------------------WISHLIST-----------------------------------------------------------
   AddToWhishlist(){
 
+    console.log("here");
     this.wishlist = new Wishlist();
     this.wishlist.userwishlist=this.user;
     this.wishlist.bookwishlist=this.book;
@@ -128,18 +135,19 @@ export class BookDetailsComponent implements OnInit {
 
     })
 
-
+    console.log("here");
     this.subscriptions.push(addtowish);
   }
 
   checkIfWish(){
-
-  const checkIfisWish=  this.wishService.checkIfWish(this.user.userId,this.book.bookId).subscribe((response:ApiResponse<Boolean>)=>{
+    console.log("here");
+  const checkIfisWish=  this.wishService.checkIfWish(this.user.userId,this.bookId).subscribe((response:ApiResponse<Boolean>)=>{
 
 
       if (response && response.status == ApiResponseType.SUCCESS) {
 
-        (response.body==false)? this.alreadyInWishlist=false :this.alreadyInWishlist=true;
+        (response.body==true)? this.alreadyInWishlist=false :this.alreadyInWishlist=true;
+        console.log("dupa request: " + this.alreadyInWishlist);
 
       }
            else {
@@ -153,12 +161,69 @@ export class BookDetailsComponent implements OnInit {
     })
 
 this.subscriptions.push(checkIfisWish);
+console.log("here");
   }
 
 
   DeleteFromWishlist(){
-//TODO DE FACUT STERGEREA + BACKEND
-  }
+    //TODO DE FACUT STERGEREA + BACKEND
+
+    const del = this.wishService.DeleteWishlist(this.user.userId , this.bookId).subscribe((response : ApiResponse<boolean>) => {
+
+
+      if (response && response.status == ApiResponseType.SUCCESS) {
+        this.toastr.Swal.fire({
+          icon: "success",
+          title: "Cartea a fost stersa cu succes din wishlist",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        }).then((result) => {
+          if (result.value) {
+           // this.router.navigate(['/cont/wishlist']);
+           //todo refresh pagina or smth
+          }
+        });
+      }
+           else {
+            this.toastr.Toast.fire({
+              icon: "error",
+              title: response.message,
+            });
+          }
+
+
+    });
+    location.reload();
+      }
+
+
+    // ---------------------------------PERSONALBOOK-----------------------------------------------------------
+
+  checkIPers(){
+
+    const checkIPerss= this.personalBookService.checkIfBookIsAlreadyPersonal(this.user.userId,this.book.bookId).subscribe((response:ApiResponse<Boolean>)=>{
+
+
+        if (response && response.status == ApiResponseType.SUCCESS) {
+
+          (response.body==false)? this.alreadyInMyBooks=false :this.alreadyInMyBooks=true;
+
+        }
+             else {
+              this.toastr.Toast.fire({
+                icon: "error",
+                title: response.message,
+              });
+            }
+
+
+      })
+
+  this.subscriptions.push(checkIPerss);
+    }
+
+
+
 
   AddToPersonal(){
     console.log("bookid " + this.bookId);
@@ -213,5 +278,10 @@ this.subscriptions.push(checkIfisWish);
   })
 
   this.subscriptions.push(addpersb);
+  }
+
+
+  DeleteFromPersonal(){
+
   }
 }

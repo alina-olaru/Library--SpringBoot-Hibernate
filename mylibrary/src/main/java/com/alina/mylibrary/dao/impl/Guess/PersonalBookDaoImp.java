@@ -1,7 +1,9 @@
 package com.alina.mylibrary.dao.impl.Guess;
 
 import com.alina.mylibrary.dao.Interfaces.Guest.PersonalBookDao;
+import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.model.db.PersonalBook;
+import com.alina.mylibrary.model.db.Wishlist;
 import com.alina.mylibrary.repository.Guest.PersonalBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,5 +44,16 @@ public class PersonalBookDaoImp implements PersonalBookDao {
             }
         }
         return response;
+    }
+
+    @Override
+    public Boolean checkIfIsMyBook(Integer userId, Integer bookId) {
+      List<PersonalBook> w=this.personalBookRepository.findAll();
+        for (PersonalBook w1 : w) {
+            if ((w1.getUser().getUserId() == userId) && (w1.getBook().getBookId() == bookId)) {
+                return true;
+            }
+        }
+     return false;
     }
 }

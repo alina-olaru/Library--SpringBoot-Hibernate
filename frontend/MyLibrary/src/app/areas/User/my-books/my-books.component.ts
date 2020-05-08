@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { LandingBooksService } from '../../Home/welcome/LandingBooks.service';
 import { Book } from 'src/app/Models/admin/BookModel';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-my-books',
@@ -28,7 +29,8 @@ export class MyBooksComponent implements OnInit {
   isMediumeScreen:Boolean;
   x:string;
   y:string;
-  books:PersonalBook[];
+  booksbyLibrary:Book[]=[];
+  subscriptions: Subscription[] = [];
 
 
   constructor(
@@ -78,6 +80,16 @@ ngOnInit(): void {
     this.getMyBooksFromLibrary();
   }
 
+
+
+
+ngOnDestroy(): void {
+  this.subscriptions.forEach((e) => {
+    e.unsubscribe();
+  });
+}
+
+
   AddBook(){
     console.log(this.heigth +  "  "+ this.width);
     this.x=this.width+"px";
@@ -104,16 +116,27 @@ ngOnInit(): void {
 
     getMyBooksFromLibrary(){
     //TODO ADD LOADING PESTE TOT
-      this.personalBookS.getBooks(1,this.auth.getUser().userId).subscribe((response:ApiResponse<PersonalBook[]>) => {
+   const getBooks=  this.personalBookS.getBooks(1,this.auth.getUser().userId).subscribe((response:ApiResponse<PersonalBook[]>) => {
 
 
     if (response && response.status == ApiResponseType.SUCCESS) {
 
-    //  this.books=response.body;
-    response.body.forEach(element => {
-      this.books.push(element);
-    })
-    }
+      if(response.body.length>0){
+
+    // response.body.forEach(element => {
+    //   this.booksbyLibrary.push(element.book);
+    // });
+
+    this.booksbyLibrary=response.body.map(e => e.book);
+
+
+  }
+
+else{
+  console.log("nu exista carti in biblioteca pers");
+  //TODO DE PUS  O IMG SAU CEVA IN HTML
+}
+}
          else {
           {//TODO ADD POPUPUL ASTA GENERAL PESTE TOT
             this.toastr.Swal.fire({
@@ -133,6 +156,8 @@ ngOnInit(): void {
 
 
       })
+
+      this.subscriptions.push(getBooks);
     }
 
 

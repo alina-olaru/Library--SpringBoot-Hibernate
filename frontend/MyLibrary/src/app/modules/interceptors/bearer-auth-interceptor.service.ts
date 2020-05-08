@@ -10,7 +10,7 @@ export class BearerAuthInterceptorService implements HttpInterceptor {
     next: import("@angular/common/http").HttpHandler
   ): import("rxjs").Observable<import("@angular/common/http").HttpEvent<any>> {
     let token = this.auth.token;
-
+    console.log(token);
     if (token) {
       req = req.clone({
         setHeaders: {

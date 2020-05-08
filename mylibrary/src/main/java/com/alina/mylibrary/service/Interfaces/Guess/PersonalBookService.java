@@ -10,4 +10,5 @@ import java.util.List;
 public interface PersonalBookService {
     PersonalBook addBook(PersonalBook personalBook);
     public List<PersonalBook> getMyBooks(Integer type, Integer userId) throws DBExceptions;
+    Boolean checkIfIsMyBook(Integer userId,Integer bookId) throws DBExceptions,Exception;
 }

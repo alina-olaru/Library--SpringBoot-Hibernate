@@ -15,4 +15,5 @@ public interface PersonalBookDao {
      *
      */
     public List<PersonalBook> getMyBooks(Integer type , Integer userId);
+    Boolean checkIfIsMyBook(Integer userId,Integer bookId);
 }

@@ -20,18 +20,18 @@
     <div fxFlex.lt-sm="100%" fxFlex fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign.md="space-around center"
       fxLayoutAlign.lt-md="space-between center" fxLayoutAlign.gt-md="space-around">
       <!-- SE ADAUGA CARTILE -->
-      <div *ngFor="let book of books" id="card-2" class="card mb-3 mt-5 mt-lg-0"
+      <div *ngFor="let book of booksbyLibrary" id="card-2" class="card mb-3 mt-5 mt-lg-0"
         [ngStyle]="{'background-image': getUrlImageForBook(book)}">
         <figure class="card__thumbnail mt-3 mt-lg-0">
           <!-- <img src=book.imageBook> -->
         </figure>
-        <div class="card__body" (click)="viewDetails(book.book.bookId)">
-          <h3 class="title">{{book.book.bookTitle}}</h3>
+        <div class="card__body" (click)="viewDetails(book.bookId)">
+          <h3 class="title">{{book.bookTitle}}</h3>
 
           <!-- <div class="pointer add-to-whishlist-icon">
         <fa-icon  mat-list-icon [icon]="faHeart"></fa-icon>
       </div> -->
-          <span *ngFor="let auth of book.book.bookAuthor" class="subtitle">{{auth.authorId.firstName}}
+          <span *ngFor="let auth of book.bookAuthor" class="subtitle">{{auth.authorId.firstName}}
             {{auth.authorId.lastName}} </span>
           <p>
             <svg width="16" height="16" viewBox="0 0 24 24">
@@ -39,7 +39,7 @@
                 d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
               </path>
             </svg>
-            Pret : {{book.book.bookPrice}}
+            Pret : {{book.bookPrice}}
           </p>
 
           <p>
@@ -48,7 +48,7 @@
                 d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
               </path>
             </svg>
-            Nr pagini : {{book.book.numberOfPages}}
+            Nr pagini : {{book.numberOfPages}}
           </p>
 
           <p>
@@ -57,7 +57,7 @@
                 d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
               </path>
             </svg>
-            Coperta : {{book.book.coverType}}
+            Coperta : {{book.coverType}}
           </p>
 
           <p>
@@ -66,7 +66,7 @@
                 d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
               </path>
             </svg>
-            Anul aparitiei : {{book.book.bookYear}}
+            Anul aparitiei : {{book.bookYear}}
           </p>
 
           <p>
@@ -75,11 +75,11 @@
                 d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
               </path>
             </svg>
-            Nr volume : {{book.book.numberofVolumes}}
+            Nr volume : {{book.numberofVolumes}}
           </p>
 
 
-          <p *ngFor=" let cat of book.book.booksCategories">
+          <p *ngFor=" let cat of book.booksCategories">
             <svg width="16" height="16" viewBox="0 0 24 24">
               <path
                 d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">

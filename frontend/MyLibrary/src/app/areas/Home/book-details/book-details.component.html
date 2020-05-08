@@ -176,10 +176,15 @@
         </div>
         <div fxLayoutAlign="center center"  fxLayoutAlign.lt-md="start start" fxFlex>
 
-          <button mat-raised-button color="default" (click)="AddToPersonal()">
+          <button *ngIf="alreadyInMyBooks" mat-raised-button color="default" (click)="AddToPersonal()">
             <mat-icon>bookmarks</mat-icon>
            Adauga in biblioteca personala
         </button>
+
+        <button *ngIf="!alreadyInMyBooks" mat-raised-button color="default" (click)="DeleteFromPersonal()">
+          <mat-icon>bookmarks</mat-icon>
+        Sterge din biblioteca personala
+      </button>
 
           </div>
 

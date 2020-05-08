@@ -29,7 +29,7 @@ export class LandingBooksService {
     private toastr: ToastrService
   ) {
     this.baseUrl = "/public/api/landing/book";
-    this.baseUrlCat = "/api/admin/Category";
+    this.baseUrlCat = "/public/api/admin/Category";
   }
 
   GetCategories() {

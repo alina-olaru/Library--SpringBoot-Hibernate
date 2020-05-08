@@ -32,4 +32,15 @@ export class PersonalBookService {
     return this.httpClient.get<ApiResponse<PersonalBook[]>>(this.globalVarService.globalUrl+this.baseUrl,
       {params : params});
   }
+
+
+
+  checkIfBookIsAlreadyPersonal(userId:number,bookId:number){
+
+    let params=new HttpParams()
+    .set("bookId",bookId.toString())
+    .append("userId",userId.toString());
+    return this.httpClient.get<ApiResponse<Boolean>>(this.globalVarService.globalUrl + this.baseUrl + "/my",
+      {params : params});
+  }
 }

@@ -38,9 +38,9 @@ public class WishListDaoImpl implements WishListDao {
     }
 
     @Override
-    public Boolean deleteWishlist(Wishlist wishlist) throws DaoException {
+    public Boolean deleteWishlist(BookUser bookUser,Book book) throws DaoException {
         try {
-            return this.wishlistCustomRepository.DeleteWishlistByObj(wishlist);
+            return this.wishlistRepository.deleteByBookwishlistAndUserwishlist(book,bookUser);
         }catch (Exception e){
             return false;
         }

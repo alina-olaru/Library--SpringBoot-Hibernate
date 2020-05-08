@@ -28,4 +28,11 @@ public class Wishlist implements Serializable {
     @JoinColumn(foreignKey = @ForeignKey(name="FK_USER_WISHLIST_ID"))
     private BookUser userwishlist;
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" +
+                '}';
+    }
+
 }

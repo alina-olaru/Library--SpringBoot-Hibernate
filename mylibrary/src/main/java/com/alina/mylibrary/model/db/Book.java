@@ -132,5 +132,12 @@ public class Book {
         new_book.setWishBooks(old_book.getWishBooks());
         return new_book;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                '}';
+    }
 }
 

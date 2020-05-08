@@ -21,4 +21,9 @@ public interface PersonalBookApi {
 
     @GetMapping
     ApiResponse<List<PersonalBook>> getMyBooks(@RequestParam Integer type,@RequestParam Integer userId);
+
+
+
+    @GetMapping("/my")
+    ApiResponse<Boolean> checkIfPersonal(@RequestParam Integer bookId,@RequestParam Integer userId);
 }

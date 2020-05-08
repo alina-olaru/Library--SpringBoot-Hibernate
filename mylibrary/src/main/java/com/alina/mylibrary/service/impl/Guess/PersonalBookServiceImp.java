@@ -32,5 +32,18 @@ public class PersonalBookServiceImp implements PersonalBookService {
        }
       return this.personalBookDao.getMyBooks(type,userId);
         }
+
+    @Override
+    public Boolean checkIfIsMyBook(Integer userId, Integer bookId) throws DBExceptions, Exception {
+        //TODO find by id null ->eroare
+
+        boolean response=false;
+        try{
+           response =  this.personalBookDao.checkIfIsMyBook(userId,bookId);
+           return response;
+        }catch (Exception ex){
+            throw new DBExceptions(ex.getMessage(), 400, this.getClass().getName(), "personalBook obj", "get(for checking)");
+        }
     }
+}
 
