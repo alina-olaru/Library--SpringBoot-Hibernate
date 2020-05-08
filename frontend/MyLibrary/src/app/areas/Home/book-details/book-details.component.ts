@@ -201,12 +201,12 @@ console.log("here");
 
   checkIPers(){
 
-    const checkIPerss= this.personalBookService.checkIfBookIsAlreadyPersonal(this.user.userId,this.book.bookId).subscribe((response:ApiResponse<Boolean>)=>{
+    const checkIPerss= this.personalBookService.checkIfBookIsAlreadyPersonal(this.user.userId,this.bookId).subscribe((response:ApiResponse<Boolean>)=>{
 
 
         if (response && response.status == ApiResponseType.SUCCESS) {
 
-          (response.body==false)? this.alreadyInMyBooks=false :this.alreadyInMyBooks=true;
+          (response.body==true)? this.alreadyInMyBooks=false :this.alreadyInMyBooks=true;
 
         }
              else {
@@ -282,6 +282,34 @@ console.log("here");
 
 
   DeleteFromPersonal(){
+    //TODO DE FACUT STERGEREA + BACKEND
 
-  }
+    const del = this.personalBookService.deletePers(this.user.userId , this.bookId).subscribe((response : ApiResponse<boolean>) => {
+
+
+      if (response && response.status == ApiResponseType.SUCCESS) {
+        this.toastr.Swal.fire({
+          icon: "success",
+          title: "Cartea a fost stersa cu succes din biblioteca personala",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        }).then((result) => {
+          if (result.value) {
+           // this.router.navigate(['/cont/wishlist']);
+           //todo refresh pagina or smth
+          }
+        });
+      }
+           else {
+            this.toastr.Toast.fire({
+              icon: "error",
+              title: response.message,
+            });
+          }
+
+
+    });
+    location.reload();
+      }
+
 }

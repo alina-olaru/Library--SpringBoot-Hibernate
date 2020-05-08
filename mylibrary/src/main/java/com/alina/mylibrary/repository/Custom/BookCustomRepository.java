@@ -1,4 +1,4 @@
-package com.alina.mylibrary.repository.Admin;
+package com.alina.mylibrary.repository.Custom;
 
 
 import com.alina.mylibrary.exception.QueryCustomException;

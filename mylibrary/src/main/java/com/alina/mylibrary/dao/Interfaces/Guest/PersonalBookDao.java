@@ -1,5 +1,8 @@
 package com.alina.mylibrary.dao.Interfaces.Guest;
 
+import com.alina.mylibrary.exception.DaoException;
+import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.db.PersonalBook;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +19,6 @@ public interface PersonalBookDao {
      */
     public List<PersonalBook> getMyBooks(Integer type , Integer userId);
     Boolean checkIfIsMyBook(Integer userId,Integer bookId);
+    Boolean deletePers(BookUser bookUser, Book book) throws DaoException;
+
 }

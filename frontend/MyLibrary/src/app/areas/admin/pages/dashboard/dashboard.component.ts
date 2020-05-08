@@ -1,3 +1,4 @@
+import { DashboardService } from './dashboard.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { TitleService } from '../../services/title.service';
@@ -5,6 +6,12 @@ import { LoadingService } from 'src/app/modules/loading-spinner/loading.service'
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import { Category } from 'src/app/Models/admin/CategoryModel';
+import { Router } from '@angular/router';
+import { LandingBooksService } from 'src/app/areas/Home/welcome/LandingBooks.service';
+import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
+import { ApiResponse } from 'src/app/Models/general/api-response';
+import { CategoryNumberBooks } from 'src/app/Models/dashboard/CategoryNumberBooks';
 
 am4core.useTheme(am4themes_animated);
 
@@ -20,23 +27,61 @@ export class DashboardComponent implements OnInit {
   private chart_third:am4charts.XYChart;
   private chart_fourth:am4charts.XYChart;
   private chart_fifth:am4charts.XYChart;
-
-
-
-
+  Categories: Category[];
+  CategoriesTitles: string[] = [];
+  countOfBooks: number;
+  //-----------------sch1----------------------------
+  countBookCategories:number[]=[];
+  titlesCategories:string[]=[];
+  CategoriesWithNumber:CategoryNumberBooks[]=[];
 
   constructor(
     private toastr: ToastrService,
     private titleService: TitleService,
     private loadingService: LoadingService,
-    private zone:NgZone
+    public landingBookService: LandingBooksService,
+    public router: Router,
+    private zone:NgZone,
+    private dash:DashboardService
   ) {
 
       }
 
       ngOnInit(){
+        this.getCategoriesWithNumberBooks();
 
       }
+
+
+
+
+      //------------------------------ADUCEM INFORMATIILE-----------------------------------
+
+            //-----------------------------CHART 1---------------------------------
+
+      getCategoriesWithNumberBooks(){
+
+        return this.dash.getCategoriesWithNumberBooks().subscribe((response:ApiResponse<CategoryNumberBooks[]>) =>{
+
+      if (response && response.status == ApiResponseType.SUCCESS) {
+        console.log("s-a intrat in req");
+        if (response.body.length == 0) {
+          this.toastr.Toast.fire({
+            icon: "info",
+            title: "Nu exista edituri in baza de date"
+          });
+        }
+      }
+      else{
+
+        this.CategoriesWithNumber=response.body;
+      }
+        })
+
+        console.log(this.CategoriesWithNumber+ " dasshhh");
+      }
+
+
     ngAfterViewInit() {
       //NR DE CARTI -> CATEGORIE (TOT VANDUTE)
       //AUTOR + CARTI VANDUTE
@@ -57,59 +102,9 @@ export class DashboardComponent implements OnInit {
           data.push({ date: new Date(2018, 0, i), name: "name" + i, value: visits });
         }
 
-        chart.data =  [{
-          "country": "USA",
-          "visits": 4025
-        }, {
-          "country": "China",
-          "visits": 1882
-        }, {
-          "country": "Japan",
-          "visits": 1809
-        }, {
-          "country": "Germany",
-          "visits": 1322
-        }, {
-          "country": "UK",
-          "visits": 1122
-        }, {
-          "country": "France",
-          "visits": 1114
-        }, {
-          "country": "India",
-          "visits": 984
-        }, {
-          "country": "Spain",
-          "visits": 711
-        }, {
-          "country": "Netherlands",
-          "visits": 665
-        }, {
-          "country": "Russia",
-          "visits": 580
-        }, {
-          "country": "South Korea",
-          "visits": 443
-        }, {
-          "country": "Canada",
-          "visits": 441
-        }, {
-          "country": "Brazil",
-          "visits": 395
-        }, {
-          "country": "Italy",
-          "visits": 386
-        }, {
-          "country": "Australia",
-          "visits": 384
-        }, {
-          "country": "Taiwan",
-          "visits": 338
-        }, {
-          "country": "Poland",
-          "visits": 328
-        }];
+        chart.data = this.CategoriesWithNumber;
 
+        console.log(this.CategoriesWithNumber.length + "dataaaaaaaaaaaaaaaa");
 
 
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -124,14 +119,14 @@ categoryAxis.tooltip.label.horizontalCenter = "right";
 categoryAxis.tooltip.label.verticalCenter = "middle";
 
 let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-valueAxis.title.text = "Countries";
+valueAxis.title.text = "Categorii";
 valueAxis.title.fontWeight = "bold";
 
 // Create series
 let series = chart.series.push(new am4charts.ColumnSeries3D());
-series.dataFields.valueY = "visits";
-series.dataFields.categoryX = "country";
-series.name = "Visits";
+series.dataFields.valueY = "numberBooksforCategory";
+series.dataFields.categoryX = "titleOfCategory";
+series.name = "Raport";
 series.tooltipText = "{categoryX}: [bold]{valueY}[/]";
 series.columns.template.fillOpacity = .8;
 

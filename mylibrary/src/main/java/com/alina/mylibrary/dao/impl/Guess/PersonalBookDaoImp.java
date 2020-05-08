@@ -1,7 +1,9 @@
 package com.alina.mylibrary.dao.impl.Guess;
 
 import com.alina.mylibrary.dao.Interfaces.Guest.PersonalBookDao;
+import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.db.PersonalBook;
 import com.alina.mylibrary.model.db.Wishlist;
 import com.alina.mylibrary.repository.Guest.PersonalBookRepository;
@@ -55,5 +57,14 @@ public class PersonalBookDaoImp implements PersonalBookDao {
             }
         }
      return false;
+    }
+
+    @Override
+    public Boolean deletePers(BookUser bookUser, Book book) throws DaoException {
+        try {
+            return this.personalBookRepository.deleteByBookAndUser(book,bookUser);
+        }catch (Exception e){
+            return false;
+        }
     }
 }

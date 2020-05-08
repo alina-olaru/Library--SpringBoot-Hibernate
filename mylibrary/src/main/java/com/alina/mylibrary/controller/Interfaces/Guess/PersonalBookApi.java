@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user/personalBook")
 @CrossOrigin
-
 public interface PersonalBookApi {
 
 
@@ -26,4 +25,7 @@ public interface PersonalBookApi {
 
     @GetMapping("/my")
     ApiResponse<Boolean> checkIfPersonal(@RequestParam Integer bookId,@RequestParam Integer userId);
+
+    @DeleteMapping("/delete")
+    ApiResponse<Boolean> deletePers(@RequestParam Integer bookId,@RequestParam Integer userId);
 }

@@ -5,12 +5,11 @@ import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.db.Wishlist;
-import com.alina.mylibrary.repository.Guest.WishlistCustomRepository;
+import com.alina.mylibrary.repository.Custom.WishlistCustomRepository;
 import com.alina.mylibrary.repository.Guest.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;

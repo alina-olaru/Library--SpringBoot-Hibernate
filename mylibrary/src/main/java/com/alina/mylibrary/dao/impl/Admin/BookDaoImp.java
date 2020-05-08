@@ -6,7 +6,7 @@ import com.alina.mylibrary.exception.QueryCustomException;
 import com.alina.mylibrary.model.db.Author;
 import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.repository.Admin.AuthorRepository;
-import com.alina.mylibrary.repository.Admin.BookCustomRepository;
+import com.alina.mylibrary.repository.Custom.BookCustomRepository;
 import com.alina.mylibrary.repository.Admin.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

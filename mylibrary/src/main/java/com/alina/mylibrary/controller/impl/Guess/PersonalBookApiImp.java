@@ -63,4 +63,16 @@ public class PersonalBookApiImp implements PersonalBookApi {
             return new ApiResponse<Boolean>(ApiResponseType.ERROR,response,"Exception prinsa");
         }
     }
+
+    @Override
+    public ApiResponse<Boolean> deletePers(Integer bookId, Integer userId) {
+        Boolean response=false;
+        try{
+            response = this.personalBookService.DeletePers(userId,bookId);
+            return new ApiResponse<Boolean>(ApiResponseType.SUCCESS,response,"s-a sters cu succes");
+        }catch (Exception ex){
+            return new ApiResponse<Boolean>(ApiResponseType.ERROR,false,"nu s-a putut sterge,a aparut o eroare" + ex.getMessage() + ex.getLocalizedMessage());
+
+        }
+    }
 }

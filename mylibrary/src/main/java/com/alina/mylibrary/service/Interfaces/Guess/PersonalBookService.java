@@ -1,6 +1,8 @@
 package com.alina.mylibrary.service.Interfaces.Guess;
 
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
+import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.db.PersonalBook;
 import org.springframework.stereotype.Service;
 
@@ -11,4 +13,6 @@ public interface PersonalBookService {
     PersonalBook addBook(PersonalBook personalBook);
     public List<PersonalBook> getMyBooks(Integer type, Integer userId) throws DBExceptions;
     Boolean checkIfIsMyBook(Integer userId,Integer bookId) throws DBExceptions,Exception;
+    public Boolean DeletePers(Integer bookUser, Integer book) throws DBExceptions;
+
 }

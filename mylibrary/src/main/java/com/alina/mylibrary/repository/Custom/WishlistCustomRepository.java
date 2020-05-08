@@ -1,4 +1,4 @@
-package com.alina.mylibrary.repository.Guest;
+package com.alina.mylibrary.repository.Custom;
 
 import com.alina.mylibrary.exception.QueryCustomException;
 import com.alina.mylibrary.model.db.Wishlist;

@@ -43,4 +43,13 @@ export class PersonalBookService {
     return this.httpClient.get<ApiResponse<Boolean>>(this.globalVarService.globalUrl + this.baseUrl + "/my",
       {params : params});
   }
+
+  deletePers(userId:number,bookId:number){
+
+    let params=new HttpParams()
+    .set("bookId",bookId.toString())
+    .append("userId",userId.toString());
+    return this.httpClient.delete<ApiResponse<Boolean>>(this.globalVarService.globalUrl + this.baseUrl + "/delete",
+      {params : params});
+  }
 }
