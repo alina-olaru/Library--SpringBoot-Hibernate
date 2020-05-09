@@ -29,7 +29,8 @@ public class Book {
     @Column
     private int bookYear;
 
-    
+    @Column
+    public Double lastPrice;
 
     @Column
     private int numberOfPages;

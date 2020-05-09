@@ -33,12 +33,22 @@ public class BookServiceImp implements BookService {
 
     @Override
     public Book addBook(Book book) {
-      //we're building the app with the idea that one book can be found in the pages more time(same title,author...but different year,cover,..something)
-        //all the books with same title with whom you want to introduce.
+        /**
+         *
+         *           we're building the app with the idea that one book can be found
+         *          in the pages more time(same title,author...but different year,cover,..something)
+         *         all the books with same title with whom you want to introduce.
+         *        the book i allready inserted,you can only edit it for increasing the numbers of volumes
+
+         *
+         */
+
+
+
         List<Book> books=this.bookDao.getBooks();
         for(Book bookWithSameTitle:books){
             if(bookWithSameTitle.equals(book)){
-                //the book is allready inserted,you can only edit it for increasing the numbers of volumes
+
                 return null;
             }
         }
@@ -52,6 +62,10 @@ public class BookServiceImp implements BookService {
             //you are able to insert the book
             book.getBooksCategories().clear();
             book.getBookAuthor().clear();
+            if(book.getLastPrice().equals(null)){
+                book.setLastPrice((double)book.getBookPrice());
+
+            }
             this.bookDao.addBook(book);
 
             deepCopy.getBookAuthor().forEach(elem -> {
@@ -74,6 +88,9 @@ public class BookServiceImp implements BookService {
     @Override
     public Book updateBook(Book book) {
      if(book!=null) {
+         Book bookBeforeUpdate=this.bookDao.getBookbyId(book.getBookId());
+         double last_price=bookBeforeUpdate.getBookPrice();
+         book.setLastPrice(last_price);
          book.getBookAuthor().forEach(elem -> elem.setBookId(book));
          book.getBooksCategories().forEach(elem -> elem.setBooksC(book));
          this.bookDao.updateBook(book);

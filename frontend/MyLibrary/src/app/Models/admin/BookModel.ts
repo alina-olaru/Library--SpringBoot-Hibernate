@@ -27,6 +27,7 @@ export class Book{
   bookR:any;
   bookImage:string;
   bookImageSrc?: any;
+  lastPrice:number;
   public constructor(init?: Partial<Book>) {
     Object.assign(this, init);
   }

@@ -71,6 +71,12 @@
       <mat-cell mat-cell *matCellDef="let element"> {{element.bookPrice}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="lastPrice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Pret anterior </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.lastPrice}} </mat-cell>
+    </ng-container>
+
+
     <ng-container matColumnDef="numberOfBoooks">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Stoc</mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element"> {{element.numberOfBoooks}} </mat-cell>

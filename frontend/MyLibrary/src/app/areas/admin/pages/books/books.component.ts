@@ -49,6 +49,7 @@ export class BooksComponent implements OnInit, OnDestroy {
     "bookDimension",
     "bookWeight",
     "bookPrice",
+    "lastPrice",
     "coverType",
     "numberOfBoooks",
     "publisher",
