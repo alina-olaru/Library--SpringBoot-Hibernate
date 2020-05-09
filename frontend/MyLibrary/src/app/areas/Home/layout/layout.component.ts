@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { BookUser } from 'src/app/Models/BookUser';
 import { Book } from 'src/app/Models/admin/BookModel';
+import { CartBook } from 'src/app/Models/cart/CartBookModel';
 
 @Component({
   selector: 'app-home-layout',
@@ -33,7 +34,7 @@ export class LayoutComponent implements OnInit {
   isLogged = false;
   private user: BookUser = null;
   private _token: String = null;
-  cartBooks$: Observable<Book[]>;
+  cartBooks:CartBook[]=[];
 
   constructor(
     private gloablVarService: GlobalVarService,
@@ -42,6 +43,7 @@ export class LayoutComponent implements OnInit {
     private toastr: ToastrService,
     private cartService: CartService
   ) {
+
     const cachedUser = this.cookieService.get('auth-user-info');
     if (cachedUser != null && cachedUser != '') {
       this.user = JSON.parse(cachedUser) as BookUser;
@@ -56,16 +58,11 @@ export class LayoutComponent implements OnInit {
       this._token = JSON.parse(cachedToken);
     }
 
-    this.cartBooks$ = this.cartService.cartBooks;
+    this.cartService.cartBooks.subscribe(books => {
+      this.cartBooks = books;
+    });
   }
 
   ngOnInit() {}
 
-  test() {
-    if (this.open == false) {
-      this.open = true;
-    } else {
-      this.open = false;
-    }
-  }
 }

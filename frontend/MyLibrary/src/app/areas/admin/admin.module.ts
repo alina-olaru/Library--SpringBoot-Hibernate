@@ -53,9 +53,6 @@ import { AddEditUserComponent } from './pages/users/add-edit-user/add-edit-user.
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
-    MaterialModule,
-    FontAwesomeModule,
     SharedModule,
   ],
   entryComponents:[

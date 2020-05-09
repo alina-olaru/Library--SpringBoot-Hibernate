@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/_theming.scss';
+@import './variables';
+@include mat-core();
+
+
+
+@mixin color-scheme($name, $color) {
+  .#{$name} {
+   color: mat-color($color);
+  }
+  .background-#{$name}{
+    background-color: mat-color($color);
+  }
+  @each $shade in map-keys($color) {
+    @if $shade !=contrast {
+      .#{$name}-#{$shade} {
+        color: mat-color($color, $shade);
+      }
+      .background-#{$name}-#{$shade} {
+        background-color: mat-color($color, $shade);
+      }
+    }
+  }
+}
+
+$mylibrary-light1-theme: mat-light-theme($mylibrary-light1-primary, $mylibrary-light1-accent);
+
+.mylibrary-light-1 {
+
+  @include color-scheme(color-primary, $mylibrary-light1-primary);
+
+  @include color-scheme(color-accent, $mylibrary-light1-accent);
+
+  @include angular-material-theme($mylibrary-light1-theme);
+
+}
+
+$mylibrary-light2-theme: mat-light-theme($mylibrary-light2-primary, $mylibrary-light2-accent);
+
+.mylibrary-light-2 {
+
+  @include color-scheme(color-primary, $mylibrary-light2-primary);
+
+  @include color-scheme(color-accent, $mylibrary-light2-accent);
+
+  @include angular-material-theme($mylibrary-light2-theme);
+
+}
+
+$mylibrary-dark1-theme: mat-dark-theme($mylibrary-dark1-primary, $mylibrary-dark1-accent, $mylibrary-dark1-warn);
+
+.mylibrary-dark-1 {
+  @include color-scheme(color-primary, $mylibrary-dark1-primary);
+
+  @include color-scheme(color-accent, $mylibrary-dark1-accent);
+
+  @include color-scheme(color-warn, $mylibrary-dark1-warn);
+
+  @include angular-material-theme($mylibrary-dark1-theme);
+}
+
+$mylibrary-dark2-theme: mat-dark-theme($mylibrary-dark2-primary, $mylibrary-dark2-accent, $mylibrary-dark2-warn);
+
+.mylibrary-dark-2 {
+  @include color-scheme(color-primary, $mylibrary-dark2-primary);
+
+  @include color-scheme(color-accent, $mylibrary-dark2-accent);
+
+  @include color-scheme(color-warn, $mylibrary-dark2-warn);
+
+  @include angular-material-theme($mylibrary-dark2-theme);
+}

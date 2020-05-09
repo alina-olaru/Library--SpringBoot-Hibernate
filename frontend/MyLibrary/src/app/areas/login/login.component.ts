@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loading = false;
   submitted = false;
   returnUrl: string;
+  hide = true;
   private $subscription: Subscription;
 
   constructor(

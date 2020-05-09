@@ -1,1 +1,90 @@
-<p>cart works!</p>
+<button mat-raised-button  id="toggle-linear">
+
+</button>
+<mat-horizontal-stepper  #stepper>
+  <mat-step >
+    <form>
+      <ng-template matStepLabel>Previzualizare comanda</ng-template>
+    <!-- FIRST STEP!!!!! -->
+
+    <div *ngFor="let b of pairBooks" fxFlex fxLayout="column">
+    <div fxFlex fxLayout="row wrap" class="container">
+      <div fxFlex="30%">
+
+      </div>
+      <div fxFlex="10%">
+        imagine
+      </div>
+      <div fxFlex="30%" fxLayout="column">
+        <div fxFlex fxLayout="row">
+          <div fxFlex >
+       {{b.book.bookTitle}}
+
+        </div>
+        <div fxFlex fxLayoutAlign="end center">
+         delete
+
+         </div>
+      </div>
+        <div *ngFor="let auth of b.book.bookAuthor" fxFlex>
+          {{auth.authorId.firstName}}  {{auth.authorId.lastName}}
+        </div>
+        <div fxFlex fxLayout="row">
+          <div fxFlex >
+
+
+            <mat-form-field>
+              <mat-label click="updatequantity(b.book.bookId)">{{quantity}}</mat-label>
+              <mat-select  required>
+
+                <mat-option *ngFor="let option of options" [value]="option" (click)="calculatePrice(option,b.book.bookId)">
+                  {{option}}
+                </mat-option>
+              </mat-select>
+
+            </mat-form-field>
+
+
+
+
+        </div>
+        <div fxFlex fxLayoutAlign="end center">
+        {{b.book.bookPrice}} lei
+
+         </div>
+      </div>
+      </div>
+      <div fxFlex="30%">
+
+      </div>
+
+    </div>
+      <div fxFlex>
+        <button mat-button matStepperNext>Inainte</button>
+      </div>
+    </div>
+    </form>
+  </mat-step>
+  <mat-step >
+    <form>
+      <ng-template matStepLabel>Detalii livrare</ng-template>
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Inapoi</button>
+        <button mat-button (click)="stepper.reset()">Inainte</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Finalizare comanda</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Inapoi</button>
+      <button mat-button (click)="stepper.reset()">Inainte</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

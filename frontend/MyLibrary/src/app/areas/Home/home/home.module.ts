@@ -18,6 +18,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { DespreComponent } from '../despre/despre.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BookDetailsComponent } from '../book-details/book-details.component';
+import { CartItemComponent } from '../cart-item/cart-item.component';
 
 
 @NgModule({
@@ -31,16 +32,17 @@ import { BookDetailsComponent } from '../book-details/book-details.component';
      ReviewComponent,
      QuizzComponent,
      CartComponent,
-
-    BookDetailsComponent
+    BookDetailsComponent,
+    CartItemComponent,
 
     ],
   imports: [
        CommonModule,
        HomeRoutingModule,
        SharedModule,
-       MaterialModule,
-       FontAwesomeModule
+  ],
+  entryComponents:[
+    CartItemComponent
   ]
 })
 export class HomeModule {}

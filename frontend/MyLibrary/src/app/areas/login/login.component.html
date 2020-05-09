@@ -17,14 +17,18 @@
                   Numele utilizatorului este obligatoriu
                 </mat-error>
               </mat-form-field>
+
               <mat-form-field class="example-full-width mb-3">
-                <input matInput placeholder="Parola" type="password" formControlName="password">
+                <input matInput [type]="hide ? 'password' : 'text'" placeholder="Parola" type="password" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 <mat-error *ngIf="form.password?.invalid">
                   Parola este obligatorie
                 </mat-error>
+              </button>
               </mat-form-field>
 
-
+<!-- TODO DC APARE EROARE LANGA ICON -->
               <div fxFlex fxLayout="row" fxLayoutGap="30px">
                 <div fxFlex>
                   <button fxFlex mat-raised-button color="primary" type="button" [disabled]="!loginForm.valid"

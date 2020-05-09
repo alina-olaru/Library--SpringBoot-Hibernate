@@ -1,6 +1,7 @@
 <div class="container" fxFlex fxLayout="column">
-  <div fxFlex="5em"  class="container home-header">
+  <div fxFlex="5em"  fxLayoutAlign= "end center" class="container home-header px-5">
 
+    <mylibrary-theme-selector></mylibrary-theme-selector>
   </div>
 
 
@@ -58,7 +59,7 @@
               <div fxFlex="0 1 0%"  class="pointer account-icon-redirect">
                 <a  routerLink="/home/cart" routerLinkActive="active">
                 <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-                  <div fxFlex class="hero-icon">
+                  <div fxFlex class="hero-icon" matBadge="{{cartBooks.length}}">
                     <fa-icon mat-list-icon [icon]="faShoppingCart"></fa-icon>
                   </div>
                   <div fxHide.xs fxHide.sm fxFlex.gt-sm class="white-space-nowrap">
@@ -68,7 +69,7 @@
                 </a>
               </div>
 
-              <div class="h-50" [class.menu-true]="open==true" fxFlex="0 1 0%" fxLayout="column" fxLayoutAlign="start center" (click)="test()">
+              <div class="h-50" [class.menu-true]="open==true" fxFlex="0 1 0%" fxLayout="column" fxLayoutAlign="start center">
                 <app-menu [myClass]="open"></app-menu>
               </div>
 

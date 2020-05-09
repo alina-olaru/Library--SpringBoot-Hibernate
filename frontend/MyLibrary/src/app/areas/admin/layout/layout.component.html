@@ -96,22 +96,27 @@
     </mat-drawer>
     <mat-drawer-content fxFlex="90">
       <mat-toolbar class="mat-elevation-z1">
-        <mat-toolbar-row>
-          <div *ngIf="loaded">
-            <fa-icon class="page-toolbar-icon" [icon]="icon"></fa-icon>
-            <span>{{title.title}}</span>
+        <mat-toolbar-row fxFlex fxLayout="row">
+          <div *ngIf="loaded" fxFlex="0 1 0%">
+            <fa-icon class="page-toolbar-icon color-primary-700" [icon]="icon"></fa-icon>
+            <span class="color-primary-100">{{title.title}}</span>
           </div>
-          <span class="example-spacer"></span>
-          <span>
-            <fa-icon mat-list-icon [icon]="faUserCircle" size="lg" matTooltip="{{user?.firstName}} {{user?.lastName}}"
-              [matTooltipPosition]="'left'" mat-icon-button [matMenuTriggerFor]="menu"></fa-icon>
-            <mat-menu #menu="matMenu">
-              <!-- <button mat-menu-item>Settings</button> -->
-              <button mat-menu-item (click)="LogOut()">
-                Deconectare
-              </button>
-            </mat-menu>
-          </span>
+          <span fxFlex class="example-spacer"></span>
+          <div fxFlex="0 1 0%" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <div fxFlex>
+              <mylibrary-theme-selector></mylibrary-theme-selector>
+            </div>
+            <div fxFlex>
+              <fa-icon class="user-menu-item" mat-list-icon [icon]="faUserCircle" matTooltip="{{user?.firstName}} {{user?.lastName}}"
+                [matTooltipPosition]="'left'" mat-icon-button [matMenuTriggerFor]="menu"></fa-icon>
+              <mat-menu #menu="matMenu">
+                <!-- <button mat-menu-item>Settings</button> -->
+                <button mat-menu-item (click)="LogOut()">
+                  Deconectare
+                </button>
+              </mat-menu>
+            </div>
+          </div>
         </mat-toolbar-row>
       </mat-toolbar>
       <div class="admin-router-wrapper">

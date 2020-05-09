@@ -22,6 +22,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import {MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { MatBadgeModule } from '@angular/material/badge';
+import {MatStepperModule} from '@angular/material/stepper';
 
 export const APP_DATE_FORMATS =
 {
@@ -62,7 +64,9 @@ export const APP_DATE_FORMATS =
     MatAutocompleteModule,
     MatChipsModule,
     MatSelectModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatBadgeModule,
+    MatStepperModule
   ],
   exports: [
     MatButtonModule,
@@ -85,7 +89,10 @@ export const APP_DATE_FORMATS =
     MatSortModule,
     MatAutocompleteModule,
     MatChipsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatBadgeModule,
+    MatStepperModule
+
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}

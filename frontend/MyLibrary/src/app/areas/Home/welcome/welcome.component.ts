@@ -1,10 +1,10 @@
 import { Router } from '@angular/router';
 import { getElement } from '@amcharts/amcharts4/core';
-import { Category } from "src/app/Models/admin/CategoryModel";
-import { LoadingService } from "src/app/modules/loading-spinner/loading.service";
-import { LandingBooksService } from "./LandingBooks.service";
-import { Component, OnInit } from "@angular/core";
-import { SliderComponent } from "../slider/slider.component";
+import { Category } from 'src/app/Models/admin/CategoryModel';
+import { LoadingService } from 'src/app/modules/loading-spinner/loading.service';
+import { LandingBooksService } from './LandingBooks.service';
+import { Component, OnInit } from '@angular/core';
+import { SliderComponent } from '../slider/slider.component';
 import {
   faUser,
   faShoppingCart,
@@ -12,16 +12,16 @@ import {
   faGift,
   faCarSide,
   faBiking,
-  faHeart
-} from "@fortawesome/free-solid-svg-icons";
-import { Book } from "src/app/Models/admin/BookModel";
-import { ApiResponse } from "src/app/Models/general/api-response";
-import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
-import { FORMERR } from "dns";
+  faHeart,
+} from '@fortawesome/free-solid-svg-icons';
+import { Book } from 'src/app/Models/admin/BookModel';
+import { ApiResponse } from 'src/app/Models/general/api-response';
+import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
+import { FORMERR } from 'dns';
 @Component({
-  selector: "app-welcome",
-  templateUrl: "./welcome.component.html",
-  styleUrls: ["./welcome.component.scss"],
+  selector: 'app-welcome',
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.scss'],
 })
 export class WelcomeComponent implements OnInit {
   faUser = faUser;
@@ -31,7 +31,7 @@ export class WelcomeComponent implements OnInit {
   faCarSide = faCarSide;
   faBiking = faBiking;
   faHeart = faHeart;
-  open: boolean = false;
+  open = false;
   SFBooks: Book[];
 
   /**
@@ -64,11 +64,9 @@ export class WelcomeComponent implements OnInit {
         if (response && response.status == ApiResponseType.SUCCESS) {
           if (response.body.length == 0) {
             this.displayColumn = false;
-            //Nu ai si tb scoasa din view coloana
+            // Nu ai si tb scoasa din view coloana
           }
           this.Categories = response.body;
-
-
 
           this.Categories.forEach((element) => {
             this.CategoriesTitles.push(element.categoryTitle);
@@ -77,46 +75,35 @@ export class WelcomeComponent implements OnInit {
           this.GetBooksForCategories();
         }
       });
-
-
   }
   GetBooksForCategories() {
     this.Categories.forEach((e) => {
       this.loadingService.start();
-      this.landingBookService.GetBooksSF(e.categoryTitle, this.countOfBooks).subscribe(
-        response => {
-          if (response.status == ApiResponseType.SUCCESS){
+      this.landingBookService
+        .GetBooksSF(e.categoryTitle, this.countOfBooks)
+        .subscribe((response) => {
+          if (response.status == ApiResponseType.SUCCESS) {
             e.categoryBooks = response.body;
           }
 
           this.loadingService.stop();
-        }
-      )
+        });
     });
   }
 
-  getUrlImageForBook(book: Book){
-return "url('data:image/jpg;base64," + book.bookImage + "')";
+  getUrlImageForBook(book: Book) {
+    return 'url(\'data:image/jpg;base64,' + book.bookImage + '\')';
   }
 
-
-
-
-
-  AddToWhishlist(){
-
-
-    var x = document.getElementsByClassName("add-to-whishlist-icon");
-    $(".add-to-whishlist-icon").addClass("whislist-item");
-
-
-
+  AddToWhishlist() {
+    let x = document.getElementsByClassName('add-to-whishlist-icon');
+    $('.add-to-whishlist-icon').addClass('whislist-item');
   }
 
-  viewDetails(bookId : number){
-
-    this.router.navigate(['/home', 'book',  bookId]);
+  viewDetails(bookId: number) {
+    this.router.navigate(['/home', 'book', bookId]);
   }
+
 }
 
 /*

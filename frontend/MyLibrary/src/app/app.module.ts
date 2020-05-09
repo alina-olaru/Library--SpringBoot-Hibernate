@@ -1,3 +1,4 @@
+import { ThemeSelectorService } from './modules/theme-selector/theme-selector.service';
 import { CartService } from './areas/Home/cart/cart.service';
 import { UserModule } from './areas/User/user/user.module';
 import { ErrorInterceptorService } from './modules/interceptors/error-interceptor.service';
@@ -32,6 +33,7 @@ import { AccountOverviewComponent } from './areas/User/account-overview/account-
 import { AddAddressComponent } from './areas/User/addresses-book/add-address/add-address.component';
 import { ForgetPasswordComponent } from './areas/forget-password/forget-password.component';
 import { ChangePasswordComponent } from './areas/change-password/change-password.component';
+import { CartItemComponent } from './areas/Home/cart-item/cart-item.component';
 
 
 
@@ -48,6 +50,7 @@ import { ChangePasswordComponent } from './areas/change-password/change-password
     ForgetPasswordComponent,
     ChangePasswordComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -56,9 +59,7 @@ import { ChangePasswordComponent } from './areas/change-password/change-password
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     SharedModule,
-    FontAwesomeModule,
     UserModule
 
   ],
@@ -80,6 +81,8 @@ import { ChangePasswordComponent } from './areas/change-password/change-password
       useClass: ErrorInterceptorService,
       multi: true,
     },
+    CartService,
+    ThemeSelectorService,
     CartService
   ],
   bootstrap: [AppComponent],

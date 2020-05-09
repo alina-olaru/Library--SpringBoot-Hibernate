@@ -1,0 +1,49 @@
+<div class="theme-container">
+  <button id="theme-menu-selector" mat-mini-fab color="primary" [matMenuTriggerFor]="themeMenu"
+    matTooltip="Change the theme!">
+    <fa-icon [icon]="faPaintBrush"></fa-icon>
+  </button>
+  <mat-menu #themeMenu="matMenu">
+    <button class="theme-menu-item" mat-menu-item (click)="changeTheme('mylibrary-light-1')">
+      <div class="theme-icon-container">
+        <mat-icon class="theme-color-icon light1">
+          brightness_1
+        </mat-icon>
+        <mat-icon class="theme-selected-chckbox" *ngIf="curentTheme=='mylibrary-light-1'">
+          check_circle_outline
+        </mat-icon>
+      </div>
+    </button>
+    <button class="theme-menu-item" mat-menu-item (click)="changeTheme('mylibrary-light-2')">
+      <div class="theme-icon-container">
+        <mat-icon class="theme-color-icon light2">
+          brightness_1
+        </mat-icon>
+        <mat-icon class="theme-selected-chckbox" *ngIf="curentTheme=='mylibrary-light-2'">
+          check_circle_outline
+        </mat-icon>
+      </div>
+    </button>
+    <br>
+    <button class="theme-menu-item" mat-menu-item (click)="changeTheme('mylibrary-dark-1')">
+      <div class="theme-icon-container">
+        <mat-icon class="theme-color-icon dark1">
+          brightness_1
+        </mat-icon>
+        <mat-icon class="theme-selected-chckbox" *ngIf="curentTheme=='mylibrary-dark-1'">
+          check_circle_outline
+        </mat-icon>
+      </div>
+    </button>
+    <button class="theme-menu-item" mat-menu-item (click)="changeTheme('mylibrary-dark-2')">
+      <div class="theme-icon-container">
+        <mat-icon class="theme-color-icon dark2">
+          brightness_1
+        </mat-icon>
+        <mat-icon class="theme-selected-chckbox" *ngIf="curentTheme=='mylibrary-dark-2'">
+          check_circle_outline
+        </mat-icon>
+      </div>
+    </button>
+  </mat-menu>
+</div>

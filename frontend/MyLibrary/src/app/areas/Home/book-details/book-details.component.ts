@@ -1,3 +1,5 @@
+import { CartItemComponent } from './../cart-item/cart-item.component';
+import { CartService } from './../cart/cart.service';
 import { CookieService } from 'ngx-cookie-service';
 import { PersonalBookService } from './personalBook.service';
 import { WishlistService } from './wishlist.service';
@@ -16,6 +18,7 @@ import { Wishlist } from 'src/app/Models/user/Wishlist';
 import { PersonalBook } from 'src/app/Models/home/PersonalBook';
 import { string } from '@amcharts/amcharts4/core';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-book-details',
@@ -32,12 +35,11 @@ export class BookDetailsComponent implements OnInit {
   personalBook: PersonalBook;
   stringFinal = ' ';
   subscriptions: Subscription[] = [];
-  b:Book;
+
 
   //--------------------------cart items in cookies----------------------------------------
-  booksAddedToCart : number[] = [];
   booksAddedToCartArray : Book[] = [];
-  booksFromCookies : Book[] =[];
+
 
 
   constructor(
@@ -49,7 +51,8 @@ export class BookDetailsComponent implements OnInit {
     private wishService: WishlistService,
     private router: Router,
     private personalBookService: PersonalBookService,
-    private cookieService:CookieService
+    private cartService: CartService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -316,23 +319,12 @@ export class BookDetailsComponent implements OnInit {
 
   AddtoCart(){
 
-    let expiration : Date = new Date();
-    expiration.setDate(expiration.getDate() + 5);
-    this.booksAddedToCart.push(this.bookId);
-    this.booksAddedToCartArray.push(this.book);
-    this.cookieService.set("bookIds",JSON.stringify(this.booksAddedToCartArray),expiration);
+    this.cartService.AddToCart(this.book);
+    let dialogRef = this.dialog.open(CartItemComponent, {
+      height: '400px',
+      width: '600px',
+    });
 
-
-  }
-
-
-  GetCookies(){
-
-    let rasp =this.cookieService.get("bookIds");
-    this.booksAddedToCartArray= JSON.parse(rasp);
-    this.booksAddedToCartArray.forEach((e) =>{
-      console.log(e.bookId + "bookId");
-    })
   }
 
 }

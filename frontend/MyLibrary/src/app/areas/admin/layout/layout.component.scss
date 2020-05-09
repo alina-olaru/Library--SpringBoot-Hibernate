@@ -1,3 +1,6 @@
+@import '~@angular/material/_theming.scss';
+@import '../../../../variables';
+
 .sidebar-title{
   height: 64px;
 }
@@ -8,6 +11,10 @@
   flex: 1 1 auto;
 }
 
+.user-menu-item{
+  font-size: 40px;
+  vertical-align: middle;
+}
 
 .route-ling-selected{
   //TODO add some css
