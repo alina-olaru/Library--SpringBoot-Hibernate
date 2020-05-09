@@ -40,6 +40,8 @@ export class LoginService {
     if (cachedToken != null && cachedToken != "") {
       this._token = JSON.parse(cachedToken);
     }
+
+
   }
 
   getUser() {

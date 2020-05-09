@@ -13,21 +13,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 
-public class CategoryNumberBooks {
+
+public class DashboardClass {
 
 
 
-    @Column(name="titleOfCategory")
-    private String titleOfCategory;
 
-    @Column(name="numberBooksforCategory")
-    private Integer numberBooksforCategory;
+    public String titleOfCategory;
+    public long numberBooksforCategory;
 
-
+    public DashboardClass(String titleOfCategory, long numberBooksforCategory) {
+        this.titleOfCategory = titleOfCategory;
+        this.numberBooksforCategory = numberBooksforCategory;
+    }
 }
 
 //
@@ -41,7 +40,7 @@ public class CategoryNumberBooks {
 //        "on c.categoryId=bc.categories.categoryId \n" +
 //        "group by c.categoryTitle")
 //@Synchronize({"Book","BooksCategories"})
-//public class CategoryNumberBooks {
+//public class DashboardClass {
 //
 //
 //    private Integer numberBooksforCategory;

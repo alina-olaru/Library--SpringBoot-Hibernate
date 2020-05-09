@@ -1,7 +1,7 @@
 import { BookUser } from '../BookUser';
 import { Book } from '../admin/BookModel';
 
-export class CategoryNumberBooks {
+export class DashboardClass {
   numberBooksforCategory:number;
   titleOfCategory:string;
 

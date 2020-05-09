@@ -1,8 +1,8 @@
 package com.alina.mylibrary.repository.Custom;
 
-
 import com.alina.mylibrary.exception.QueryCustomException;
-import com.alina.mylibrary.model.dashboard.CategoryNumberBooks;
+import com.alina.mylibrary.model.dashboard.DashboardClass;
+import com.alina.mylibrary.model.dashboard.DashboardThreeItemsClass;
 import org.hibernate.QueryException;
 import org.hibernate.transform.Transformers;
 import org.springframework.data.repository.query.QueryCreationException;
@@ -22,80 +22,110 @@ public class DashboardRepository {
     private EntityManager entityManager;
 
 
-
-    public List<CategoryNumberBooks> getCategoriesWithNumberBooks() throws QueryCustomException{
-//        List<CategoryNumberBooks> response=null;
-//try {
-//    TypedQuery<CategoryNumberBooks> query = entityManager.createQuery("select c.categoryTitle as titleOfCategory  ,count(c.categoryId) as numberBooksforCategory \n" +
-//            "from Category  c \n" +
-//            "join BooksCategories bc\n" +
-//            "on c.categoryId=bc.categories.categoryId \n" +
-//            "group by c.categoryTitle", CategoryNumberBooks.class);
-//
-//    response = query.getResultList(); //no type warning
-//    return response;
-//
-//}catch (StackOverflowError e){
-//            throw  new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query","StackOverflowError","finding books writted only by this author",response.getClass().getName(),"get");
-//        }
-//        catch (QueryTimeoutException ex){
-//            throw  new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(),"QueryTimeoutException","finding books writted only by this author",response.getClass().getName(),"get");
-//
-//        }
-//        catch (QueryException ex) {
-//            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "QueryException", "finding books writted only by this author", response.getClass().getName(), "get");
-//        }
-//
-//        catch(QueryCreationException ex){
-//            throw  new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(),"QueryCreationException","finding books writted only by this author",response.getClass().getName(),"get");
-//
-//        }
-//        catch (Exception ex){
-//            throw  new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(),"Exception","finding books writted only by this author",response.getClass().getName(),"get");
-//
-//        }
-//
-//
-        List<CategoryNumberBooks> response=null;
-        try{
-            response=entityManager
-                    .createQuery("select c.categoryTitle as titleOfCategory, COALESCE(count(c.categoryId),0) as numberBooksforCategory \n" +
+    public List<DashboardClass> getCategoriesWithNumberBooks() throws QueryCustomException {
+        List<DashboardClass> response = null;
+        try {
+            TypedQuery<DashboardClass> query = entityManager.createQuery("select NEW  com.alina.mylibrary.model.dashboard.DashboardClass(c.categoryTitle as titleOfCategory  ,count(c.categoryId) as numberBooksforCategory) \n" +
                     "from Category  c \n" +
                     "join BooksCategories bc\n" +
                     "on c.categoryId=bc.categories.categoryId \n" +
-                    "group by c.categoryTitle")
-                    .unwrap(org.hibernate.query.Query.class)
-                    .setResultTransformer(Transformers.aliasToBean(CategoryNumberBooks.class))
-                    .getResultList();
+                    "group by c.categoryTitle", DashboardClass.class);
 
+            response = query.getResultList(); //no type warning
+            return response;
 
-        }catch (StackOverflowError e){
-            throw  new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query","StackOverflowError","finding books writted only by this author",response.getClass().getName(),"get");
-        }
-        catch (QueryTimeoutException ex){
-            throw  new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(),"QueryTimeoutException","finding books writted only by this author",response.getClass().getName(),"get");
+        } catch (StackOverflowError e) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query", "StackOverflowError", "finding books writted only by this author", response.getClass().getName(), "get");
+        } catch (QueryTimeoutException ex) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "QueryTimeoutException", "finding books writted only by this author", response.getClass().getName(), "get");
 
-        }
-        catch (QueryException ex) {
+        } catch (QueryException ex) {
             throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "QueryException", "finding books writted only by this author", response.getClass().getName(), "get");
-        }
+        } catch (QueryCreationException ex) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "QueryCreationException", "finding books writted only by this author", response.getClass().getName(), "get");
 
-        catch(QueryCreationException ex){
-            throw  new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(),"QueryCreationException","finding books writted only by this author",response.getClass().getName(),"get");
-
-        }
-        catch (Exception ex){
-            throw  new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(),"Exception","finding books writted only by this author",response.getClass().getName(),"get");
+        } catch (Exception ex) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "Exception", "finding books writted only by this author", response.getClass().getName(), "get");
 
         }
 
-        return response;
+
+    }
+    public List<DashboardClass> getAuthorsNumberBooks() throws QueryCustomException{
+
+
+        List<DashboardClass> response = null;
+        try {
+
+            TypedQuery<DashboardClass> query = entityManager.createQuery("select NEW  com.alina.mylibrary.model.dashboard.DashboardClass(concat(concat(a.firstName, ' '),a.lastName) as titleOfCategory  ,count(a.authorId) as numberBooksforCategory) \n" +
+                    "from Author a\n" +
+                    "join BooksAuthors ba \n" +
+                    "on a.authorId=ba.authorId \n" +
+                    "group by concat(concat(a.firstName, ' '),a.lastName)", DashboardClass.class);
+
+            response = query.getResultList(); //no type warning
+            return response;
+
+        } catch (StackOverflowError e) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query", "StackOverflowError", "finding books writted only by this author", response.getClass().getName(), "get");
+        } catch (QueryTimeoutException ex) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "QueryTimeoutException", "finding books writted only by this author", response.getClass().getName(), "get");
+
+        } catch (QueryException ex) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "QueryException", "finding books writted only by this author", response.getClass().getName(), "get");
+        } catch (QueryCreationException ex) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "QueryCreationException", "finding books writted only by this author", response.getClass().getName(), "get");
+
+        } catch (Exception ex) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "Exception", "finding books writted only by this author", response.getClass().getName(), "get");
+
+        }
+
+
+    }
+    public List<DashboardThreeItemsClass> getBooksWithAuthorsAndCat() throws QueryCustomException{
+
+        ///TODO DE CE NU MERGE ASTA
+
+        List<DashboardThreeItemsClass> response = null;
+        try {
+           response = entityManager.createNativeQuery("select nrcat,narath,t1.title\n" +
+                            "from (\n" +
+                            "select b.BOOK_TITLE title ,count(BC.CATEGORIES___CATEGORY_ID) nrcat\n" +
+                            "FROM [MyLibrary].[dbo].[BOOK]  as b\n" +
+                            "join [MyLibrary].[dbo].[BOOKS_CATEGORIES] as bc\n" +
+                            "on  bc.BOOKS_C___BOOK_ID=b.BOOK_ID\n" +
+                            "group by b.BOOK_TITLE\n" +
+                            ") t1 \n" +
+                            "join (\n" +
+                            "select b.BOOK_TITLE as \"title\" , COUNT(ba.AUTHOR_ID___AUTHOR_ID) as narath\n" +
+                            "FROM [MyLibrary].[dbo].[BOOK]  as b\n" +
+                            "join [MyLibrary].[dbo].[BOOKS_AUTHORS] as ba\n" +
+                            "on b.BOOK_ID=ba.BOOK_ID___BOOK_ID\n" +
+                            "group by b.BOOK_TITLE\n" +
+                            "\n" +
+                            ") t2\n" +
+                            "on t1.title=t2.title",DashboardThreeItemsClass.class).getResultList();
+
+
+            return response;
+
+        } catch (StackOverflowError e) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query", "StackOverflowError", "finding books writted only by this author", response.getClass().getName(), "get");
+        } catch (QueryTimeoutException ex) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "QueryTimeoutException", "finding books writted only by this author", response.getClass().getName(), "get");
+
+        } catch (QueryException ex) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "QueryException", "finding books writted only by this author", response.getClass().getName(), "get");
+        } catch (QueryCreationException ex) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "QueryCreationException", "finding books writted only by this author", response.getClass().getName(), "get");
+
+        } catch (Exception ex) {
+            throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "Exception", "finding books writted only by this author", response.getClass().getName(), "get");
+
+        }
+
+
+
     }
 }
-
-//
-//        select CATEGORY_TITLE,count(*)
-//        from CATEGORY c
-//        join BOOKS_CATEGORIES bc
-//        on c.CATEGORY_ID=bc.CATEGORIES___CATEGORY_ID
-//        group by CATEGORY_TITLE;

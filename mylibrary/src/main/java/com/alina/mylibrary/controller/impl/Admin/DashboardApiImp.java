@@ -1,7 +1,8 @@
 package com.alina.mylibrary.controller.impl.Admin;
 
 import com.alina.mylibrary.controller.Interfaces.Admin.DashboardApi;
-import com.alina.mylibrary.model.dashboard.CategoryNumberBooks;
+import com.alina.mylibrary.model.dashboard.DashboardClass;
+import com.alina.mylibrary.model.dashboard.DashboardThreeItemsClass;
 import com.alina.mylibrary.model.view.ApiResponse;
 import com.alina.mylibrary.model.view.ApiResponseType;
 import com.alina.mylibrary.service.Interfaces.Admin.DashboardService;
@@ -20,13 +21,37 @@ public class DashboardApiImp implements DashboardApi {
 
 
     @Override
-    public ApiResponse<List<CategoryNumberBooks>> getCategoriesWithNumberBooks() {
+    public ApiResponse<List<DashboardClass>> getCategoriesWithNumberBooks() {
        try{
-           return new ApiResponse<List<CategoryNumberBooks>>(ApiResponseType.SUCCESS,this.dashboardService.getCategoriesWithNumberBooks(), "S-AU ADUS DATELE CU SUCCES");
+           return new ApiResponse<List<DashboardClass>>(ApiResponseType.SUCCESS,this.dashboardService.getCategoriesWithNumberBooks(), "S-AU ADUS DATELE CU SUCCES");
 
 
        }catch (Exception e){
-           return new ApiResponse<List<CategoryNumberBooks>>(ApiResponseType.ERROR,null,e.getMessage()+e.getLocalizedMessage()+ " a aparut o problema");
+           return new ApiResponse<List<DashboardClass>>(ApiResponseType.ERROR,null,e.getMessage()+e.getLocalizedMessage()+ " a aparut o problema");
        }
+    }
+
+    @Override
+    public  ApiResponse<List<DashboardClass>> getAuthorsNumberBooks() {
+
+        try{
+            return new ApiResponse<List<DashboardClass>>(ApiResponseType.SUCCESS,this.dashboardService.getAuthorsNumberBooks(), "S-AU ADUS DATELE CU SUCCES");
+
+
+        }catch (Exception e){
+            return new ApiResponse<List<DashboardClass>>(ApiResponseType.ERROR,null,e.getMessage()+e.getLocalizedMessage()+ " a aparut o problema");
+        }
+
+    }
+
+    @Override
+    public ApiResponse<List<DashboardThreeItemsClass>> getBooksWithAutCat() {
+        try{
+            return new ApiResponse<List<DashboardThreeItemsClass>>(ApiResponseType.SUCCESS,this.dashboardService.getBooksWithAuthorsAndCat(), "S-AU ADUS DATELE CU SUCCES");
+
+
+        }catch (Exception e){
+            return new ApiResponse<List<DashboardThreeItemsClass>>(ApiResponseType.ERROR,null,e.getMessage()+e.getLocalizedMessage()+ " a aparut o problema");
+        }
     }
 }

@@ -8,7 +8,6 @@ import { TitleService } from '../../services/title.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { PersonalBook } from 'src/app/Models/home/PersonalBook';
-import { CategoryNumberBooks } from 'src/app/Models/dashboard/CategoryNumberBooks';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +30,12 @@ baseUrl:string;
 
 
   getCategoriesWithNumberBooks(){
-    return this.http.get<ApiResponse<CategoryNumberBooks[]>>(this.globalVarService.globalUrl+this.baseUrl+"/categories/count");
+    return this.http.get<ApiResponse<any[]>>(this.globalVarService.globalUrl + this.baseUrl+"/categories/count");
+    }
+
+    getAuthorsNumberBooks(){
+      return this.http.get<ApiResponse<any[]>>(this.globalVarService.globalUrl + this.baseUrl+"/authors/count");
+
     }
 }
+
