@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { PersonalBookService } from './personalBook.service';
 import { WishlistService } from './wishlist.service';
 import { BookUser } from 'src/app/Models/BookUser';
@@ -31,6 +32,14 @@ export class BookDetailsComponent implements OnInit {
   personalBook: PersonalBook;
   stringFinal = ' ';
   subscriptions: Subscription[] = [];
+  b:Book;
+
+  //--------------------------cart items in cookies----------------------------------------
+  booksAddedToCart : number[] = [];
+  booksAddedToCartArray : Book[] = [];
+  booksFromCookies : Book[] =[];
+
+
   constructor(
     private route: ActivatedRoute,
     private toastr: ToastrService,
@@ -39,7 +48,8 @@ export class BookDetailsComponent implements OnInit {
     private auth: LoginService,
     private wishService: WishlistService,
     private router: Router,
-    private personalBookService: PersonalBookService
+    private personalBookService: PersonalBookService,
+    private cookieService:CookieService
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +66,13 @@ export class BookDetailsComponent implements OnInit {
     });
   }
 
+
+
+
   // ---------------------------------BOOK-----------------------------------------------------------
+
+
+
 
   GetBookById(id: number) {
     this.bookId = id;
@@ -97,7 +113,15 @@ export class BookDetailsComponent implements OnInit {
     }
   }
 
+
+
+
   // ---------------------------------WISHLIST-----------------------------------------------------------
+
+
+
+
+
   AddToWhishlist() {
     console.log('here');
     this.wishlist = new Wishlist();
@@ -175,7 +199,13 @@ export class BookDetailsComponent implements OnInit {
       });
   }
 
+
+
   // ---------------------------------PERSONALBOOK-----------------------------------------------------------
+
+
+
+
 
   checkIPers() {
     const checkIPerss = this.personalBookService
@@ -274,4 +304,35 @@ export class BookDetailsComponent implements OnInit {
       });
     location.reload();
   }
+
+
+
+
+
+  // --------------------------------------------------cart----------------------------------------------------------
+
+
+
+
+  AddtoCart(){
+
+    let expiration : Date = new Date();
+    expiration.setDate(expiration.getDate() + 5);
+    this.booksAddedToCart.push(this.bookId);
+    this.booksAddedToCartArray.push(this.book);
+    this.cookieService.set("bookIds",JSON.stringify(this.booksAddedToCartArray),expiration);
+
+
+  }
+
+
+  GetCookies(){
+
+    let rasp =this.cookieService.get("bookIds");
+    this.booksAddedToCartArray= JSON.parse(rasp);
+    this.booksAddedToCartArray.forEach((e) =>{
+      console.log(e.bookId + "bookId");
+    })
+  }
+
 }

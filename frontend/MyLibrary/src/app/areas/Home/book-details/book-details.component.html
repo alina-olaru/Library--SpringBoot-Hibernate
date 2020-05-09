@@ -169,7 +169,7 @@
           </div>
           <div fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
-            <button mat-raised-button color="primary">
+            <button mat-raised-button color="primary" (click)="AddtoCart()">
               <mat-icon>add_shopping_cart</mat-icon>
               Adauga in cos
             </button>
@@ -195,6 +195,12 @@
   </div>
   <div class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex>
     {{book.bookDescription}}
+  </div>
+  <div class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex>
+    <button mat-raised-button color="default" (click)="GetCookies()">
+      <mat-icon>bookmarks</mat-icon>
+   check
+    </button>
   </div>
 </div>
 

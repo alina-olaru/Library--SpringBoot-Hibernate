@@ -1,3 +1,4 @@
+import { CartService } from './areas/Home/cart/cart.service';
 import { UserModule } from './areas/User/user/user.module';
 import { ErrorInterceptorService } from './modules/interceptors/error-interceptor.service';
 import { LoadingService } from './modules/loading-spinner/loading.service';
@@ -79,6 +80,7 @@ import { ChangePasswordComponent } from './areas/change-password/change-password
       useClass: ErrorInterceptorService,
       multi: true,
     },
+    CartService
   ],
   bootstrap: [AppComponent],
 })
