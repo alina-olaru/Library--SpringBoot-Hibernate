@@ -14,4 +14,8 @@ import java.util.List;
 public interface BooksAuthorsRepository extends JpaRepository<BooksAuthors,Integer>{
     public List<BooksAuthors> findByAuthorId(Author author);
     public List<BooksAuthors> findByBookId(Book book);
+    List<BooksAuthors> findBooksAuthorsByAuthorId(Author author);
+    List<BooksAuthors> findBooksAuthorsByBookId(Book book);
+    Long deleteByAuthorId(Author author);
+    Long deleteByBookId(Book book);
 }

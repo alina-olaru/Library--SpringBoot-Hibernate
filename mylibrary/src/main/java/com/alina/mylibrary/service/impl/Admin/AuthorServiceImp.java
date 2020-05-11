@@ -5,8 +5,6 @@ import com.alina.mylibrary.dao.Interfaces.Admin.AuthorDao;
 import com.alina.mylibrary.dao.Interfaces.Admin.BookDao;
 import com.alina.mylibrary.dao.Interfaces.Admin.BooksAuthorsDao;
 import com.alina.mylibrary.dao.Interfaces.Admin.VoucherDao;
-import com.alina.mylibrary.dao.Interfaces.Guest.BookAuthorDao;
-import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
 import com.alina.mylibrary.model.db.Author;
@@ -14,7 +12,6 @@ import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.model.db.BooksAuthors;
 import com.alina.mylibrary.model.db.Voucher;
 import com.alina.mylibrary.service.Interfaces.Admin.AuthorService;
-import com.alina.mylibrary.service.Interfaces.Admin.VoucherService;
 import org.hibernate.type.SerializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.serializer.support.SerializationFailedException;
@@ -92,17 +89,20 @@ public class AuthorServiceImp implements AuthorService {
              * gasesc toate cartile pe care le-a scris si le selectez doar pe cele care au un singur autor
              * sterg legaturile
              */
+
             List<Book> books=new ArrayList<>();
             Author auth=this.authorDao.getAuthorById(authorId);
 
           books=this.bookDao.getBookbyAuthor(auth.getFirstName(),auth.getLastName());
-            for(Book ba: books){
-                if(ba.getBookAuthor().size()==1){
+            for(Book b: books) {
 
+                for (BooksAuthors ba : b.getBookAuthor()) {
+                    //todo add sa stergi tot autoryl tau
+                    if(ba.getAuthorId().equals(auth)){
+                    this.booksAuthorsDao.delete(ba);
+                    }
                 }
             }
-
-
 
 
           List<Voucher> vouchers=auth.getAuthor_vouchers();
@@ -117,7 +117,7 @@ public class AuthorServiceImp implements AuthorService {
             List<Book> books2=new ArrayList<>();
             List<Book> response=new ArrayList<>();
 
-            books=this.bookDao.getBooks();
+            books2=this.bookDao.getBooks();
             for(Book b:books2){
                 for(BooksAuthors ba : b.getBookAuthor()){
                     if(((ba.getAuthorId().getFirstName().equals(auth.getFirstName()))&&(ba.getAuthorId().getLastName().equals(auth.getLastName())))||

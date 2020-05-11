@@ -38,7 +38,7 @@ public class BooksAuthorsDaoImpl implements BooksAuthorsDao {
 
     @Override
     public BooksAuthors addBooksAuthors(BooksAuthors booksAuthors) {
-        if(booksAuthors != null){
+        if (booksAuthors != null) {
             this.booksAuthorsRepository.save(booksAuthors);
             return booksAuthors;
         }
@@ -47,11 +47,39 @@ public class BooksAuthorsDaoImpl implements BooksAuthorsDao {
 
     @Override
     public boolean delteBooksAuthors(BooksAuthors booksAuthors) {
-        if(booksAuthors != null){
+        if (booksAuthors != null) {
             this.booksAuthorsRepository.delete(booksAuthors);
             return true;
         }
         return false;
     }
 
+    @Override
+    public List<BooksAuthors> findBooksAuthorsByAuthorId(Author author) {
+        return this.booksAuthorsRepository.findBooksAuthorsByAuthorId(author);
+    }
+
+    @Override
+    public List<BooksAuthors> findBooksAuthorsByBookId(Book book) {
+        return this.booksAuthorsRepository.findBooksAuthorsByBookId(book);
+    }
+
+    @Override
+    public Boolean deleteByAuthor(Author author) {
+        try {
+            this.booksAuthorsRepository.deleteByAuthorId(author);
+            return true;
+        } catch (Exception ex) {
+
+            return false;
+        }
+
+
+    }
+
+    @Override
+    public Boolean delete(BooksAuthors ba) {
+         this.booksAuthorsRepository.delete(ba);
+         return true;
+    }
 }

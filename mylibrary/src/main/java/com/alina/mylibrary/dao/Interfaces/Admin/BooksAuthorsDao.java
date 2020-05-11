@@ -20,5 +20,10 @@ public interface BooksAuthorsDao {
     public BooksAuthors addBooksAuthors(BooksAuthors booksAuthors);
 
     public boolean delteBooksAuthors(BooksAuthors booksAuthors);
+    List<BooksAuthors> findBooksAuthorsByAuthorId(Author author);
+    List<BooksAuthors> findBooksAuthorsByBookId(Book book);
+    Boolean deleteByAuthor(Author author);
+    Boolean delete(BooksAuthors ba);
+
 
 }
