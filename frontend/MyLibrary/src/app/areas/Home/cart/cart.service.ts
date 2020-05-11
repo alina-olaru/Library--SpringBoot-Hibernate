@@ -53,6 +53,15 @@ export class CartService {
   }
 
 
+  getQuantity(idBook : number) : number{
+
+    this._books.forEach((e) => {
+      if(e.book.bookId==idBook){
+        return e.quantity;
+      }
+    });
+    return 1;
+  }
   getBooks(){
     return this._books;
   }

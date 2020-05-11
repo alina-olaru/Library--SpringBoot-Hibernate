@@ -62,6 +62,7 @@ import { CartItemComponent } from './areas/Home/cart-item/cart-item.component';
     SharedModule,
     UserModule
 
+
   ],
   providers: [
     FormBuilder,

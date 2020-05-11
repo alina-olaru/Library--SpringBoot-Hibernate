@@ -19,6 +19,7 @@ import { PersonalBook } from 'src/app/Models/home/PersonalBook';
 import { string } from '@amcharts/amcharts4/core';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-book-details',
@@ -26,8 +27,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./book-details.component.scss'],
 })
 export class BookDetailsComponent implements OnInit {
-  book: Book;
-  bookId: number;
+
   wishlist: Wishlist;
   user: BookUser;
   alreadyInWishlist: Boolean = false;
@@ -35,11 +35,22 @@ export class BookDetailsComponent implements OnInit {
   personalBook: PersonalBook;
   stringFinal = ' ';
   subscriptions: Subscription[] = [];
-
+    //--------------------------popup---------------------------------------
+    book: Book;
+    bookId: number;
+   quantity:number;
 
   //--------------------------cart items in cookies----------------------------------------
   booksAddedToCartArray : Book[] = [];
+  //--------------------------responsive variables----------------------------------------
 
+  width:number;
+  heigth:number;
+  isSmallScreen:Boolean;
+  isLargeScreen:Boolean;
+  isMediumeScreen:Boolean;
+  x:string;
+  y:string;
 
 
   constructor(
@@ -52,10 +63,37 @@ export class BookDetailsComponent implements OnInit {
     private router: Router,
     private personalBookService: PersonalBookService,
     private cartService: CartService,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    public breakpointObserver:BreakpointObserver
+  ) {
+
+
+      this.isSmallScreen = breakpointObserver.isMatched('(max-width: 599px)');
+      this.isLargeScreen = breakpointObserver.isMatched('(min-width: 1000px)');
+      this.isMediumeScreen = breakpointObserver.isMatched('(min-width: 600px)');
+  }
 
   ngOnInit(): void {
+
+    if(this.isLargeScreen==true){
+
+      this.width=1100;
+      this.heigth=800;
+    }
+
+    if(this.isSmallScreen==true){
+
+      this.width=300;
+      this.heigth=400;
+    }
+    if((this.isMediumeScreen==true)&&(this.isLargeScreen==false)){
+
+      this.width=350;
+      this.heigth=440;
+    }
+
+
+
     this.bookId = parseInt(this.route.snapshot.paramMap.get('id'));
     this.GetBookById(this.bookId);
     this.user = this.auth.getUser();
@@ -319,10 +357,18 @@ export class BookDetailsComponent implements OnInit {
 
   AddtoCart(){
 
+    this.x=this.width+"px";
+    this.y=this.heigth+"px";
+
+    this.quantity =this.cartService.getQuantity(this.bookId);
     this.cartService.AddToCart(this.book);
     let dialogRef = this.dialog.open(CartItemComponent, {
-      height: '400px',
-      width: '600px',
+      width: this.x,
+      height: this.y,
+      data : {
+        model : this.book,
+        quantity :this.quantity
+      }
     });
 
   }

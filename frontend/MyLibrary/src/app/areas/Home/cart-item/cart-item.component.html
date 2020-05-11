@@ -1,0 +1,57 @@
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap" rel="stylesheet">
+<div fxFlex fxLayoutAlign="center center" fxLayout="column">
+  <div fxFlex class="color-primary-100-contrast">
+    <h1>Produsul a fost adaugat in cosul de cumparaturi!</h1>
+  </div>
+  <div fxFlex>
+    <table class='content__table'>
+      <thead>
+        <tr class="background-color-primary color-primary-500-contrast">
+          <th>Produs</th>
+          <th>Cantitate</th>
+          <th>Pret Unitar</th>
+          <th>Subtotal</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>{{book.bookTitle}}</td>
+          <td>{{quantity}}</td>
+          <td>{{book.bookPrice}}</td>
+          <td>{{subtotal}}</td>
+
+        </tr>
+
+        <tr *ngFor="let auth of book.bookAuthor">
+          <td>{{auth.authorId.firstName}} {{auth.authorId.lastName}}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td *ngIf="book.booksCategories[1].categories[1] ">{{book.booksCategories[1].categories[1].categoryTitle}}
+          </td>
+          <td *ngIf="!book.booksCategories[1].categories[1] ">_</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+
+
+      </tbody>
+    </table>
+  </div>
+  <footer class="footer-cart-item">
+    <div class="container-fluid" fxFlex fxLayout="row wrap">
+      <div fxFlex fxLayoutAlign="start start">
+        <button mat-stroked-button color="primary">Continua cumparaturile!</button>
+      </div>
+      <div fxFlex fxLayoutAlign="end end">
+        <button mat-stroked-button color="primary">Du-te spre cos</button>
+      </div>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,103 @@
+    //--------------------------------------Tabel-------------------------------------------------------------
+
+
+
+body{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  font-family: 'Poppins';
+  background-color: rgba(241,196,15,0.15);
+}
+h1{
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: rgba(0,0,0, 0.45);
+}
+    .content__table{
+      border-collapse: collapse;
+
+      font-size: 0.9em;
+      min-width: 400px;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0, 0.15);
+      transform: scale(1.6);
+      margin: 159px 0px;
+
+      @media(min-width:1200px) {
+        margin: 197px 0;
+        transform: scale(1.8);
+      }
+
+      @media(min-width:960px){
+        transform: scale(1.6);
+        margin: 159px 0px;
+      }
+
+    }
+    .content__table thead tr{
+      text-align: left;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .content__table th,
+    .content__table td {
+      padding: 12px 15px;
+    }
+    .content__table tbody tr{
+      /*border-bottom: 1px solid #aaa;*/
+      color: #444;
+      text-align: center;
+    }
+    .content__table tbody tr:nth-of-type(even){
+      background-color: rgba(241,196,15,0.30);
+    }
+    .content__table tbody tr:last-of-type{
+      border-bottom: 2px solid #f1c40f;
+    }
+    .content__table tbody tr.active__row{
+      font-weight: bold;
+      color: #f1c40f;
+    }
+.content__table tbody tr td:hover{
+  background-color: #f1c40f;
+  color: #444;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.footer{
+font-weight: 600;
+color: #444;}
+.footer a{
+  color: #444;
+}
+.footer a:hover{
+  background-color: rgba(241,196,15,0.3);
+}
+
+    @media screen and (max-width: 500px){
+      .content__table{display:none;}
+      body{background-color: rgba(0,0,0, 0.15);}
+      h1{color: rgba(241,196,15,1);
+      animation: rotation 5s 1s 1;}
+    }
+
+    @keyframes rotation{
+      from{transform: rotate(0deg);}
+      to{transform: rotate(360deg) scale(2);}
+    }
+
+
+
+    //--------------------------------------footer--------------------------------------------------------------
+    .footer-cart-item{
+      height: 100%;
+      width: 100%;
+    }
