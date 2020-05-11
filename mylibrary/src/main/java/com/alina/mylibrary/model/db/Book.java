@@ -102,7 +102,7 @@ public class Book {
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<BooksCategories> booksCategories;
 
-    @JsonIgnoreProperties(ignoreUnknown=true, value = {"bookId"}, allowSetters = true)
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"bookId"}, allowSetters = true , allowGetters = true)
     @OneToMany(mappedBy = "bookId",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<BooksAuthors> bookAuthor;

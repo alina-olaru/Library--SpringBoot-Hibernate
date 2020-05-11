@@ -76,11 +76,6 @@ token: string = "";
           icon: 'success'
 
         });
-        this.cookieService.set(
-          "auth-user-info",
-          JSON.stringify(response.body),
-          expiration
-        );
 
       }
     });

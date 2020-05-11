@@ -42,11 +42,7 @@ export class AuthorsService {
     );
   }
 
-  DeleteBookByAuthor(author: Author): Observable<ApiResponse<Book[]>> {
-    return this.http.post<ApiResponse<Book[]>>(
-      this.globalVarService.globalUrl + this.baseUrl + '/byAuthor', author
-    );
-  }
+
 
   AddAuthor(author: Author): Observable<ApiResponse<Author>> {
     return this.http.post<ApiResponse<Author>>(

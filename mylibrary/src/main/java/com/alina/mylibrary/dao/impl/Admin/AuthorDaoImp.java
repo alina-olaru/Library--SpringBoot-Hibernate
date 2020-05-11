@@ -3,6 +3,7 @@ package com.alina.mylibrary.dao.impl.Admin;
 import com.alina.mylibrary.dao.Interfaces.Admin.AuthorDao;
 import com.alina.mylibrary.model.db.Author;
 import com.alina.mylibrary.repository.Admin.AuthorRepository;
+import com.alina.mylibrary.repository.Custom.AuthorCustomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,9 @@ public class AuthorDaoImp implements AuthorDao {
 
     @Autowired
     private AuthorRepository authorRepository;
+
+    @Autowired
+    private AuthorCustomRepository authorCustomRepository;
 
 
     @Override
@@ -44,34 +48,23 @@ public class AuthorDaoImp implements AuthorDao {
 
     @Override
     public Author addAuthor(Author author) {
-      //  try {
-            this.authorRepository.save(author);
-     //   }
-//        catch(ConstraintViolationException ex){
-////            System.out.println(ex);
-////        }
-////        catch(SQLGrammarException ex){
-////            System.out.println(ex);
-////        }
-////        catch(QueryTimeoutException ex){
-////            System.out.println(ex);
-////        }
-////        catch(GenericJDBCException ex){
-////            System.out.println(ex);
-////        }
-////        catch(JDBCConnectionException ex){
-////            System.out.println(ex);
-////        }
+
+        this.authorRepository.save(author);
         return author;
     }
 
     @Override
     public boolean deleteAuthor(int authorId) {
-       if(authorId==0){
-           return false;
-       }
-       this.authorRepository.deleteById(authorId);
-       return true;
+
+
+        Author auth = this.getAuthorById(authorId);
+        this.authorRepository.delete(auth);
+        try {
+             this.authorRepository.delete(auth);
+             return true;
+
+        } catch (Exception ex){}
+        return false;
     }
 
     @Override

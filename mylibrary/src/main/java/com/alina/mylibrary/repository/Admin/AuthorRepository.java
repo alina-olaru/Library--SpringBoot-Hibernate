@@ -13,4 +13,5 @@ import java.util.List;
 public interface AuthorRepository  extends JpaRepository<Author,Integer> {
     List<Author> findByFirstName(String firstName);
     List<Author> findByLastName(String lastName);
+    List<Author> findByFirstNameAndLastName(String firstName,String lastName);
 }

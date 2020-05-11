@@ -62,7 +62,7 @@ public class BookServiceImp implements BookService {
             //you are able to insert the book
             book.getBooksCategories().clear();
             book.getBookAuthor().clear();
-            if(book.getLastPrice().equals(null)){
+            if(book.getLastPrice() ==null){
                 book.setLastPrice((double)book.getBookPrice());
 
             }
@@ -190,33 +190,7 @@ public class BookServiceImp implements BookService {
         return response;
         }
 
-    @Override
-    public List<Book> deleteBookByAuthor(Author author) throws DBExceptions,Exception {
 
-        if(author.equals(null)){
-            throw new DBExceptions("Obiectul trimis este gol", 400, this.getClass().getName(), "Category obj", "get");
-
-        }
-        List<Book> response=new ArrayList<>();
-        try{
-            response=this.bookDao.deleteBookByAuthor(author);
-            if(response.size()>0){
-                return response;
-            }
-            if(response.size()==0){
-                throw new DBExceptions("Service issues(BookService)", 400, this.getClass().getName(), "Book obj", "get");
-
-            }
-        }catch (DaoException e){
-            throw new DBExceptions("Am prins eroarea DAO(delete by author)", 400, this.getClass().getName(), "Book obj", "get");
-
-        }catch (Exception e){
-            throw new DBExceptions("Service issues(BookService),am prins o eroare", 400, this.getClass().getName(), "Book obj", "get");
-
-        }
-        return response;
-
-    }
     }
 
 

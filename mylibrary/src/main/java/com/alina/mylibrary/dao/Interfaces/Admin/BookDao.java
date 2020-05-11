@@ -19,5 +19,5 @@ public interface BookDao {
     public boolean deleteBook(int bookId);
     public Book updateBook(Book book);
     public  List<Book> getBooksByQuery(@Param("title") String title, @Param("count") int count)  throws DaoException;
-    public List<Book> deleteBookByAuthor(Author author) throws DaoException;
+
 }

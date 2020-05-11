@@ -5,9 +5,10 @@ import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.QueryCustomException;
 import com.alina.mylibrary.model.db.Author;
 import com.alina.mylibrary.model.db.Book;
+import com.alina.mylibrary.model.db.BooksAuthors;
 import com.alina.mylibrary.repository.Admin.AuthorRepository;
-import com.alina.mylibrary.repository.Custom.BookCustomRepository;
 import com.alina.mylibrary.repository.Admin.BookRepository;
+import com.alina.mylibrary.repository.Custom.AuthorCustomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
@@ -23,8 +24,7 @@ public class BookDaoImp implements BookDao {
     @Autowired
     private BookRepository bookRepository;
 
-    @Autowired
-    private BookCustomRepository bookCustomRepository;
+
 
 
     @Autowired
@@ -51,7 +51,24 @@ public class BookDaoImp implements BookDao {
     @Override
     public List<Book> getBookbyAuthor(String firstName, String lastname) {
 
-        return new ArrayList<Book>();
+        List<Book> books=new ArrayList<>();
+        List<Book> response=new ArrayList<>();
+
+        books=this.bookRepository.findAll();
+        for(Book b:books){
+            for(BooksAuthors ba : b.getBookAuthor()){
+                if(((ba.getAuthorId().getFirstName().equals(firstName))&&(ba.getAuthorId().getLastName().equals(lastname)))||
+                        ((ba.getAuthorId().getFirstName().equals(lastname))&&(ba.getAuthorId().getLastName().equals(firstName)))){
+
+                    response.add(b);
+
+                }
+
+
+
+            }
+        }
+        return response;
 
     }
 
@@ -120,20 +137,5 @@ public class BookDaoImp implements BookDao {
             throw new DaoException(3);
         }
     }
-
-    @Override
-    public List<Book> deleteBookByAuthor(Author author) throws DaoException{
-        List<Book> response=new ArrayList<>();
-        try {
-            response = this.bookCustomRepository.deleteBookByAuthor(author);
-            if(response.size()>0){
-                return response;
-            }
-        }catch (QueryCustomException e){
-
-            throw new DaoException(1);
-        }
-        return response;
-        }
     }
 

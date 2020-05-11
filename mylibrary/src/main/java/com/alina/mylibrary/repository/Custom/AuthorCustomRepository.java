@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class BookCustomRepository {
+public class AuthorCustomRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Book> deleteBookByAuthor(Author author) throws QueryCustomException{
+    public Boolean deleteBookByAuthor(Author author) throws QueryCustomException{
 
         Author a=entityManager.find(Author.class,1);
         /**
@@ -35,7 +35,7 @@ public class BookCustomRepository {
         List<Integer> bookId=new ArrayList<>();
         try {
             bookId=entityManager.createQuery("select ba.bookId.bookId FROM BookAuthors ba" +
-                    "join Book b" +
+                    "join fetch all properties Book b" +
                     "on ba.bookId.bookId=b.bookId" +
                     "join BookAuthors ba2" +
                     "on b.bookId=ba2.bookId.bookId" +
@@ -133,11 +133,15 @@ public class BookCustomRepository {
         }
         entityManager.remove(a);
 
-        Query response=entityManager.createQuery("select * from Book");
+        Query response=entityManager.createQuery("select b from Book b join BooksAuthors  ba on b.bookId=ba.bookId.bookId where ba.bookId.bookId=?");
+                response.setParameter(1,author.getAuthorId());
         try {
             response.executeUpdate();
             List<Book> bookResponse = response.getResultList();
-            return bookResponse;
+            if(bookResponse.equals(null)){
+                return true;
+            }
+            return false;
         }      catch (StackOverflowError e){
             throw  new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme la adusul cartilor rezultat din baza de date","StackOverflowError","finding books writted only by this author",author.getClass().getName(),"get");
         }

@@ -18,6 +18,5 @@ public interface BookService {
     public Book getBookById(int id) throws DBExceptions;
     public List<Book> getBookByCategory(String category) throws DBExceptions;
     List<Book> getBooksByQuery(String title, int count)  throws DBExceptions ,Exception;
-    public List<Book> deleteBookByAuthor(Author author) throws DBExceptions ,Exception;
 
 }

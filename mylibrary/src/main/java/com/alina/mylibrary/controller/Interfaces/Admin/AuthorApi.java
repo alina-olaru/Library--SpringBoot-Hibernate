@@ -27,8 +27,7 @@ public interface AuthorApi {
     @DeleteMapping(path="/{id}")
     ApiResponse<Boolean> deleteAuthor(@PathVariable int id);
 
-    @PostMapping("byAuthor")
-    ApiResponse<List<Book>> deleteBooksByAuthor(@RequestBody Author author);
+
 }
 
 

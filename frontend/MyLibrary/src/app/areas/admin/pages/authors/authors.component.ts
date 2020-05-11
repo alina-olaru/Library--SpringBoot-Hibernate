@@ -103,13 +103,12 @@ export class AuthorsComponent implements OnInit {
         this.loadingService.start();
 
         this.authorsService
-          .DeleteBookByAuthor(autor)
-          .subscribe((response: ApiResponse<Book[]>) => {
+          .DeleteAuthor(autor.authorId)
+          .subscribe((response: ApiResponse<boolean>) => {
             this.loadingService.stop();
             if (
               response &&
-              response.status == ApiResponseType.SUCCESS &&
-              response.body.length > 0
+              response.status == ApiResponseType.SUCCESS
             ) {
               this.toastr.Toast.fire({
                 title: 'Autorul a fost sters.',

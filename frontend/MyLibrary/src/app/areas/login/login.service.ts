@@ -68,7 +68,8 @@ export class LoginService {
             this.cookieService.set(
               "auth-token",
               JSON.stringify(x.body.jwttoken),
-              expiration
+              expiration,
+              '/'
             );
 
             if (this.user == null) {
@@ -78,7 +79,8 @@ export class LoginService {
               this.cookieService.set(
                 "auth-user-info",
                 JSON.stringify(x.body.bookUser),
-                expiration
+                expiration,
+                '/'
               );
             }
           }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -34,11 +35,13 @@ public class Author {
 
     @JsonIgnoreProperties(ignoreUnknown=true, value = {"authorId"}, allowSetters = true)
     @OneToMany(mappedBy = "authorId")
+    @ToString.Exclude
     private List<BooksAuthors> bookAuthor;
 
     @JsonIgnore
     @OneToMany(mappedBy = "author_voucher",
                 fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Voucher> author_vouchers;
 
     public static Author get_copy(Author old_author) {
@@ -49,4 +52,8 @@ public class Author {
         return new_author;
     }
 
+    @Override
+    public String toString() {
+        return "";
+    }
 }
