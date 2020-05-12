@@ -1,6 +1,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap" rel="stylesheet">
 <div fxFlex fxLayoutAlign="center center" fxLayout="column">
-  <div fxFlex class="color-primary-100-contrast">
+  <div fxFlex class="color-primary-100">
     <h1>Produsul a fost adaugat in cosul de cumparaturi!</h1>
   </div>
   <div fxFlex>
@@ -16,7 +16,7 @@
       </thead>
       <tbody>
 
-        <tr>
+        <tr class="background-color-warn-400 color-primary-500-contrast" >
           <td>{{book.bookTitle}}</td>
           <td>{{quantity}}</td>
           <td>{{book.bookPrice}}</td>
@@ -24,13 +24,13 @@
 
         </tr>
 
-        <tr *ngFor="let auth of book.bookAuthor">
+        <tr *ngFor="let auth of book.bookAuthor" class="background-color-primary-300 color-primary-500-contrast">
           <td>{{auth.authorId.firstName}} {{auth.authorId.lastName}}</td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
-        <tr>
+        <tr class="background-color-warn-400 color-primary-500-contrast">
           <td *ngIf="book.booksCategories[1].categories[1] ">{{book.booksCategories[1].categories[1].categoryTitle}}
           </td>
           <td *ngIf="!book.booksCategories[1].categories[1] ">_</td>
@@ -47,10 +47,10 @@
   <footer class="footer-cart-item">
     <div class="container-fluid" fxFlex fxLayout="row wrap">
       <div fxFlex fxLayoutAlign="start start">
-        <button mat-stroked-button color="primary">Continua cumparaturile!</button>
+        <button mat-stroked-button class="color-primary-100 background-color-warn-400" (click)="closePop()">Continua cumparaturile!</button>
       </div>
       <div fxFlex fxLayoutAlign="end end">
-        <button mat-stroked-button color="primary">Du-te spre cos</button>
+        <button mat-stroked-button class="color-primary-100 background-color-warn-400" (click)="redirectToCart()">Du-te spre cos</button>
       </div>
     </div>
   </footer>

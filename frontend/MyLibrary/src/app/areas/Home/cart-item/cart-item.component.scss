@@ -1,6 +1,5 @@
     //--------------------------------------Tabel-------------------------------------------------------------
-
-
+@import '../../../../variables';
 
 body{
   height: 100vh;
@@ -16,7 +15,7 @@ body{
 h1{
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: rgba(0,0,0, 0.45);
+ // color: rgba(0,0,0, 0.45);
 }
     .content__table{
       border-collapse: collapse;
@@ -56,7 +55,7 @@ h1{
       text-align: center;
     }
     .content__table tbody tr:nth-of-type(even){
-      background-color: rgba(241,196,15,0.30);
+     // background-color: rgba(241,196,15,0.30);
     }
     .content__table tbody tr:last-of-type{
       border-bottom: 2px solid #f1c40f;
@@ -66,10 +65,11 @@ h1{
       color: #f1c40f;
     }
 .content__table tbody tr td:hover{
-  background-color: #f1c40f;
+//  background-color: #f1c40f;
   color: #444;
   font-weight: bold;
   cursor: pointer;
+ // background-color:  mat-color($primary);
 }
 
 .footer{
@@ -79,13 +79,14 @@ color: #444;}
   color: #444;
 }
 .footer a:hover{
-  background-color: rgba(241,196,15,0.3);
+ // background-color: rgba(241,196,15,0.3);
 }
 
     @media screen and (max-width: 500px){
       .content__table{display:none;}
-      body{background-color: rgba(0,0,0, 0.15);}
-      h1{color: rgba(241,196,15,1);
+    //  body{background-color: rgba(0,0,0, 0.15);}
+    //  h1{color: rgba(241,196,15,1);
+      h1{
       animation: rotation 5s 1s 1;}
     }
 
