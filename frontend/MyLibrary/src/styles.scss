@@ -56,3 +56,11 @@ html, body, app-root {
   flex: 1 1 auto;
   flex-direction: column;
 }
+
+.border-angular{
+  border-style: solid;
+  border-width: 1.7px;
+  /* box-sizing: border-box; */
+  border-collapse: separate;
+
+}

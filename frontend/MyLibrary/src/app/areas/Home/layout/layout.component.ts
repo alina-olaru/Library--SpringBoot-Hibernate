@@ -1,4 +1,6 @@
-import { Observable } from 'rxjs';
+import { ThemeNames } from './../../../modules/theme-selector/theme-names.enum';
+import { ThemeSelectorService } from './../../../modules/theme-selector/theme-selector.service';
+import { Observable, concat } from 'rxjs';
 import { CartService } from './../cart/cart.service';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -30,6 +32,7 @@ export class LayoutComponent implements OnInit {
   faCarSide = faCarSide;
   faBiking = faBiking;
   open = false;
+  currentTheme: string;
 
   isLogged = false;
   private user: BookUser = null;
@@ -41,7 +44,8 @@ export class LayoutComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router,
     private toastr: ToastrService,
-    private cartService: CartService
+    private cartService: CartService,
+    private themeSelectorService: ThemeSelectorService
   ) {
 
     const cachedUser = this.cookieService.get('auth-user-info');
@@ -63,6 +67,26 @@ export class LayoutComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.themeSelectorService.curentTheme.subscribe(e=>{
+      this.currentTheme = e;
+    });
+  }
+
+  GetHomeMainClass(){
+    switch(this.currentTheme) {
+      case ThemeNames.dark1:
+      case ThemeNames.dark2:
+        return "background-color-primary-900 color-primary-500-contrast";
+      default:
+        return "";
+
+        // case ThemeNames.light1:
+        //   case ThemeNames.light2:
+        //     return "color-primary-500-contrast";
+    }
+  }
+
+
 
 }

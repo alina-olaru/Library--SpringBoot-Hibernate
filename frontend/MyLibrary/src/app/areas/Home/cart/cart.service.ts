@@ -41,18 +41,29 @@ export class CartService {
     }
   }
 
+  UpdateBook(book: Book , newQuantity : number){
+    if (book != null) {
+      const bookIdx = this._books
+        .map((e) => e.book.bookId)
+        .indexOf(book.bookId);
+
+      if (bookIdx >= 0) {
+        this._books[bookIdx].quantity=newQuantity;
+      }
+      localStorage.setItem('cart-books', JSON.stringify(this._books));
+      this.cartBooks.next(this._books);
+    }
+  }
   RemoveFromCart(book: Book) {
     if (book != null) {
       const index = this._books.map((e) => e.book.bookId).indexOf(book.bookId);
       if (index >= 0) {
-        this._books.slice(index, 1);
+        this._books.splice(index, 1);
         localStorage.setItem('cart-books', JSON.stringify(this._books));
         this.cartBooks.next(this._books);
       }
     }
   }
-
-
   getQuantity(idBook : number) : number{
 
     this._books.forEach((e) => {
@@ -65,5 +76,7 @@ export class CartService {
   getBooks(){
     return this._books;
   }
+
+
 
 }

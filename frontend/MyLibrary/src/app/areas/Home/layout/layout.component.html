@@ -1,27 +1,30 @@
 <div class="container" fxFlex fxLayout="column">
-  <div fxFlex="5em"  fxLayoutAlign= "end center" class="container home-header px-5">
+  <div fxFlex="5em"  fxLayoutAlign= "end center" class="container home-header background-color-accent-500  px-5">
 
     <mylibrary-theme-selector></mylibrary-theme-selector>
   </div>
 
 
   <div class="container" fxFlex fxLayout="row">
-    <div fxHide.xs [fxFlex.lg]="10" [fxFlex.xl]="20" class="margin-home">
+    <div fxHide.xs [fxFlex.lg]="10" [fxFlex.xl]="20" class="margin-home background-color-accent-100">
 
 
     </div>
 
 
-    <div fxFlex="100" [fxFlex.lg]="80" [fxFlex.xl]="60" class="middle-home">
+    <div fxFlex="100" [fxFlex.lg]="80" [fxFlex.xl]="60" [ngClass]="GetHomeMainClass()" class="middle-home">
       <div class="container line">
 
 
         <div class="container" fxFlex fxLayout="column">
           <div fxFlex fxLayout="row wrap">
 
-            <div fxFlex="0 1 0%" [fxFlexOrder]="1" class="my-2 px-4 page-icon pointer account-icon-redirect">
+            <div fxFlex="0 1 0%" [fxFlexOrder]="1" class="my-2 px-4 page-icon pointer account-icon-redirect" >
               <a  routerLink="/home/welcome" routerLinkActive="active">
-              <fa-icon mat-list-icon [icon]="faBookOpen"></fa-icon>
+                <div fxFlex class=" color-accent" >
+                  <fa-icon mat-list-icon [icon]="faBookOpen"></fa-icon>
+                </div>
+
               <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Library_building_clipart.svg/800px-Library_building_clipart.svg.png" class="banner-image"> -->
               </a>
             </div>
@@ -30,9 +33,9 @@
             <div fxFlex="100" fxFlex.gt-sm="1 1 0%" [fxFlexOrder]="3" [fxFlexOrder.gt-sm]="2" class="mt-2 px-3">
 
 
-              <mat-form-field fxFlex appearance="outline">
-                <mat-label>Ce vrei sa cauti?</mat-label>
-                <input matInput placeholder="Cauta...">
+              <mat-form-field fxFlex appearance="outline" >
+                <mat-label  >Ce vrei sa cauti?</mat-label>
+                <input  matInput placeholder="Cauta...">
                 <mat-icon matSuffix>search</mat-icon>
 
               </mat-form-field>
@@ -45,10 +48,11 @@
               <div fxFlex="0 1 0%" class="pointer account-icon-redirect">
                 <a  routerLink="/login" routerLinkActive="active">
                 <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-                  <div fxFlex class="hero-icon">
+                  <div fxFlex class="hero-icon color-accent" >
                     <fa-icon mat-list-icon [icon]="faUser"></fa-icon>
                   </div>
-                  <div fxFlex fxHide.xs fxHide.sm class="white-space-nowrap">
+                  <div fxFlex fxHide.xs fxHide.sm class="white-space-nowrap"
+                  [ngClass]="GetHomeMainClass()">
 
                     Contul meu
 
@@ -59,10 +63,11 @@
               <div fxFlex="0 1 0%"  class="pointer account-icon-redirect">
                 <a  routerLink="/home/cart" routerLinkActive="active">
                 <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-                  <div fxFlex class="hero-icon" matBadge="{{cartBooks.length}}">
+                  <div fxFlex class="hero-icon color-accent" matBadge="{{cartBooks.length}}">
                     <fa-icon mat-list-icon [icon]="faShoppingCart"></fa-icon>
                   </div>
-                  <div fxHide.xs fxHide.sm fxFlex.gt-sm class="white-space-nowrap">
+                  <div fxHide.xs fxHide.sm fxFlex.gt-sm class="white-space-nowrap"
+                  [ngClass]="GetHomeMainClass()">
                     Cosul meu
                   </div>
                 </div>
@@ -88,7 +93,7 @@
     </div>
 
 
-    <div fxHide.xs [fxFlex.lg]="10" [fxFlex.xl]="20" class="margin-home">
+    <div fxHide.xs [fxFlex.lg]="10" [fxFlex.xl]="20" class="background-color-accent-100 margin-home">
 
     </div>
 

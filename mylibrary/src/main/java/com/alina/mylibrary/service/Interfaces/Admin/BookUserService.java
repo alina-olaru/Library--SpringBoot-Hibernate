@@ -23,5 +23,6 @@ public interface BookUserService {
     public BookUser addAddress(Address address,BookUser bookUser)  throws NotFoundException, FieldException,NullPointerException;
 
     public void createPasswordResetTokenForUser(BookUser user, String token);
+    public List<Address> getAddress(int id);
 
 }

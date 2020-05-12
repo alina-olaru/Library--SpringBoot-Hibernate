@@ -28,10 +28,6 @@ const routes: Routes = [
         component: ReviewComponent,
       },
       {
-        path: "404Error",
-        component: Error404Component,
-      },
-      {
         path: "despre",
         component: DespreComponent,
       },
@@ -53,6 +49,10 @@ const routes: Routes = [
     path: "**",
     component: Error404Component,
   },
+  {
+    path:"/error",
+    component:Error404Component
+  }
 ];
 
 @NgModule({

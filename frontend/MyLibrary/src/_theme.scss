@@ -12,6 +12,11 @@
   .background-#{$name}{
     background-color: mat-color($color);
   }
+
+  .border-#{$name}{
+    border-color: mat-color($color);
+  }
+
   @each $shade in map-keys($color) {
     @if $shade !=contrast {
       .#{$name}-#{$shade} {
@@ -19,6 +24,9 @@
       }
       .background-#{$name}-#{$shade} {
         background-color: mat-color($color, $shade);
+      }
+      .border-#{$name}-#{$shade} {
+        border-color: mat-color($color, $shade);
       }
     }
   }

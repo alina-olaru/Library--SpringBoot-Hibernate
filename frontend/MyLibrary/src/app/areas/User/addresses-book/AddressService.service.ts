@@ -40,4 +40,9 @@ export class AddressServiceService {
   }
 
 
+  getAddresses(userId : number) : Observable<ApiResponse<Address[]>>{
+    return this.httpClient.get<ApiResponse<Address[]>>(this.gloablVarService.globalUrl + "/api/admin/users/"+userId);
+  }
+
+
 }

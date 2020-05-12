@@ -6,18 +6,18 @@ body {
 
 
 .margin-home{
-  background-color: rgb(227, 250, 239);
+
   height: 100%;
 }
 .middle-home{
-  background-color: white;
+
   overflow-y: scroll;
 
 }
 
 
 .home-header{
-  background-color: rgb(120, 236, 145);
+ // background-color: rgb(120, 236, 145);
   height: 5em;
 }
 
@@ -43,7 +43,7 @@ height: 100px;
 
 .under-banner-icon{
   font-size:9rem;
-  color:rgb(25, 97, 25);
+ // color:rgb(25, 97, 25);
   opacity: 0.7;
   align-self: center;;
 }
@@ -69,16 +69,17 @@ z-index:-1;
 
 .white-space-nowrap{
   white-space: nowrap;
-  color:black;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .account-icon-redirect{
   a{
     text-decoration: none!important;
-    color:black;
+   // color:black;
 
 
   }
 
 }
+
+
