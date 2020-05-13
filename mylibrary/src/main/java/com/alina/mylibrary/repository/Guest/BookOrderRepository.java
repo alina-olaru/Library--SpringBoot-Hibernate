@@ -10,4 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 
 public interface BookOrderRepository extends JpaRepository<BookOrder, Integer> {
+
+
+    BookOrder getAllByOrderId(Integer orderId);
 }
