@@ -1,7 +1,7 @@
 import { UserAddressAdd } from "./../../../Models/user/UserAddressAdd";
 import { Address } from "./../../../Models/Address";
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { GlobalVarService } from "src/app/services/global-var.service";
 import { CookieService } from "ngx-cookie-service";
 import { Router } from "@angular/router";
@@ -29,13 +29,11 @@ export class AddressServiceService {
   }
 
   addAddress(address: Address, user: BookUser): Observable<ApiResponse<BookUser>> {
-    let body = {
-      user,
-      address,
-    } as UserAddressAdd;
+
+    let param =new HttpParams()
+    .set("userId",user.userId.toString());
     return this.httpClient.post<ApiResponse<BookUser>>(
-      this.gloablVarService.globalUrl + this.baseUrl,
-      body
+      this.gloablVarService.globalUrl + this.baseUrl,address,{params : param}
     );
   }
 

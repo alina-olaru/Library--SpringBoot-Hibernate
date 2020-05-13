@@ -95,15 +95,18 @@
           </div>
 
           <div fxFlex="30%" fxLayoutAlign="center center">
-            <button mat-raised-button color="accent" (click)="chooseAddress()" class="pointer">Alege</button>
+            <button type="button" mat-raised-button color="accent" (click)="chooseAddress(a)" class="pointer">Alege</button>
 
           </div>
         </div>
 
-        <div>
-          <button type="button" mat-button fxFlexAlign="start start" matStepperPrevious>Inapoi</button>
-          <button type="button" mat-button fxFlexAlign="end end">Inainte</button>
+        <div fxLayoutAlign="start start" fxFlex>
+          <button type="button" mat-button  matStepperPrevious>Inapoi</button>
         </div>
+        <div fxLayoutAlign="end end" fxFlex>
+          <button type="button" [disabled]="order.idLocatie==null" mat-button fxLayoutAlign="end end" matStepperNext>Inainte</button>
+        </div>
+
       </form>
       <form *ngIf="!user" fxFlex="column">
         Trebuie sa va logati

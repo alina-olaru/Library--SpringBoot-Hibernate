@@ -36,4 +36,8 @@ public class OrderItem  implements Serializable
     private int quantity=0;
     //todo de vazut de ce in baza poate fi null
 
+
+    @Column
+    private int idLocatie;
+
 }

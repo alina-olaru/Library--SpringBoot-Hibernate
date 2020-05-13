@@ -128,11 +128,12 @@ public class BookUserServiceImpl implements BookUserService {
     @Override
     public List<Address> getAddress(int id) {
         BookUser user=this.bookUserDao.getBookUserById(id);
-        List<Address> addresses=new ArrayList<>();
-        for(Address ad:user.getAddresses()){
-            addresses.add(ad);
-        }
-
-        return addresses;
+        return user.getAddresses();
+//        List<Address> addresses=new ArrayList<>();
+//        for(Address ad:user.getAddresses()){
+//            addresses.add(ad);
+//        }
+//
+//        return addresses;
     }
 }

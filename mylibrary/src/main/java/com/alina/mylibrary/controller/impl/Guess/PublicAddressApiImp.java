@@ -3,15 +3,21 @@ package com.alina.mylibrary.controller.impl.Guess;
 
 import com.alina.mylibrary.controller.Interfaces.Guess.PublicAddressApi;
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
+import com.alina.mylibrary.model.db.Address;
 import com.alina.mylibrary.model.view.ApiResponse;
 import com.alina.mylibrary.model.view.ApiResponseType;
 import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.requests.UserAddressAdd;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
+import com.alina.mylibrary.service.Interfaces.Guess.AddressService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Component
@@ -19,37 +25,21 @@ public class PublicAddressApiImp implements PublicAddressApi {
 
 
     @Autowired
-    BookUserService bookUserService;
+    AddressService addressService;
 
 
     @Override
-    public ApiResponse<BookUser> addAddress(@RequestBody UserAddressAdd user) {
-        BookUser response=null;
+    public ApiResponse<BookUser> addAddress(@RequestParam Integer userId,@RequestBody Address address) {
 
-        try{
-            response=this.bookUserService.addAddress(user.getAddress()
-                    , user.getUser());
-            if(response!=null){
-                return new ApiResponse<BookUser>(ApiResponseType.SUCCESS,response,"Adresa s-a adaugat cu succes!");
-            }
-        }catch(NotFoundException e){
-            return new ApiResponse<BookUser>(ApiResponseType.ERROR,response,e.getMessage());
+        BookUser user=null;
+        try {
+           user=this.addressService.addAddress(address,userId);
+            return new ApiResponse<BookUser>(ApiResponseType.SUCCESS, user);
 
-        }
-        catch (NullPointerException e){
-            return new ApiResponse<BookUser>(ApiResponseType.ERROR,response,e.getMessage());
-
-        }
-        catch(FieldException e){
-            return new ApiResponse<BookUser>(ApiResponseType.ERROR,response,e.getMessage());
-
-        }
-        catch (Exception e){
-            return new ApiResponse<BookUser>(ApiResponseType.ERROR,response,e.getMessage());
-
+        }catch (Exception ex) {
+            return new ApiResponse<BookUser>(ApiResponseType.ERROR, null,ex.getMessage());
         }
 
-        return new ApiResponse<BookUser>(ApiResponseType.ERROR,response,"Nu s-a putut adauga adresa.Ne pare rau!");
+        }
+    };
 
-    }
-};

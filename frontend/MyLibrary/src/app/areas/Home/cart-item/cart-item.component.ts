@@ -65,7 +65,10 @@ export class CartItemComponent implements OnInit {
   redirectToCart(){
 
     this.closePop();
-    this.router.navigate(['/home/cart']);
+    this.dialog.afterAllClosed.subscribe((response) =>{
+      this.router.navigate(['/home/cart']);
+    })
+
   }
 
   closePop(){

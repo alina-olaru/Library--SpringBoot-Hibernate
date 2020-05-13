@@ -14,6 +14,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { LandingBooksService } from '../welcome/LandingBooks.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { BookOrder } from 'src/app/Models/cart/Order';
+import { orderItem } from 'src/app/Models/cart/orderItem';
 
 @Component({
   selector: 'app-cart',
@@ -24,9 +26,14 @@ export class CartComponent implements OnInit {
   pairBooks : CartBook[]=[];
   options : number[] =[];
   isLinear = false;
-  user : BookUser;
+
   quantity : number;
   currentTheme: string;
+
+  //-------------------order details-------------------------
+  user : BookUser;
+  address : Address;
+  order : BookOrder;
   constructor(public cartService:CartService,
     private themeSelectorService: ThemeSelectorService,
     private auth : LoginService,
@@ -45,6 +52,8 @@ export class CartComponent implements OnInit {
     });
     this.getBooks();
     this.user=this.auth.getUser();
+    this.order=new BookOrder();
+    this.order.ordersUser=this.user;
     this.getAddress();
   }
 
@@ -96,7 +105,7 @@ export class CartComponent implements OnInit {
     }
 
     deleteAddress(address:Address){
-
+//todo de completat asta
     }
 
     getAddress(){
@@ -119,8 +128,14 @@ export class CartComponent implements OnInit {
 }
 }
 
-chooseAddress(){
-
+chooseAddress(add : Address){
+  console.log(add.streetName + "parametru");
+  this.address = new Address();
+  this.address=add;
+  this.order=new BookOrder();
+  this.order.idLocatie=add.addressId;
+  console.log("order" + this.order.idLocatie);
+  //todo ceva disable pe cealalta
 }
 }
 
