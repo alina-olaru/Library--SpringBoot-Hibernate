@@ -95,16 +95,18 @@
           </div>
 
           <div fxFlex="30%" fxLayoutAlign="center center">
-            <button type="button" mat-raised-button color="accent" (click)="chooseAddress(a)" class="pointer">Alege</button>
+            <button type="button" mat-raised-button color="accent" (click)="chooseAddress(a)"
+              class="pointer">Alege</button>
 
           </div>
         </div>
 
         <div fxLayoutAlign="start start" fxFlex>
-          <button type="button" mat-button  matStepperPrevious>Inapoi</button>
+          <button type="button" mat-button matStepperPrevious>Inapoi</button>
         </div>
         <div fxLayoutAlign="end end" fxFlex>
-          <button type="button" [disabled]="order.idLocatie==null" mat-button fxLayoutAlign="end end" matStepperNext>Inainte</button>
+          <button type="button" [disabled]="order.idLocatie==null" mat-button fxLayoutAlign="end end"
+            matStepperNext>Inainte</button>
         </div>
 
       </form>
@@ -119,8 +121,12 @@
       <p>You are now done.</p>
       <p>You are now done.</p>
       <div>
-        <button type="button" mat-button matStepperPrevious>Inapoi</button>
-        <button type="button" mat-button>Inainte</button>
+        <div fxLayoutAlign="start start" fxFlex>
+          <button type="button" mat-button matStepperPrevious> INAINTE</button>
+        </div>
+        <div fxLayoutAlign="end end" fxFlex>
+          <button type="button" mat-button fxLayoutAlign="end end" matStepperNext (click)="send()">TRIMITE COMANDA</button>
+        </div>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

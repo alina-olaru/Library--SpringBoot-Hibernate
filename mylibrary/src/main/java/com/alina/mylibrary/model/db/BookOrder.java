@@ -51,12 +51,14 @@ public class BookOrder {
     @Column
     private int numberItems;
 
-    @JsonIgnoreProperties(ignoreUnknown=true, value = {"ordersbyuser"}, allowSetters = true)
+   @JsonIgnoreProperties(ignoreUnknown=true, value = {"ordersbyuser"}, allowSetters = true)
+   ///@JsonIgnore
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_ORDERUS_ID"))
     private BookUser ordersUser;
 
-    @JsonIgnoreProperties(ignoreUnknown=true, value = {"order"}, allowSetters = true)
+  //  @JsonIgnoreProperties(ignoreUnknown=true, value = {"order"}, allowSetters = true)
+  @JsonIgnore
     @OneToMany(mappedBy = "order",
             cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<OrderItem> items;

@@ -44,6 +44,7 @@ dependencies {
 	}
 	testImplementation 'org.springframework.security:spring-security-test'
     implementation 'junit:junit:4.12'
+	compile 'com.itextpdf:itextg:5.5.10'
 }
 
 test {

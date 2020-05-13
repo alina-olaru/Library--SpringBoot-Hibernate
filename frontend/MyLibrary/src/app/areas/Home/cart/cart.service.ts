@@ -1,8 +1,12 @@
+import { ApiResponse } from './../../../Models/general/api-response';
+import { BookOrder } from './../../../Models/cart/Order';
 import { CartBook } from './../../../Models/cart/CartBookModel';
 import { Book } from 'src/app/Models/admin/BookModel';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { GlobalVarService } from 'src/app/services/global-var.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +15,9 @@ export class CartService {
   private _books: CartBook[] = [];
   cartBooks: BehaviorSubject<CartBook[]>;
 
-  constructor(private cookieService: CookieService) {
+  constructor(private cookieService: CookieService,
+    private httpClient: HttpClient,
+    private globalVarService: GlobalVarService) {
     const cachedBooks = localStorage.getItem('cart-books');
     if (cachedBooks != null && cachedBooks !== '') {
       this._books = JSON.parse(cachedBooks) as CartBook[];
@@ -64,6 +70,12 @@ export class CartService {
       }
     }
   }
+
+  RemoveAll(){
+    this._books.forEach((e)=>{
+      this.RemoveFromCart(e.book);
+    })
+  }
   getQuantity(idBook : number) : number{
 
     this._books.forEach((e) => {
@@ -78,5 +90,21 @@ export class CartService {
   }
 
 
+  sendOrder(order : BookOrder){
+
+    console.log(order);
+    console.log(JSON.stringify(order));
+    return this.httpClient.post<ApiResponse<BookOrder>>(this.globalVarService.globalUrl+"/api/order",
+    order)
+  }
+
+  getTotalQuantity() : number{
+    let total=0;
+    this._books.forEach((e) =>{
+
+      total=total+e.quantity;
+    })
+    return total;
+  }
 
 }

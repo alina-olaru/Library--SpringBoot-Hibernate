@@ -1,3 +1,4 @@
+import { orderItem } from './orderItem';
 import { BookUser } from './../BookUser';
 import { Book } from 'src/app/Models/admin/BookModel';
 export class BookOrder {
@@ -11,7 +12,7 @@ export class BookOrder {
   ordersUser : BookUser;
   vouchersForUser:any;
   idLocatie:number;
-  items:any;
+  items : orderItem[];
   public constructor(init?: Partial<Book>) {
     Object.assign(this, init);
   }

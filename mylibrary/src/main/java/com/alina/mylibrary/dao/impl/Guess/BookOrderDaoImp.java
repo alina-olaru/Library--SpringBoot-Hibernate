@@ -23,4 +23,15 @@ public class BookOrderDaoImp implements BookOrderDao {
     public BookOrder getOrderById(Integer id) {
         return this.bookOrderRepository.getAllByOrderId(id);
     }
+
+    @Override
+    public BookOrder addOrder(BookOrder order) {
+        return this.bookOrderRepository.save(order);
+    }
+
+    @Override
+    public Boolean deleteOrder(BookOrder order) {
+        this.bookOrderRepository.delete(order);
+        return true;
+    }
 }

@@ -39,6 +39,7 @@ export class LayoutComponent implements OnInit {
   private _token: String = null;
   cartBooks:CartBook[]=[];
 
+  numberItems : number;
   constructor(
     private gloablVarService: GlobalVarService,
     private cookieService: CookieService,
@@ -65,6 +66,8 @@ export class LayoutComponent implements OnInit {
     this.cartService.cartBooks.subscribe(books => {
       this.cartBooks = books;
     });
+
+    this.numberItems = this.cartService.getTotalQuantity();
   }
 
   ngOnInit() {
@@ -74,6 +77,7 @@ export class LayoutComponent implements OnInit {
   }
 
   GetHomeMainClass(){
+
     switch(this.currentTheme) {
       case ThemeNames.dark1:
       case ThemeNames.dark2:

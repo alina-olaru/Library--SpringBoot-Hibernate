@@ -67,7 +67,8 @@ export class CartItemComponent implements OnInit {
     this.closePop();
     this.dialog.afterAllClosed.subscribe((response) =>{
       this.router.navigate(['/home/cart']);
-    })
+    }
+    )
 
   }
 

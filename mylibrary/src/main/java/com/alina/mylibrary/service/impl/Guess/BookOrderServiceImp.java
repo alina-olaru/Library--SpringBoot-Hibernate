@@ -24,4 +24,14 @@ public class BookOrderServiceImp implements BookOrderService {
     public BookOrder getOrderById(Integer id) {
         return this.bookOrderDao.getOrderById(id);
     }
+
+    @Override
+    public BookOrder addOrder(BookOrder order) {
+        return this.bookOrderDao.addOrder(order);
+    }
+
+    @Override
+    public Boolean deleteOrder(BookOrder order) {
+        return this.bookOrderDao.deleteOrder(order);
+    }
 }

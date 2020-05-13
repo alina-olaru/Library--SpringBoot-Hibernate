@@ -10,4 +10,6 @@ import java.util.List;
 public interface BookOrderService {
     List<BookOrder> getOrders();
     BookOrder getOrderById(Integer id);
+    BookOrder addOrder(BookOrder order);
+    Boolean deleteOrder(BookOrder order);
 }
