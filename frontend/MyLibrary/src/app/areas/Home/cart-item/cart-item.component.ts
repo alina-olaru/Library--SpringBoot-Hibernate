@@ -62,6 +62,7 @@ export class CartItemComponent implements OnInit {
 
   }
 
+
   redirectToCart(){
 
     this.closePop();

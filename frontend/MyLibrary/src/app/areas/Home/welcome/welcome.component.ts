@@ -1,10 +1,10 @@
-import { Router } from '@angular/router';
-import { getElement } from '@amcharts/amcharts4/core';
-import { Category } from 'src/app/Models/admin/CategoryModel';
-import { LoadingService } from 'src/app/modules/loading-spinner/loading.service';
-import { LandingBooksService } from './LandingBooks.service';
-import { Component, OnInit } from '@angular/core';
-import { SliderComponent } from '../slider/slider.component';
+import { Router } from "@angular/router";
+import { getElement } from "@amcharts/amcharts4/core";
+import { Category } from "src/app/Models/admin/CategoryModel";
+import { LoadingService } from "src/app/modules/loading-spinner/loading.service";
+import { LandingBooksService } from "./LandingBooks.service";
+import { Component, OnInit } from "@angular/core";
+import { SliderComponent } from "../slider/slider.component";
 import {
   faUser,
   faShoppingCart,
@@ -13,15 +13,15 @@ import {
   faCarSide,
   faBiking,
   faHeart,
-} from '@fortawesome/free-solid-svg-icons';
-import { Book } from 'src/app/Models/admin/BookModel';
-import { ApiResponse } from 'src/app/Models/general/api-response';
-import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
-import { FORMERR } from 'dns';
+} from "@fortawesome/free-solid-svg-icons";
+import { Book } from "src/app/Models/admin/BookModel";
+import { ApiResponse } from "src/app/Models/general/api-response";
+import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
+import { FORMERR } from "dns";
 @Component({
-  selector: 'app-welcome',
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.scss'],
+  selector: "app-welcome",
+  templateUrl: "./welcome.component.html",
+  styleUrls: ["./welcome.component.scss"],
 })
 export class WelcomeComponent implements OnInit {
   faUser = faUser;
@@ -92,18 +92,17 @@ export class WelcomeComponent implements OnInit {
   }
 
   getUrlImageForBook(book: Book) {
-    return 'url(\'data:image/jpg;base64,' + book.bookImage + '\')';
+    return "url('data:image/jpg;base64," + book.bookImage + "')";
   }
 
   AddToWhishlist() {
-    let x = document.getElementsByClassName('add-to-whishlist-icon');
-    $('.add-to-whishlist-icon').addClass('whislist-item');
+    let x = document.getElementsByClassName("add-to-whishlist-icon");
+    $(".add-to-whishlist-icon").addClass("whislist-item");
   }
 
   viewDetails(bookId: number) {
-    this.router.navigate(['/home', 'book', bookId]);
+    this.router.navigate(["/home", "book", bookId]);
   }
-
 }
 
 /*

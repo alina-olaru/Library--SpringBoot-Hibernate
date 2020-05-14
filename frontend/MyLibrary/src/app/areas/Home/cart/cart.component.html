@@ -40,7 +40,7 @@
                     <mat-select required>
 
                       <mat-option *ngFor="let option of options" [value]="option"
-                        (click)="calculatePrice(option,b.book.bookId)">
+                        (click)="calculatePrice(option,b)">
                         {{option}}
                       </mat-option>
                     </mat-select>
@@ -52,7 +52,7 @@
 
                 </div>
                 <div fxFlex fxLayoutAlign="end center">
-                  {{b.book.bookPrice}} lei
+                 {{b | priceLibrary}} lei
 
                 </div>
               </div>
@@ -116,10 +116,37 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Finalizare comanda</ng-template>
-      <p>You are now done.</p>
-      <p>You are now done.</p>
-      <p>You are now done.</p>
-      <p>You are now done.</p>
+
+
+      <div *ngFor="let v of vouchers" fxFlex="70%" fxLayout="row"
+      class="container second-step border-angular border-color-accent-100">
+
+      <div fxFlex="70%" class="">
+        <div class="container " fxFlex fxLayout="column">
+
+          <div fxFlex="100%" fxLayoutAlign="start start " class="ml-5 my-1">
+           {{v.voucherTitle}} ( {{v.voucherMaximumUses}} utilizari)
+          </div>
+
+          <div *ngIf="v.author_voucher!=null" fxFlex="100%" class="ml-5 my-1">
+           Autor : {{v.author_voucher.firstName}}  {{v.author_voucher.lastName}}
+           </div>
+           <div *ngIf="v.category_voucher!=null" fxFlex="100%" class="ml-5 my-1">
+            Categorie : {{v.category_voucher.categoryTitle}}
+            </div>
+            <div *ngIf="v.language!=null" fxFlex="100%" class="ml-5 my-1">
+              Limba : {{v.language}}
+              </div>
+        </div>
+      </div>
+
+      <div fxFlex="30%" fxLayoutAlign="center center">
+        <button type="button" mat-raised-button color="accent" (click)="chooseVoucher(v)"
+          class="pointer">Alege</button>
+
+      </div>
+    </div>
+
       <div>
         <div fxLayoutAlign="start start" fxFlex>
           <button type="button" mat-button matStepperPrevious> INAINTE</button>

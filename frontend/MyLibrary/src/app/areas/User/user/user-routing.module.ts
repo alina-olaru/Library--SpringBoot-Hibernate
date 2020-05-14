@@ -10,6 +10,7 @@ import { AddressesBookComponent } from './../addresses-book/addresses-book.compo
 import { AccountOverviewComponent } from './../account-overview/account-overview.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MyVouchersComponent } from '../MyVouchers/MyVouchers.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
           {
             path: 'adrese',
             component: AddressesBookComponent,
+          },{
+            path:'vouchere',
+            component:MyVouchersComponent
+
           },
           {
             path: 'bibiotecapersonala',

@@ -1,0 +1,12 @@
+<div fxFlex fxLayout="column">
+<div *ngFor="let v of basicVouchers" fxFlex fxLayout="column wrap" fxLayoutAlign="center center" class="my-3" (click)="myVouchersAdd(v)">
+  <div fxFlex="100%" class="border-angular border-color-accent-100">
+    {{v.voucherTitle}}
+  </div>
+
+  <div fxFlex="100%" class="border-angular border-color-accent-100" [ngStyle]="{'background-image': getUrlImageForVoucher(v)}">
+
+  </div>
+
+
+</div></div>

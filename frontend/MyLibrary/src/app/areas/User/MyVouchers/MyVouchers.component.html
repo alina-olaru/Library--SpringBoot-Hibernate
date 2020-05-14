@@ -1,0 +1,8 @@
+<div *ngFor="let v of vouchers " fxFlex fxLayout="column wrap">
+<div fxFlex>
+  {{v.voucherTitle}}
+</div>
+<div fxFlex>
+  {{v.voucherStartDate | date}}--  {{v.voucherEndDate | date}}
+</div>
+</div>

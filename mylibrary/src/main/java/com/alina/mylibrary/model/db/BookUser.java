@@ -95,11 +95,10 @@ public class BookUser {
     @JsonIgnoreProperties(ignoreUnknown=true, value = {"userAddress"}, allowSetters = true)
     @OneToMany(mappedBy = "userAddress")
     private List<Address> addresses;
+
     @Override
     public String toString() {
-        return "Book{" +
-                "bookId=" +
-                '}';
+        return " ";
     }
 }
 

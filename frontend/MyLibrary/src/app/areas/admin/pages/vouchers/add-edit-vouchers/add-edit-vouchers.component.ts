@@ -110,7 +110,7 @@ export class AddEditVouchersComponent implements OnInit {
   ngOnInit(): void {
 
     this.localForm = this.formBuilder.group({
-      voucherId: [{ value: this.data.model.voucherId, disabled: true }],
+      voucherId: [{ value: this.data.model.voucherId }],
       voucherTitle: [this.data.model.voucherTitle, Validators.required],
       voucherDescription: [this.data.model.voucherDescription],
       voucherMaximumUses: [

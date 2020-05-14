@@ -19,7 +19,7 @@ import { DespreComponent } from '../despre/despre.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BookDetailsComponent } from '../book-details/book-details.component';
 import { CartItemComponent } from '../cart-item/cart-item.component';
-
+import { VouchersUserComponent } from '../VouchersUser/VouchersUser.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +34,7 @@ import { CartItemComponent } from '../cart-item/cart-item.component';
      CartComponent,
     BookDetailsComponent,
     CartItemComponent,
+    VouchersUserComponent
 
     ],
   imports: [

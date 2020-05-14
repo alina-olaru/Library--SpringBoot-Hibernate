@@ -37,4 +37,9 @@ public class VoucherUser implements Serializable {
     @OneToMany(mappedBy = "vouchersForUser",
             fetch = FetchType.LAZY)
     private List<BookOrder> orderWithVouchers;
+
+    @Override
+    public String toString() {
+        return " ";
+    }
 }

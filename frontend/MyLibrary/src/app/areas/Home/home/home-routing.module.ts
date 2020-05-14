@@ -9,6 +9,7 @@ import { NgModule, Component } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { DespreComponent } from "../despre/despre.component";
 import { BookDetailsComponent } from '../book-details/book-details.component';
+import { VouchersUserComponent } from '../VouchersUser/VouchersUser.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: "",
         redirectTo: "welcome"
+      },{
+        path:"vouchere",
+        component:VouchersUserComponent
+
       },
       {
         path: "welcome",

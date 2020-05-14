@@ -1,3 +1,4 @@
+import { VouchersUserComponent } from './areas/Home/VouchersUser/VouchersUser.component';
 import { ThemeSelectorService } from './modules/theme-selector/theme-selector.service';
 import { CartService } from './areas/Home/cart/cart.service';
 import { UserModule } from './areas/User/user/user.module';
@@ -49,6 +50,7 @@ import { CartItemComponent } from './areas/Home/cart-item/cart-item.component';
     AddAddressComponent,
     ForgetPasswordComponent,
     ChangePasswordComponent,
+
 
 
   ],

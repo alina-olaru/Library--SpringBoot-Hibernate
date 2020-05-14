@@ -67,14 +67,27 @@ export class LayoutComponent implements OnInit {
       this.cartBooks = books;
     });
 
-    this.numberItems = this.cartService.getTotalQuantity();
   }
 
   ngOnInit() {
     this.themeSelectorService.curentTheme.subscribe(e=>{
       this.currentTheme = e;
     });
+   this.getNumberItems();
+
   }
+
+
+  ngAfterContentChecked() {
+    this.getNumberItems();
+
+  }
+
+
+  getNumberItems(){
+  this.numberItems = this.cartService.getTotalQuantity();
+  }
+
 
   GetHomeMainClass(){
 

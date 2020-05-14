@@ -1,3 +1,4 @@
+import { PricePipe } from "./../../../modules/pipes/price.pipe";
 import { error } from "protractor";
 import { ApiResponse } from "./../../../Models/general/api-response";
 import { Router } from "@angular/router";
@@ -19,6 +20,10 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { BookOrder } from "src/app/Models/cart/Order";
 import { orderItem } from "src/app/Models/cart/orderItem";
 import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
+import { Voucher } from "src/app/Models/admin/VoucherModel";
+import { VoucherUserService } from "../VouchersUser/VoucherUser.service";
+import { VoucherUser } from "src/app/Models/admin/VoucherUserModel";
+import { LowerCasePipe } from "@angular/common";
 
 @Component({
   selector: "app-cart",
@@ -34,12 +39,17 @@ export class CartComponent implements OnInit {
   currentTheme: string;
 
   //-------------------order details-------------------------
-  user: BookUser;
+
   address: Address;
   order: BookOrder;
   items: orderItem[] = [];
   finalOrder: BookOrder;
+  refreshCount: number = 0;
+  vouchers: Voucher[] = [];
+  user: BookUser;
+  empty: boolean = false;
 
+  voucherUsers: VoucherUser[] = [];
   constructor(
     public cartService: CartService,
     private themeSelectorService: ThemeSelectorService,
@@ -50,7 +60,8 @@ export class CartComponent implements OnInit {
     private landingBooksService: LandingBooksService,
     private domSanitizer: DomSanitizer,
     private loadingService: LoadingService,
-    private router: Router
+    private router: Router,
+    private voucherUserService: VoucherUserService
   ) {}
 
   ngOnInit(): void {
@@ -62,7 +73,11 @@ export class CartComponent implements OnInit {
     this.order = new BookOrder();
     this.order.ordersUser = this.user;
     this.getAddress();
+    this.getVouchers();
+    this.getUserVouchers();
   }
+
+  ngAfterContentChecked() {}
 
   GetHomeMainClass() {
     switch (this.currentTheme) {
@@ -78,27 +93,20 @@ export class CartComponent implements OnInit {
     this.pairBooks = this.cartService.getBooks();
     this.pairBooks.forEach((e) => {
       this.quantity = e.quantity;
-      e.book.bookPrice = e.book.bookPrice * this.quantity;
+      //  e.book.bookPrice = e.book.bookPrice * this.quantity;
       this.options = [];
       for (let index = -1; index < 4; index++) {
         this.options.push(index + this.quantity);
       }
     });
     this.pairBooks.forEach((e) => {
-      this.calculatePrice(e.quantity, e.book.bookId);
+      this.calculatePrice(e.quantity, e);
     });
   }
-  calculatePrice(quantity: number, id: Number) {
-    console.log(quantity);
-    this.pairBooks.forEach((e) => {
-      if (e.book.bookId == id) {
-        this.cartService.UpdateBook(e.book, quantity);
-        let last_price = e.book.bookPrice / e.quantity;
-        e.book.bookPrice =
-          e.book.bookPrice + (quantity - e.quantity) * last_price;
-        e.quantity = quantity;
-      }
-    });
+  calculatePrice(quantity: number, b: CartBook) {
+    let price = 0;
+    b.quantity = quantity;
+    this.cartService.UpdateBook(b.book, quantity);
   }
 
   deleteItemCart(book: Book) {
@@ -139,8 +147,71 @@ export class CartComponent implements OnInit {
     //todo ceva disable pe cealalta
   }
 
-  send() {
+  getVouchers() {
+    if (this.user == null || this.user == undefined) {
+      this.toastr.Swal.fire({
+        title: "Trebuie sa te loghezi pentru a aduna vouchere!!",
+        html: ``,
+        // Autor: <b>${Book.bookAuthor.firstName} ${Book.bookAuthor.lastName}</b>
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Da",
+        cancelButtonText: "Nu",
+      }).then((result) => {
+        if (result.value) {
+          this.router.navigate(["/login"]);
+        }
+      });
+    }
 
+    this.voucherUserService
+      .getVouchersForUser(this.user)
+      .subscribe((response: ApiResponse<Voucher[]>) => {
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.vouchers = response.body;
+          console.log(this.vouchers);
+        } else {
+          this.empty = true;
+          //todo handling in front sa iti apara ceva mesaj
+        }
+      });
+  }
+
+  getUserVouchers() {
+    if (this.user == null || this.user == undefined) {
+      this.toastr.Swal.fire({
+        title: "Trebuie sa te loghezi pentru a aduna vouchere!!",
+        html: ``,
+        // Autor: <b>${Book.bookAuthor.firstName} ${Book.bookAuthor.lastName}</b>
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Da",
+        cancelButtonText: "Nu",
+      }).then((result) => {
+        if (result.value) {
+          this.router.navigate(["/login"]);
+        }
+      });
+    }
+
+    this.voucherUserService
+      .getUserVouchers(this.user)
+      .subscribe((response: ApiResponse<VoucherUser[]>) => {
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.voucherUsers = response.body;
+          console.log(this.voucherUsers);
+        } else {
+          //  this.empty=true;
+          //todo handling in front sa iti apara ceva mesaj
+        }
+      });
+  }
+
+  chooseVoucher(voucher: Voucher) {
     console.log("Send method called");
     let subt = 0;
     let numberItems = 0;
@@ -148,36 +219,110 @@ export class CartComponent implements OnInit {
       let item = new orderItem();
       item.booksorder = e.book;
       item.quantity = e.quantity;
-      item.order =null;
+      item.order = null;
       this.items.push(item);
       subt = subt + e.quantity * e.book.bookPrice;
-      numberItems=numberItems+e.quantity;
+      numberItems = numberItems + e.quantity;
     });
 
+    this.order.items = this.items;
+    this.order.shipping = 15;
+    this.order.subtotal = subt;
+    this.order.total = this.order.shipping + this.order.subtotal;
+    this.order.ordersUser = this.user;
+    this.order.numberItems = numberItems;
+    const date = new Date();
+    this.order.orderD = date;
 
+    this.order.voucherDiscount = 0;
+    this.order.vouchersForUser = [];
+
+    let reducere = 0;
+    let type = 0;
+    if (voucher.author_voucher != null) {
+      type = 1;
+      console.log(this.order);
+      console.log("type" + type);
+      this.order.items.forEach((e) => {
+        e.booksorder.bookAuthor.forEach((autor) => {
+          if (autor.authorId == voucher.author_voucher) {
+            let reducere_locala = 0;
+            reducere_locala = e.booksorder.bookPrice % voucher.voucherPrice;
+            this.order.subtotal = this.order.subtotal - reducere_locala;
+            this.order.total = this.order.subtotal + this.order.shipping;
+            reducere = reducere + reducere_locala;
+          }
+        });
+      });
+    }
+    if (voucher.language != null) {
+      type = 2;
+      this.order.items.forEach((e) => {
+        if (
+          (e.booksorder.bookLanguage.toLowerCase = voucher.language.toLowerCase)
+        ) {
+          let reducere_locala = 0;
+          reducere_locala = e.booksorder.bookPrice % voucher.voucherPrice;
+          this.order.subtotal = this.order.subtotal - reducere_locala;
+          reducere = reducere + reducere_locala;
+        }
+      });
+    }
+
+    if (type != 0) {
+      this.toastr.Swal.fire({
+        title: "FINALIZEAZA COMANDA!",
+        html: `Id: AI${reducere} REDUCERE DACA COMANZI ACUM!</b>`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Da",
+        cancelButtonText: "Nu",
+      }).then((result) => {
+        if (result.value) {
+          this.send();
+        }
+      });
+    }
+  }
+
+  send() {
+    // console.log("Send method called");
+    // let subt = 0;
+    // let numberItems = 0;
+    // this.pairBooks.forEach((e) => {
+    //   let item = new orderItem();
+    //   item.booksorder = e.book;
+    //   item.quantity = e.quantity;
+    //   item.order =null;
+    //   this.items.push(item);
+    //   subt = subt + e.quantity * e.book.bookPrice;
+    //   numberItems=numberItems+e.quantity;
+    // });
+
+    //TODO PAGINA DE FINALIZARE COMANDA OR SMTH
     this.toastr.Swal.fire({
       title: "ESTI SIGUR CA VREI SA FINALIZEZI COMANDA?",
-      html: `Ai: <b>${numberItems}</b> <b>articole in cos!</b>`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Da",
-      cancelButtonText: "Nu"
-    }).then(result => {
+      cancelButtonText: "Nu",
+    }).then((result) => {
       if (result.value) {
+        // this.order.items = this.items;
+        // this.order.shipping = 15;
+        // this.order.subtotal = subt;
+        // this.order.total = this.order.shipping + this.order.subtotal;
+        // this.order.ordersUser = this.user;
+        // this.order.numberItems = numberItems;
+        // const date = new Date();
+        // this.order.orderD = date;
 
-        this.order.items = this.items;
-        this.order.shipping = 15;
-        this.order.subtotal = subt;
-        this.order.total = this.order.shipping + this.order.subtotal;
-        this.order.ordersUser = this.user;
-        this.order.numberItems = numberItems;
-        const date = new Date();
-        this.order.orderD = date;
-
-        this.order.voucherDiscount=0;
-        this.order.vouchersForUser=[];
+        // this.order.voucherDiscount=0;
+        // this.order.vouchersForUser=[];
 
         console.log(this.order.idLocatie);
         console.log(this.order.ordersUser.userId);
@@ -198,6 +343,7 @@ export class CartComponent implements OnInit {
               });
             }
           }),
+          // tslint:disable-next-line: no-unused-expression
           (error) => {
             console.error(error);
             this.toastr.Toast.fire({
@@ -205,17 +351,13 @@ export class CartComponent implements OnInit {
               title: "A aparut o eroare in frontend",
             });
           };
-        }else{
+      } else {
         //
-        }
-        this.cartService.RemoveAll();
       }
-      )
-    }
+      this.cartService.RemoveAll();
+    });
   }
-
-
-
+}
 
 // orderD:Date;
 // voucherDiscount : number;

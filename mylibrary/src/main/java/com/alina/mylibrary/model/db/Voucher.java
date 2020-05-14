@@ -91,4 +91,9 @@ public class Voucher {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_QUIZZ_ID"))
     private Quizz quizzez;
+
+    @Override
+    public String toString() {
+        return " ";
+    }
 }

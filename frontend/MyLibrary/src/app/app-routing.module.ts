@@ -11,6 +11,7 @@ import { AdminGuardService } from "./modules/guards/admin-guard.service";
 import { HomeModule } from "./areas/Home/home/home.module";
 import { UserModule } from "./areas/User/user/user.module";
 import { ForgetPasswordComponent } from './areas/forget-password/forget-password.component';
+import { VouchersUserComponent } from './areas/Home/VouchersUser/VouchersUser.component';
 const routes: Routes = [
   {
     path: "",

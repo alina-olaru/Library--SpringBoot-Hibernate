@@ -1,3 +1,4 @@
+import { PricePipe } from './../pipes/price.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ThemeSelectorComponent } from './../theme-selector/theme-selector.component';
 import { NgModule } from "@angular/core";
@@ -13,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../material/material.module';
 
 @NgModule({
-  declarations: [TruncatePipe, YesNoPipe, ThemeSelectorComponent],
+  declarations: [TruncatePipe, YesNoPipe, ThemeSelectorComponent,PricePipe],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -36,7 +37,8 @@ import { MaterialModule } from '../material/material.module';
     GallerizeModule,
     MaterialModule,
     FontAwesomeModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    PricePipe
   ],
 })
 export class SharedModule {}
