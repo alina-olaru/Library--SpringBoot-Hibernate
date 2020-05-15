@@ -9,6 +9,7 @@ import com.alina.mylibrary.model.db.Quizz;
 import com.alina.mylibrary.service.Interfaces.Admin.QuizzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class QuizzApiImp implements QuizzApi {
     }
 
     @Override
-    public ApiResponse<Quizz> addQuizz(Quizz quizz) {
+    public ApiResponse<Quizz> addQuizz(@RequestBody  Quizz quizz) {
         if(quizz==null){
             return new ApiResponse<Quizz>(ApiResponseType.ERROR,null,"nu s-a putut adauga in baza de date");
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("public/api/admin/Quizz")
+@RequestMapping("/api/admin/Quizz")
 @CrossOrigin
 public interface QuizzApi {
 
@@ -23,5 +23,5 @@ public interface QuizzApi {
     public ApiResponse<Quizz> updateQuizz(Quizz quizz);
 
     @PostMapping
-    public ApiResponse<Quizz> addQuizz(Quizz quizz);
+    public ApiResponse<Quizz> addQuizz(@RequestBody Quizz quizz);
 }

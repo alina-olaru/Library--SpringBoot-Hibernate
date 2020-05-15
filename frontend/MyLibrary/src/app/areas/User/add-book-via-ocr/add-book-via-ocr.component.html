@@ -1,6 +1,3 @@
-
-
-
 <!-- STATE 0 --------------------INITIAL -->
 
 
@@ -10,9 +7,11 @@
   <div fxFlex fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-around center">
 
 
-      <button mat-button class="add-address-button">Galerie</button>
+    <button mat-button class="add-address-button" (click)="uploadFromGalery()">Galerie</button>
 
-      <button mat-button class="add-address-button" (click)="startCamera()">Camera</button>
+    <button mat-button class="add-address-button" (click)="startCamera()">Camera</button>
+    <button mat-button class="add-address-button" (click)="manual()">Manual</button>
+
 
 
 
@@ -23,26 +22,91 @@
 
 
 
-<!-- STATE 0 --------------------UPLOAD VIA CAMERA/WEBCAM-->
+<!-- STATE 1 --------------------UPLOAD VIA CAMERA/WEBCAM-->
 
 
 
 
 <div [hidden]="state!=1">
-  <button mat-button class="add-address-button"  click="selectPhoto()">Alege</button>
-<div class="container vh-100">
-	<div class="d-flex flex-column align-items-center">
-		<div class="p-1">
-			<video #video class="vid" autoplay></video>
-		</div>
-		<div class="pb-2">
-			<button class="btn btn-primary" (click)="capture()">Capture Image</button>
-		</div>
-		<div class="p-1">
-      <canvas #canvas class="vid"></canvas>
+  <button mat-button class="add-address-button" click="selectPhoto()">Alege</button>
+  <div class="container vh-100">
+    <div class="d-flex flex-column align-items-center">
+      <div class="p-1">
+        <video #video class="vid" autoplay></video>
+      </div>
+      <div class="pb-2">
+        <button class="btn btn-primary" (click)="capture()">Capture Image</button>
+      </div>
+      <div class="p-1">
+        <canvas #canvas class="vid"></canvas>
 
-		</div>
-	</div>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+
+<!-- STATE 2 --------------------UPLOAD FROM GALERAY-->
+
+<div *ngIf="state==2" fxFlex>
+
+  <div class="input-row" fxFlex="100%">
+    <mat-form-field fxFlex class="file-field">
+      <mat-icon matPrefix matTooltip="Sterge fisier!" (click)="DeleteFile()">close</mat-icon>
+      <input type="tel" matInput disabled placeholder="Imagine bautura" [(ngModel)]="fileName"
+        [ngModelOptions]="{standalone: true}">
+      <mat-icon class="upload-file-icon" matSuffix (click)="UploadFile()" matTooltip="Incarca fisier!">file_upload
+      </mat-icon>
+      <input type="file" id="modal-file-upload-input" accept="image/*" style="visibility: hidden;display: none;">
+    </mat-form-field>
+  </div>
+
+  <div class="input-row" [hidden]="!fileName" fxFlex="100%" fxLayoutAlign="center center">
+    <img [src]="this.myBook.bookImageSrc" [hidden]="!this.myBook.bookImageSrc" class="voucher-image">
+  </div>
+
+</div>
+
+
+<!-- STATE 2 --------------------UPLOAD MANUAL-->
+<div *ngIf="state==3" fxFlex fxLayout="column" >
+<form [formGroup]="localForm" (ngSubmit)="SubmitManualPersBook()">
+    <div class="input-row" fxFlex="100%">
+      <mat-form-field fxFlex>
+        <textarea rows="3" matInput placeholder="Nume autor" formControlName="persBAuthor">
+        </textarea>
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-row" fxFlex="100%">
+      <mat-form-field fxFlex>
+        <textarea rows="3" matInput placeholder="Prenume autor" formControlName="persBTitle">
+        </textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="input-row" fxFlex="100%">
+      <mat-form-field fxFlex class="file-field">
+        <mat-icon matPrefix matTooltip="Sterge fisier!" (click)="DeleteFile()">close</mat-icon>
+        <input type="tel" matInput disabled placeholder="Imagine bautura" [(ngModel)]="fileName"
+          [ngModelOptions]="{standalone: true}">
+        <mat-icon class="upload-file-icon" matSuffix (click)="UploadFile()" matTooltip="Incarca fisier!">file_upload
+        </mat-icon>
+        <input type="file" id="modal-file-upload-input" accept="image/*" style="visibility: hidden;display: none;">
+      </mat-form-field>
+    </div>
+
+    <div class="input-row" [hidden]="!fileName" fxFlex="100%" fxLayoutAlign="center center">
+      <img [src]="this.myBook.bookImageSrc" [hidden]="!this.myBook.bookImageSrc" class="voucher-image">
+    </div>
+
+    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+      <button mat-button color="primary" type="submit" cdkFocusInitial >
+        <mat-icon>add</mat-icon> Adauga
+      </button>
+    </div>
+</form>
 
 </div>

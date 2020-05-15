@@ -50,6 +50,7 @@ export class CartComponent implements OnInit {
   empty: boolean = false;
 
   voucherUsers: VoucherUser[] = [];
+  newVoucherUser : VoucherUser;
   constructor(
     public cartService: CartService,
     private themeSelectorService: ThemeSelectorService,
@@ -225,11 +226,12 @@ export class CartComponent implements OnInit {
       numberItems = numberItems + e.quantity;
     });
 
+    this.order.ordersUser = this.user;
     this.order.items = this.items;
     this.order.shipping = 15;
     this.order.subtotal = subt;
     this.order.total = this.order.shipping + this.order.subtotal;
-    this.order.ordersUser = this.user;
+
     this.order.numberItems = numberItems;
     const date = new Date();
     this.order.orderD = date;
@@ -247,27 +249,30 @@ export class CartComponent implements OnInit {
         e.booksorder.bookAuthor.forEach((autor) => {
           if (autor.authorId == voucher.author_voucher) {
             let reducere_locala = 0;
-            reducere_locala = e.booksorder.bookPrice % voucher.voucherPrice;
+            reducere_locala = (e.booksorder.bookPrice % voucher.voucherPrice)*e.quantity;
             this.order.subtotal = this.order.subtotal - reducere_locala;
             this.order.total = this.order.subtotal + this.order.shipping;
             reducere = reducere + reducere_locala;
           }
         });
       });
+
     }
     if (voucher.language != null) {
       type = 2;
       this.order.items.forEach((e) => {
         if (
-          (e.booksorder.bookLanguage.toLowerCase = voucher.language.toLowerCase)
+          (e.booksorder.bookLanguage = voucher.language)
         ) {
           let reducere_locala = 0;
-          reducere_locala = e.booksorder.bookPrice % voucher.voucherPrice;
+          reducere_locala = (e.booksorder.bookPrice % voucher.voucherPrice)*e.quantity;
           this.order.subtotal = this.order.subtotal - reducere_locala;
           reducere = reducere + reducere_locala;
         }
       });
     }
+
+    this.order.voucherDiscount = reducere;
 
     if (type != 0) {
       this.toastr.Swal.fire({
@@ -282,6 +287,8 @@ export class CartComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
           this.send();
+          this.addVoucherUser();
+          this.updateVoucherDetails();
         }
       });
     }
@@ -357,8 +364,26 @@ export class CartComponent implements OnInit {
       this.cartService.RemoveAll();
     });
   }
-}
 
-// orderD:Date;
-// voucherDiscount : number;
-// vouchersForUser:any;
+  addVoucherUser(){
+
+    this.newVoucherUser = new VoucherUser();
+    this.newVoucherUser.orderWithVouchers=[];
+    this.newVoucherUser.orderWithVouchers.push(this.order);
+    this.newVoucherUser.used=false;
+    this.newVoucherUser.usersWithVouchers=this.user;
+    this.voucherUserService.addVoucherToUser(this.newVoucherUser).subscribe();
+
+  }
+
+
+  // usersWithVouchers: BookUser;
+  // vouchers: Voucher;
+  // used: boolean;
+  // orderWithVouchers:BookOrder[];
+
+  updateVoucherDetails(){
+
+    this.voucherUserService.updateVoucherUser(this.newVoucherUser).subscribe();
+  }
+}

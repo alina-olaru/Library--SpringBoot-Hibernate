@@ -39,10 +39,10 @@ export class QuizzService {
     );
   }
 
-  AddQuizzez(publisher: Quizz): Observable<ApiResponse<Quizz>> {
+  AddQuizzez(quizz: Quizz): Observable<ApiResponse<Quizz>> {
     return this.http.post<ApiResponse<Quizz>>(
       this.globalVarService.globalUrl + this.baseUrl,
-      publisher
+      quizz
     );
   }
 

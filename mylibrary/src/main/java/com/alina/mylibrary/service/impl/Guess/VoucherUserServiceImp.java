@@ -3,11 +3,13 @@ package com.alina.mylibrary.service.impl.Guess;
 
 import com.alina.mylibrary.dao.Interfaces.Guest.VoucherUserDao;
 import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
+import com.alina.mylibrary.model.db.BookOrder;
 import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.db.Voucher;
 import com.alina.mylibrary.model.db.VoucherUser;
 import com.alina.mylibrary.service.Interfaces.Guess.VoucherUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -119,5 +121,39 @@ public class VoucherUserServiceImp implements VoucherUserService {
             }
         }
         return  response;
+    }
+
+    @Override
+    public VoucherUser updateVoucherAfter(VoucherUser voucherUser) throws DBExceptions {
+
+        if((voucherUser.getUsersWithVouchers()==null)||(voucherUser.getVouchers()==null)){
+            throw new DBExceptions("Obiectul trimis este gol", 400, this.getClass().getName(), "voucherusert obj", "Insert");
+        }
+
+        BookUser user = voucherUser.getUsersWithVouchers();
+        List<BookOrder> orders = user.getOrdersbyuser();
+        int count = 0;
+        for(BookOrder o :orders){
+            if(o.getVouchersForUser().getVouchers().getVoucherId()==voucherUser.getVouchers().getVoucherId()){
+
+            if(o.getVouchersForUser().getUsed()==true){
+                break;
+//                if((o.getOrderD().before(o.getVouchersForUser().getVouchers().getVoucherEndDate()))&&(o.getOrderD().after(o.getVouchersForUser().getVouchers().getVoucherStartDate()))) {
+//                }
+                }
+            }
+            count++;
+        }
+
+        if(count==voucherUser.getVouchers().getVoucherMaximumUses()){
+            voucherUser.setUsed(true);
+           try {
+               return this.voucherUserDao.editVoucher(voucherUser);
+           }catch (Exception ex){
+               return null;
+           }
+        }
+        return voucherUser;
+
     }
 }

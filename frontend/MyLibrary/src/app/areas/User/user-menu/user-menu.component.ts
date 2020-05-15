@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/areas/login/login.service';
 import { Component, OnInit } from '@angular/core';
 import {
 faArrowRight
@@ -11,9 +12,13 @@ export class UserMenuComponent implements OnInit {
 
 faArrowRight = faArrowRight;
 
-  constructor() { }
+  constructor(private auth :LoginService) { }
 
   ngOnInit(): void {
   }
 
+  logOut(){
+    this.auth.logOutUser();
+
+  }
 }

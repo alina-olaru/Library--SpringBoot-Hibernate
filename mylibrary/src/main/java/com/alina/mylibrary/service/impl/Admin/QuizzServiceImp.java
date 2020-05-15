@@ -93,7 +93,7 @@ public class QuizzServiceImp implements QuizzService {
         Quizz response=null;
         try{
         response= this.quizzDao.addQuizz(quizz);
-        if(!response.equals(null)){
+        if(response!=null){
             return response;
         }
         }catch (DaoException e){

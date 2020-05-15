@@ -1,8 +1,13 @@
-<div *ngFor="let v of vouchers " fxFlex fxLayout="column wrap">
+<div fxFlex fxLayout="column " fxLayoutAlign="center center">
+<div *ngFor="let v of vouchers " fxFlex fxLayout="column wrap" class="border-angular border-color-accent-100 my-4 mx-lg-5 px-3 py-3 ">
 <div fxFlex>
   {{v.voucherTitle}}
 </div>
 <div fxFlex>
+{{v.voucherMaximumUses}} utilizari maxim
+</div>
+<div fxFlex>
   {{v.voucherStartDate | date}}--  {{v.voucherEndDate | date}}
+</div>
 </div>
 </div>

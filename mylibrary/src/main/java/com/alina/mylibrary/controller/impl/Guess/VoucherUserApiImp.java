@@ -61,5 +61,15 @@ public class VoucherUserApiImp implements VoucherUserApi {
         }
     }
 
+    @Override
+    public ApiResponse<VoucherUser> updateVoucherAfter(VoucherUser voucherUser) {
+        try{
+            return new ApiResponse<VoucherUser>(ApiResponseType.SUCCESS,this.voucherUserService.updateVoucherAfter(voucherUser));
+        }catch (Exception ex){
+            return new ApiResponse<VoucherUser>(ApiResponseType.ERROR,null, ex.getMessage() + ex.getCause() + ex.getStackTrace() + ex.getClass());
+
+        }
+    }
+
 
 }

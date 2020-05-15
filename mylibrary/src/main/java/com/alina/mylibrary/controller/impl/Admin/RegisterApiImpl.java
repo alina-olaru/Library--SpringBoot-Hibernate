@@ -116,6 +116,7 @@ public class RegisterApiImpl implements RegisterApi {
             BookUser user=this.userMailRepository.findByemailAdressIgnoreCase(token.getUser().getEmailAdress());
             user.setIsEnabled(true);
 
+            //todo de ce nu se salveaza in baza cu true
 
 
             BookUser response = null;

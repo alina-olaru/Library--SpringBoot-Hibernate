@@ -1,3 +1,4 @@
+import { LoginService } from './../../login/login.service';
 import { Book } from './../../../Models/admin/BookModel';
 import { ApiResponse } from './../../../Models/general/api-response';
 import { Injectable } from '@angular/core';
@@ -6,7 +7,7 @@ import { ToastrService } from 'src/app/services/toastr.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { GlobalVarService } from 'src/app/services/global-var.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -22,43 +23,38 @@ constructor(
     private gloablVarService: GlobalVarService,
     private cookieService: CookieService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private auth : LoginService
 
 ){
 
-  this.baseUrl = "/public/api/admin/user/details";
 
-  let cachedUser = this.cookieService.get("auth-user-info");
-  if (cachedUser != null && cachedUser != "") {
-    this.user = JSON.parse(cachedUser) as BookUser;
-  }
-
-  let cachedToken = this.cookieService.get("auth-token");
-  if (cachedToken != null && cachedToken != "") {
-    this._token = JSON.parse(cachedToken);
-  }
-
+  this.user = this.auth.getUser();
+  console.log(this.user);
+  this.baseUrl="/public/api/admin/user/details";
 
 }
 
 
-
-getUser() {
-  return this.user;
-}
-
-get token() {
-  return this._token;
-}
 
 
 YesToNews(){
-  return this.httpClient.post<ApiResponse<BookUser>>(this.gloablVarService.globalUrl+this.baseUrl+"/yes",this.user.userId);
+
+  let params1 = new HttpParams().
+  set("id", this.user.userId.toString());
+  return this.httpClient.post<ApiResponse<BookUser>>(this.gloablVarService.globalUrl+this.baseUrl+"/yes", null ,
+  {params : params1});
 }
 
 
 NoToNews(){
-  return this.httpClient.post<ApiResponse<BookUser>>(this.gloablVarService.globalUrl+this.baseUrl+"/no",this.user.userId);
+
+
+  let params1 = new HttpParams().
+  set("id", this.user.userId.toString());
+
+  return this.httpClient.post<ApiResponse<BookUser>>(this.gloablVarService.globalUrl + this.baseUrl+ "/no" , null ,
+  {params : params1});
 }
 
 

@@ -24,10 +24,9 @@ public interface VoucherUserApi {
 
     @PostMapping("/user/all")
     ApiResponse<List<Voucher>> getVoucherUserById(@RequestBody BookUser user);
+
+
+    @PostMapping("/user/after")
+    ApiResponse<VoucherUser> updateVoucherAfter(@RequestBody VoucherUser voucherUser);
 }
 
-
-//    VoucherUser addVoucher(VoucherUser voucherUser)  throws DBExceptions;
-//    VoucherUser editVoucher(VoucherUser voucherUser)  throws DBExceptions;
-//    List<Voucher> getVouchersForUser(BookUser user) throws DBExceptions;
-//    List<VoucherUser> getAllVouchers()  throws DBExceptions;

@@ -33,7 +33,7 @@ export class AccountOverviewComponent implements OnInit {
 
 )
   {
-    this.user = this.authService.getUser();
+  this.GetUser();
 
     if(this.user.newsletter==true){
       this.yesNewsletter=true;
@@ -47,7 +47,7 @@ export class AccountOverviewComponent implements OnInit {
 
 
   GetUser(){
-
+    this.user = this.authService.getUser();
 
   }
 
@@ -60,6 +60,7 @@ export class AccountOverviewComponent implements OnInit {
 
     if (response && response.status == ApiResponseType.SUCCESS)
     {
+      this.authService.updateUser(this.user);
       this.toastr.Swal.fire({
         icon: "success",
         title: "Abonare facuta cu succes!",
@@ -79,6 +80,7 @@ export class AccountOverviewComponent implements OnInit {
   }
 
 
+
 },
 error=>{
   this.toastr.Swal.fire({
@@ -90,6 +92,7 @@ error=>{
 
 }
 );
+this.GetUser();
 }
 
 NoToNews(){
@@ -101,6 +104,7 @@ NoToNews(){
 
   if (response && response.status == ApiResponseType.SUCCESS)
   {
+    this.authService.updateUser(this.user);
     this.toastr.Swal.fire({
       icon: "success",
       title: "Te-ai dezabonat cu succes!",
@@ -131,5 +135,6 @@ this.toastr.Swal.fire({
 
 }
 );
+this.GetUser();
 }
 }

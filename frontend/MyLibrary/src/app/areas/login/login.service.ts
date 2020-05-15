@@ -94,4 +94,17 @@ export class LoginService {
     this.user = null;
     this.router.navigate(["login"]);
   }
+
+  updateUser(user : BookUser){
+    this.cookieService.delete("auth-token");
+    let expiration: Date = new Date();
+    expiration.setDate(expiration.getDate() + 1);
+    this.cookieService.set(
+      "auth-token",
+      JSON.stringify(user),
+      expiration,
+      '/'
+    );
+
+  }
 }

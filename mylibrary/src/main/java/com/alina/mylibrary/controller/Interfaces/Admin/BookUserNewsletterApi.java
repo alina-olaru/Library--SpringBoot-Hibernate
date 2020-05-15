@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public interface BookUserNewsletterApi {
 
-    @PostMapping(path="/yes/{id}")
-    ApiResponse<BookUser> YesToNewsletter(@PathVariable int id);
+    @PostMapping(path="/yes")
+    ApiResponse<BookUser> YesToNewsletter(@RequestParam int id);
 
 
-    @PostMapping(path="/no/{id}")
-    ApiResponse<BookUser> NoToNewsletter(@PathVariable int id);
+    @PostMapping(path="/no")
+    ApiResponse<BookUser> NoToNewsletter(@RequestParam int id);
 }

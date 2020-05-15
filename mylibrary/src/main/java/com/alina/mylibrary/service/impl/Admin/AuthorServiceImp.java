@@ -98,7 +98,7 @@ public class AuthorServiceImp implements AuthorService {
 
                 for (BooksAuthors ba : b.getBookAuthor()) {
                     //todo add sa stergi tot autoryl tau
-                    if(ba.getAuthorId().equals(auth)){
+                    if(ba.getAuthorId().getAuthorId()==auth.getAuthorId()){
                     this.booksAuthorsDao.delete(ba);
                     }
                 }
@@ -120,12 +120,12 @@ public class AuthorServiceImp implements AuthorService {
             books2=this.bookDao.getBooks();
             for(Book b:books2){
                 for(BooksAuthors ba : b.getBookAuthor()){
-                    if(((ba.getAuthorId().getFirstName().equals(auth.getFirstName()))&&(ba.getAuthorId().getLastName().equals(auth.getLastName())))||
-                            ((ba.getAuthorId().getFirstName().equals(auth.getLastName()))&&(ba.getAuthorId().getLastName().equals(auth.getFirstName())))){
+                    if(((ba.getAuthorId().getFirstName()==(auth.getFirstName()))&&(ba.getAuthorId().getLastName()==(auth.getLastName())))||
+                            ((ba.getAuthorId().getFirstName()==(auth.getLastName()))&&(ba.getAuthorId().getLastName()==(auth.getFirstName())))){
 
-                        if(b.getBookAuthor().size()>=2) {
+
                             response.add(b);
-                        }
+
 
                     }
 

@@ -18,4 +18,9 @@ public interface VoucherUserService {
     List<Voucher> getVouchersForUser(BookUser user) throws DBExceptions;
     List<VoucherUser> getAllVouchers()  throws DBExceptions;
     List<VoucherUser> getVoucherUserForUser(BookUser user) ;
+
+    /**
+     * after placing a new order , the field "used" is updated if you spend the maximum uses on a voucher
+     */
+    VoucherUser updateVoucherAfter (VoucherUser voucherUser) throws DBExceptions;
 }
