@@ -16,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Wishlist implements Serializable {
 
-    @JsonIgnoreProperties(ignoreUnknown=true, value = {"wishBooks"}, allowSetters = true)
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"wishBooks", "bookAuthor", "booksCategories", "persBooks" }, allowSetters = true)
     @Id
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name="FK_BOOK_WISHLIST_ID"))

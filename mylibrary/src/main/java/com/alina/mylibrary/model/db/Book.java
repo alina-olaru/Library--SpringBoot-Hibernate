@@ -64,7 +64,7 @@ public class Book {
     private int numberOfReviews;
 
     @Column
-    private float bookRating;
+    private Double bookRating;
 
     @Column
     @NotNull

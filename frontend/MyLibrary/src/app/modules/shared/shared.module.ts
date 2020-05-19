@@ -12,11 +12,17 @@ import { LightboxModule } from "@ngx-gallery/lightbox";
 import { GalleryModule } from "@ngx-gallery/core";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../material/material.module';
+import { StarRatingModule } from 'angular-star-rating';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [TruncatePipe, YesNoPipe, ThemeSelectorComponent,PricePipe],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     NgImageSliderModule,
     GalleryModule,
@@ -24,9 +30,12 @@ import { MaterialModule } from '../material/material.module';
     GallerizeModule,
     MaterialModule,
     FontAwesomeModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    StarRatingModule.forRoot()
   ],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
     ThemeSelectorComponent,
     TruncatePipe,
     YesNoPipe,
@@ -38,7 +47,8 @@ import { MaterialModule } from '../material/material.module';
     MaterialModule,
     FontAwesomeModule,
     FlexLayoutModule,
-    PricePipe
+    PricePipe,
+    StarRatingModule
   ],
 })
 export class SharedModule {}

@@ -201,27 +201,93 @@
   </div>
   <div class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex fxLayout="row" fxLayoutAlign="center space-between">
     <div fxFlex>
-      <button mat-button color="accent" class="border-angular border-color-primary-500" (click)="viewReview=false">LASA
-        UN COMENTARIU</button>
+      <button mat-button color="accent" class="border-angular border-color-primary-500" (click)="viewReview=false">VEZI RECENZII</button>
     </div>
-    <div fxFlex>
-      <button mat-button color="accent" (click)="viewReview=true">REVIEWS</button>
+    <div fxFlex fxLayout="row">
+      <div fxFlex>
+        <button mat-button color="accent" (click)="viewReview=true">LASA
+          UN COMENTARIU</button>
 
+      </div>
+      <div fxFlex>
+        <star-rating [starType]="'svg'" [rating]="rating" [readOnly]="true" [showHalfStars]="true" [labelText]="rating"
+          [hoverEnabled]="false" labelPosition="left" [numOfStars]="5"></star-rating>
+
+        <!-- <app-star-rating [rating]="rating" [isEditable] = "true" [dataSet] = "dataSet"></app-star-rating> -->
+
+      </div>
     </div>
-
   </div>
 
-  <div *ngIf="!viewReview" class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex fxLayout="row"
+  <div *ngIf="!viewReview" class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5 " FxFlex fxLayout="column"
     fxLayoutAlign="center space-between">
-    <div fxFlex>
-      COMENTARII
+    <div *ngIf="existReviews==true" fxFlex fxLayoutAlign="center center" fxLayout="column" >
+      <div *ngFor="let rev of reviews" fxFlex fxLayout="column" fxLayoutAlign="center center" class=" my-3 border-angular border-color-accent-100">
+        <div *ngIf="rev.userReviewMaker!=null" fxFlex>
+         User {{rev.userReviewMaker.username}}
+        </div>
+        <div fxFlex>
+          {{rev.reviewerName}}
+        </div>
+        <div fxFlex>
+          {{rev.textReview}}
+        </div>
     </div>
   </div>
+  </div>
 
-  <div *ngIf="viewReview" class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex fxLayout="row" fxLayoutAlign="center space-between">
+  <div *ngIf="viewReview" class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex fxLayout="column"
+    fxLayoutAlign="center space-between">
+
     <div fxFlex>
-    REVIEWS
+      <!-- <star-rating value="5" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating> -->
+      <star-rating [starType]="'svg'" [rating]="newRating" [step]="0.5" [showHalfStars]="true" [hoverEnabled]="true"
+        labelPosition="left" [numOfStars]="5" [readOnly]="false" (ratingChange)="onRatingChange($event)"
+        (starClickChange)="onClick($event)"></star-rating>
+      <!-- <app-star-rating [rating]="rating" [isEditable] = "true" [dataSet] = "dataSet"
+         (click)="addReview(rating)"
+
+         (Click)="onClick($event)"
+         (onRatingChange)="onRatingChange($event)"
+         (onHoverRatingChange)="onHoverRatingChange($event)"
+         ></app-star-rating> -->
+
     </div>
+    <div fxFlex fxLayoutAlign="center center" class="my-3">
+      <form [formGroup]="localForm" (ngSubmit)="SubmitForm()">
+
+        <div mat-dialog-content class="example-container" fxLayout="column">
+
+          <div class="input-row">
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Nume*" formControlName="reviewerName">
+              <mat-error *ngIf="form.reviewerName?.invalid">
+                Numele este obligatoriu
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="input-row">
+            <mat-form-field fxFlex>
+              <textarea rows="8" matInput placeholder="Comentariu" formControlName="textReview"></textarea>
+
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <button mat-button color="primary" type="submit">
+          <mat-icon>add</mat-icon> Adauga
+        </button>
+
+
+      </form>
+    </div>
+    <!-- <div  fxLayoutAlign="center center" fxFlex>
+      <button mat-button color="primary" type="submit">
+        <mat-icon>add</mat-icon> Adauga
+      </button>
+    </div> -->
+
   </div>
 
   <!-- //TODO ADD BUTON DE BACK -->

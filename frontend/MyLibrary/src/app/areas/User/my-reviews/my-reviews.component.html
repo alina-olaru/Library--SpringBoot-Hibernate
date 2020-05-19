@@ -1,0 +1,43 @@
+
+<div fxFlex fxLayout="column">
+  <div fxFlex fxLayoutAlign="center start" class="account-title mt-5 mt-lg-1">
+        <p >
+         Recenziile mele
+        </p>
+      </div>
+
+
+      <!-- DE AICI INCEPE INSIRUIREA ADRESELOR -->
+
+      <div fxFlex>
+
+        <div *ngFor="let rev of reviews" class="container">
+
+          <div class="account-overview-box mt-lg-5">
+
+
+            <div FxFlex fxLayoutAlign="center center" fxLayout="column wrap" class="mr-sm-5 mr-md-0 h-100 w-100">
+
+              <div class="account-overview-box-info" FxFlex> Id:   {{rev.reviewID}} </div>
+              <div  class="account-overview-box-info" FxFlex>Pseudonim:    {{rev.reviewerName}} </div>
+              <div class="account-overview-box-info" FxFlex> Recenzie:   {{rev.textReview}} </div>
+              <div class="account-overview-box-info" FxFlex> Carte:   {{rev.bookR.bookTitle}} </div>
+              <div class="account-overview-box-info" *ngFor="let auth of rev.bookR.bookAuthor" FxFlex> Autor:   {{auth.authorId.firstName}} {{auth.authorId.lastName}}</div>
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>

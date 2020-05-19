@@ -23,7 +23,7 @@ public class BooksCategories implements Serializable {
     private Category categories;
 
 
-    @JsonIgnoreProperties(ignoreUnknown=true, value = {"booksCategories"}, allowSetters = true)
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"booksCategories", "reviews", "bookAuthor", "wishBooks", "persBooks" }, allowSetters = true)
     @Id
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name="FK_BOOKS_ID"))

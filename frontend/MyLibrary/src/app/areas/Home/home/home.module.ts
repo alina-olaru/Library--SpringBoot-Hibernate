@@ -20,6 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BookDetailsComponent } from '../book-details/book-details.component';
 import { CartItemComponent } from '../cart-item/cart-item.component';
 import { VouchersUserComponent } from '../VouchersUser/VouchersUser.component';
+import { StarRatingModule } from 'angular-rating-star';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { VouchersUserComponent } from '../VouchersUser/VouchersUser.component';
        CommonModule,
        HomeRoutingModule,
        SharedModule,
+       StarRatingModule
   ],
   entryComponents:[
     CartItemComponent
