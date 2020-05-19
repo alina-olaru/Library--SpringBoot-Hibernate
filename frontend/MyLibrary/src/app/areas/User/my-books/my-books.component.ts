@@ -1,3 +1,4 @@
+import { NgZone } from '@angular/core';
 import { ApiResponse } from 'src/app/Models/general/api-response';
 import { LoginService } from 'src/app/areas/login/login.service';
 import { PersonalBookService } from './../../Home/book-details/personalBook.service';
@@ -30,6 +31,7 @@ export class MyBooksComponent implements OnInit {
   x:string;
   y:string;
   booksbyLibrary:Book[]=[];
+  booksbyUser : Book[] = [];
   subscriptions: Subscription[] = [];
 
 
@@ -42,6 +44,7 @@ export class MyBooksComponent implements OnInit {
    public router:Router,
    private toastr: ToastrService,
    private landingBooksService: LandingBooksService,
+   private zone : NgZone
   ) {
     this.UrlOCR="https://api.ocr.space/parse/image";
     this.isSmallScreen = breakpointObserver.isMatched('(max-width: 599px)');
@@ -78,6 +81,7 @@ ngOnInit(): void {
  */
 
     this.getMyBooksFromLibrary();
+    this.getBooksByUser();
   }
 
 
@@ -97,6 +101,7 @@ ngOnDestroy(): void {
     console.log(this.x);
 
     console.log(this.y);
+    this.zone.run(() =>{
     const dialogRef = this.dialog.open(AddBookViaOCRComponent, {
       width: this.x,
       height: this.y
@@ -105,6 +110,7 @@ ngOnDestroy(): void {
       //   model: Object.assign({}, item)
       // }
     });
+  })
   }
 
     // GetText(){
@@ -160,6 +166,51 @@ else{
       this.subscriptions.push(getBooks);
     }
 
+    getBooksByUser(){
+      //TODO ADD LOADING PESTE TOT
+     const getBooks=  this.personalBookS.getBooks(2,this.auth.getUser().userId).subscribe((response:ApiResponse<PersonalBook[]>) => {
+
+
+      if (response && response.status == ApiResponseType.SUCCESS) {
+
+        if(response.body.length>0){
+
+      // response.body.forEach(element => {
+      //   this.booksbyLibrary.push(element.book);
+      // });
+
+      this.booksbyUser=response.body.map(e => e.book);
+
+
+    }
+
+  else{
+    console.log("nu exista carti in biblioteca pers");
+    //TODO DE PUS  O IMG SAU CEVA IN HTML
+  }
+  }
+           else {
+            {//TODO ADD POPUPUL ASTA GENERAL PESTE TOT
+              this.toastr.Swal.fire({
+                icon: "error",
+                title: "Au aparut probleme cu serverul nostru.Contacteaza-ne pentru detalii!",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+              }).then((result) => {
+                if (result.value) {
+                  this.router.navigate(["/home/welcome"]);
+                }
+              });
+            }
+          }
+
+
+
+
+        })
+
+        this.subscriptions.push(getBooks);
+      }
 
   getUrlImageForBook(book: Book){
     return "url('data:image/jpg;base64," + book.bookImage + "')";

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.io.Serializable;
 
 @Entity
@@ -22,6 +23,7 @@ public class PersonalBook implements Serializable {
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_USER_ID"))
     private BookUser user;
+
 
     @JsonIgnoreProperties(ignoreUnknown=true, value = {"persBooks"}, allowSetters = true)
     @Id

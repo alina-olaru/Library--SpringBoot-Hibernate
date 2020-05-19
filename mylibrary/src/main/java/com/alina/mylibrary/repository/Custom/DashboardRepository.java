@@ -3,6 +3,7 @@ package com.alina.mylibrary.repository.Custom;
 import com.alina.mylibrary.exception.QueryCustomException;
 import com.alina.mylibrary.model.dashboard.DashboardClass;
 import com.alina.mylibrary.model.dashboard.DashboardThreeItemsClass;
+import com.alina.mylibrary.model.db.Preferences;
 import org.hibernate.QueryException;
 import org.hibernate.transform.Transformers;
 import org.springframework.data.repository.query.QueryCreationException;
@@ -46,6 +47,39 @@ public class DashboardRepository {
 
         } catch (Exception ex) {
             throw new QueryCustomException("Nu s-a putut sterge cartea,au aparut probleme in primul query" + ex.getMessage(), "Exception", "finding books writted only by this author", response.getClass().getName(), "get");
+
+        }
+
+
+    }
+    public List<Preferences> getPreferences(Integer userId) throws QueryCustomException{
+        List<Preferences> preferences=null;
+        try{
+            TypedQuery<Preferences> query=entityManager.createQuery("SELECT NEW Preferences(a.firstName as first_name , a.lastName as last_name  ) from " +
+                    "Book b " +
+                    "join Whishlist w \n" +
+                    "on b.bookId=w.bookwishlist.bookId \n" +
+                    "join BooksAuthors ba \n" +
+                    "on ba.bookId.bookId=b.bookId \n" +
+                    "join Author a \n" +
+                    "on a.authorId=ba.authorId.authorId \n" +
+                    "where w.userwishlist.userId=? ",
+                    Preferences.class)
+                    .setParameter(1,userId);
+            preferences = query.getResultList();
+            return preferences;
+        } catch (StackOverflowError e) {
+            throw new QueryCustomException("Nu s-au putut aduce datele,probleme la query", "StackOverflowError", "preferences", preferences.getClass().getName(), "get");
+        } catch (QueryTimeoutException ex) {
+            throw new QueryCustomException("Nu s-au putut aduce datele,probleme la query" + ex.getMessage(), "QueryTimeoutException","preferences", preferences.getClass().getName(), "get");
+
+        } catch (QueryException ex) {
+            throw new QueryCustomException("Nu s-au putut aduce datele,probleme la query"+ ex.getMessage(), "QueryException", "preferences", preferences.getClass().getName(), "get");
+        } catch (QueryCreationException ex) {
+            throw new QueryCustomException("Nu s-au putut aduce datele,probleme la query" + ex.getMessage(), "QueryCreationException", "preferences", preferences.getClass().getName(), "get");
+
+        } catch (Exception ex) {
+            throw new QueryCustomException("Nu s-au putut aduce datele,probleme la query" + ex.getMessage(), "Exception","preferences", preferences.getClass().getName(), "get");
 
         }
 

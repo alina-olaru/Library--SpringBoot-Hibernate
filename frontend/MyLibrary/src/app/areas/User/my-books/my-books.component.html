@@ -103,6 +103,83 @@ Adauga in biblioteca personala" .
 ADD
   </button>
   </div>
+  <div fxFlex.lt-sm="100%" fxFlex.lt-md="33%" fxFlex-mt-md="20%" fxLayoutAlign="end center" fxLayout="row">
+
+    <div fxFlex.lt-sm="100%" fxFlex fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign.md="space-around center"
+      fxLayoutAlign.lt-md="space-between center" fxLayoutAlign.gt-md="space-around">
+      <!-- SE ADAUGA CARTILE -->
+      <div *ngFor="let book_by_user of booksbyUser" id="card-2" class="card mb-3 mt-5 mt-lg-0"
+        [ngStyle]="{'background-image': getUrlImageForBook(book_by_user)}">
+        <figure class="card__thumbnail mt-3 mt-lg-0">
+          <!-- <img src=book.imageBook> -->
+        </figure>
+        <div class="card__body" (click)="viewDetails(book_by_user.bookId)">
+          <h3 class="title">{{book_by_user.bookTitle}}</h3>
+
+          <!-- <div class="pointer add-to-whishlist-icon">
+        <fa-icon  mat-list-icon [icon]="faHeart"></fa-icon>
+      </div> -->
+          <span *ngFor="let auth of book_by_user.bookAuthor" class="subtitle">{{auth.authorId.firstName}}
+            {{auth.authorId.lastName}} </span>
+          <p>
+            <svg width="16" height="16" viewBox="0 0 24 24">
+              <path
+                d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+              </path>
+            </svg>
+            Pret : {{book_by_user.bookPrice}}
+          </p>
+
+          <p>
+            <svg width="16" height="16" viewBox="0 0 24 24">
+              <path
+                d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+              </path>
+            </svg>
+            Nr pagini : {{book_by_user.numberOfPages}}
+          </p>
+
+          <p>
+            <svg width="16" height="16" viewBox="0 0 24 24">
+              <path
+                d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+              </path>
+            </svg>
+            Coperta : {{book_by_user.coverType}}
+          </p>
+
+          <p>
+            <svg width="16" height="16" viewBox="0 0 24 24">
+              <path
+                d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+              </path>
+            </svg>
+            Anul aparitiei : {{book_by_user.bookYear}}
+          </p>
+
+          <p>
+            <svg width="16" height="16" viewBox="0 0 24 24">
+              <path
+                d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+              </path>
+            </svg>
+            Nr volume : {{book_by_user.numberofVolumes}}
+          </p>
+
+
+          <p *ngFor=" let cat of book_by_user.booksCategories">
+            <svg width="16" height="16" viewBox="0 0 24 24">
+              <path
+                d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+              </path>
+            </svg>
+            {{cat.categories.categoryTitle}}
+          </p>
+        </div>
+      </div> <!-- ./ Card #2   -->
+    </div>
+
+  </div>
 
 
 </div>

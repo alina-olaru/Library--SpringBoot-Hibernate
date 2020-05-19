@@ -1,7 +1,8 @@
-import { ApiResponse } from './../../../Models/general/api-response';
-import { PersonalBookService } from './../../Home/book-details/personalBook.service';
-import { LoginService } from 'src/app/areas/login/login.service';
-import { BookUser } from './../../../Models/BookUser';
+import { Book } from "./../../../Models/admin/BookModel";
+import { ApiResponse } from "./../../../Models/general/api-response";
+import { PersonalBookService } from "./../../Home/book-details/personalBook.service";
+import { LoginService } from "src/app/areas/login/login.service";
+import { BookUser } from "./../../../Models/BookUser";
 import { PersonalBook } from "./../../../Models/home/PersonalBook";
 import {
   Component,
@@ -12,11 +13,14 @@ import {
 } from "@angular/core";
 import { getElement, Image } from "@amcharts/amcharts4/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialogRef } from '@angular/material/dialog';
-import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
-import { ToastrService } from 'src/app/services/toastr.service';
-import { LandingBooksService } from '../../Home/welcome/LandingBooks.service';
-import Swal from 'sweetalert2';
+import { MatDialogRef } from "@angular/material/dialog";
+import { ApiResponseType } from "src/app/Models/general/api-response-type.enum";
+import { ToastrService } from "src/app/services/toastr.service";
+import { LandingBooksService } from "../../Home/welcome/LandingBooks.service";
+import Swal from "sweetalert2";
+import { DomSanitizer } from "@angular/platform-browser";
+import { Subscription } from "rxjs";
+import { retryWhen } from "rxjs/operators";
 
 @Component({
   selector: "app-add-book-via-ocr",
@@ -30,7 +34,9 @@ export class AddBookViaOCRComponent implements OnInit {
   base64: string;
   state: number;
   localForm: FormGroup;
-  user : BookUser;
+  user: BookUser;
+  emptyBook: Book;
+  subscriptions: Subscription[] = [];
 
   @ViewChild("video", { static: true }) videoElement: ElementRef;
   @ViewChild("canvas", { static: true }) canvas: ElementRef;
@@ -45,45 +51,48 @@ export class AddBookViaOCRComponent implements OnInit {
     },
   };
 
-  constructor
-  ( public dialogRef: MatDialogRef<AddBookViaOCRComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<AddBookViaOCRComponent>,
     private renderer: Renderer2,
-     private formBuilder: FormBuilder,
-     private auth : LoginService,
-     private persBookService : PersonalBookService,
-     private toastr: ToastrService,
-     private landingBooksService: LandingBooksService,
-     ) {
+    private formBuilder: FormBuilder,
+    private auth: LoginService,
+    private persBookService: PersonalBookService,
+    private toastr: ToastrService,
+    private landingBooksService: LandingBooksService,
+    private domSanitizer: DomSanitizer
+  ) {
     this.state = 0;
     this.user = auth.getUser();
     this.myBook = new PersonalBook();
+
+    console.log("empty book sus:" + this.emptyBook);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    //  if (this.emptyBook != undefined) {
+    this.GetBookById(27);
+    console.log("ngOnInit" + this.emptyBook);
+    //  }
+  }
+
+  ngAfterContentInit() {
     console.log(this.state + " state");
+    console.log("empty book ngAfterContentChecked:" + this.emptyBook);
+
     this.localForm = this.formBuilder.group({
-      user: [{ value: this.user }],
-  //    book : [{value : null}],
-      persBAuthor: [" ", Validators.required],
-      persBTitle: [" ", Validators.required],
+      persBAuthor: [null, Validators.required],
+      persBTitle: [null, Validators.required],
     });
   }
-  //   user: BookUser;
-  //   book: Book;
-  //   persBAuthor:string;
-  //   persBTitle:string;
-  //   bookImage:string;
-  //   bookImageSrc?: any;
-  // }
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
+    this.subscriptions.forEach((e) => {
+      e.unsubscribe();
+    });
     this.state = 0;
-    console.log(this.state + " state");
 
-    //Se opreste camera
     this.stopCamera();
   }
+
   //----------------------- ---------------------(STATE 1 )UPLOAD VIA CAMERA/WEBCAM-------------------------------------------
 
   startCamera() {
@@ -188,56 +197,89 @@ export class AddBookViaOCRComponent implements OnInit {
     this.base64 = null;
   }
 
-  SubmitManualPersBook(){
-      if (this.localForm.valid) {
-        let model: PersonalBook = new PersonalBook(this.localForm.value);
-
-        if(typeof this.base64 == "string"){
+  SubmitManualPersBook() {
+    if (this.localForm.valid) {
+      let model: PersonalBook = new PersonalBook(this.localForm.value);
+      model.user = this.user;
+      if (this.emptyBook) {
+     //   console.log("modelul " + model.book.bookAuthor);
+        model.book = this.emptyBook;
+        if (typeof this.base64 == "string") {
           model.bookImage = this.base64
-            ? this.base64.replace(/^data:image\/[a-z]+;base64,/, '')
+            ? this.base64.replace(/^data:image\/[a-z]+;base64,/, "")
             : null;
-          } else
-          {
-            model.bookImage = this.base64
-            ? (this.base64 as any).changingThisBreaksApplicationSecurity.replace(/^data:image\/[a-z]+;base64,/, '')
+        } else {
+          model.bookImage = this.base64
+            ? (this
+                .base64 as any).changingThisBreaksApplicationSecurity.replace(
+                /^data:image\/[a-z]+;base64,/,
+                ""
+              )
             : null;
-          }
+        }
         model.bookImageSrc = this.base64;
-        this.PostRequest(model);
-        this.dialogRef.close(model);
-      }
 
+        this.PostRequest(model);
+      }
+    } else {
+      //NU AVEM EMPTY BOOK
+    }
   }
 
-
-  PostRequest(book : PersonalBook){
-    this.persBookService.addBook(book).subscribe((response : ApiResponse<PersonalBook>)=>{
-      if (response && response.status == ApiResponseType.SUCCESS) {
-
-
-        this.toastr.Swal.fire({
-          title: 'Cartea s-a adaugat cu succes!',
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
+  GetBookById(id: number) {
+    const getBooks = this.landingBooksService.GetDetails(id).subscribe(
+      (response: ApiResponse<Book>) => {
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.emptyBook = response.body;
+          if (this.emptyBook.bookImage) {
+            this.emptyBook.bookImageSrc = this.domSanitizer.bypassSecurityTrustResourceUrl(
+              "data:image/jpg;base64," + this.emptyBook.bookImage
+            );
           }
-        })
+          console.log(this.emptyBook);
 
-
-
+          return response.body;
+        } else {
+          this.toastr.Toast.fire({
+            icon: "error",
+            title: "A aparut o eroare",
+          });
+        }
+      },
+      (error) => {
+        this.toastr.Toast.fire({
+          icon: "error",
+          title: "A aparut o eroare",
+        });
       }
-      else{
-        this.toastr.Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: response.message,
-          footer: 'Contactati-ne pentru detalii'
-        })
-      }
+    );
 
-    })
+    this.subscriptions.push(getBooks);
+  }
 
+  PostRequest(book: PersonalBook) {
+    this.persBookService
+      .addBook(book)
+      .subscribe((response: ApiResponse<PersonalBook>) => {
+        if (response && response.status == ApiResponseType.SUCCESS) {
+          this.toastr.Swal.fire({
+            title: "Cartea s-a adaugat cu succes!",
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          });
+        } else {
+          this.toastr.Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: response.message,
+            footer: "Contactati-ne pentru detalii",
+          });
+        }
+        this.dialogRef.close();
+      });
   }
 }

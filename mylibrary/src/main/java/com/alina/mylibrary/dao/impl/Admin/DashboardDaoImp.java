@@ -5,6 +5,7 @@ import com.alina.mylibrary.exception.DaoException;
 import com.alina.mylibrary.exception.QueryCustomException;
 import com.alina.mylibrary.model.dashboard.DashboardClass;
 import com.alina.mylibrary.model.dashboard.DashboardThreeItemsClass;
+import com.alina.mylibrary.model.db.Preferences;
 import com.alina.mylibrary.repository.Custom.DashboardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -46,6 +47,19 @@ public class DashboardDaoImp implements DashboardDao {
 
         try{
             response = this.dashboardRepository.getBooksWithAuthorsAndCat();
+            return response;
+        }catch(QueryCustomException ex){
+            throw new DaoException(3);
+        }catch (Exception ex){
+            throw new DaoException(3);
+        }
+    }
+
+    @Override
+    public List<Preferences> getPreferences(Integer userId) throws DaoException {
+        List<Preferences> response=null;
+        try{
+            response = this.dashboardRepository.getPreferences(userId);
             return response;
         }catch(QueryCustomException ex){
             throw new DaoException(3);

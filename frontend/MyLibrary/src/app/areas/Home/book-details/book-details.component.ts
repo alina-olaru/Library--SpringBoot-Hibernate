@@ -36,6 +36,7 @@ export class BookDetailsComponent implements OnInit {
   personalBook: PersonalBook;
   stringFinal = ' ';
   subscriptions: Subscription[] = [];
+  viewReview : boolean = true;
     //--------------------------popup---------------------------------------
     book: Book;
     bookId: number;
@@ -374,4 +375,13 @@ export class BookDetailsComponent implements OnInit {
 
   }
 
+  ///-----------------------------------------------buttom actions----------------------------------------------------
+  ViewReviews(){
+    this.viewReview = true;
+
+  }
+  Comment(){
+    this.viewReview = false;
+
+  }
 }

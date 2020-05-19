@@ -71,7 +71,7 @@
 
 <!-- STATE 2 --------------------UPLOAD MANUAL-->
 <div *ngIf="state==3" fxFlex fxLayout="column" >
-<form [formGroup]="localForm" (ngSubmit)="SubmitManualPersBook()">
+<form [formGroup]="localForm" (ngSubmit)="SubmitManualPersBook()" fxFlex fxLayout="column">
     <div class="input-row" fxFlex="100%">
       <mat-form-field fxFlex>
         <textarea rows="3" matInput placeholder="Nume autor" formControlName="persBAuthor">

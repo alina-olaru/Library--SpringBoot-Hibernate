@@ -32,8 +32,9 @@ export class LoginService {
     this.baseUrl = "";
 
     let cachedUser = this.cookieService.get("auth-user-info");
-    if (cachedUser != null && cachedUser != "") {
+    if (cachedUser != null && cachedUser != "" && cachedUser!= undefined ) {
       this.user = JSON.parse(cachedUser) as BookUser;
+      console.log("empty");
     }
 
     let cachedToken = this.cookieService.get("auth-token");
@@ -73,6 +74,7 @@ export class LoginService {
             );
 
             if (this.user == null) {
+              console.log("empty");
               this.user = x.body.bookUser;
               let expiration: Date = new Date();
               expiration.setDate(expiration.getDate() + 1);

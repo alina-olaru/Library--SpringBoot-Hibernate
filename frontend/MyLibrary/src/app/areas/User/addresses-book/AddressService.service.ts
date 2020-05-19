@@ -26,6 +26,7 @@ export class AddressServiceService {
     private toastr: ToastrService
   ) {
     this.baseUrl = "/public/api/users/address";
+
   }
 
   addAddress(address: Address, user: BookUser): Observable<ApiResponse<BookUser>> {

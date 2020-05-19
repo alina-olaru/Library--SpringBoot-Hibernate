@@ -48,6 +48,7 @@ export class CartComponent implements OnInit {
   vouchers: Voucher[] = [];
   user: BookUser;
   empty: boolean = false;
+  addresses : Address[]=[];
 
   voucherUsers: VoucherUser[] = [];
   newVoucherUser : VoucherUser;
@@ -71,6 +72,7 @@ export class CartComponent implements OnInit {
     });
     this.getBooks();
     this.user = this.auth.getUser();
+    this.getAddress();
     this.order = new BookOrder();
     this.order.ordersUser = this.user;
     this.getAddress();
@@ -136,6 +138,13 @@ export class CartComponent implements OnInit {
         }
       });
     }
+
+
+    this.addressService.getAddresses(this.user.userId).subscribe((Response) =>{
+      if(Response.status==ApiResponseType.SUCCESS){
+        this.addresses = Response.body;
+      }
+    })
   }
 
   chooseAddress(add: Address) {

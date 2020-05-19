@@ -199,7 +199,29 @@
   <div class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex>
 
   </div>
-</div>
+  <div class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex fxLayout="row" fxLayoutAlign="center space-between">
+    <div fxFlex>
+      <button mat-button color="accent" class="border-angular border-color-primary-500" (click)="viewReview=false">LASA
+        UN COMENTARIU</button>
+    </div>
+    <div fxFlex>
+      <button mat-button color="accent" (click)="viewReview=true">REVIEWS</button>
 
+    </div>
 
-<!-- //TODO ADD BUTON DE BACK -->
+  </div>
+
+  <div *ngIf="!viewReview" class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex fxLayout="row"
+    fxLayoutAlign="center space-between">
+    <div fxFlex>
+      COMENTARII
+    </div>
+  </div>
+
+  <div *ngIf="viewReview" class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex fxLayout="row" fxLayoutAlign="center space-between">
+    <div fxFlex>
+    REVIEWS
+    </div>
+  </div>
+
+  <!-- //TODO ADD BUTON DE BACK -->

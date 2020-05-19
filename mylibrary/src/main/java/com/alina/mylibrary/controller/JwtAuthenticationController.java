@@ -54,6 +54,8 @@ public class JwtAuthenticationController {
             user.setPersBooks(new ArrayList<PersonalBook>());
             user.setUserComplaints(new ArrayList<Complaint>());
             user.setUserVoucherLink(new ArrayList<VoucherUser>());
+            user.setAddresses(new ArrayList<Address>());
+            user.setOrdersbyuser(new ArrayList<BookOrder>());
             return new ApiResponse<JwtResponse>(ApiResponseType.SUCCESS, new JwtResponse(token, user));
         } catch (Exception ex) {
 

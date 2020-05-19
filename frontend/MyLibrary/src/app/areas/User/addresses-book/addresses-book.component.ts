@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AddressesBookComponent implements OnInit {
 user:BookUser;
-
+addresses : Address[]=[];
   constructor(
     public  adressService: AddressServiceService,
     private toastr: ToastrService,
@@ -33,8 +33,17 @@ user:BookUser;
      }
 
   ngOnInit(): void {
+    this.GetAddresses();
   }
 
+
+  GetAddresses(){
+    this.adressService.getAddresses(this.user.userId).subscribe((response =>{
+      if(response.status==ApiResponseType.SUCCESS){
+        this.addresses = response.body;
+      }
+    }))
+  }
 
   AddAddress(){
     console.log("S-a intrat in functie");
@@ -58,9 +67,10 @@ user:BookUser;
     this.adressService.addAddress(address, this.authService.getUser()).subscribe((response:ApiResponse<BookUser>) =>{
       if (response && response.status == ApiResponseType.SUCCESS) {
         this.toastr.Toast.fire({
-          title: 'Vouchcerul a fost editat cu succes!',
+          title: 'Adresa a fost adaugata cu succes!',
           icon: 'success'
         });
+        this.GetAddresses();
     }
         else {
           this.toastr.Swal.fire(
