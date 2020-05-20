@@ -39,6 +39,7 @@ export class MyReviewsComponent implements OnInit {
   ngOnInit(): void {
    // if(this.auth.getUser()!=null && this.auth.getUser()!=undefined){
       this.user = this.auth.getUser();
+      console.log(this.user + " ");
    // }
   //  else{
      // this.user = null;

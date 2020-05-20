@@ -71,17 +71,10 @@
       </a>
     </li>
 
-<!-- TO DO ADD FUNCTIONALITATE -->
-    <li class="account-navigation-item">
-      <a fxFlex fxLayout="row" fxLayoutAlign="space-between center" routerLink="/home/welcome" [routerLinkActive]="['active']">
-        <span fxFlex> Iesire din cont</span>
-        <fa-icon [icon]="faArrowRight"></fa-icon>
-      </a>
-    </li>
-    <!-- TO DO ADD FUNCTIONALITATE -->
 
 
-    <li class="account-navigation-item">
+
+    <li (click)="deleteAccount()" class="account-navigation-item">
       <a fxFlex fxLayout="row" fxLayoutAlign="space-between center">
         <span fxFlex> Stergere cont</span>
         <fa-icon [icon]="faArrowRight"></fa-icon>

@@ -38,14 +38,14 @@ addReview(review : Review){
 getReviewsForUser(userId : number){
   let paramsPass =new HttpParams()
   .set("userId" , userId.toString());
-  return this.http.post<ApiResponse<Review[]>>(this.globalVarService.globalUrl + this.baseUrl + "/user",null, { params : paramsPass});
+  return this.http.get<ApiResponse<Review[]>>(this.globalVarService.globalUrl + this.baseUrl + "/user", { params : paramsPass});
 }
 
 
 getReviewsForBook(bookId : number){
   let paramsPass =new HttpParams()
   .set("bookId" , bookId.toString());
-  return this.http.post<ApiResponse<Review[]>>(this.globalVarService.globalUrl + this.baseUrl + "/book",null, { params : paramsPass});
+  return this.http.get<ApiResponse<Review[]>>(this.globalVarService.globalUrl + this.baseUrl + "/book", { params : paramsPass});
 }
 
 }

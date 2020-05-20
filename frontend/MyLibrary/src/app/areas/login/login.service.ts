@@ -109,4 +109,9 @@ export class LoginService {
     );
 
   }
+
+
+  deleteAccount(){
+    return this.httpClient.delete<ApiResponse<boolean>>(this.gloablVarService.globalUrl+"/api/admin/users/" + this.user.userId);
+    }
 }

@@ -454,10 +454,14 @@ export class BookDetailsComponent implements OnInit {
         if (response && response.status == ApiResponseType.SUCCESS) {
           this.reviews = response.body;
           this.GetBookById(this.bookId);
+          console.log(this.reviews + " nu e gol");
+
         } else {
+          console.log(this.reviews + "gol");
           this.existReviews = false;
         }
       }
+
     );
   }
 }

@@ -32,9 +32,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private cookieService: CookieService
   ) {}
-  ngOnDestroy(): void {
-    this.$subscription.unsubscribe();
-  }
+  // ngOnDestroy(): void {
+  //   this.$subscription.unsubscribe();
+  // }
+  ngOnDestroy(){}
 
   ngOnInit() {
     if (this.loginService.getUser() != null) {

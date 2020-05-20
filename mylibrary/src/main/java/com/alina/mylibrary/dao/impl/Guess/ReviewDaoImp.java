@@ -23,8 +23,10 @@ public class ReviewDaoImp implements ReviewDao {
         try {
             List<Review> all = this.reviewRepository.findAll();
             for (Review r : all) {
-                if (r.getBookR().getBookId() == bookId) {
-                    response.add(r);
+                if(r.getBookR()!=null) {
+                    if (r.getBookR().getBookId() == bookId) {
+                        response.add(r);
+                    }
                 }
             }
             return response;
