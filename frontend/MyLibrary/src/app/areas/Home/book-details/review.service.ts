@@ -26,7 +26,7 @@ constructor(
   private toastr: ToastrService,
 
   ) {
-  this.baseUrl= "public/api/review";
+  this.baseUrl= "/public/api/review";
 }
 
 

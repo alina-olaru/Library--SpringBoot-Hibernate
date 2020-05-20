@@ -1,5 +1,6 @@
 package com.alina.mylibrary.controller.Interfaces.Guess;
 
+import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.model.db.BookOrder;
 import com.alina.mylibrary.model.view.ApiResponse;
 import org.springframework.web.bind.annotation.*;
@@ -19,4 +20,7 @@ public interface OrderApi {
 
     @GetMapping("/all")
     ApiResponse<List<BookOrder>> getOrders();
+
+
+
 }

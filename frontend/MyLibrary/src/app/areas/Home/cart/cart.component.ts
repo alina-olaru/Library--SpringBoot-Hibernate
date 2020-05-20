@@ -52,6 +52,9 @@ export class CartComponent implements OnInit {
 
   voucherUsers: VoucherUser[] = [];
   newVoucherUser : VoucherUser;
+
+  sendedOrder : boolean=false;
+
   constructor(
     public cartService: CartService,
     private themeSelectorService: ThemeSelectorService,
@@ -328,6 +331,7 @@ export class CartComponent implements OnInit {
       cancelButtonText: "Nu",
     }).then((result) => {
       if (result.value) {
+        this.sendedOrder = true;
         // this.order.items = this.items;
         // this.order.shipping = 15;
         // this.order.subtotal = subt;
@@ -350,6 +354,7 @@ export class CartComponent implements OnInit {
             console.log("Send method finished");
             if (response && response.status == ApiResponseType.SUCCESS) {
               this.finalOrder = response.body;
+
 
               console.log(this.finalOrder);
             } else {

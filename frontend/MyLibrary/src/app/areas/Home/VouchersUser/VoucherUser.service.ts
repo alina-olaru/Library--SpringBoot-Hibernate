@@ -34,8 +34,7 @@ constructor(
 
  addVoucherToUser(voucherUser : VoucherUser){
 
-  return this.http.post<ApiResponse<VoucherUser>>(this.globalVarService.globalUrl+this.baseUrl + "/user/after" , voucherUser);
-}
+  return this.http.post<ApiResponse<VoucherUser>>(this.globalVarService.globalUrl+this.baseUrl , voucherUser);}
 
 getVouchersForUser(user : BookUser)  {
   return this.http.post<ApiResponse<Voucher[]>>(this.globalVarService.globalUrl+this.baseUrl+"/user" , user);
@@ -47,7 +46,8 @@ getUserVouchers(user : BookUser)  {
 
 updateVoucherUser(voucherUser : VoucherUser){
 
-  return this.http.post<ApiResponse<VoucherUser>>(this.globalVarService.globalUrl+this.baseUrl , voucherUser);
+
+  return this.http.post<ApiResponse<VoucherUser>>(this.globalVarService.globalUrl+this.baseUrl + "/user/after" , voucherUser);
 }
 
 }

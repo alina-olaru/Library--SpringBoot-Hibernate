@@ -1,10 +1,12 @@
 package com.alina.mylibrary.controller.Interfaces.Admin;
 
 import com.alina.mylibrary.model.db.Address;
+import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.model.view.ApiResponse;
 import com.alina.mylibrary.model.db.BookUser;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 @RestController
 @RequestMapping("/api/admin/users")
@@ -28,6 +30,9 @@ public interface BookUserApi {
 
     @DeleteMapping(path="/{id}")
     ApiResponse<Boolean> deleteUser(@PathVariable int id);
+
+    @GetMapping("/recommandations")
+    ApiResponse<HashSet<Book>> recoomandForUser(@RequestParam Integer userId);
 
 
 

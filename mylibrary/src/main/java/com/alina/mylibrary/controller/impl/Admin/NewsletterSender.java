@@ -49,7 +49,7 @@ public class NewsletterSender {
 
         //TODO ADD HTML IN MAIL
         simpleMailMessage.setFrom("olarualina01@gmail.com");
-        simpleMailMessage.setSubject("Newsletter test");
+        simpleMailMessage.setSubject("Newsletter");
         simpleMailMessage.setText("Multumim ca te-ai abonat la newsletter-ul nostru,il vei primi saptmanaal.Pt dezabonare,click mai jos");
         for(BookUser user:usersNews) {
             simpleMailMessage.setTo(user.getEmailAdress());
@@ -58,5 +58,37 @@ public class NewsletterSender {
         }
 
     }
+
+    @Scheduled(cron = "10 ** * ")
+    public void reminderShopping() {
+        /**
+         * Mail pentru orice user are in whishlist adaugate articole , zilnic la 10
+         */
+        final LocalDateTime start = LocalDateTime.now();
+
+        SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
+
+        List<BookUser> users=bookUserService.getUsers();
+        List<BookUser> usersNews=new ArrayList<>();
+        for(BookUser b:users){
+            if((b.getBlocked()==false)&&(b.getIsEnabled()==true)&&(b.isNewsletter()==true)){
+                if(b.getWishBooks().size()>=2) {
+                    usersNews.add(b);
+                }
+            }
+        }
+
+        //TODO ADD HTML IN MAIL
+        simpleMailMessage.setFrom("olarualina01@gmail.com");
+        simpleMailMessage.setSubject("Ai uitat articole in wishlist!");
+        simpleMailMessage.setText("Se pare ca ai uitat articole in wishlist.Intra sa le achizitionezi inainte sa dispara de pe stoc!.http://localhost:4200/cont/wishlist");
+        for(BookUser user:usersNews) {
+            simpleMailMessage.setTo(user.getEmailAdress());
+            emailSenderService.sendEmail(simpleMailMessage);
+
+        }
+
+    }
+
 }
 

@@ -1,11 +1,14 @@
 package com.alina.mylibrary.service.Interfaces.Admin;
 
+import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
 import com.alina.mylibrary.model.db.Address;
+import com.alina.mylibrary.model.db.Book;
 import com.alina.mylibrary.model.db.BookUser;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -24,5 +27,6 @@ public interface BookUserService {
 
     public void createPasswordResetTokenForUser(BookUser user, String token);
     public List<Address> getAddress(int id);
+    public HashSet<Book> recoomandForUser(Integer userId)   throws NotFoundException, FieldException,NullPointerException, DBExceptions;
 
 }

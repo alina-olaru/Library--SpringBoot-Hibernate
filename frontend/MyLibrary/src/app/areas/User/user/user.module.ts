@@ -44,6 +44,7 @@ import { MaterialModule } from 'src/app/modules/material/material.module';
     FlexLayoutModule,
     MaterialModule,
 
+
   ],
   exports:[
     UserMenuComponent

@@ -1,26 +1,31 @@
 package com.alina.mylibrary.service.impl.Admin;
 
 import com.alina.mylibrary.config.DBCheck;
+import com.alina.mylibrary.dao.Interfaces.Admin.BookDao;
 import com.alina.mylibrary.dao.Interfaces.Admin.BookUserDao;
+import com.alina.mylibrary.exception.ServiceExceptions.DBExceptions;
 import com.alina.mylibrary.exception.ServiceExceptions.FieldException;
-import com.alina.mylibrary.model.db.Address;
-import com.alina.mylibrary.model.db.Book;
-import com.alina.mylibrary.model.db.BookUser;
-import com.alina.mylibrary.model.db.PasswordResetToken;
+import com.alina.mylibrary.model.db.*;
 import com.alina.mylibrary.repository.Admin.passwordTokenRepository;
 import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
+import com.alina.mylibrary.service.Interfaces.Guess.BookAuthorService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Field;
+import java.util.*;
 
 @Service
 public class BookUserServiceImpl implements BookUserService {
 
     @Autowired
     private BookUserDao bookUserDao;
+
+
+    @Autowired
+    private BookDao bookDao;
+
 
     @Autowired
     private passwordTokenRepository passwordTokenRepository;
@@ -135,5 +140,130 @@ public class BookUserServiceImpl implements BookUserService {
 //        }
 //
 //        return addresses;
+    }
+
+    @Override
+    public HashSet<Book> recoomandForUser(Integer userId) throws NotFoundException, FieldException, NullPointerException, DBExceptions {
+        if(userId<1){
+            throw new FieldException("ID INCORECT", "BookUser", BookUser.class.getName());
+        }
+        BookUser user = null;
+        try {
+            user = this.bookUserDao.getBookUserById(userId);
+        }catch(Exception ex){
+            throw new DBExceptions(ex.getMessage(), 404, this.getClass().getName(), "BookUser obj", "get");
+        }
+        if(user==null){
+            throw new NullPointerException();
+        }
+
+        /**
+         *
+         * Am in vedere titlurile din whislist si orders - >Fac split dupa spatiu si o sa constituie cuvinte cheie
+         * numele si prenumele autorului
+         * categoria cartilor din whishlist si orders
+         * autorii in sine ( afisez cartile pt fiecare autor ,dar si autori cu nume partiale = )
+         */
+        List<Book> response = new ArrayList<>();
+
+        List<String> titles = new ArrayList<>();
+        List <String> names = new ArrayList<>();
+        List<Author> authors = new ArrayList<>();
+        List<Category> categories = new ArrayList<>();
+        /**
+         * whishlist
+         */
+        for(Wishlist wishlist : user.getWishBooks()){
+            titles.add(wishlist.getBookwishlist().getBookTitle());
+          for(BooksCategories bc : wishlist.getBookwishlist().getBooksCategories()) {
+              /**
+               * Parcurg tabelul asociativ si pt fiecare legatura cu categoria
+               * memorez categoria cartii
+               *
+               *
+               */
+              categories.add(bc.getCategories());
+
+          }
+            for(BooksAuthors ba :wishlist.getBookwishlist().getBookAuthor()){
+                /**
+                 * Parcurg tabelul asociativ si pt fiecare legatura autor
+                 * carte ,adaug numele si prenumele autorului , titlul (care urmeaza sa fie manipulat mai jos)
+                 *  si autorul(ca sa afisez toate cartile scrise de el)
+
+                 */
+
+                names.add(ba.getAuthorId().getFirstName());
+                names.add(ba.getAuthorId().getLastName());
+                authors.add(ba.getAuthorId());
+
+            }
+        }
+        /**
+         *
+         * order
+         */
+
+        for(BookOrder order : user.getOrdersbyuser()){
+            for(OrderItem item :order.getItems())
+            {
+                titles.add(item.getBooksorder().getBookTitle());
+                for(BooksCategories bc : item.getBooksorder().getBooksCategories()){
+                    categories.add(bc.getCategories());
+                }
+
+                for(BooksAuthors ba : item.getBooksorder().getBookAuthor()){
+                    authors.add(ba.getAuthorId());
+                    names.add(ba.getAuthorId().getLastName());
+                    names.add(ba.getAuthorId().getFirstName());
+                }
+            }
+        }
+
+
+        /**
+         * Aflu cuvintele cheie ->split dupa spatiu si memorez cuvintele cu lungime >=3 (fara cele de legatura)
+         *
+         *
+         */
+
+        List<String> keyWords = new ArrayList<>();
+        for(String title : titles){
+            keyWords.addAll(Arrays.asList(title.split("\\s+")));
+        }
+
+
+
+        /**
+         *
+         * iterez printre toate cartile si
+         * dau push in response pentru toate cele care respecta
+         * macar una dintre conditii ( nume de autor, id de autor , cuvinte cheie , categorie)
+         */
+        List<Book> books = this.bookDao.getBooks();
+        for(Book book: books){
+            for(String t : keyWords) {
+                if (book.getBookTitle().contains(t)){
+                    response.add(book);
+                }
+            }
+            for(BooksAuthors baa : book.getBookAuthor()){
+                for(Author aa : authors){
+                if(baa.getAuthorId().getAuthorId()==aa.getAuthorId()){
+                    response.add(book);
+                }
+
+            }
+                for(String s : names){
+                    if((baa.getAuthorId().getLastName().contains(s)) || (baa.getAuthorId().getFirstName().contains(s))){
+
+                        response.add(book);
+                    }
+                }
+
+            }
+        }
+
+        return new HashSet<Book>(response);
     }
 }

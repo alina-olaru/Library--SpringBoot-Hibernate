@@ -1,3 +1,4 @@
+import { UserAddressAdd } from './../../../Models/user/UserAddressAdd';
 import { ApiResponse } from './../../../Models/general/api-response';
 import { BookOrder } from './../../../Models/cart/Order';
 import { CartBook } from './../../../Models/cart/CartBookModel';
@@ -5,7 +6,7 @@ import { Book } from 'src/app/Models/admin/BookModel';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { GlobalVarService } from 'src/app/services/global-var.service';
 
 @Injectable({
@@ -105,6 +106,12 @@ export class CartService {
       total=total+e.quantity;
     })
     return total;
+  }
+
+  getOrderForUser(userId : number){
+    let params = new HttpParams()
+    .set("userId",userId.toString());
+    return this.httpClient.get<ApiResponse<BookOrder[]>>(this.globalVarService.globalUrl + "/api/order" , { params:params });
   }
 
 }

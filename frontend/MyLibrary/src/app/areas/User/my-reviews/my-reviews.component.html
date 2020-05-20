@@ -9,14 +9,11 @@
 
       <!-- DE AICI INCEPE INSIRUIREA ADRESELOR -->
 
-      <div fxFlex>
-
-        <div *ngFor="let rev of reviews" class="container">
-
-          <div class="account-overview-box mt-lg-5">
 
 
-            <div FxFlex fxLayoutAlign="center center" fxLayout="column wrap" class="mr-sm-5 mr-md-0 h-100 w-100">
+        <div *ngFor="let rev of reviews"  class=" info-box-user border-angular border-color-accent-100 my-4 mx-lg-5 px-3 py-3 " fxFlex>
+
+
 
               <div class="account-overview-box-info" FxFlex> Id:   {{rev.reviewID}} </div>
               <div  class="account-overview-box-info" FxFlex>Pseudonim:    {{rev.reviewerName}} </div>
@@ -25,19 +22,7 @@
               <div class="account-overview-box-info" *ngFor="let auth of rev.bookR.bookAuthor" FxFlex> Autor:   {{auth.authorId.firstName}} {{auth.authorId.lastName}}</div>
 
 
-
-
-            </div>
-
-
-
-
-
-
-
-          </div>
         </div>
 
 
-      </div>
     </div>

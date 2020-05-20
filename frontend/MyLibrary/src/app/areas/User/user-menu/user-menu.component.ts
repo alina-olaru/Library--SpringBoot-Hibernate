@@ -8,6 +8,7 @@ faArrowRight
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'src/app/services/toastr.service';
+
 @Component({
   selector: 'app-user-menu',
   templateUrl: './user-menu.component.html',
@@ -28,6 +29,7 @@ faArrowRight = faArrowRight;
     this.auth.logOutUser();
 
   }
+
   deleteAccount(){
     this.auth.deleteAccount().subscribe((response:ApiResponse<boolean>)=>{
       if(response && response.status == ApiResponseType.SUCCESS)

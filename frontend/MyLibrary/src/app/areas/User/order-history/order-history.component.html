@@ -1,0 +1,25 @@
+
+<div fxFlex *ngIf="existOrders==true">
+<div fxFlex fxLayout="column " fxLayoutAlign="center center">
+  <div *ngFor="let v of orders " fxFlex fxLayout="column wrap" class="border-angular border-color-accent-100 my-4 mx-lg-5 px-3 py-3 ">
+  <div fxFlex>
+    Comanda {{v.orderId}}
+  </div>
+  <div fxFlex>
+  Pret : {{v.total}}
+  </div>
+  <div fxFlex>
+    Subtotal : {{v.subtotal}}
+    </div>
+    <div fxFlex>
+      Transport : {{v.shipping}}
+      </div>
+  <div fxFlex>
+    {{v.orderD | date}}
+  </div>
+  </div>
+  </div>
+</div>
+<div fxFlex *ngIf="existOrders==false">
+Nu ai comenzi
+</div>

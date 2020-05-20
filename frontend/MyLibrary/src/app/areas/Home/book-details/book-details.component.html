@@ -221,8 +221,11 @@
 
   <div *ngIf="!viewReview" class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5 " FxFlex fxLayout="column"
     fxLayoutAlign="center space-between">
-    <div *ngIf="existReviews==false" fxFlex fxLayoutAlign="center center" fxLayout="column" >
+    <div  fxFlex fxLayoutAlign="center center" fxLayout="column" >
       <div *ngFor="let rev of reviews" fxFlex fxLayout="column" fxLayoutAlign="center center" class=" my-3 border-angular border-color-accent-100">
+        <div fxFlex>
+         aaaaaaaaaaaaa
+        </div>
         <div *ngIf="rev.userReviewMaker!=null" fxFlex>
          User {{rev.userReviewMaker.username}}
         </div>

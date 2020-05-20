@@ -33,8 +33,13 @@ public class OrderApiImp implements OrderApi {
 
     @Override
     public ApiResponse<List<BookOrder>> getOrdersByUser(Integer userId) {
-        //return new ApiResponse<List<BookOrder>>(ApiResponseType.SUCCESS,this.bookOrderSer);
-        return null;
+        try {
+            return new ApiResponse<List<BookOrder>>(ApiResponseType.SUCCESS, this.bookOrderService.getOrdersByUser(userId), "s-au adus datele cu succes");
+        }catch (Exception ex){
+            return new ApiResponse<List<BookOrder>>(ApiResponseType.ERROR,null, "   a aparut o eroare   " + ex.getCause() + "  "+ ex.getMessage() +"  "+ ex.getClass() + "  " + ex.getStackTrace());
+
+        }
+
 
     }
 
@@ -44,4 +49,6 @@ public class OrderApiImp implements OrderApi {
 
 
     }
+
+
 }
