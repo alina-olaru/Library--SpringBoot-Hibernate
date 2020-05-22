@@ -1,3 +1,5 @@
+import { SearchLayoutComponent } from './../SearchLayout/SearchLayout.component';
+import { SearchComponent } from './../search/search.component';
 import { CartComponent } from './../cart/cart.component';
 import { LayoutComponent } from "./../layout/layout.component";
 import { QuizzComponent } from "./../quizz/quizz.component";
@@ -48,7 +50,18 @@ const routes: Routes = [
       {
         path:"book/:id",
         component:BookDetailsComponent
+      },
+      {
+        path: '',
+        component: SearchLayoutComponent,
+        children: [
+
+      {
+        path:"search/:query",
+        component:SearchComponent
       }
+    ]
+    }
     ],
   },
   {

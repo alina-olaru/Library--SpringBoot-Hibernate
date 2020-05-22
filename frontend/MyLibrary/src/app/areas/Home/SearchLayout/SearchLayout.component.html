@@ -1,0 +1,68 @@
+<div fxFlex fxLayout="row wrap" class="mt-lg-5">
+  <div fxFlex="100"  [fxFlex.gt-xs]="40" [fxFlex.gt-sm]="30" [fxFlex.gt-sm]="30" [fxFlex.gt-md]="20" class="px-2">
+
+<!--
+    <div fxFlex fxLayout="column">
+      <mat-checkbox [checked]="" #stoc (click)="toggleStoc(!stoc.checked)">In stoc</mat-checkbox>
+      <mat-checkbox #sale (click)="togglePromotie(!sale.checked)">Promotii</mat-checkbox>
+      <mat-checkbox #out (click)="toggleOutOfStock(!out.checked)">Out of stock</mat-checkbox>
+    </div> -->
+
+    <div fxFlex fxLayout="column">
+    <div fxFlex fxLayout="column">
+      <div class="my-4 color-accent search-item-title"fxFlex>
+        Disponibilitate
+      </div>
+    <div *ngFor="let item of object;  let i = index">
+      <mat-checkbox [checked]="disponibilitate == item.cod" (change)="disponibilitate = item.cod">{{item.title}}</mat-checkbox>
+    </div>
+  </div>
+
+  <div fxFlex fxLayout="column">
+    <div class="my-4 color-accent search-item-title"fxFlex>
+      Interval pret
+    </div>
+  <div *ngFor="let item of prices;  let i = index">
+    <mat-checkbox [checked]="minPrice == item.first && maxPrice == item.last" (change)="minPrice == item.first && maxPrice == item.last">{{item.first}} - {{item.last}}</mat-checkbox>
+  </div>
+</div>
+<div fxFlex fxLayout="column">
+  <div class="my-4 color-accent search-item-title"fxFlex>
+    Rating minim
+  </div>
+<div *ngFor="let item of [1,2,3,4,5];  let i = index">
+  <mat-checkbox [checked]="rating == item*2" (change)="rating==item*2">
+    <star-rating [starType]="'svg'" [rating]="item" [readOnly]="true" [showHalfStars]="true"
+    [hoverEnabled]="false" labelPosition="left" [numOfStars]="5"></star-rating>
+  </mat-checkbox>
+</div>
+</div>
+<div fxFlex fxLayout="column">
+  <div class="my-4 color-accent search-item-title"fxFlex>
+    Categorii
+  </div>
+<div *ngFor="let item of categories;  let i = index">
+  <mat-checkbox  (change)="selectCategory(item.categoryId)">{{item.categoryTitle}}</mat-checkbox>
+</div>
+</div>
+<div fxFlex fxLayout="column">
+  <div class="my-4 color-accent search-item-title"fxFlex>
+   Autori
+  </div>
+<div *ngFor="let item of authors;  let i = index">
+  <mat-checkbox  (change)="selectAuthor(item.authorId)">{{item.firstName}} {{item.lastName}}</mat-checkbox>
+</div>
+</div>
+
+<div fxFlex fxLayout="column">
+  <div class=" my-4 color-accent search-item-title"fxFlex>
+   Edituri
+  </div>
+<div *ngFor="let item of publishers;  let i = index">
+  <mat-checkbox  (change)="selectPublisher(item.publisherId)">{{item.publisherTitle}} </mat-checkbox>
+</div>
+</div>
+  <div fxFlex="100" [fxFlex.gt-xs]="60" [fxFlex.gt-sm]="70"  [fxFlex.gt-md]="80" fxLayout="column">
+    <router-outlet></router-outlet>
+  </div>
+</div>

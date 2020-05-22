@@ -107,6 +107,11 @@ export class LayoutComponent implements OnInit {
 
   search(){
     console.log(this.searchKey);
+    this.router.navigate(["/home", "search", this.searchKey]);
   }
 
+  sendit(varr : any)
+  {
+    console.log(varr);
+  }
 }

@@ -1,3 +1,5 @@
+import { SearchLayoutComponent } from './../SearchLayout/SearchLayout.component';
+import { SearchComponent } from './../search/search.component';
 import { AbonarepopComponent } from './../abonarepop/abonarepop.component';
 import { CartComponent } from './../cart/cart.component';
 import { LayoutComponent } from './../layout/layout.component';
@@ -37,7 +39,9 @@ import { StarRatingModule } from 'angular-rating-star';
     BookDetailsComponent,
     CartItemComponent,
     VouchersUserComponent,
-    AbonarepopComponent
+    AbonarepopComponent,
+    SearchComponent,
+    SearchLayoutComponent
 
     ],
   imports: [

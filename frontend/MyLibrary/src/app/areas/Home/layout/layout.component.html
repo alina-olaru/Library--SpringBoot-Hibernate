@@ -37,7 +37,7 @@
                 <mat-label  >Ce vrei sa cauti?</mat-label>
                 <input [(ngModel)]="searchKey" matInput placeholder="Cauta...">
 
-                <mat-icon matSuffix (click)="search()">search</mat-icon>
+                <mat-icon matSuffix (keyup.enter)="sendit($event.target.value)" (click)="search()">search</mat-icon>
 
               </mat-form-field>
 
