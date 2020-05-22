@@ -139,12 +139,12 @@ export class AddEditBooksComponent implements OnInit {
       );
 
       if(typeof this.base64 == "string"){
-      model.bookImage = this.base64
+      model.bookImageDb = this.base64
         ? this.base64.replace(/^data:image\/[a-z]+;base64,/, '')
         : null;
       } else
       {
-        model.bookImage = this.base64
+        model.bookImageDb = this.base64
         ? (this.base64 as any).changingThisBreaksApplicationSecurity.replace(/^data:image\/[a-z]+;base64,/, '')
         : null;
       }
@@ -351,7 +351,7 @@ export class AddEditBooksComponent implements OnInit {
         this.fileName = file.name;
         myReader.onloadend = e => {
           console.log(myReader.result);
-          this.data.model.bookImage = <string>myReader.result;
+          this.data.model.bookImageDb = <string>myReader.result;
           this.data.model.bookImageSrc = myReader.result;
           this.base64 = <string>myReader.result;
         };
@@ -363,7 +363,7 @@ export class AddEditBooksComponent implements OnInit {
 
   DeleteFile() {
     this.fileName = null;
-    this.data.model.bookImage = null;
+    this.data.model.bookImageDb = null;
     this.data.model.bookImageSrc = null;
     this.base64 = null;
   }

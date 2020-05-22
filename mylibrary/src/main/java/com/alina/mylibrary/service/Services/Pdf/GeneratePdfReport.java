@@ -1,6 +1,7 @@
 package com.alina.mylibrary.service.Services.Pdf;
 
 import com.alina.mylibrary.model.db.BookOrder;
+import com.alina.mylibrary.model.db.OrderItem;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -187,18 +188,33 @@ public class GeneratePdfReport {
 
             for (BookOrder order : orderList) {
 
-                if(order.getOrderId()==20) {
+//TODO SCHIMBA DATELE
+              if(order.getOrderId()==20) {
 
-                    String id = Integer.toString(order.getOrderId());
-                    String subtotal = Double.toString(order.getSubtotal());
-                    String transport = Double.toString(order.getShipping());
-                    table.addCell(id);
-                    table.addCell(subtotal);
-                    table.addCell(transport);
-                }
+                  for(OrderItem item : order.getItems()) {
+
+                      String quantity=Integer.toString(item.getQuantity());
+                      String bookTitle =item.getBooksorder().getBookTitle();
+                      String price = Double.toString(item.getBooksorder().getBookPrice());
+                      var x =item.getBooksorder().getBookPrice() * 0.19;
+                      String priceTVA = Double.toString(x);
+
+                      table.addCell(bookTitle);
+                      table.addCell(price);
+                      table.addCell(priceTVA);
+                      table.addCell(quantity);
+                  }
+                  }
+//                    String id = Integer.toString(order.getOrderId());
+//                String subtotal = Double.toString(order.getSubtotal());
+//                String transport = Double.toString(order.getShipping());
+//                table.addCell(id);
+//                table.addCell(subtotal);
+//                table.addCell(transport);
+               }
 
 
-            }
+            
 
 
 

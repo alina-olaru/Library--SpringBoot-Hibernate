@@ -72,6 +72,9 @@ public class BookUser {
     @OneToMany(mappedBy = "userwishlist")
     private List<Wishlist> wishBooks;
 
+
+
+
     @JsonIgnoreProperties(ignoreUnknown=true, value = {"ordersUser"}, allowSetters = true)
     @OneToMany(mappedBy = "ordersUser",
             fetch = FetchType.LAZY)

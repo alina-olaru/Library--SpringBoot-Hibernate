@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface ComplaintDao {
     public List<Complaint> getComplaints();
+    public List<Complaint> getComplaintsbyId(Integer userId);
     public Complaint addComplaint(Complaint complaint)  throws DaoException;
 }

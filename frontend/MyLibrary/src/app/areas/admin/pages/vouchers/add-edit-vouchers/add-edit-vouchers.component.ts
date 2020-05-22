@@ -94,9 +94,9 @@ export class AddEditVouchersComponent implements OnInit {
       this.dropdownSelectedCategory = null;
     } else {
 
-      if(this.data.model.voucherImage)
+      if(this.data.model.voucherImageDb)
       {
-        this.fileName = this.data.model.voucherImage;
+        this.fileName = this.data.model.voucherImageDb;
         this.base64 = this.data.model.voucherImageSrc;
       }
 
@@ -153,12 +153,12 @@ export class AddEditVouchersComponent implements OnInit {
       model.voucherId = this.data.model.voucherId;
 
       if(typeof this.base64 == "string"){
-        model.voucherImage = this.base64
+        model.voucherImageDb = this.base64
           ? this.base64.replace(/^data:image\/[a-z]+;base64,/, '')
           : null;
         } else
         {
-          model.voucherImage = this.base64
+          model.voucherImageDb = this.base64
           ? (this.base64 as any).changingThisBreaksApplicationSecurity.replace(/^data:image\/[a-z]+;base64,/, '')
           : null;
         }
@@ -255,7 +255,7 @@ export class AddEditVouchersComponent implements OnInit {
         this.fileName = file.name;
         myReader.onloadend = e => {
           console.log(myReader.result);
-          this.data.model.voucherImage = <string>myReader.result;
+          this.data.model.voucherImageDb = <string>myReader.result;
           this.data.model.voucherImageSrc = myReader.result;
           this.base64 = <string>myReader.result;
         };
@@ -267,7 +267,7 @@ export class AddEditVouchersComponent implements OnInit {
 
   DeleteFile() {
     this.fileName = null;
-    this.data.model.voucherImage = null;
+    this.data.model.voucherImageDb = null;
     this.data.model.voucherImageSrc = null;
     this.base64 = null;
   }

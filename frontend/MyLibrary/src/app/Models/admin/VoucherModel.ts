@@ -7,7 +7,7 @@ export class Voucher {
   voucherId: number;
   voucherTitle: string;
   voucherDescription: string;
-  voucherImage: string;
+  voucherImageDb?: string;
   voucherImageSrc?: any;
   voucherStartDate: Date;
   voucherEndDate: Date;

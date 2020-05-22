@@ -86,11 +86,6 @@ public class WishListDaoImpl implements WishListDao {
             List<Wishlist> wishlists = this.wishlistRepository.findByuserwishlist(user);
             List<Book> books = wishlists.stream().map(Wishlist::getBookwishlist)
                     .collect(Collectors.toList());
-            books.forEach(book -> {
-                if(book.getBookImageDb() != null){
-                    book.setBookImage(Base64.getEncoder().encodeToString(book.getBookImageDb()));
-                }
-            });
             return books;
         } catch (Exception ex) {
             return null;

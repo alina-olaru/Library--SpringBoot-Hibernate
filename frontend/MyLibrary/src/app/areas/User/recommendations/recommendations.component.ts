@@ -58,7 +58,7 @@ export class RecommendationsComponent implements OnInit {
 
   getUrlImageForBook(book : Book)
     {
-      return "url('data:image/jpg;base64," + book.bookImage + "')";
+      return "url('data:image/jpg;base64," + book.bookImageDb + "')";
     }
     viewDetails(bookId : number){
 

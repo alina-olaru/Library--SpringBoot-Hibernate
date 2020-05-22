@@ -35,6 +35,7 @@ import { AddAddressComponent } from './areas/User/addresses-book/add-address/add
 import { ForgetPasswordComponent } from './areas/forget-password/forget-password.component';
 import { ChangePasswordComponent } from './areas/change-password/change-password.component';
 import { CartItemComponent } from './areas/Home/cart-item/cart-item.component';
+import { TestComponent } from './test/test.component';
 
 
 
@@ -50,6 +51,7 @@ import { CartItemComponent } from './areas/Home/cart-item/cart-item.component';
     AddAddressComponent,
     ForgetPasswordComponent,
     ChangePasswordComponent,
+    TestComponent,
 
 
 

@@ -1,6 +1,6 @@
 
-<div fxFlex fxLayout="column">
-  <div fxFlex fxLayoutAlign="center start" class="account-title mt-5 mt-lg-1">
+<div fxFlex fxLayout="column" fxLayoutAlign="center center">
+  <div fxFlex fxLayoutAlign="center start" class="color-accent account-title mt-5 mt-lg-1">
         <p >
          Recenziile mele
         </p>
@@ -11,18 +11,18 @@
 
 
 
-        <div *ngFor="let rev of reviews"  class=" info-box-user border-angular border-color-accent-100 my-4 mx-lg-5 px-3 py-3 " fxFlex>
+        <div *ngFor="let rev of reviews" class=" info-box-user border-angular border-color-accent-100 my-4 mx-lg-5 px-3 py-3 "
+         fxFlex >
 
 
+              <div class="fit-font-in-div account-overview-box-info" FxFlex> Id:   {{rev.reviewID}} </div>
+              <div  class="fit-font-in-div account-overview-box-info" FxFlex>Pseudonim:    {{rev.reviewerName}} </div>
+              <div class="fit-font-in-div account-overview-box-info" FxFlex> Recenzie:   {{rev.textReview}} </div>
+              <div class="fit-font-in-div account-overview-box-info" FxFlex> Carte:   {{rev.bookR.bookTitle}} </div>
+              <div class="fit-font-in-div account-overview-box-info" *ngFor="let auth of rev.bookR.bookAuthor" FxFlex> Autor:   {{auth.authorId.firstName}} {{auth.authorId.lastName}}</div>
 
-              <div class="account-overview-box-info" FxFlex> Id:   {{rev.reviewID}} </div>
-              <div  class="account-overview-box-info" FxFlex>Pseudonim:    {{rev.reviewerName}} </div>
-              <div class="account-overview-box-info" FxFlex> Recenzie:   {{rev.textReview}} </div>
-              <div class="account-overview-box-info" FxFlex> Carte:   {{rev.bookR.bookTitle}} </div>
-              <div class="account-overview-box-info" *ngFor="let auth of rev.bookR.bookAuthor" FxFlex> Autor:   {{auth.authorId.firstName}} {{auth.authorId.lastName}}</div>
+            </div>
 
-
-        </div>
 
 
     </div>

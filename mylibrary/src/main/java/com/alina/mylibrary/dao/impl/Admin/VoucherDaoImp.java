@@ -25,10 +25,6 @@ public class VoucherDaoImp implements VoucherDao {
     public List<Voucher> getVouchers() {
         LobHandler blobHandler = new DefaultLobHandler();
         var x = this.voucherRepository.findAll();
-        x.forEach(voucher -> {
-            if (voucher.getVoucherImageDb() != null)
-                voucher.setVoucherImage(Base64.getEncoder().encodeToString(voucher.getVoucherImageDb()));
-        });
         return x;
     }
 
@@ -39,9 +35,7 @@ public class VoucherDaoImp implements VoucherDao {
         if (voucher == null) {
             throw new DaoException(1);
         }
-        if(!(voucher.getVoucherImage() == null || voucher.getVoucherImage().isEmpty())){
-            voucher.setVoucherImageDb(org.apache.tomcat.util.codec.binary.Base64.decodeBase64(voucher.getVoucherImage()));
-        }
+
         return this.voucherRepository.save(voucher);
         } catch (Exception ex){
 
@@ -63,9 +57,7 @@ public class VoucherDaoImp implements VoucherDao {
                 throw new DaoException(2);
             }
         }
-        if(!(voucher.getVoucherImage() == null || voucher.getVoucherImage().isEmpty())){
-            voucher.setVoucherImageDb(org.apache.tomcat.util.codec.binary.Base64.decodeBase64(voucher.getVoucherImage()));
-        }
+
         return this.voucherRepository.save(voucher);
     }
 

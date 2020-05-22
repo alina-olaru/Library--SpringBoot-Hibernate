@@ -4,8 +4,11 @@
       <div fxFlex fxLayout="row wrap">
         <div fxFlex="30%" fxFlex.lt-sm="100%" fxFlex.mt-sm="50%">
 
-          <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="">
-            <img *ngIf="book.bookImageSrc" [src]="book.bookImageSrc" class="image-book">
+          <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="parent">
+            <img *ngIf="book.bookImageSrc" [src]="book.bookImageSrc" class="image-book" [class.out-of-stock-overlay]="book.numberOfBoooks==0">
+            <img *ngIf="book.numberOfBoooks==0" src="../../../../assets/images/details/Sold-Out-PNG-Picture.png" class="pointer on-top-image out-of-stock-img" >
+            <img *ngIf="book.bookPrice<book.lastPrice && book.numberOfBoooks!=0" src="../../../../assets/images/details/new/sales.png" class="pointer on-top-image sales-img child" >
+
           </div>
 
         </div>
@@ -167,13 +170,30 @@
             </button>
 
           </div>
-          <div fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
+          <div *ngIf="book.numberOfBoooks>0"fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
-            <button mat-raised-button color="primary" (click)="AddtoCart()">
+            <button [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary" (click)="AddtoCart()">
               <mat-icon>add_shopping_cart</mat-icon>
               Adauga in cos
             </button>
           </div>
+          <div *ngIf="book.numberOfBoooks==0"fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
+
+            <button [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary" (click)="AddtoCart()">
+              <mat-icon>close</mat-icon>
+              Indisponibil
+            </button>
+          </div>
+
+          <div *ngIf="book.numberOfBoooks==0"fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
+
+            <button [disabled]="book.numberOfBoooks>0" mat-raised-button color="accent" (click)="mailMe()">
+              <mat-icon>mail</mat-icon>
+              Notifica-ma cand e in stoc
+         </button>
+          </div>
+
+
           <div fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
             <button *ngIf="alreadyInMyBooks" mat-raised-button color="default" (click)="AddToPersonal()">
@@ -210,7 +230,7 @@
 
       </div>
       <div fxFlex>
-        <star-rating [starType]="'svg'" [rating]="rating" [readOnly]="true" [showHalfStars]="true" [labelText]="rating"
+        <star-rating [starType]="'svg'" [rating]="rating" [readOnly]="true" [showHalfStars]="true"
           [hoverEnabled]="false" labelPosition="left" [numOfStars]="5"></star-rating>
 
         <!-- <app-star-rating [rating]="rating" [isEditable] = "true" [dataSet] = "dataSet"></app-star-rating> -->
@@ -224,7 +244,7 @@
     <div  fxFlex fxLayoutAlign="center center" fxLayout="column" >
       <div *ngFor="let rev of reviews" fxFlex fxLayout="column" fxLayoutAlign="center center" class=" my-3 border-angular border-color-accent-100">
         <div fxFlex>
-         aaaaaaaaaaaaa
+
         </div>
         <div *ngIf="rev.userReviewMaker!=null" fxFlex>
          User {{rev.userReviewMaker.username}}

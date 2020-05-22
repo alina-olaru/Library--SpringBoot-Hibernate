@@ -36,6 +36,7 @@ const routes: Routes = [
         path: "despre",
         component: DespreComponent,
       },
+
       {
         path: "quizz",
         component: QuizzComponent,

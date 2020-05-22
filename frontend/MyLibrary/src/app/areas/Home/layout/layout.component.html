@@ -33,10 +33,11 @@
             <div fxFlex="100" fxFlex.gt-sm="1 1 0%" [fxFlexOrder]="3" [fxFlexOrder.gt-sm]="2" class="mt-2 px-3">
 
 
-              <mat-form-field fxFlex appearance="outline" >
+              <mat-form-field fxFlex appearance="outline" class="pointer">
                 <mat-label  >Ce vrei sa cauti?</mat-label>
-                <input  matInput placeholder="Cauta...">
-                <mat-icon matSuffix>search</mat-icon>
+                <input [(ngModel)]="searchKey" matInput placeholder="Cauta...">
+
+                <mat-icon matSuffix (click)="search()">search</mat-icon>
 
               </mat-form-field>
 

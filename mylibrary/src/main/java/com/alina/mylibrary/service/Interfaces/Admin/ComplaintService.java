@@ -9,4 +9,6 @@ public interface ComplaintService {
 
     public Complaint addComplaint(Complaint complaint)  throws DBExceptions,Exception;
     public List<Complaint> getComplaints();
+    public List<Complaint> getComplaintsbyId(Integer userId);
+
 }

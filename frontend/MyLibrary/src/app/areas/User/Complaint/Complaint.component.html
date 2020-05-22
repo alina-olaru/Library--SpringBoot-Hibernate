@@ -1,0 +1,78 @@
+<div fxFlex fxLayout="column">
+  <div fxFlex fxLayoutAlign="center start" class="color-accent account-title mt-5 mt-lg-1">
+        <p >
+         Trimite-ne o plangere!
+        </p>
+      </div>
+
+      <div fxFlex  fxLayoutAlign="center center" class="my-3 mx-5 p-3">
+        <form fxFlex fxLayout="column" [formGroup]="localForm" (ngSubmit)="SubmitForm()">
+
+          <div mat-dialog-content class="example-container" fxLayout="column">
+
+            <div class="input-row">
+              <mat-form-field fxFlex>
+                <input matInput placeholder="Subject*" formControlName="subject">
+                <mat-error *ngIf="form.subject?.invalid">
+                Subiectul plangerii este obligatoriu!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="input-row">
+              <mat-form-field fxFlex>
+                <input matInput placeholder="Feedback*" formControlName="text">
+                <mat-error *ngIf="form.text?.invalid">
+                 Continutul plangerii este obligatoriu!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="input-row" fxFlex="100%">
+              <mat-form-field fxFlex class="file-field">
+                <mat-icon matPrefix matTooltip="Sterge fisier!" (click)="DeleteFile()">close</mat-icon>
+                <input type="tel" matInput disabled placeholder="Imagine feedback" [(ngModel)]="fileName"
+                  [ngModelOptions]="{standalone: true}">
+                <mat-icon class="upload-file-icon" matSuffix (click)="UploadFile()" matTooltip="Incarca fisier!">file_upload
+                </mat-icon>
+                <input type="file" id="modal-file-upload-input" accept="image/*" style="visibility: hidden;display: none;">
+              </mat-form-field>
+            </div>
+
+            <div class="input-row" [hidden]="!fileName" fxFlex="100%" fxLayoutAlign="center center">
+              <img [src]="this.myComplaint.complaintImage" [hidden]="!this.myComplaint.complaintImage" class="voucher-image">
+            </div>
+          </div>
+
+          <div fxLayoutAlign="center center" fxFlex>
+          <button mat-button color="primary"  type="submit">
+            <mat-icon>add</mat-icon> Trimite
+          </button>
+        </div>
+
+        </form>
+      </div>
+      <div fxFlex fxLayoutAlign="center start" class="color-accent account-title mt-5 my-5 p-4">
+        <p >
+        Istoricul plangerilor tale
+        </p>
+      </div>
+      <div fxFlex fxLayoutAlign="center center" fxLayout="column" *ngFor="let c of all">
+        <div fxFlex class="important-info color-accent-300">
+          Plangerea numarul : {{c.complaintId}}
+        </div>
+
+        <div fxFlex class="important-info color-accent-300">
+          Subiect :
+        </div>
+        <div fxFlex>
+          {{c.subject}}
+        </div>
+        <div fxFlex class="important-info color-accent-300">
+         Continut:
+        </div>
+
+        <div fxFlex>
+        <textarea  wrap="off" cols="60" rows="5">  {{c.text}} </textarea>
+        </div>
+
+      </div>
+</div>

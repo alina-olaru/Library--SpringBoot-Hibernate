@@ -8,6 +8,7 @@ import com.alina.mylibrary.model.db.Complaint;
 import com.alina.mylibrary.service.Interfaces.Admin.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -63,5 +64,14 @@ public class ComplaintApiImp implements ComplaintApi {
         return new ApiResponse<Complaint>(ApiResponseType.ERROR,response,"Cererea nu a putut fi inregistrata");
 
     }
+
+    @Override
+    public ApiResponse<List<Complaint>> getComplaintById(@PathVariable Integer id) {
+        try {
+            return new  ApiResponse<List<Complaint>> (ApiResponseType.SUCCESS,this.complaintService.getComplaintsbyId(id),"s-au adus datele cu succces");
+        }catch (Exception ex){
+            return new ApiResponse<List<Complaint>>(ApiResponseType.ERROR,null,ex.getMessage() +"  " + ex.getLocalizedMessage() +"  " + ex.getCause() +"  " + ex.getCause() +"  " + ex.getClass() +"  " +  ex.getStackTrace() +"  " + ex.fillInStackTrace());
+        }
     }
+}
 

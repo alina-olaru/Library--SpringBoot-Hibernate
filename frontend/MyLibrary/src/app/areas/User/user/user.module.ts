@@ -1,3 +1,4 @@
+import { ComplaintComponent } from './../Complaint/Complaint.component';
 import { MyVouchersComponent } from './../MyVouchers/MyVouchers.component';
 import { LayoutComponent } from './../layout/layout.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -32,7 +33,8 @@ import { MaterialModule } from 'src/app/modules/material/material.module';
     MyReviewsComponent,
     AddBookViaOCRComponent,
     LayoutComponent,
-    MyVouchersComponent
+    MyVouchersComponent,
+    ComplaintComponent
   ],
   imports: [
     CommonModule,

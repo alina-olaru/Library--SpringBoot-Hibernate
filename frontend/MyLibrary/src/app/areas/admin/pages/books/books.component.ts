@@ -141,8 +141,8 @@ export class BooksComponent implements OnInit, OnDestroy {
         }
         this.Books = response.body;
         this.Books.forEach((e) => {
-          if (e.bookImage) {
-            const objectURL = 'data:image/png;base64,' + e.bookImage;
+          if (e.bookImageDb) {
+            const objectURL = 'data:image/png;base64,' + e.bookImageDb;
             e.bookImageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
               objectURL
             );
@@ -217,7 +217,6 @@ export class BooksComponent implements OnInit, OnDestroy {
 
   EditBookConfirm(newBook: Book, oldBook: Book) {
     this.loadingService.start();
-
     this.bookService
       .UpdateBook(newBook, newBook.bookId)
       .subscribe((response: ApiResponse<Book>) => {
@@ -270,9 +269,9 @@ export class BooksComponent implements OnInit, OnDestroy {
             title: "Cartea a fost adaugata cu succes",
             icon: "success"
           });
-          if (response.body.bookImage) {
+          if (response.body.bookImageDb) {
             const objectURL =
-              'data:image/png;base64,' + response.body.bookImage;
+              'data:image/png;base64,' + response.body.bookImageDb;
             response.body.bookImageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
               objectURL
             );

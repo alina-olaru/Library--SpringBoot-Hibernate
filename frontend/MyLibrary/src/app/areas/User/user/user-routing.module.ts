@@ -11,6 +11,7 @@ import { AccountOverviewComponent } from './../account-overview/account-overview
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MyVouchersComponent } from '../MyVouchers/MyVouchers.component';
+import { ComplaintComponent } from '../Complaint/Complaint.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,9 @@ const routes: Routes = [
             path:'vouchere',
             component:MyVouchersComponent
 
+          },{
+            path:'complaint',
+            component:ComplaintComponent
           },
           {
             path: 'bibiotecapersonala',

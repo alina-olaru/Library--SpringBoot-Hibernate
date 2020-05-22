@@ -33,18 +33,12 @@ public class BookDaoImp implements BookDao {
     @Override
     public List<Book> getBooks() {
         var books = this.bookRepository.findAll();
-        books.forEach(book -> {
-            if (book.getBookImageDb() != null)
-                book.setBookImage(Base64.getEncoder().encodeToString(book.getBookImageDb()));
-        });
         return books;
     }
 
     @Override
     public Book getBookbyId(int bookId) {
         var book = this.bookRepository.findById(bookId).stream().findFirst().orElse(null);
-        if (book != null && book.getBookImageDb() != null)
-            book.setBookImage(Base64.getEncoder().encodeToString(book.getBookImageDb()));
         return book;
     }
 
@@ -82,9 +76,6 @@ public class BookDaoImp implements BookDao {
 //                var bookCategories = book.getBooksCategories();
 //                 book.getBooksCategories().clear();
 //                 book.getBookAuthor().clear();
-                if (!(book.getBookImage() == null || book.getBookImage().isEmpty())) {
-                    book.setBookImageDb(org.apache.tomcat.util.codec.binary.Base64.decodeBase64(book.getBookImage()));
-                }
                 this.bookRepository.save(book);
 //                book.setBooksCategories(bookCategories);
 //                book.setBookAuthor(bookAuthors);
@@ -115,9 +106,6 @@ public class BookDaoImp implements BookDao {
         if (book.getBookId() == 0) {
             return null;
         }
-        if (!(book.getBookImage() == null || book.getBookImage().isEmpty())) {
-            book.setBookImageDb(org.apache.tomcat.util.codec.binary.Base64.decodeBase64(book.getBookImage()));
-        }
         this.bookRepository.save(book);
         return book;
 
@@ -127,11 +115,6 @@ public class BookDaoImp implements BookDao {
     public List<Book> getBooksByQuery(String title, int count) throws DaoException {
         try {
             var books = this.bookRepository.getBooksByQuery(title, PageRequest.of(0,count));
-            books.forEach(book -> {
-                if(book.getBookImageDb()!= null){
-                    book.setBookImage(Base64.getEncoder().encodeToString(book.getBookImageDb()));
-                }
-            });
             return books;
         }catch (Exception e){
             throw new DaoException(3);

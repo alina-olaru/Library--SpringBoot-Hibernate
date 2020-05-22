@@ -44,7 +44,4 @@ public class PersonalBook implements Serializable {
     @Lob
     private byte[] persBImageDb;
 
-    @Transient
-    private String persBImage;
-
 }

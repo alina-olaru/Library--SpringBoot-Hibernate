@@ -38,6 +38,7 @@ export class LayoutComponent implements OnInit {
   private user: BookUser = null;
   private _token: String = null;
   cartBooks:CartBook[]=[];
+  searchKey : string = null;
 
   numberItems : number;
   constructor(
@@ -104,6 +105,8 @@ export class LayoutComponent implements OnInit {
     }
   }
 
-
+  search(){
+    console.log(this.searchKey);
+  }
 
 }

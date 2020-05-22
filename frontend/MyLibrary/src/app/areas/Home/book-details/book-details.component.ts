@@ -24,6 +24,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Review } from "src/app/Models/home/Review";
+import { Mailme } from 'src/app/Models/user/Mailme';
 
 @Component({
   selector: "app-book-details",
@@ -65,6 +66,8 @@ export class BookDetailsComponent implements OnInit {
   localForm: FormGroup;
   reviews: Review[] = [];
   existReviews: boolean = true;
+    //---------------------------------------mail when it's in stock--------------------------------------
+mail : string;
 
   constructor(
     private route: ActivatedRoute,
@@ -152,14 +155,14 @@ export class BookDetailsComponent implements OnInit {
       (response: ApiResponse<Book>) => {
         if (response && response.status == ApiResponseType.SUCCESS) {
           this.book = response.body;
-          if (this.book.bookRating != 0) {
+          if ((this.book.bookRating != 0)&&(this.rating!=null)&&(this.rating!=9.978)) {
             this.rating = this.book.bookRating;
           } else {
-            this.rating = 10;
+            this.rating = 9.978;
           }
-          if (this.book.bookImage) {
+          if (this.book.bookImageDb) {
             this.book.bookImageSrc = this.domSanitizer.bypassSecurityTrustResourceUrl(
-              "data:image/jpg;base64," + this.book.bookImage
+              "data:image/jpg;base64," + this.book.bookImageDb
             );
           }
           console.log(this.book);
@@ -183,7 +186,7 @@ export class BookDetailsComponent implements OnInit {
 
   getUrlImageForBook() {
     {
-      return "url('data:image/jpg;base64," + this.book.bookImage + "')";
+      return "url('data:image/jpg;base64," + this.book.bookImageDb + "')";
     }
   }
 
@@ -308,7 +311,7 @@ export class BookDetailsComponent implements OnInit {
     });
 
     this.personalBook.persBAuthor = this.stringFinal;
-    this.personalBook.bookImage = this.book.bookImage;
+    this.personalBook.bookImageDb = this.book.bookImageDb;
     this.personalBook.bookImageSrc = this.book.bookImageSrc;
     //  console.log("datele care se trimit " + this.personalBook.book);
     //  console.log("datele care se trimit " + this.personalBook.bookImage);
@@ -463,5 +466,60 @@ export class BookDetailsComponent implements OnInit {
       }
 
     );
+  }
+  mailMe(){
+    this.toastr.Swal.fire({
+      title: 'Introdu adresa de email si te vom notifica cand produsul va reveni in stoc!',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Trimite',
+      allowOutsideClick:true
+    }).then((result) => {
+      if (result.value) {
+        // this.toastr.Swal.fire({
+        //   title: `${result.value.login}'s avatar`,
+        //   imageUrl: result.value.avatar_url
+        // })
+
+        this.mail = result.value;
+        this.personalBookService.Mailme(this.mail , this.bookId).subscribe((response:ApiResponse<Mailme>)=>{
+
+          if(response && response.status ==ApiResponseType.SUCCESS){
+
+            this.toastr.Swal.fire({
+              title:
+                "Veti fi notificata cand va fi in stoc cartea!",
+              width: 600,
+              allowOutsideClick: true,
+              allowEscapeKey: true,
+              padding: "3em",
+              background:
+                "#fff url(https://media1.tenor.com/images/04ad2a50fbb94e57acf8ef7ae669d263/tenor.gif?itemid=13321206)",
+              backdrop: `
+        rgba(0,0,0,0.396)
+        url("https://media2.giphy.com/media/3o7aDbht91HHeNpsME/source.gif")
+       left left
+        no-repeat
+      `,
+            })
+          }
+          else {
+            //mail invalid
+            this.toastr.Swal.fire(
+              'Eroare!',
+              'A aparut o eroare la stergere, incearca din nou!',
+              'error'
+            );
+          }
+        });
+
+
+      }
+    })
+
+
   }
 }

@@ -74,9 +74,6 @@ public class Book {
     @Lob
     private byte[] bookImageDb;
 
-    @Transient
-    private String bookImage;
-
     @JsonIgnoreProperties(ignoreUnknown=true, value = {"book"}, allowSetters = true)
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_publisher_id"))
@@ -91,6 +88,8 @@ public class Book {
     @OneToMany(mappedBy = "bookwishlist",
             fetch = FetchType.LAZY)
     private List<Wishlist> wishBooks;
+
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "booksorder",

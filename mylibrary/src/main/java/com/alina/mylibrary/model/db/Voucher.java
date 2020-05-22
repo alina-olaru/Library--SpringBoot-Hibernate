@@ -39,8 +39,6 @@ public class Voucher {
     @JsonIgnore
     private byte[] voucherImageDb;
 
-    @Transient
-    private String voucherImage;
 
     @Column
     @NotNull

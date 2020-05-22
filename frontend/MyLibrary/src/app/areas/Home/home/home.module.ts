@@ -1,3 +1,4 @@
+import { AbonarepopComponent } from './../abonarepop/abonarepop.component';
 import { CartComponent } from './../cart/cart.component';
 import { LayoutComponent } from './../layout/layout.component';
 import { QuizzComponent } from './../quizz/quizz.component';
@@ -35,7 +36,8 @@ import { StarRatingModule } from 'angular-rating-star';
      CartComponent,
     BookDetailsComponent,
     CartItemComponent,
-    VouchersUserComponent
+    VouchersUserComponent,
+    AbonarepopComponent
 
     ],
   imports: [

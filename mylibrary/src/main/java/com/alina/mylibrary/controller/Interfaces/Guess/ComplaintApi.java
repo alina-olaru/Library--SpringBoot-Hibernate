@@ -19,6 +19,10 @@ public interface ComplaintApi {
     @PostMapping
     ApiResponse<Complaint> insertComplaint(@RequestBody Complaint complaint);
 
+
+    @GetMapping(path = "/{id}")
+    ApiResponse<List<Complaint>> getComplaintById(@PathVariable Integer id);
+
 }
 
 

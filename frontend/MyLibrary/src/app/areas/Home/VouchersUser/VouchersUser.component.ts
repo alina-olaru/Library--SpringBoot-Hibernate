@@ -61,7 +61,7 @@ export class VouchersUserComponent implements OnInit {
   }
 
   getUrlImageForVoucher(voucher: Voucher) {
-    return "url('data:image/jpg;base64," + voucher.voucherImage + "')";
+    return "url('data:image/jpg;base64," + voucher.voucherImageDb + "')";
   }
 
   //----------------------------------------------------------------actions-------------------------------------------------------

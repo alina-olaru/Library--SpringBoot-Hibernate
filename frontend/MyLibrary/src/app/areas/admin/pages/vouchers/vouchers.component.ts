@@ -161,8 +161,8 @@ export class VouchersComponent implements OnInit, OnDestroy {
           }
           this.vouchers = response.body;
           this.vouchers.forEach((e) => {
-            if (e.voucherImage) {
-              const objectURL = 'data:image/png;base64,' + e.voucherImage;
+            if (e.voucherImageDb) {
+              const objectURL = 'data:image/png;base64,' + e.voucherImageDb;
               e.voucherImageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
                 objectURL
               );
@@ -203,9 +203,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
             title: 'Voucherul a fost adaugat cu succes',
             icon: 'success',
           });
-          if (response.body.voucherImage) {
+          if (response.body.voucherImageDb) {
             const objectURL =
-              'data:image/png;base64,' + response.body.voucherImage;
+              'data:image/png;base64,' + response.body.voucherImageDb;
             response.body.voucherImageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
               objectURL
             );

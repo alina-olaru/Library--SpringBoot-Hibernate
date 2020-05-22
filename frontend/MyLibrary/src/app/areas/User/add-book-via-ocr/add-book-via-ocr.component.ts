@@ -180,7 +180,7 @@ export class AddBookViaOCRComponent implements OnInit {
         myReader.onloadend = (e) => {
           console.log(myReader.result);
 
-          this.myBook.bookImage = <string>myReader.result;
+          this.myBook.bookImageDb = <string>myReader.result;
           this.myBook.bookImageSrc = myReader.result;
           this.base64 = <string>myReader.result;
         };
@@ -192,7 +192,7 @@ export class AddBookViaOCRComponent implements OnInit {
 
   DeleteFile() {
     this.fileName = null;
-    this.myBook.bookImage = null;
+    this.myBook.bookImageDb = null;
     this.myBook.bookImageSrc = null;
     this.base64 = null;
   }
@@ -205,11 +205,11 @@ export class AddBookViaOCRComponent implements OnInit {
      //   console.log("modelul " + model.book.bookAuthor);
         model.book = this.emptyBook;
         if (typeof this.base64 == "string") {
-          model.bookImage = this.base64
+          model.bookImageDb = this.base64
             ? this.base64.replace(/^data:image\/[a-z]+;base64,/, "")
             : null;
         } else {
-          model.bookImage = this.base64
+          model.bookImageDb = this.base64
             ? (this
                 .base64 as any).changingThisBreaksApplicationSecurity.replace(
                 /^data:image\/[a-z]+;base64,/,
@@ -231,9 +231,9 @@ export class AddBookViaOCRComponent implements OnInit {
       (response: ApiResponse<Book>) => {
         if (response && response.status == ApiResponseType.SUCCESS) {
           this.emptyBook = response.body;
-          if (this.emptyBook.bookImage) {
+          if (this.emptyBook.bookImageDb) {
             this.emptyBook.bookImageSrc = this.domSanitizer.bypassSecurityTrustResourceUrl(
-              "data:image/jpg;base64," + this.emptyBook.bookImage
+              "data:image/jpg;base64," + this.emptyBook.bookImageDb
             );
           }
           console.log(this.emptyBook);

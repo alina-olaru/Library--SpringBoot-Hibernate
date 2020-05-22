@@ -43,4 +43,9 @@ public class ComplaintServiceImp implements ComplaintService {
     public List<Complaint> getComplaints() {
         return this.complaintDao.getComplaints();
     }
+
+    @Override
+    public List<Complaint> getComplaintsbyId(Integer userId) {
+        return this.complaintDao.getComplaintsbyId(userId);
+    }
 }

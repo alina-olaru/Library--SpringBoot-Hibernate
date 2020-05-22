@@ -6,7 +6,7 @@ export class PersonalBook {
   book: Book;
   persBAuthor:string;
   persBTitle:string;
-  bookImage:string;
+  bookImageDb?:string;
   bookImageSrc?: any;
   public constructor(init?: Partial<BookUser>) {
     Object.assign(this, init);

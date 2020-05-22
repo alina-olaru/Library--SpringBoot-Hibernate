@@ -26,3 +26,38 @@
 .already-saved{
   color:rgb(16, 233, 16);
 }
+.out-of-stock-img{
+  height: 24%;
+  width: 51%;
+
+}
+.sales-img{
+
+  height: 59%;
+  width: 44%;
+    padding: 154px 0 0 191px;
+    -webkit-transition: -webkit-transform 0.4s;
+    transition: transform 0.4s;
+    :hover{
+     // transform: scale(1.5);
+     -webkit-transform: scale(1.8) rotate(0.01deg);
+   // transform: scale(1.8) rotate(0.01deg);
+   transform: rotate(25deg);
+    }
+
+}
+
+.out-of-stock-overlay{
+  opacity: 0.3;
+
+}
+.parent:hover .child,
+.parent:focus .child {
+  transform: scale(1.2);
+}
+
+.parent{
+  position: relative;
+}
+
+
