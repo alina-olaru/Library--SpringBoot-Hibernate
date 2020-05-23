@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -63,6 +64,10 @@ public class BookUser {
     @Column
     private Boolean isEnabled;
 
+    @Column
+    @ColumnDefault("0")
+    private Double bonus;
+
     @JsonIgnoreProperties(ignoreUnknown=true, value = {"user"}, allowSetters = true)
     @OneToMany(mappedBy = "user",
             fetch = FetchType.LAZY)
@@ -98,6 +103,10 @@ public class BookUser {
     @JsonIgnoreProperties(ignoreUnknown=true, value = {"userAddress"}, allowSetters = true)
     @OneToMany(mappedBy = "userAddress")
     private List<Address> addresses;
+
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"userForQuizz"}, allowSetters = true)
+    @OneToMany(mappedBy = "userForQuizz")
+    private List<QuizzUser> userQuizzes;
 
     @Override
     public String toString() {

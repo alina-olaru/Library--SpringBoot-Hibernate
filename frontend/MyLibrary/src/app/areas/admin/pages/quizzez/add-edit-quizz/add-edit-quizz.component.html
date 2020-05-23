@@ -23,24 +23,38 @@
         <mat-error *ngIf="form.quizzQuestion?.invalid">
           Intrebarea este obligatorie
         </mat-error>
+        <button matSuffix mat-button type="button" (click)="addAnswer()">
+          Adauga raspuns
+        </button>
       </mat-form-field>
     </div>
 
-    <button mat-raised-button type="button" (click)="addAnswer()"> Adauga raspuns </button>
 
 
     <div fxFlex="calc(100%-10px)">
-      <mat-card *ngIf="answers.length > 0">
+      <mat-card class="my-3" *ngIf="answers.length > 0">
         <mat-list role="list" fxLayout="column">
-          <mat-list-item role="listitem" *ngFor="let answer of answers; let i = index" fxFlex fxLayout="row wrap" fxLayoutGap="10px">
+          <mat-list-item role="listitem" *ngFor="let answer of answers; let i = index" fxFlex fxLayout="row wrap"
+            fxLayoutGap="10px">
+            <div fxFlex="100%" fxLayout="row" class="answer-list-item">
+              <div fxFlex fxFill class="answer-text gap-10">
+                {{answer}}
+              </div>
+              <div fxFlex="nogrow" class="answer-buttons gap-10">
 
-            <div fxFlex="calc(70%-10px)" class="answer-text gap-10">
-              {{answer}}
+                <button mat-button type="button" color="primary" *ngIf="correctAnswer!==answer"
+                  (click)="MakeCorrectAnswer(answer)">
+                  <mat-icon>star</mat-icon> Raspuns incorect
+                </button>
+                <button mat-button type="button" color="accent" *ngIf="correctAnswer===answer">
+                  <mat-icon>star</mat-icon> Raspuns corect
+                </button>
+                <button mat-button color="warn" type="button" (click)="DeleteAnswer(answer)">
+                  <mat-icon>delete</mat-icon> Sterge
+                </button>
+              </div>
             </div>
-            <div fxFlex="calc(30%-10px)" class="answer-buttons gap-10">
-
-            </div>
-            <div fxFlex [hidden]="i==answers.length-1">
+            <div fxFlex="100%" [hidden]="i==answers.length-1">
               <mat-divider></mat-divider>
             </div>
           </mat-list-item>
@@ -51,10 +65,19 @@
 
 
 
+    <div class="input-row" fxFlex="calc(100%)">
+      <mat-form-field fxFlex>
+        <input matInput type="number" placeholder="Bonus*" formControlName="bonus">
+        <mat-error *ngIf="form.bonus?.invalid">
+          Valoarea bonusului este obligatorie
+        </mat-error>
+      </mat-form-field>
+    </div>
+
 
 
     <div class="input-row" fxFlex="calc(50%-10px)">
-      <mat-form-field fxFlex>
+      <mat-form-field fxFlex (click)="picker_startt.open()">
         <mat-label>Data de inceput</mat-label>
         <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_startt" formControlName="quizzStartDate"
           disabled>
@@ -69,7 +92,7 @@
 
 
     <div class="input-row" fxFlex="calc(50%-10px)">
-      <mat-form-field fxFlex>
+      <mat-form-field fxFlex (click)="picker_endd.open()">
         <mat-label>Data de final</mat-label>
         <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker_endd" formControlName="quizzEndDate"
           disabled>

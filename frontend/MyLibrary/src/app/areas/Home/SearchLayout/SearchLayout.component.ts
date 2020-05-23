@@ -6,7 +6,7 @@ import { PublishersService } from "./../../admin/pages/publishers/publishers.ser
 import { Component, OnInit } from "@angular/core";
 import { LandingBooksService } from "../welcome/LandingBooks.service";
 import { LoadingService } from "src/app/modules/loading-spinner/loading.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { ApiResponse } from "src/app/Models/general/api-response";
@@ -77,6 +77,7 @@ export class SearchLayoutComponent implements OnInit {
   chosenAuthors: number[] = [];
   publishers: Publisher[] = [];
   chosenPublishers: number[] = [];
+  query: string;
 
   constructor(
     public landingBookService: LandingBooksService,
@@ -87,6 +88,7 @@ export class SearchLayoutComponent implements OnInit {
     public authorsService: AuthorsService,
     public publishersService: PublishersService,
     private SearchService : SearchService,
+    private route: ActivatedRoute
 
   ) {}
 
@@ -94,6 +96,14 @@ export class SearchLayoutComponent implements OnInit {
     this.GetCategories();
     this.getAuthors();
     this.getPublishers();
+
+    this.route.params.subscribe(params => {
+      let query = params['query'];
+      if(query && this.query!=query){
+        this.query = query;
+      }
+    });
+
   }
   ngOnChanges() {
     console.log(this.disponibilitate);

@@ -13,7 +13,6 @@ export class Voucher {
   voucherEndDate: Date;
   voucherMaximumUses: number;
   voucherPrice: number;
-  quizzez: Quizz[];
   userVoucherLink: VoucherUser[];
 
   language: string;

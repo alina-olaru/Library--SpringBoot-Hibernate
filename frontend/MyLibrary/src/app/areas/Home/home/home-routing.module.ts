@@ -1,3 +1,5 @@
+import { GalerieComponent } from './../galerie/galerie.component';
+import { CategoryLandingComponent } from './../categoryLanding/categoryLanding.component';
 import { SearchLayoutComponent } from './../SearchLayout/SearchLayout.component';
 import { SearchComponent } from './../search/search.component';
 import { CartComponent } from './../cart/cart.component';
@@ -48,8 +50,16 @@ const routes: Routes = [
         component:CartComponent
       },
       {
+        path:"galerie",
+        component:GalerieComponent
+      },
+      {
         path:"book/:id",
         component:BookDetailsComponent
+      },
+      {
+        path:"category/:idb",
+        component:CategoryLandingComponent
       },
       {
         path: '',

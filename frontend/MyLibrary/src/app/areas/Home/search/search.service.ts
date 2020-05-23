@@ -53,18 +53,17 @@ filter(disponibility : number , minPrice : number , maxPrice : number ,ratingMin
     }
 
 
-    let header = new HttpHeaders();
     if(authorsIds.length>0){
-      header.append("authors",authorsIds.toString());
+      params.append("authors",authorsIds.join(","));
     }
     if(categoriesIds.length>0){
-      header.append("categories",categoriesIds.toString());
+      params.append("categories",categoriesIds.join(","));
     }
     if(categoriesIds.length>0){
-      header.append("publishers",publishersIds.toString());
+      params.append("publishers",publishersIds.join(","));
     }
 
-    return this.http.post<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.url + "/filter" ,{ },{params : params , headers : header });
+    return this.http.post<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.url + "/filter" ,{ },{params : params });
 }
 
 }

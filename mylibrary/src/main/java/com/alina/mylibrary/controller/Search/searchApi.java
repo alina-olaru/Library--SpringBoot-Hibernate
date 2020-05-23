@@ -21,9 +21,9 @@ public interface searchApi {
                                       @RequestParam("minPrice") Optional<Integer> minPrice ,
                                       @RequestParam("maxPrice") Optional<Integer> maxPrice,
                                       @RequestParam("ratingMin") Optional<Integer> ratingMin,
-                                      @RequestHeader Optional<List<Integer>> authors,
-                                      @RequestHeader Optional<List<Integer>> categories,
-                                      @RequestHeader Optional<List<Integer>> publishers);
+                                      @RequestParam("authors") Optional<List<Integer>> authors,
+                                      @RequestParam("categories") Optional<List<Integer>> categories,
+                                      @RequestParam("publishers") Optional<List<Integer>> publishers);
 
 
 

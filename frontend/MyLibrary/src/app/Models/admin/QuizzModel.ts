@@ -14,5 +14,5 @@ export class Quizz {
   quizzCorrectAnswer:string;
   quizzStartDate:Date;
   quizzEndDate:Date;
-  vouchersGotByQuizz:Voucher[]
+  bonus: number;
 }

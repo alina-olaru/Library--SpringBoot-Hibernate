@@ -21,10 +21,6 @@ public class Quizz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int quizzId;
 
-
-    @Column()
-    private int numberOfQuestions;
-
     @NotNull
     @Column(columnDefinition = "NVARCHAR(MAX)")
     private String quizzQuestion;
@@ -42,20 +38,18 @@ public class Quizz {
 
 
     @Column
-
     private Date quizzStartDate;
 
     @Column
-
     private Date quizzEndDate;
 
-    @JsonIgnoreProperties(ignoreUnknown=true, value = {"quizzez"}, allowSetters = true)
-    @OneToMany(mappedBy = "quizzez",
-    fetch = FetchType.EAGER)
-    /**
-     * Un quizz are unul/mai multe vouchere -->voucher = child , quizz=parent
-     *
-     *
-     */
-    private List<Voucher> vouchersGotByQuizz;
+    @Column
+    @NotNull
+    private Double bonus;
+
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"quizzForUser"}, allowSetters = true)
+    @OneToMany(mappedBy = "quizzForUser",
+            fetch = FetchType.LAZY)
+    private List<QuizzUser> quizzUsers;
+
 }

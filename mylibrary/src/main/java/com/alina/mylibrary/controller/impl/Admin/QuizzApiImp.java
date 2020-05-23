@@ -9,6 +9,7 @@ import com.alina.mylibrary.model.db.Quizz;
 import com.alina.mylibrary.service.Interfaces.Admin.QuizzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class QuizzApiImp implements QuizzApi {
     }
 
     @Override
-    public ApiResponse<Boolean> deleteQquizz(int quizzId) {
+    public ApiResponse<Boolean> deleteQquizz(@PathVariable int quizzId) {
        if(quizzId<1){
            return new ApiResponse<Boolean>(ApiResponseType.ERROR,null,"Nu s-a putut sterge din baza de date.");
        }
@@ -56,7 +57,7 @@ public class QuizzApiImp implements QuizzApi {
     }
 
     @Override
-    public ApiResponse<Quizz> updateQuizz(Quizz quizz) {
+    public ApiResponse<Quizz> updateQuizz(@RequestBody Quizz quizz) {
         if(quizz==null){
             return new ApiResponse<Quizz>(ApiResponseType.ERROR,null,"nu s-a putut edita in baza de date");
 
@@ -81,7 +82,7 @@ public class QuizzApiImp implements QuizzApi {
         }
         Quizz response=null;
         try {
-            this.quizzService.addQuizz(quizz);
+            response=this.quizzService.addQuizz(quizz);
         }
         catch (DBExceptions e){
             return new ApiResponse<Quizz>(ApiResponseType.ERROR,null,e.getMessage());

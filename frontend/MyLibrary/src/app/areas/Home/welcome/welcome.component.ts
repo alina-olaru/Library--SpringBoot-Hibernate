@@ -163,6 +163,12 @@ export class WelcomeComponent implements OnInit {
     this.router.navigate(["/home", "book", bookId]);
   }
 
+
+  RedirectToCategory(categoryTitle: string) {
+    this.router.navigate(["/home", "category", categoryTitle]);
+  }
+
+
   openDialog(){
     this.x=this.width+"px";
     this.y=this.heigth+"px";

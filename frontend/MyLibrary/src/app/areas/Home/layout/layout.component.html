@@ -1,5 +1,5 @@
 <div class="container" fxFlex fxLayout="column">
-  <div fxFlex="5em"  fxLayoutAlign= "end center" class="container home-header background-color-accent-500  px-5">
+  <div fxFlex="5em" fxLayoutAlign="end center" class="container home-header background-color-accent-500  px-5">
 
     <mylibrary-theme-selector></mylibrary-theme-selector>
   </div>
@@ -19,13 +19,13 @@
         <div class="container" fxFlex fxLayout="column">
           <div fxFlex fxLayout="row wrap">
 
-            <div fxFlex="0 1 0%" [fxFlexOrder]="1" class="my-2 px-4 page-icon pointer account-icon-redirect" >
-              <a  routerLink="/home/welcome" routerLinkActive="active">
-                <div fxFlex class=" color-accent" >
+            <div fxFlex="0 1 0%" [fxFlexOrder]="1" class="my-2 px-4 page-icon pointer account-icon-redirect">
+              <a routerLink="/home/welcome" routerLinkActive="active">
+                <div fxFlex class=" color-accent">
                   <fa-icon mat-list-icon [icon]="faBookOpen"></fa-icon>
                 </div>
 
-              <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Library_building_clipart.svg/800px-Library_building_clipart.svg.png" class="banner-image"> -->
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Library_building_clipart.svg/800px-Library_building_clipart.svg.png" class="banner-image"> -->
               </a>
             </div>
 
@@ -34,7 +34,7 @@
 
 
               <mat-form-field fxFlex appearance="outline" class="pointer">
-                <mat-label  >Ce vrei sa cauti?</mat-label>
+                <mat-label>Ce vrei sa cauti?</mat-label>
                 <input [(ngModel)]="searchKey" matInput placeholder="Cauta...">
 
                 <mat-icon matSuffix (keyup.enter)="sendit($event.target.value)" (click)="search()">search</mat-icon>
@@ -47,41 +47,155 @@
             <div fxFlex="1 1 0%" fxFlex.gt-sm="0 1 0%" [fxFlexOrder]="2" [fxFlexOrder.gt-sm]="3" class="cont px-3"
               fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="30px">
               <div fxFlex="0 1 0%" class="pointer account-icon-redirect">
-                <a  routerLink="/login" routerLinkActive="active">
-                <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-                  <div fxFlex class="hero-icon color-accent" >
-                    <fa-icon mat-list-icon [icon]="faUser"></fa-icon>
-                  </div>
-                  <div fxFlex fxHide.xs fxHide.sm class="white-space-nowrap"
-                  [ngClass]="GetHomeMainClass()">
+                <a routerLink="/login" routerLinkActive="active">
+                  <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+                    <div fxFlex class="hero-icon color-accent">
+                      <fa-icon mat-list-icon [icon]="faUser"></fa-icon>
+                    </div>
+                    <div fxFlex fxHide.xs fxHide.sm class="white-space-nowrap" [ngClass]="GetHomeMainClass()">
 
-                    Contul meu
+                      Contul meu
 
+                    </div>
                   </div>
-                </div>
-              </a>
-              </div>
-              <div fxFlex="0 1 0%"  class="pointer account-icon-redirect">
-                <a  routerLink="/home/cart" routerLinkActive="active">
-                <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-                  <div fxFlex class="hero-icon color-accent" matBadge="{{numberItems}}">
-                    <fa-icon mat-list-icon [icon]="faShoppingCart"></fa-icon>
-                  </div>
-                  <div fxHide.xs fxHide.sm fxFlex.gt-sm class="white-space-nowrap"
-                  [ngClass]="GetHomeMainClass()">
-                    Cosul meu
-                  </div>
-                </div>
                 </a>
               </div>
-
-              <div class="h-50" [class.menu-true]="open==true" fxFlex="0 1 0%" fxLayout="column" fxLayoutAlign="start center">
-                <app-menu [myClass]="open"></app-menu>
+              <div fxFlex="0 1 0%" class="pointer account-icon-redirect">
+                <a routerLink="/home/cart" routerLinkActive="active">
+                  <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+                    <div fxFlex class="hero-icon color-accent" matBadge="{{numberItems}}">
+                      <fa-icon mat-list-icon [icon]="faShoppingCart"></fa-icon>
+                    </div>
+                    <div fxHide.xs fxHide.sm fxFlex.gt-sm class="white-space-nowrap" [ngClass]="GetHomeMainClass()">
+                      Cosul meu
+                    </div>
+                  </div>
+                </a>
               </div>
+              <div fxFlex="0 1 0%" class="pointer account-icon-redirect">
+
+                <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+                  <div fxFlex class="hero-icon color-accent">
+                    <mat-icon (click)="toggleMenu()" style="font-size: 3rem;">menu</mat-icon>
+                  </div>
+
+                </div>
+
+              </div>
+
 
             </div>
 
           </div>
+
+
+          <div *ngIf="open==true">
+            <button mat-button [matMenuTriggerFor]="aboveMenu" >Carti</button>
+            <mat-menu #aboveMenu="matMenu" xPosition="after">
+              <button mat-menu-item>Toate cartile</button>
+
+            </mat-menu>
+
+            <button mat-button [matMenuTriggerFor]="belowMenu">Categorii </button>
+            <mat-menu #belowMenu="matMenu" xPosition="after">
+
+
+              <button (click)="RedirectToCategory(cat.categoryTitle)" class="pointer" *ngFor="let cat of categories"
+                mat-menu-item>{{cat.categoryTitle}}</button>
+
+            </mat-menu>
+
+            <button mat-button class="pointer">
+              <a routerLink="/home/vouchere" routerLinkActive="active">Vouchere
+              </a>
+            </button>
+
+            <button mat-button class="pointer">
+              <a routerLink="/home/quizz" routerLinkActive="active">Quizzuri
+              </a>
+            </button>
+
+
+
+            <button mat-button [matMenuTriggerFor]="afterMenu">Autori</button>
+            <mat-menu #afterMenu="matMenu" xPosition="after">
+              <button (click)="RedirectToAuthors(a.lastName)" class="pointer" *ngFor="let a of authors"
+                mat-menu-item>{{a.firstName}}{{a.lastName}}</button>
+
+            </mat-menu>
+
+            <button mat-button [matMenuTriggerFor]="pub">Edituri</button>
+            <mat-menu #pub="matMenu" xPosition="after">
+              <button (click)="RedirectToPublisher(p.publisherTitle)" class="pointer" *ngFor="let p of publishers"
+                mat-menu-item>{{p.publisherTitle}}</button>
+
+            </mat-menu>
+
+            <button mat-button class="pointer">
+              <a routerLink="/home/despre" routerLinkActive="active">Despre noi
+              </a>
+            </button>
+
+
+            <button mat-button class="pointer">
+              <a routerLink="/home/galerie" routerLinkActive="active">Galerie
+              </a>
+            </button>
+
+          </div>
+          <!-- <div fxFlex fxLayout="row">
+            <ng-container *ngFor="let menuItem of modulesList">
+
+              <ng-container *ngIf="!menuItem.children">
+                <a class="nav-link">
+                  <span class="icon fa" [ngClass]="menuItem.icon"></span>
+                  <span class="text-holder">{{menuItem.label}}</span>
+                </a>
+              </ng-container>
+              <ng-container *ngIf="menuItem.children.length > 0">
+                <button #button mat-button [matMenuTriggerFor]="levelOne" #levelOneTrigger="matMenuTrigger"
+                  (mouseenter)="buttonEnter(levelOneTrigger)" (mouseleave)="buttonLeave(levelOneTrigger, button)"
+                  style="z-index:1050">
+                  <span class="icon fa" [ngClass]="menuItem.icon"></span>
+                  <span>{{menuItem.label}}
+                    <i class="fa fa-chevron-down"></i>
+                  </span>
+                </button>
+
+                <mat-menu #levelOne="matMenu" direction="down" yPosition="below">
+                  <span (mouseenter)="menuenter()" (mouseleave)="menuLeave(levelOneTrigger, button)">
+                    <ng-container *ngFor="let childL1 of menuItem.children">
+                      <li class="p-0" *ngIf="!childL1.children" mat-menu-item>
+                        <a class="nav-link">{{childL1.label}}
+                          <i *ngIf="childL1.icon" [ngClass]="childL1.icon"></i>
+                        </a>
+                      </li>
+                      <ng-container *ngIf="childL1.children && childL1.children.length > 0">
+                        <li mat-menu-item #levelTwoTrigger="matMenuTrigger" [matMenuTriggerFor]="levelTwo">
+                          <span class="icon fa" [ngClass]="childL1.icon"></span>
+                          <span>{{childL1.label}}</span>
+                        </li>
+
+                        <mat-menu #levelTwo="matMenu">
+                          <span (mouseenter)="menu2enter()"
+                            (mouseleave)="menu2Leave(levelOneTrigger,levelTwoTrigger, button)">
+                            <ng-container *ngFor="let childL2 of childL1.children">
+                              <li class="p-0" mat-menu-item>
+                                <a class="nav-link">{{childL2.label}}
+                                  <i *ngIf="childL2.icon" [ngClass]="childL2.icon"></i>
+                                </a>
+                              </li>
+                            </ng-container>
+                          </span>
+                        </mat-menu>
+                      </ng-container>
+                    </ng-container>
+                  </span>
+                </mat-menu>
+              </ng-container>
+
+            </ng-container> -->
+          <!-- </div> -->
 
           <div fxFlex>
             <router-outlet></router-outlet>

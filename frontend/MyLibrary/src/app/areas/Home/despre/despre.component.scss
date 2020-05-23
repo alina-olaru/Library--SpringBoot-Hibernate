@@ -63,3 +63,19 @@ z-index:-1;
 .next-icon, .ng-star-inserted , .next, .icons,.prev{
   z-index:102;
 }
+.about-font{
+  font-size: 1.4rem;
+    font-family: sans-serif;
+    font-variant-caps: titling-caps;
+    font-feature-settings: initial;
+    font-variant-numeric: oldstyle-nums;
+    break-after: auto;
+    word-break: break-word;
+    outline-width: inherit;
+    line-height: initial;
+    line-break: auto;
+}
+
+.about-title{
+  font-size: 2.5rem;
+}

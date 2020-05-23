@@ -16,11 +16,11 @@ public interface QuizzApi {
     @GetMapping
     public ApiResponse<List<Quizz>> getQuizzes();
 
-    @DeleteMapping
-    public ApiResponse<Boolean> deleteQquizz(int quizzId);
+    @DeleteMapping(path = "/{quizzId}")
+    public ApiResponse<Boolean> deleteQquizz(@PathVariable int quizzId);
 
     @PutMapping
-    public ApiResponse<Quizz> updateQuizz(Quizz quizz);
+    public ApiResponse<Quizz> updateQuizz(@RequestBody Quizz quizz);
 
     @PostMapping
     public ApiResponse<Quizz> addQuizz(@RequestBody Quizz quizz);

@@ -36,8 +36,10 @@ export class QuizzezComponent implements OnInit {
     "quizzId",
     "quizzQuestion",
     "quizzCorrectAnswer",
+    "quizzBonus",
     "quizzStartDate",
-    "quizzEndDate"
+    "quizzEndDate",
+    "actions"
 
 
 
@@ -195,7 +197,7 @@ AddQuizzez() {
       width: '40%',
       data: {
         type: "add",
-        model: this.quizzezArray
+        model: null
       }
     });
 

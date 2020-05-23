@@ -14,6 +14,7 @@ export class BookUser {
   password: string;
   isEnabled: boolean;
   addresses: Address[];
+  bonus: number;
   public constructor(init?: Partial<BookUser>) {
     Object.assign(this, init);
   }

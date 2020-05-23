@@ -1,126 +1,45 @@
-<div class="container" fxFlex fxLayout="column">
-  <div class="container  home-header">
+<div class="container " fxFlex fxLayout="column">
 
 
+  <div class="container mb-5 slider" fxFlex>
+    <app-slider></app-slider>
   </div>
 
 
-  <div class="container" fxFlex fxLayout="row">
-    <div fxFlex="20" class="margin-home color-accent" fxFlex.sm="10">
+  <div fxFlex fxLayoutAlign="center center" class="about-font color-accent about-title">
+    Despre noi
+  </div>
 
-
+  <div fxFlex fxLayoutAlign="center center" fxLayout="column" class="mt-2 mb-3 p-5 about-font">
+    <div fxFlex class="p-5">
+      <span>
+        Pornind ca o comunitate online am desfășurat, de-a lungul anilor, cu succes măsurabil campanii, am donat cărți,
+        am organizat evenimente culturale, am dăruit suplimente culturale cititorilor fideli, am promovat autori, ne-am
+        implicat, cu dăruire și profesionalism, oriunde-am considerat că e cazul și, mai ales, oriunde-am fost
+        solicitați. Și nu ne-am oprit aici. În 2016 ne-am propus ca în următorul an să aducem editurile, anticariatele,
+        pe scurt vânzătorii de carte, mai aproape de cititorii noștri prin conceptul de librărie online BiblioCarti.
+      </span>
     </div>
 
+    <div fxFlex fxLayoutAlign="center center" class="about-font color-accent mt-3 about-title">
+      Cum funcționează?
+    </div>
 
-    <div fxFlex="60" class="middle-home color-primary">
-      <div class="container line">
-
-
-        <div class="container" fxFlex fxLayout="column">
-          <div fxFlex fxLayout="row">
-
-            <div fxFlex="20" fxFlexOrder.sm="1" fxFlexOrder.xs="1" class="mx-5 my-2 page-icon">
-
-              <fa-icon mat-list-icon [icon]="faBookOpen"></fa-icon>
-              <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Library_building_clipart.svg/800px-Library_building_clipart.svg.png" class="banner-image"> -->
-            </div>
-
-            <div fxFlex="40" fxFlexOrder.sm="2" fxFlexOrder.xs="3" class="mt-2">
-
-
-              <mat-form-field appearance="outline">
-                <mat-label>Ce vrei sa cauti?</mat-label>
-                <input matInput placeholder="Cauta...">
-                <mat-icon matSuffix>search</mat-icon>
-
-              </mat-form-field>
-
-
-            </div>
-            <div fxFlex="30" fxFlexOrder.sm="1" fxFlexOrder.xs="2" class="cont">
-
-              <div fxFlex fxLayout="row">
-
-
-                <div fxFlex fxLayout="row">
-
-                  <div fxFlex="40">
-                    <div fxFlex fxLayout="row">
-                      <div fxFlex="30" class="hero-icon mt-4">
-                        <fa-icon mat-list-icon [icon]="faUser"></fa-icon>
-                      </div>
-                      <div fxFlex="70">
-                        <div fxFlex fxLayout="column">
-                          <div fxFlex="50" class="mt-4 mb-0">
-                            Bun venit!
-                          </div>
-                          <div fxFlex="50">
-                            Contul meu
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div fxFlex="40">
-                    <div fxFlex fxLayout="row">
-                      <div fxFlex="30" class="hero-icon mt-4">
-                        <fa-icon mat-list-icon [icon]="faShoppingCart"></fa-icon>
-                      </div>
-                      <div fxFlex="70">
-                        <div fxFlex fxLayout="column">
-                          <div fxFlex="50" class="mt-4 mb-0">
-                            Cosul meu
-                          </div>
-                          <div fxFlex="50">
-                            Total
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div [class.menu-true]="open==true" fxFlex (click)="test()">
-
-                      <app-menu></app-menu>
-
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="container slider" fxFlex>
-            <app-slider></app-slider>
-          </div>
-
-
-
-
-
-          <div class="container" fxFlex fxLayout="row">
-
-
-            <div fxFlex="50%">
-              <div data-aos="fade-up-right">aaaaaaaaaaa</div>
-            </div>
-            <div fxFlex="50%">
-              <div data-aos="fade-up-right">aaaaaaaaaaa</div>
-            </div>
-          </div>
-        </div>
-
+    <div fxFlex fxLayoutAlign="center center" class="mt-2 p-5 about-font">
+      <div fxFlex>
+        <span>
+          Vânzătorii de carte ne propun noutățile editoriale pentru care doresc să-și sporească vânzările, iar noi le
+          vom lista în librăria noastră, cuprinzând pentru fiecare titlu de carte următoarele detalii: titlu carte,
+          autor, editura, an apariție, format carte, număr de pagini, tip coperta, ISBN, prețul produsului, imagine
+          copertă, o scurtă prezentare și alte informații opționale relevante pentru potențialul client (a se lua în
+          evidență eventualele oferte). </span>
       </div>
-
     </div>
-
-
-    <div fxFlex="20" class="margin-home color-accent">
-
+    <div fxFlex fxLayoutAlign="center center" class="mt-2 mb-3 p-5 about-font">
+      <div fxFlex>
+        <span>
+          Produsul listat în librărie va avea atașat un formular simplu de comandă prin care cumpărătorul va expedia comanda direct spre adresa de e-mail a vânzătorului și/sau numărul de telefon, urmând ca acesta să o onoreze respectând modalitățile de transport, iar cumpărătorul va respecta la rândul lui modalitățile de plată aferente. </span>
+      </div>
     </div>
-
   </div>
-
-
 </div>

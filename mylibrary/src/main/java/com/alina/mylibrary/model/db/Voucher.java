@@ -85,11 +85,6 @@ public class Voucher {
     fetch = FetchType.LAZY)
     private List<VoucherUser> userVoucherLink;
 
-    @JsonIgnoreProperties(ignoreUnknown=true, value = {"vouchersGotByQuizz"}, allowSetters = true)
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(foreignKey = @ForeignKey(name = "FK_QUIZZ_ID"))
-    private Quizz quizzez;
-
     @Override
     public String toString() {
         return " ";

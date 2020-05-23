@@ -48,7 +48,7 @@ export class QuizzService {
 
   UpdateQuizzez(publisher:Quizz ,id: number): Observable<ApiResponse<Quizz>> {
     return this.http.put<ApiResponse<Quizz>>(
-      this.globalVarService.globalUrl + this.baseUrl + "/" + id,
+      this.globalVarService.globalUrl + this.baseUrl,
       publisher
     );
   }

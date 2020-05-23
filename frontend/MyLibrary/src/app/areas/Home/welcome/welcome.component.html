@@ -68,7 +68,7 @@
   <!-- CARTI DIN FIECARE CATEGORIE + REDIRECTIONARE -->
   <div fxFlex.lt-sm="100%" fxLayout="column" *ngFor="let cat of Categories">
     <div fxFlex fxLayout="column" *ngIf="cat.categoryBooks && cat.categoryBooks.length > 0">
-      <div fxFlex>
+      <div fxFlex (click)="RedirectToCategory(cat.categoryTitle)" class="pointer color-primary">
         {{  cat.categoryTitle }}
       </div>
       <div fxFlex.lt-sm="100%" fxFlex.lt-md="33%" fxFlex-mt-md="20%" fxLayoutAlign="end center" fxLayout="row"
