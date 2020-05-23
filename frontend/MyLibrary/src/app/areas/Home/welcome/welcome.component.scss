@@ -4,7 +4,6 @@ body {
   cursor:"../../../../assets/images/landingpage/cursor.png";
 }
 .margin-home{
- // background-color: rgb(227, 250, 239);
   height: 100vh;
 }
 .middle-home{
@@ -15,7 +14,6 @@ body {
 
 
 .home-header{
- // background-color: rgb(120, 236, 145);
   height: 5em;
 }
 
@@ -54,16 +52,13 @@ z-index:-1;
 }
 
 
-// @import "variables";
 
 @import "welcome.small";
 
-//960px is also 560px (if basefont is 16px)
 @media only screen and (min-width: 960px) {
 	@import "welcome.medium";
 }
 
-//1280px is also 1028px (if basefont is 16px)
 @media only screen and (min-width: 1280px) {
 	@import "welcome.large";
 }
@@ -74,7 +69,6 @@ z-index:-1;
 .under-banner-icon{
 
   :hover{
- //   color:rgb(41, 209, 41);
     cursor: pointer;
 
   }
@@ -147,7 +141,6 @@ svg{ fill: currentcolor; width: 1rem; height: 1rem; }
 ------------------------------------------ */
 .card__body{
   position: absolute;
-  // top: calc(400px * .65); /* .65 = thumbnail.height */
   left: 0;
   overflow: hidden;
 

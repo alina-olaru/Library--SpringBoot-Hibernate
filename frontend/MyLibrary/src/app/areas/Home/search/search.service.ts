@@ -1,7 +1,7 @@
 import { Params } from '@angular/router';
 import { ApiResponse } from 'src/app/Models/general/api-response';
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable, Optional } from '@angular/core';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { GlobalVarService } from 'src/app/services/global-var.service';
 import { LoadingService } from 'src/app/modules/loading-spinner/loading.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,6 +9,7 @@ import { TitleService } from '../../admin/services/title.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { Book } from 'src/app/Models/admin/BookModel';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +35,36 @@ get(query: string){
   .set("query",query.toString());
   return this.http.get<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.url ,{params : params});
 }
+
+
+filter(disponibility : number , minPrice : number , maxPrice : number ,ratingMin : number ,
+  authorsIds : number[] , categoriesIds : number[] , publishersIds : number[]){
+
+    let params = new HttpParams();
+    if(disponibility!=4){
+      params.set("disponibility",disponibility.toString());
+      if(minPrice!=-1){
+        params.append("minPrice",minPrice.toString())
+        .append("maxPrice",maxPrice.toString());
+      }
+      if(ratingMin!=-1){
+        params.append("ratingMin",ratingMin.toString());
+      }
+    }
+
+
+    let header = new HttpHeaders();
+    if(authorsIds.length>0){
+      header.append("authors",authorsIds.toString());
+    }
+    if(categoriesIds.length>0){
+      header.append("categories",categoriesIds.toString());
+    }
+    if(categoriesIds.length>0){
+      header.append("publishers",publishersIds.toString());
+    }
+
+    return this.http.post<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.url + "/filter" ,{ },{params : params , headers : header });
+}
+
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/public/search")
@@ -14,4 +15,19 @@ public interface searchApi {
 
     @GetMapping
     ApiResponse<HashSet<Book>> search(@RequestParam String query);
+
+    @PostMapping("/filter")
+    ApiResponse<HashSet<Book>> filter(@RequestParam("disponibility") Optional<Integer> disponibility,
+                                      @RequestParam("minPrice") Optional<Integer> minPrice ,
+                                      @RequestParam("maxPrice") Optional<Integer> maxPrice,
+                                      @RequestParam("ratingMin") Optional<Integer> ratingMin,
+                                      @RequestHeader Optional<List<Integer>> authors,
+                                      @RequestHeader Optional<List<Integer>> categories,
+                                      @RequestHeader Optional<List<Integer>> publishers);
+
+
+
 }
+//    @RequestHeader(value="authors" , required = false) Optional<List<Integer>> authors,
+//    @RequestHeader (value="categories" , required = false)Optional<List<Integer>> categories,
+//    @RequestHeader (value="publishers" , required = false) Optional<List<Integer>> publishers);

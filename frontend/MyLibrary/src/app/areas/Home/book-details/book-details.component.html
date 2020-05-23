@@ -5,9 +5,12 @@
         <div fxFlex="30%" fxFlex.lt-sm="100%" fxFlex.mt-sm="50%">
 
           <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="parent">
-            <img *ngIf="book.bookImageSrc" [src]="book.bookImageSrc" class="image-book" [class.out-of-stock-overlay]="book.numberOfBoooks==0">
-            <img *ngIf="book.numberOfBoooks==0" src="../../../../assets/images/details/Sold-Out-PNG-Picture.png" class="pointer on-top-image out-of-stock-img" >
-            <img *ngIf="book.bookPrice<book.lastPrice && book.numberOfBoooks!=0" src="../../../../assets/images/details/new/sales.png" class="pointer on-top-image sales-img child" >
+            <img *ngIf="book.bookImageSrc" [src]="book.bookImageSrc" class="image-book"
+              [class.out-of-stock-overlay]="book.numberOfBoooks==0">
+            <img *ngIf="book.numberOfBoooks==0" src="../../../../assets/images/details/Sold-Out-PNG-Picture.png"
+              class="pointer on-top-image out-of-stock-img">
+            <img *ngIf="book.bookPrice<book.lastPrice && book.numberOfBoooks!=0"
+              src="../../../../assets/images/details/new/sales.png" class="pointer on-top-image sales-img child">
 
           </div>
 
@@ -20,7 +23,9 @@
                 Titlu:
               </div>
               <div fxFlex="70%" class="ml-1">
+                <a class="search-redirect color-accent" [routerLink]="['/home/search',book.bookTitle]">
                 {{book.bookTitle}}
+                </a>
               </div>
             </div>
 
@@ -31,8 +36,14 @@
                 Autori:
               </div>
               <div fxFlex="30%" fxLayout="row wrap">
-                <div *ngFor="let author of book.bookAuthor" class="ml-1">{{author.authorId.firstName}}
-                  {{author.authorId.lastName}} </div>
+
+                <div *ngFor=" let author of book.bookAuthor" class="ml-1">
+                  <a class="search-redirect color-accent" [routerLink]="['/home/search',author.authorId.lastName]">
+                    {{author.authorId.firstName}}
+                    {{author.authorId.lastName}}
+                  </a>
+                </div>
+
               </div>
 
             </div>
@@ -43,7 +54,12 @@
                 Editura:
               </div>
               <div fxFlex="30%" fxLayout="row wrap">
-                <div class="ml-1"> {{book.publisher.publisherTitle}} </div>
+                <div class="ml-1">
+                  <a class="search-redirect color-accent" [routerLink]="['/home/search',book.publisher.publisherTitle]">
+
+                    {{book.publisher.publisherTitle}}
+                  </a>
+                </div>
               </div>
 
             </div>
@@ -54,7 +70,11 @@
                 Categorii:
               </div>
               <div fxFlex="30%" fxLayout="row wrap">
-                <div *ngFor="let cat of book.booksCategories" class="ml-1">{{cat.categories.categoryTitle}} </div>
+                <div *ngFor="let cat of book.booksCategories" class="ml-1">
+                  <a class="search-redirect color-accent" [routerLink]="['/home/search',cat.categories.categoryTitle]">
+                    {{cat.categories.categoryTitle}}
+                  </a>
+                </div>
               </div>
 
             </div>
@@ -170,14 +190,14 @@
             </button>
 
           </div>
-          <div *ngIf="book.numberOfBoooks>0"fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
+          <div *ngIf="book.numberOfBoooks>0" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
             <button [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary" (click)="AddtoCart()">
               <mat-icon>add_shopping_cart</mat-icon>
               Adauga in cos
             </button>
           </div>
-          <div *ngIf="book.numberOfBoooks==0"fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
+          <div *ngIf="book.numberOfBoooks==0" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
             <button [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary" (click)="AddtoCart()">
               <mat-icon>close</mat-icon>
@@ -185,12 +205,12 @@
             </button>
           </div>
 
-          <div *ngIf="book.numberOfBoooks==0"fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
+          <div *ngIf="book.numberOfBoooks==0" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
             <button [disabled]="book.numberOfBoooks>0" mat-raised-button color="accent" (click)="mailMe()">
               <mat-icon>mail</mat-icon>
               Notifica-ma cand e in stoc
-         </button>
+            </button>
           </div>
 
 
@@ -221,7 +241,8 @@
   </div>
   <div class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex fxLayout="row" fxLayoutAlign="center space-between">
     <div fxFlex>
-      <button mat-button color="accent" class="border-angular border-color-primary-500" (click)="viewReview=false">VEZI RECENZII</button>
+      <button mat-button color="accent" class="border-angular border-color-primary-500" (click)="viewReview=false">VEZI
+        RECENZII</button>
     </div>
     <div fxFlex fxLayout="row">
       <div fxFlex>
@@ -241,13 +262,14 @@
 
   <div *ngIf="!viewReview" class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5 " FxFlex fxLayout="column"
     fxLayoutAlign="center space-between">
-    <div  fxFlex fxLayoutAlign="center center" fxLayout="column" >
-      <div *ngFor="let rev of reviews" fxFlex fxLayout="column" fxLayoutAlign="center center" class=" my-3 border-angular border-color-accent-100">
+    <div fxFlex fxLayoutAlign="center center" fxLayout="column">
+      <div *ngFor="let rev of reviews" fxFlex fxLayout="column" fxLayoutAlign="center center"
+        class=" my-3 border-angular border-color-accent-100">
         <div fxFlex>
 
         </div>
         <div *ngIf="rev.userReviewMaker!=null" fxFlex>
-         User {{rev.userReviewMaker.username}}
+          User {{rev.userReviewMaker.username}}
         </div>
         <div fxFlex>
           {{rev.reviewerName}}
@@ -255,8 +277,8 @@
         <div fxFlex>
           {{rev.textReview}}
         </div>
+      </div>
     </div>
-  </div>
   </div>
 
   <div *ngIf="viewReview" class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex fxLayout="column"
