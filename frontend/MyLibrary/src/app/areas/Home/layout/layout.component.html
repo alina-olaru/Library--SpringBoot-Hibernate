@@ -120,7 +120,7 @@
             <button mat-button [matMenuTriggerFor]="afterMenu">Autori</button>
             <mat-menu #afterMenu="matMenu" xPosition="after">
               <button (click)="RedirectToAuthors(a.lastName)" class="pointer" *ngFor="let a of authors"
-                mat-menu-item>{{a.firstName}}{{a.lastName}}</button>
+                mat-menu-item>{{a.firstName}} {{a.lastName}}</button>
 
             </mat-menu>
 
