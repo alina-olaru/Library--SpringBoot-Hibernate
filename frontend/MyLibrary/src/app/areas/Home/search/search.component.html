@@ -73,10 +73,11 @@
 
     </div>
   </div>
-  <div fxFlex="100" [fxFlex.gt-xs]="60" [fxFlex.gt-sm]="70" [fxFlex.gt-md]="80"  fxLayoutAlign="start space-between" fxLayout="row wrap">
+  <div *ngIf="books.length>0" fxFlex="100" [fxFlex.gt-xs]="60" [fxFlex.gt-sm]="70" [fxFlex.gt-md]="80"
+    fxLayoutAlign="start space-between" fxLayout="row wrap">
 
 
-    <div *ngFor="let book of books" id="card-2" class="card mt-5 mt-lg-0"
+    <div *ngFor="let book of books" id="card-2" class="card mt-3 mt-lg-0 mx-4 p-3"
       [ngStyle]="{'background-image': getUrlImageForBook(book)}">
       <figure class="card__thumbnail mt-3 mt-lg-0">
 
@@ -146,5 +147,10 @@
     </div>
 
   </div>
+
+  <!-- <div fxFlex fxLayoutAlign="center start" *ngIf="books.length==0">
+
+    <img src="../../../../assets/images/clipart1533013.png">
+  </div> -->
 
 </div>
