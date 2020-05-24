@@ -1,6 +1,6 @@
-<div fxFlex fxLayout="column">
-  <div *ngFor="let v of quizzezArray" fxFlex fxLayout="column wrap" fxLayoutAlign="center center" class="my-3">
-    <div fxFlex="100%" fxLayout="column wrap" class="border-angular border-color-accent-100 p-3 my-2 mx-2">
+<div fxFlex fxLayout="column wrap">
+  <div *ngFor="let v of quizzezArray" fxFlex fxLayout="column wrap"  fxLayoutAlign="space-between center" class=" mx-3 my-3">
+    <!-- <div fxFlex="100%" fxLayout="column wrap" class="border-angular border-color-accent-100 p-3 my-2 mx-2">
       <div fxFlex>
         {{v.quizzStartDate | date}} - {{v.quizzEndDate | date}}
       </div>
@@ -17,11 +17,34 @@
       <button (click)="AnswerToQuizz(v,v.quizzSelectedAnswer)" mat-button color="primary" type="submit">
         <mat-icon>add</mat-icon> RASPUNDE
       </button>
-    </div>
+    </div> -->
+    <!-- </div> -->
+
+    <mat-card class="tp-card">
+      <mat-card-header>
+        <div mat-card-avatar class="tp-header-image"></div>
+        <mat-card-title> {{v.quizzQuestion}} </mat-card-title>
+
+        <mat-card-subtitle>
+          {{v.quizzStartDate | date}} - {{v.quizzEndDate | date}}
+
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://i.pinimg.com/originals/4e/05/ed/4e05ed4783b99a9ed3f2e19059b6c814.jpg"
+        alt="Review">
+      <mat-card-content *ngFor="let item of v.quizzAnswers;  let i = index" class="fit-in-box-text">
+        <mat-checkbox [checked]="v.quizzSelectedAnswer == item" (change)="v.quizzSelectedAnswer = item">{{item}}
+        </mat-checkbox>
+      </mat-card-content>
+      <mat-card-actions>
+        <button (click)="AnswerToQuizz(v,v.quizzSelectedAnswer)" mat-button color="primary" type="submit">
+          <mat-icon>add</mat-icon> RASPUNDE
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
   </div>
-</div>
 
 
 
 </div>
-
