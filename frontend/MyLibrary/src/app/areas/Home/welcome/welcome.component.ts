@@ -151,7 +151,13 @@ export class WelcomeComponent implements OnInit {
   }
 
   getUrlImageForBook(book: Book) {
+    if(book.bookImageDb!=null){
     return "url('data:image/jpg;base64," + book.bookImageDb + "')";
+    }
+    else{
+      return "url('../../../../assets/no.png')";
+    }
+
   }
 
   AddToWhishlist() {

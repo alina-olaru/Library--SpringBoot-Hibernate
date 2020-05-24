@@ -7,6 +7,10 @@
           <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="parent">
             <img *ngIf="book.bookImageSrc" [src]="book.bookImageSrc" class="image-book"
               [class.out-of-stock-overlay]="book.numberOfBoooks==0">
+              <img *ngIf="!book.bookImageSrc" src="../../../../assets/no.jpg" class="" style="height: 592px;
+              width: 371px;"
+              [class.out-of-stock-overlay]="book.numberOfBoooks==0">
+
             <img *ngIf="book.numberOfBoooks==0" src="../../../../assets/images/details/Sold-Out-PNG-Picture.png"
               class="pointer on-top-image out-of-stock-img">
             <img *ngIf="book.bookPrice<book.lastPrice && book.numberOfBoooks!=0"

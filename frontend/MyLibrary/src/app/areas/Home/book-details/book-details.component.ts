@@ -184,12 +184,16 @@ mail : string;
     this.subscriptions.push(getBooks);
   }
 
-  getUrlImageForBook() {
-    {
-      return "url('data:image/jpg;base64," + this.book.bookImageDb + "')";
-    }
-  }
 
+  getUrlImageForBook(book: Book) {
+    if(book.bookImageDb!=null){
+    return "url('data:image/jpg;base64," + book.bookImageDb + "')";
+    }
+    else{
+      return "url('../../../../assets/no.png')";
+    }
+
+  }
   // ---------------------------------WISHLIST-----------------------------------------------------------
 
   AddToWhishlist() {

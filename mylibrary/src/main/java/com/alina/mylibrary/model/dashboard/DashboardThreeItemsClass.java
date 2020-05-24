@@ -11,4 +11,10 @@ public class DashboardThreeItemsClass {
         this.numberBooksforCategory = numberBooksforCategory;
         this.numberBooksforAuthor = numberBooksforAuthor;
     }
+
+    public DashboardThreeItemsClass() {
+        this.titleOfCategory = "A";
+        this.numberBooksforCategory=0;
+        this.numberBooksforAuthor=0;
+    }
 }

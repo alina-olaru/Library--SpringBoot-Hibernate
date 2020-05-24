@@ -25,7 +25,7 @@ baseUrl:string;
     private toastr: ToastrService
   )
   {
-    this.baseUrl="/api/admin/dashboard";
+    this.baseUrl="/public/api/admin/dashboard";
   }
 
 
@@ -35,6 +35,11 @@ baseUrl:string;
 
     getAuthorsNumberBooks(){
       return this.http.get<ApiResponse<any[]>>(this.globalVarService.globalUrl + this.baseUrl+"/authors/count");
+
+    }
+
+    getBooksWithAutCat(){
+      return this.http.get<ApiResponse<any[]>>(this.globalVarService.globalUrl + this.baseUrl+"/authors/books/cat");
 
     }
 }
