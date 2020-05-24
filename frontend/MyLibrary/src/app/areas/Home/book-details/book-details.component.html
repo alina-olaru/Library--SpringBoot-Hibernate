@@ -23,26 +23,26 @@
           <div fxFlex fxLayout="column">
             <div fxFlex fxLayout="row" class="ml-4">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%" class="book-info">
                 Titlu:
               </div>
               <div fxFlex="70%" class="ml-1">
-                <a class="search-redirect color-accent" [routerLink]="['/home/search',book.bookTitle]">
+                <a class=" book-info search-redirect color-accent" [routerLink]="['/home/search',book.bookTitle]">
                 {{book.bookTitle}}
                 </a>
               </div>
             </div>
 
             <!-- autori -->
-            <div fxFlex fxLayout="row" class="ml-4">
+            <div fxFlex fxLayout="row" class="ml-4 book-info">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%" class="book-info">
                 Autori:
               </div>
-              <div fxFlex="30%" fxLayout="row wrap">
+              <div fxFlex="30%" fxLayout="row wrap book-info">
 
                 <div *ngFor=" let author of book.bookAuthor" class="ml-1">
-                  <a class="search-redirect color-accent" [routerLink]="['/home/search',author.authorId.lastName]">
+                  <a class="search-redirect color-accent book-info" [routerLink]="['/home/search',author.authorId.lastName]">
                     {{author.authorId.firstName}}
                     {{author.authorId.lastName}}
                   </a>
@@ -54,12 +54,12 @@
 
             <div fxFlex fxLayout="row" class="ml-4">
 
-              <div *ngIf="book.publisher" fxFlex="30%">
+              <div *ngIf="book.publisher" class="book-info" fxFlex="30%">
                 Editura:
               </div>
               <div fxFlex="30%" fxLayout="row wrap">
                 <div class="ml-1">
-                  <a class="search-redirect color-accent" [routerLink]="['/home/search',book.publisher.publisherTitle]">
+                  <a class="search-redirect color-accent book-info" [routerLink]="['/home/search',book.publisher.publisherTitle]">
 
                     {{book.publisher.publisherTitle}}
                   </a>
@@ -70,12 +70,12 @@
 
             <div *ngIf="book.booksCategories.length > 0" fxFlex fxLayout="row" class="ml-4">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%"  class="book-info">
                 Categorii:
               </div>
               <div fxFlex="30%" fxLayout="row wrap">
                 <div *ngFor="let cat of book.booksCategories" class="ml-1">
-                  <a class="search-redirect color-accent" [routerLink]="['/home/search',cat.categories.categoryTitle]">
+                  <a class="search-redirect color-accent book-info" [routerLink]="['/home/search',cat.categories.categoryTitle]">
                     {{cat.categories.categoryTitle}}
                   </a>
                 </div>
@@ -86,27 +86,27 @@
             <!-- cu verificare -->
             <div *ngIf="book.bookDimension" fxFlex fxLayout="row" class="ml-4">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%" class="book-info">
                 Dimensiune:
               </div>
-              <div fxFlex="70%" class="ml-1">
+              <div fxFlex="70%" class="ml-1 book-info">
                 {{book.bookDimension}}
               </div>
             </div>
 
             <div *ngIf="book.bookLanguage" fxFlex fxLayout="row" class="ml-4">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%" class="book-info">
                 Limba:
               </div>
-              <div fxFlex="70%" class="ml-1">
+              <div fxFlex="70%" class="ml-1  book-info">
                 {{book.bookLanguage}}
               </div>
             </div>
 
-            <div *ngIf="book.bookPrice" fxFlex fxLayout="row" class="ml-4">
+            <div *ngIf="book.bookPrice" fxFlex fxLayout="row" class="ml-4 book-info">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%" class="book-info">
                 Pret:
               </div>
               <div fxFlex="70%" class="ml-1">
@@ -116,60 +116,60 @@
 
             <div *ngIf="book.bookRating" fxFlex fxLayout="row" class="ml-4">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%" class="book-info">
                 Rating:
               </div>
-              <div fxFlex="70%" class="ml-1">
+              <div fxFlex="70%" class="ml-1 book-info">
                 {{book.bookRating}}
               </div>
             </div>
 
             <div *ngIf="book.bookWeight" fxFlex fxLayout="row" class="ml-4">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%" class="book-info">
                 Greutate:
               </div>
-              <div fxFlex="70%" class="ml-1">
+              <div fxFlex="70%" class="ml-1 book-info">
                 {{book.bookWeight}}
               </div>
             </div>
 
             <div *ngIf="book.coverType" fxFlex fxLayout="row" class="ml-4">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%" class="book-info">
                 Coperta:
               </div>
-              <div fxFlex="70%" class="ml-1">
+              <div fxFlex="70%" class="ml-1 book-info">
                 {{book.coverType}}
               </div>
             </div>
 
             <div *ngIf="book.numberOfBoooks" fxFlex fxLayout="row" class="ml-4">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%" class="book-info">
                 STOC:
               </div>
-              <div fxFlex="70%" class="ml-1">
+              <div fxFlex="70%" class="ml-1 book-info">
                 {{book.numberOfBoooks}}
               </div>
             </div>
 
             <div *ngIf="book.numberOfPages" fxFlex fxLayout="row" class="ml-4">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%" class="book-info">
                 Numar pagini:
               </div>
-              <div fxFlex="70%" class="ml-1">
+              <div fxFlex="70%" class="ml-1 book-info">
                 {{book.numberOfPages}}
               </div>
             </div>
 
             <div *ngIf="book.numberofVolumes" fxFlex fxLayout="row" class="ml-4">
 
-              <div fxFlex="30%">
+              <div fxFlex="30%" class="book-info">
                 Numar volume:
               </div>
-              <div fxFlex="70%" class="ml-1">
+              <div fxFlex="70%" class="ml-1 book-info">
                 {{book.numberofVolumes}}
               </div>
             </div>
@@ -179,16 +179,16 @@
         <div fxLayout="column" fxLayoutAlign="start center" fxFlex="30%" fxFlex.lt-sm="100%" fxFlex.mt-sm="50%"
           class="user-actions-class ">
 
-          <div fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex
+          <div fxFlex="grow" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex
             class="mr-lg-0 mr-sm-3 pl-4 pl-lg-0">
 
 
-            <button *ngIf="alreadyInWishlist" mat-raised-button color="warn" (click)="AddToWhishlist()">
+            <button  class="book-details-button" *ngIf="alreadyInWishlist" mat-raised-button color="warn" (click)="AddToWhishlist()">
               <mat-icon>favorite</mat-icon>
               Adauga in whishlist
             </button>
 
-            <button *ngIf="!alreadyInWishlist" mat-raised-button color="warn" (click)="DeleteFromWishlist()">
+            <button class="book-details-button" *ngIf="!alreadyInWishlist" mat-raised-button color="warn" (click)="DeleteFromWishlist()">
               <mat-icon>favorite</mat-icon>
               Sterge din whishlist
             </button>
@@ -196,14 +196,14 @@
           </div>
           <div *ngIf="book.numberOfBoooks>0" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
-            <button [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary" (click)="AddtoCart()">
+            <button  class="book-details-button" [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary" (click)="AddtoCart()">
               <mat-icon>add_shopping_cart</mat-icon>
               Adauga in cos
             </button>
           </div>
           <div *ngIf="book.numberOfBoooks==0" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
-            <button [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary" (click)="AddtoCart()">
+            <button  class="book-details-button" [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary" (click)="AddtoCart()">
               <mat-icon>close</mat-icon>
               Indisponibil
             </button>
@@ -211,7 +211,7 @@
 
           <div *ngIf="book.numberOfBoooks==0" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
-            <button [disabled]="book.numberOfBoooks>0" mat-raised-button color="accent" (click)="mailMe()">
+            <button  class="book-details-button" [disabled]="book.numberOfBoooks>0" mat-raised-button color="accent" (click)="mailMe()">
               <mat-icon>mail</mat-icon>
               Notifica-ma cand e in stoc
             </button>
@@ -220,12 +220,12 @@
 
           <div fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
-            <button *ngIf="alreadyInMyBooks" mat-raised-button color="default" (click)="AddToPersonal()">
+            <button  class="book-details-button" *ngIf="alreadyInMyBooks" mat-raised-button color="default" (click)="AddToPersonal()">
               <mat-icon>bookmarks</mat-icon>
               Adauga in biblioteca personala
             </button>
 
-            <button *ngIf="!alreadyInMyBooks" mat-raised-button color="default" (click)="DeleteFromPersonal()">
+            <button  class="book-details-button" *ngIf="!alreadyInMyBooks" mat-raised-button color="default" (click)="DeleteFromPersonal()">
               <mat-icon>bookmarks</mat-icon>
               Sterge din biblioteca personala
             </button>
@@ -237,7 +237,10 @@
       </div>
     </div>
   </div>
-  <div class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex>
+  <div class="book-info p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex>
+    Descriere
+  </div>
+  <div class="book-info p-lg-2 ml-lg-4 ml-4 " FxFlex>
     {{book.bookDescription}}
   </div>
   <div class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex>
@@ -245,12 +248,12 @@
   </div>
   <div class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex fxLayout="row" fxLayoutAlign="center space-between">
     <div fxFlex>
-      <button mat-button color="accent" class="border-angular border-color-primary-500" (click)="viewReview=false">VEZI
+      <button mat-button mat-raised-button  color="accent" class="border-angular border-color-primary-500" (click)="viewReview=false">VEZI
         RECENZII</button>
     </div>
     <div fxFlex fxLayout="row">
       <div fxFlex>
-        <button mat-button color="accent" (click)="viewReview=true">LASA
+        <button mat-button mat-raised-button  color="accent" (click)="viewReview=true">LASA
           UN COMENTARIU</button>
 
       </div>
@@ -268,8 +271,8 @@
     fxLayoutAlign="center space-between">
     <div fxFlex fxLayoutAlign="center center" fxLayout="column">
       <div *ngFor="let rev of reviews" fxFlex fxLayout="column" fxLayoutAlign="center center"
-        class=" my-3 border-angular border-color-accent-100">
-        <div fxFlex>
+        class=" my-3">
+        <!-- <div fxFlex>
 
         </div>
         <div *ngIf="rev.userReviewMaker!=null" fxFlex>
@@ -280,7 +283,7 @@
         </div>
         <div fxFlex>
           {{rev.textReview}}
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -324,7 +327,7 @@
 
         </div>
 
-        <button mat-button color="primary" type="submit">
+        <button mat-button mat-raised-button  color="accent" type="submit">
           <mat-icon>add</mat-icon> Adauga
         </button>
 
