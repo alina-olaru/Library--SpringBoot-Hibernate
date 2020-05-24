@@ -53,6 +53,11 @@ public class DBExceptions extends Exception {
         this.operationAffected = operationAffected;
     }
 
+    public DBExceptions(String message) {
+        super(message);
+        this.message = message;
+    }
+
     @Override
     public String getMessage() {
         return this.message;

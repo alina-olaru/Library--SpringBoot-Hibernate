@@ -179,6 +179,12 @@ export class LayoutComponent implements OnInit {
 
   //----------------------------------------------menu ->toggle at hover ------------------------------------------------------------------------------
 
+  allbooks() {
+    this.router.navigate(["/home", "search", "empty"]);
+  }
+
+
+
   toggleMenu() {
     if (this.open == false) {
       this.open = true;

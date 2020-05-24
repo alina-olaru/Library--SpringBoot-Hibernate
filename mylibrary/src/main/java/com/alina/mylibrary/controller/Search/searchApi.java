@@ -25,6 +25,16 @@ public interface searchApi {
                                       @RequestParam("categories") Optional<List<Integer>> categories,
                                       @RequestParam("publishers") Optional<List<Integer>> publishers);
 
+    @PostMapping("/filter/query")
+    ApiResponse<HashSet<Book>> filterwithWord(@RequestParam("disponibility") Optional<Integer> disponibility,
+                                      @RequestParam("minPrice") Optional<Integer> minPrice ,
+                                      @RequestParam("maxPrice") Optional<Integer> maxPrice,
+                                      @RequestParam("ratingMin") Optional<Integer> ratingMin,
+                                      @RequestParam("authors") Optional<List<Integer>> authors,
+                                      @RequestParam("categories") Optional<List<Integer>> categories,
+                                      @RequestParam("publishers") Optional<List<Integer>> publishers,
+                                              @RequestParam("query") String query);
+
 
 
 }

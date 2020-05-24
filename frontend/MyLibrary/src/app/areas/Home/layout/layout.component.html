@@ -12,7 +12,7 @@
     </div>
 
 
-    <div fxFlex="100" [fxFlex.lg]="80" [fxFlex.xl]="60" [ngClass]="GetHomeMainClass()" class="middle-home">
+    <div fxFlex="100" [fxFlex.lg]="80" [fxFlex.xl]="60" [ngClass]="GetHomeMainClass()" class="middle-home px-2">
       <div class="container line">
 
 
@@ -90,7 +90,7 @@
 
 
           <div *ngIf="open==true">
-            <button mat-button [matMenuTriggerFor]="aboveMenu" >Carti</button>
+            <button (click)="allbooks()"mat-button [matMenuTriggerFor]="aboveMenu" >Carti</button>
             <mat-menu #aboveMenu="matMenu" xPosition="after">
               <button mat-menu-item>Toate cartile</button>
 

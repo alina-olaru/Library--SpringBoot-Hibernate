@@ -26,6 +26,7 @@ export class VouchersUserComponent implements OnInit {
   basicVouchers: Voucher[] = [];
   myVouchers: Voucher[] = [];
   already: boolean = false;
+  currentDate: Date;
 
   constructor(
     public voucherService: VoucherService,
@@ -39,7 +40,13 @@ export class VouchersUserComponent implements OnInit {
     private auth: LoginService,
     private voucherUserService: VoucherUserService,
     private router: Router
-  ) {}
+  ) {
+    this.currentDate = new Date();
+    console.log(this.currentDate);
+  }
+
+
+
 
   ngOnInit() {
     this.getBASICVouchers();
@@ -52,7 +59,21 @@ export class VouchersUserComponent implements OnInit {
       .GetVouchers()
       .subscribe((response: ApiResponse<Voucher[]>) => {
         if (response && response.status == ApiResponseType.SUCCESS) {
-          this.basicVouchers = response.body;
+        //  this.basicVouchers = response.body;
+        // response.body.forEach((el)=>{
+        //   if(el.voucherStartDate.getTime()<this.currentDate.getTime() && el.voucherEndDate.getTime()>this.currentDate.getTime()){
+        //     this.basicVouchers.push(el);
+        //     console.log(el.voucherStartDate.getTime()<this.currentDate.getTime());
+        //   }
+        // }
+        response.body.forEach((el)=>{
+          if(el.voucherStartDate<this.currentDate && el.voucherEndDate>this.currentDate){
+            this.basicVouchers.push(el);
+            console.log(el.voucherStartDate.getTime()<this.currentDate.getTime());
+          }
+        }
+
+        )
         } else {
           //todo daca nu exista vouchere sa faci ceva in html sa nu fie gol
         }

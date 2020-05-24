@@ -12,58 +12,106 @@ import { Book } from 'src/app/Models/admin/BookModel';
 import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SearchService {
-url : string;
-constructor(
-  private http: HttpClient,
-  private globalVarService: GlobalVarService,
-  private loadingService: LoadingService,
-  public dialog: MatDialog,
-  private titleService: TitleService,
-  private sanitizer: DomSanitizer,
-  private toastr: ToastrService
+  url: string;
+  constructor(
+    private http: HttpClient,
+    private globalVarService: GlobalVarService,
+    private loadingService: LoadingService,
+    public dialog: MatDialog,
+    private titleService: TitleService,
+    private sanitizer: DomSanitizer,
+    private toastr: ToastrService
+  ) {
+    this.url = '/public/search';
+  }
 
-) {
-  this.url = "/public/search";
-}
+  get(query: string) {
+    const params = new HttpParams().set('query', query.toString());
+    return this.http.get<ApiResponse<Book[]>>(
+      this.globalVarService.globalUrl + this.url,
+      { params }
+    );
+  }
 
-
-get(query: string){
-  let params = new HttpParams()
-  .set("query",query.toString());
-  return this.http.get<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.url ,{params : params});
-}
-
-
-filter(disponibility : number , minPrice : number , maxPrice : number ,ratingMin : number ,
-  authorsIds : number[] , categoriesIds : number[] , publishersIds : number[]){
-
+  filter(
+    disponibility: number,
+    minPrice: number,
+    maxPrice: number,
+    ratingMin: number,
+    authorsIds: number[],
+    categoriesIds: number[],
+    publishersIds: number[]
+  ) {
     let params = new HttpParams();
-    if(disponibility!=4){
-      params.set("disponibility",disponibility.toString());
-      if(minPrice!=-1){
-        params.append("minPrice",minPrice.toString())
-        .append("maxPrice",maxPrice.toString());
+    if (disponibility != 4) {
+      params = params.set('disponibility', disponibility.toString());
+      if (minPrice != -1) {
+        params = params
+          .append('minPrice', minPrice.toString())
+          .append('maxPrice', maxPrice.toString());
       }
-      if(ratingMin!=-1){
-        params.append("ratingMin",ratingMin.toString());
+      if (ratingMin != -1) {
+        params =  params.append('ratingMin', ratingMin.toString());
       }
     }
 
-
-    if(authorsIds.length>0){
-      params.append("authors",authorsIds.join(","));
+    if (authorsIds.length > 0) {
+      params = params.append('authors', authorsIds.join(','));
     }
-    if(categoriesIds.length>0){
-      params.append("categories",categoriesIds.join(","));
+    if (categoriesIds.length > 0) {
+      params =params.append('categories', categoriesIds.join(','));
     }
-    if(categoriesIds.length>0){
-      params.append("publishers",publishersIds.join(","));
+    if (categoriesIds.length > 0) {
+      params = params.append('publishers', publishersIds.join(','));
     }
 
-    return this.http.post<ApiResponse<Book[]>>(this.globalVarService.globalUrl + this.url + "/filter" ,{ },{params : params });
-}
+    return this.http.post<ApiResponse<Book[]>>(
+      this.globalVarService.globalUrl + this.url + '/filter',
+      {},
+      { params }
+    );
+  }
 
+  filterwithWord(
+    disponibility: number,
+    minPrice: number,
+    maxPrice: number,
+    ratingMin: number,
+    authorsIds: number[],
+    categoriesIds: number[],
+    publishersIds: number[],
+    query: string
+  ) {
+    let params = new HttpParams();
+    params = params.set('disponibility', disponibility.toString());
+    if (minPrice != -1) {
+      params =  params
+        .append('minPrice', minPrice.toString())
+        .append('maxPrice', maxPrice.toString());
+    }
+
+    if (ratingMin != -1) {
+      params =  params.append('ratingMin', ratingMin.toString());
+    }
+    params = params.append('query', query.toString());
+
+    if (authorsIds.length > 0) {
+      params = params.append('authors', authorsIds.join(','));
+    }
+    if (categoriesIds.length > 0) {
+      params =  params.append('categories', categoriesIds.join(','));
+    }
+    if (categoriesIds.length > 0) {
+      params =  params.append('publishers', publishersIds.join(','));
+    }
+
+    return this.http.post<ApiResponse<Book[]>>(
+      this.globalVarService.globalUrl + this.url + '/filter/query',
+      null,
+      { params }
+    );
+  }
 }

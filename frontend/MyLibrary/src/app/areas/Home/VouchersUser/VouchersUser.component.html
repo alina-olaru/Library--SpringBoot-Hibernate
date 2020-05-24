@@ -1,7 +1,18 @@
 <div fxFlex fxLayout="column">
 <div *ngFor="let v of basicVouchers" fxFlex fxLayout="column wrap" fxLayoutAlign="center center" class="my-3" (click)="myVouchersAdd(v)">
-  <div fxFlex="100%" class="border-angular border-color-accent-100">
+  <div fxFlex="100%" fxLayout="column" class="border-angular border-color-accent-100">
+   <div fxFlex fxFill>
     {{v.voucherTitle}}
+   </div>
+   <div fxFlex fxFill>
+    {{v.voucherDescription}}
+   </div>
+   <div fxFlex fxFill>
+    {{v.voucherStartDate | date}} -  {{v.voucherEndDate  | date}}
+   </div>
+   <div fxFlex fxFill>
+    {{v.voucherMaximumUses}} maxim utilizari
+   </div>
   </div>
 
   <div fxFlex="100%" class="border-angular border-color-accent-100" [ngStyle]="{'background-image': getUrlImageForVoucher(v)}">

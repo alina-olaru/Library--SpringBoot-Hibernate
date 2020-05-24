@@ -1,6 +1,5 @@
 import { GalerieComponent } from './../galerie/galerie.component';
 import { CategoryLandingComponent } from './../categoryLanding/categoryLanding.component';
-import { SearchLayoutComponent } from './../SearchLayout/SearchLayout.component';
 import { SearchComponent } from './../search/search.component';
 import { AbonarepopComponent } from './../abonarepop/abonarepop.component';
 import { CartComponent } from './../cart/cart.component';
@@ -43,7 +42,6 @@ import { StarRatingModule } from 'angular-rating-star';
     VouchersUserComponent,
     AbonarepopComponent,
     SearchComponent,
-    SearchLayoutComponent,
     CategoryLandingComponent,
     GalerieComponent
 

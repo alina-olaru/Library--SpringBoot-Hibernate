@@ -1,95 +1,150 @@
-<!-- <div fxFlex.lt-sm="100%" fxLayout="column" *ngFor="let cat of categories">
-  <div fxFlex fxLayout="column" *ngIf="cat.categoryBooks && cat.categoryBooks.length > 0">
-    <div fxFlex>
-      {{  cat.categoryTitle }}
-    </div>
-    <div fxFlex.lt-sm="100%" fxFlex.lt-md="33%" fxFlex-mt-md="20%" fxLayoutAlign="end center" fxLayout="row"
-      class="mb-5">
+<div fxFlex class="mt-lg-5">
+  <div fxFlex="100" [fxFlex.gt-xs]="40" [fxFlex.gt-sm]="30" [fxFlex.gt-sm]="30" [fxFlex.gt-md]="20" class="px-2">
 
-      <div fxFlex.lt-sm="100%" fxFlex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.md="space-around center"
-        fxLayoutAlign.lt-md="space-between center" fxLayoutAlign.gt-md="space-around">
+    <!--
+    <div fxFlex fxLayout="column">
+      <mat-checkbox [checked]="" #stoc (click)="toggleStoc(!stoc.checked)">In stoc</mat-checkbox>
+      <mat-checkbox #sale (click)="togglePromotie(!sale.checked)">Promotii</mat-checkbox>
+      <mat-checkbox #out (click)="toggleOutOfStock(!out.checked)">Out of stock</mat-checkbox>
+    </div> -->
 
+    <div fxFlex fxLayout="column">
+      <div fxFlex fxLayout="column">
+        <div class="my-4 color-accent search-item-title" fxFlex>
+          Disponibilitate
+        </div>
+        <div *ngFor="let item of object;  let i = index">
+          <mat-checkbox [checked]="disponibilitate == item.cod" (change)="disponibilitate = item.cod">{{item.title}}
+          </mat-checkbox>
+        </div>
+      </div>
 
+      <div fxFlex fxLayout="column">
+        <div class="my-4 color-accent search-item-title" fxFlex>
+          Interval pret
+        </div>
+        <div *ngFor="let item of prices;  let i = index">
+          <mat-checkbox [checked]="minPrice == item.first" (change)="setPrice(item)">{{item.first}} - {{item.last}}
+          </mat-checkbox>
+        </div>
+      </div>
+      <div fxFlex fxLayout="column">
+        <div class="my-4 color-accent search-item-title" fxFlex>
+          Rating minim
+        </div>
+        <div *ngFor="let item of [1,2,3,4,5];  let i = index">
+          <mat-checkbox [checked]="rating == item*2" (change)="rating=item*2">
+            <star-rating [starType]="'svg'" [rating]="item" [readOnly]="true" [showHalfStars]="true"
+              [hoverEnabled]="false" labelPosition="left" [numOfStars]="5"></star-rating>
+          </mat-checkbox>
+        </div>
+      </div>
+      <div fxFlex fxLayout="column">
+        <div class="my-4 color-accent search-item-title" fxFlex>
+          Categorii
+        </div>
+        <div *ngFor="let item of categories;  let i = index">
+          <mat-checkbox (change)="selectCategory(item.categoryId)">{{item.categoryTitle}}</mat-checkbox>
+        </div>
+      </div>
+      <div fxFlex fxLayout="column">
+        <div class="my-4 color-accent search-item-title" fxFlex>
+          Autori
+        </div>
+        <div *ngFor="let item of authors;  let i = index">
+          <mat-checkbox (change)="selectAuthor(item.authorId)">{{item.firstName}} {{item.lastName}}</mat-checkbox>
+        </div>
+      </div>
+
+      <div fxFlex fxLayout="column">
+        <div class=" my-4 color-accent search-item-title" fxFlex>
+          Edituri
+        </div>
+        <div *ngFor="let item of publishers;  let i = index">
+          <mat-checkbox (change)="selectPublisher(item.publisherId)">{{item.publisherTitle}} </mat-checkbox>
+        </div>
+      </div>
+      <div fxFlex fxLayout="column" fxLayoutAlign="start start">
+        <button (click)="filter()" mat-button color="accent" class="background-color-primary" type="submit"
+          cdkFocusInitial>
+          <mat-icon>search</mat-icon> Filtreaza
+        </button>
       </div>
 
     </div>
+  </div>
+  <div fxFlex="100" [fxFlex.gt-xs]="60" [fxFlex.gt-sm]="70" [fxFlex.gt-md]="80"  fxLayoutAlign="start space-between" fxLayout="row wrap">
 
 
+    <div *ngFor="let book of books" id="card-2" class="card mt-5 mt-lg-0"
+      [ngStyle]="{'background-image': getUrlImageForBook(book)}">
+      <figure class="card__thumbnail mt-3 mt-lg-0">
+
+      </figure>
+      <div class="card__body" (click)="viewDetails(book.bookId)">
+        <h3 class="title">{{book.bookTitle}}</h3>
+
+        <p>
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path
+              d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+            </path>
+          </svg>
+          Pret : {{book.bookPrice}}
+        </p>
+
+        <span *ngFor="let auth of book.bookAuthor" class="subtitle">{{auth.authorId.firstName}}
+          {{auth.authorId.lastName}} </span>
+
+
+        <p>
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path
+              d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+            </path>
+          </svg>
+          Nr pagini : {{book.numberOfPages}}
+        </p>
+
+        <p>
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path
+              d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+            </path>
+          </svg>
+          Coperta : {{book.coverType}}
+        </p>
+
+        <p>
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path
+              d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+            </path>
+          </svg>
+          Anul aparitiei : {{book.bookYear}}
+        </p>
+
+        <p>
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path
+              d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+            </path>
+          </svg>
+          Nr volume : {{book.numberofVolumes}}
+        </p>
+
+
+        <p *ngFor=" let cat of book.booksCategories">
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path
+              d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
+            </path>
+          </svg>
+          {{cat.categories.categoryTitle}}
+        </p>
+      </div>
+    </div>
 
   </div>
-</div> -->
-<div *ngIf="books.length!=0" fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center " class="mx-3 p-3 my-2">
-<div *ngFor="let book of books" id="card-2" class="card mt-5 mt-lg-0"
-[ngStyle]="{'background-image': getUrlImageForBook(book)}">
-<figure class="card__thumbnail mt-3 mt-lg-0">
 
-</figure>
-<div class="card__body" (click)="viewDetails(book.bookId)">
-  <h3 class="title">{{book.bookTitle}}</h3>
-
-<p>
-<svg width="16" height="16" viewBox="0 0 24 24">
-  <path
-    d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
-  </path>
-</svg>
-Pret : {{book.bookPrice}}
-</p>
-
-  <span *ngFor="let auth of book.bookAuthor" class="subtitle">{{auth.authorId.firstName}}
-    {{auth.authorId.lastName}} </span>
-
-
-  <p>
-    <svg width="16" height="16" viewBox="0 0 24 24">
-      <path
-        d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
-      </path>
-    </svg>
-    Nr pagini : {{book.numberOfPages}}
-  </p>
-
-  <p>
-    <svg width="16" height="16" viewBox="0 0 24 24">
-      <path
-        d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
-      </path>
-    </svg>
-    Coperta : {{book.coverType}}
-  </p>
-
-  <p>
-    <svg width="16" height="16" viewBox="0 0 24 24">
-      <path
-        d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
-      </path>
-    </svg>
-    Anul aparitiei : {{book.bookYear}}
-  </p>
-
-  <p>
-    <svg width="16" height="16" viewBox="0 0 24 24">
-      <path
-        d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
-      </path>
-    </svg>
-    Nr volume : {{book.numberofVolumes}}
-  </p>
-
-
-  <p *ngFor=" let cat of book.booksCategories">
-    <svg width="16" height="16" viewBox="0 0 24 24">
-      <path
-        d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z">
-      </path>
-    </svg>
-    {{cat.categories.categoryTitle}}
-  </p>
-</div>
-</div>
-</div>
-
-<div fxFlex fxLayoutAlign="center center" class="img-fluid" *ngIf="books.length==0">
-<img src = "../../../../assets/images/clipart1533013.png" style="    height: 100%;
-width: 54%;">
 </div>

@@ -46,4 +46,20 @@ public class searchApiImp implements searchApi {
         }
 
     }
-}
+
+    @Override
+    public ApiResponse<HashSet<Book>> filterwithWord(Optional<Integer> disponibility, Optional<Integer> minPrice, Optional<Integer> maxPrice, Optional<Integer> ratingMin, Optional<List<Integer>> authors, Optional<List<Integer>> categories, Optional<List<Integer>> publishers, String query) {
+        try{
+            return new ApiResponse<HashSet<Book>>(ApiResponseType.SUCCESS,this.searchService.filterWithTitle(disponibility , minPrice , maxPrice,ratingMin,authors,categories,publishers,query),"s-au adus cartile filtrate dupa cerinte");
+        }catch (ServiceException ex){
+            return new ApiResponse<HashSet<Book>>(ApiResponseType.ERROR,null,"A aparut o problema" + ex.getLocalizedMessage() +ex.getCause() + ex.getMessage() + ex.getStackTrace());
+        }catch (OutOfMemoryError ex){
+            return new ApiResponse<HashSet<Book>>(ApiResponseType.ERROR,null,"A aparut o problema" + ex.getLocalizedMessage() +ex.getCause() + ex.getMessage() + ex.getStackTrace() + ex.getSuppressed());
+
+        }catch (Exception ex){
+            return new ApiResponse<HashSet<Book>>(ApiResponseType.ERROR,null,"A aparut o problema" + ex.getLocalizedMessage() +ex.getCause() + ex.getMessage() + ex.getStackTrace());
+        }
+
+    }
+    }
+

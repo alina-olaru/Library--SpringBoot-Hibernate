@@ -1,85 +1,103 @@
-
 body {
-  cursor:"../../../../assets/images/landingpage/cursor.png";
+  cursor: "../../../../assets/images/landingpage/cursor.png";
 }
 
 
 
-.margin-home{
+.margin-home {
 
   height: 100%;
 }
-.middle-home{
 
+.middle-home {
   overflow-y: scroll;
 
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+
+  &::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
+  }
 }
 
 
-.home-header{
- // background-color: rgb(120, 236, 145);
+.home-header {
+  // background-color: rgb(120, 236, 145);
   height: 5em;
 }
 
-.banner-image{
+.banner-image {
   object-fit: cover;
   width: 120px;
   height: 80px;
 
 }
 
-.line{
-height: 100px;
+.line {
+  height: 100px;
 }
 
 
-.hero-icon{
-  font-size:28px;
+.hero-icon {
+  font-size: 28px;
 }
 
-.page-icon{
+.page-icon {
   font-size: 62px;
 }
 
-.under-banner-icon{
-  font-size:9rem;
- // color:rgb(25, 97, 25);
+.under-banner-icon {
+  font-size: 9rem;
+  // color:rgb(25, 97, 25);
   opacity: 0.7;
-  align-self: center;;
+  align-self: center;
+  ;
 }
 
-.under-banner-text{
+.under-banner-text {
   font-family: cursive;
-  font-size:1.3rem;
+  font-size: 1.3rem;
   text-align: center;
 }
 
 
-.menu-true{
-  z-index:100;
+.menu-true {
+  z-index: 100;
 }
 
-.menu-false{
-z-index:-1;
+.menu-false {
+  z-index: -1;
 }
 
-.next-icon, .ng-star-inserted , .next, .icons,.prev{
-  z-index:102;
+.next-icon,
+.ng-star-inserted,
+.next,
+.icons,
+.prev {
+  z-index: 102;
 }
 
-.white-space-nowrap{
+.white-space-nowrap {
   white-space: nowrap;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.account-icon-redirect{
-  a{
-    text-decoration: none!important;
-   // color:black;
+.account-icon-redirect {
+  a {
+    text-decoration: none !important;
+    // color:black;
 
 
   }
 
 }
-
-

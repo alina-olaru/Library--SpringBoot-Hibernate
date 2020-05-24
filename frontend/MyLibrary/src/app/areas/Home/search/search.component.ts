@@ -28,6 +28,52 @@ import { PublishersService } from '../../admin/pages/publishers/publishers.servi
 })
 export class SearchComponent implements OnInit {
 
+
+  object = [
+    {
+      cod: 0,
+      title: "Out of stock",
+    },
+    {
+      cod: 1,
+      title: "In stoc",
+    },
+    {
+      cod: 2,
+      title: "Reduceri",
+    },
+  ];
+
+  prices = [
+    {
+      first: 0,
+      last: 10,
+    },
+    {
+      first: 10,
+      last: 20,
+    },
+    {
+      first: 20,
+      last: 30,
+    },
+    {
+      first: 30,
+      last: 40,
+    },
+    {
+      first: 40,
+      last: 50,
+    },
+    {
+      first: 50,
+      last: 100,
+    },
+    {
+      first: 100,
+      last: 1000,
+    },
+  ];
   query :string;
   books : Book[]=[];
   categories : Category[] = [];
@@ -36,6 +82,11 @@ export class SearchComponent implements OnInit {
   chosenAuthors : number[] =[];
   publishers : Publisher[] = [];
   chosenPublishers : number[] = [];
+  disponibilitate: number = 2;
+  minPrice: number = -1;
+  maxPrice: number = -1;
+  rating: number=-1;
+
   constructor(    private route: ActivatedRoute,
                   private toastr: ToastrService,
                   private landingBooksService: LandingBooksService,
@@ -63,7 +114,9 @@ export class SearchComponent implements OnInit {
         this.search();
       }
     });
-
+    this.GetCategories();
+    this.getAuthors();
+    this.getPublishers();
 
   }
 
@@ -81,6 +134,8 @@ export class SearchComponent implements OnInit {
           'Eroare!',
          response.message,
           'error'
+
+
         );
       }
     })
@@ -149,4 +204,32 @@ export class SearchComponent implements OnInit {
   viewDetails(bookId: number) {
     this.router.navigate(["/home", "book", bookId]);
   }
+
+  setPrice(item: any) {
+
+
+    this.minPrice = item.first;
+    this.maxPrice = item.last;
+  }
+  filter() {
+    this.loadingService.start();
+    console.log(this.disponibilitate + "disp");
+    console.log(this.chosenAuthors + "autori");
+    console.log(this.chosenCategories + "cat");
+    console.log(this.chosenPublishers + "publisjers");
+    console.log(this.rating + "rating");
+    console.log(this.minPrice + "min-max " + this.maxPrice);
+    console.log("layout");
+    console.log(this.query);
+    this.SearchService.filterwithWord(this.disponibilitate , this.minPrice , this.maxPrice , this.rating , this.chosenAuthors , this.chosenCategories , this.chosenPublishers,this.query).subscribe((Response : ApiResponse<Book[]>) =>{
+      if(Response && Response.status == ApiResponseType.SUCCESS)
+      {
+        this.loadingService.stop();
+        this.books = Response.body;
+      }
+
+    })
+
+  }
+
 }

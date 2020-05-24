@@ -51,7 +51,7 @@ public class Review {
     private Book bookR;
 
 
-    @JsonIgnoreProperties(ignoreUnknown=true, value = {"reviewsByUser", "persBooks", "wishBooks", "ordersbyuser", "userComplaints", "userVoucherLink", "addresses"}, allowSetters = true)
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"reviewsByUser", "persBooks", "wishBooks", "ordersbyuser", "userComplaints", "userVoucherLink", "addresses", "userQuizzes"}, allowSetters = true)
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name="FK_USER_REVIEW_ID"))
     private BookUser userReviewMaker;

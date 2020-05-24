@@ -1,1 +1,27 @@
-<!-- aici vine partea aia de sus (Comuna) -->
+<div fxFlex fxLayout="column">
+  <div *ngFor="let v of quizzezArray" fxFlex fxLayout="column wrap" fxLayoutAlign="center center" class="my-3">
+    <div fxFlex="100%" fxLayout="column wrap" class="border-angular border-color-accent-100 p-3 my-2 mx-2">
+      <div fxFlex>
+        {{v.quizzStartDate | date}} - {{v.quizzEndDate | date}}
+      </div>
+      <div fxFlex>
+        {{v.quizzQuestion}}
+      </div>
+      <div *ngFor="let item of v.quizzAnswers;  let i = index">
+        <mat-checkbox [checked]="v.quizzSelectedAnswer == item"
+          (change)="v.quizzSelectedAnswer = item">{{item}}
+        </mat-checkbox>
+      </div>
+
+    <div fxFlex>
+      <button (click)="AnswerToQuizz(v,v.quizzSelectedAnswer)" mat-button color="primary" type="submit">
+        <mat-icon>add</mat-icon> RASPUNDE
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+

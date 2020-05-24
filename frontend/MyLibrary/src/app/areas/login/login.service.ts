@@ -98,11 +98,11 @@ export class LoginService {
   }
 
   updateUser(user : BookUser){
-    this.cookieService.delete("auth-token");
+    this.cookieService.delete("auth-user-info");
     let expiration: Date = new Date();
     expiration.setDate(expiration.getDate() + 1);
     this.cookieService.set(
-      "auth-token",
+      "auth-user-info",
       JSON.stringify(user),
       expiration,
       '/'

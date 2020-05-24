@@ -1,8 +1,7 @@
-import { GalerieComponent } from './../galerie/galerie.component';
-import { CategoryLandingComponent } from './../categoryLanding/categoryLanding.component';
-import { SearchLayoutComponent } from './../SearchLayout/SearchLayout.component';
-import { SearchComponent } from './../search/search.component';
-import { CartComponent } from './../cart/cart.component';
+import { GalerieComponent } from "./../galerie/galerie.component";
+import { CategoryLandingComponent } from "./../categoryLanding/categoryLanding.component";
+import { SearchComponent } from "./../search/search.component";
+import { CartComponent } from "./../cart/cart.component";
 import { LayoutComponent } from "./../layout/layout.component";
 import { QuizzComponent } from "./../quizz/quizz.component";
 import { ReviewComponent } from "./../review/review.component";
@@ -12,8 +11,8 @@ import { WelcomeComponent } from "../welcome/welcome.component";
 import { NgModule, Component } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { DespreComponent } from "../despre/despre.component";
-import { BookDetailsComponent } from '../book-details/book-details.component';
-import { VouchersUserComponent } from '../VouchersUser/VouchersUser.component';
+import { BookDetailsComponent } from "../book-details/book-details.component";
+import { VouchersUserComponent } from "../VouchersUser/VouchersUser.component";
 
 const routes: Routes = [
   {
@@ -22,11 +21,11 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        redirectTo: "welcome"
-      },{
-        path:"vouchere",
-        component:VouchersUserComponent
-
+        redirectTo: "welcome",
+      },
+      {
+        path: "vouchere",
+        component: VouchersUserComponent,
       },
       {
         path: "welcome",
@@ -46,32 +45,26 @@ const routes: Routes = [
         component: QuizzComponent,
       },
       {
-        path:"cart",
-        component:CartComponent
+        path: "cart",
+        component: CartComponent,
       },
       {
-        path:"galerie",
-        component:GalerieComponent
+        path: "galerie",
+        component: GalerieComponent,
       },
       {
-        path:"book/:id",
-        component:BookDetailsComponent
+        path: "book/:id",
+        component: BookDetailsComponent,
       },
       {
-        path:"category/:idb",
-        component:CategoryLandingComponent
+        path: "category/:idb",
+        component: CategoryLandingComponent,
       },
-      {
-        path: '',
-        component: SearchLayoutComponent,
-        children: [
 
       {
-        path:"search/:query",
-        component:SearchComponent
-      }
-    ]
-    }
+        path: "search/:query",
+        component: SearchComponent,
+      },
     ],
   },
   {
@@ -79,9 +72,9 @@ const routes: Routes = [
     component: Error404Component,
   },
   {
-    path:"/error",
-    component:Error404Component
-  }
+    path: "/error",
+    component: Error404Component,
+  },
 ];
 
 @NgModule({

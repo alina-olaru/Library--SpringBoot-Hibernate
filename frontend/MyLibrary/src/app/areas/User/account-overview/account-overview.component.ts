@@ -8,6 +8,11 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { BookUser } from 'src/app/Models/BookUser';
 import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
+import { AddEditUserComponent } from '../../admin/pages/users/add-edit-user/add-edit-user.component';
+import { UserService } from '../../admin/pages/users/user.service';
+import { LoadingService } from 'src/app/modules/loading-spinner/loading.service';
+import { ApiResponse } from 'src/app/Models/general/api-response';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-account-overview',
@@ -29,7 +34,11 @@ export class AccountOverviewComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private newsletterService:NewsletterServiceService,
-    private authService: LoginService
+    private authService: LoginService,
+    public usersService: UserService,
+    private loadingService: LoadingService,
+    public dialog: MatDialog,
+
 
 )
   {
@@ -137,4 +146,48 @@ this.toastr.Swal.fire({
 );
 this.GetUser();
 }
+
+
+edit(){
+  const dialogRef = this.dialog.open(AddEditUserComponent, {
+    width: '40&',
+    data: {
+      type: 'edit',
+      model: Object.assign({}, this.user)
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result != undefined && result != null) {
+      this.EditUserConfirm(result, this.user);
+    }
+  });
+}
+
+EditUserConfirm(newUser: BookUser, oldUser: BookUser) {
+  this.loadingService.start();
+
+  this.usersService
+    .UpdateUser(newUser, newUser.userId)
+    .subscribe((response: ApiResponse<BookUser>) => {
+      this.loadingService.stop();
+      if (response && response.status == ApiResponseType.SUCCESS) {
+        this.authService.updateUser(response.body);
+        this.GetUser();
+        this.toastr.Toast.fire({
+          title: 'Userul a fost editat cu succes!',
+          icon: 'success'
+        });
+
+
+      } else {
+        this.toastr.Swal.fire(
+          'Eroare!',
+          'A aparut o eroare la editare, incearca din nou!',
+          'error'
+        );
+      }
+    });
+}
+
 }

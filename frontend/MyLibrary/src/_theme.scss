@@ -78,4 +78,5 @@ $mylibrary-dark2-theme: mat-dark-theme($mylibrary-dark2-primary, $mylibrary-dark
   @include color-scheme(color-warn, $mylibrary-dark2-warn);
 
   @include angular-material-theme($mylibrary-dark2-theme);
+
 }

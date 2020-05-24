@@ -15,4 +15,5 @@ export class Quizz {
   quizzStartDate:Date;
   quizzEndDate:Date;
   bonus: number;
+  quizzSelectedAnswer?:string;
 }
