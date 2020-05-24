@@ -7,9 +7,8 @@
           <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="parent">
             <img *ngIf="book.bookImageSrc" [src]="book.bookImageSrc" class="image-book"
               [class.out-of-stock-overlay]="book.numberOfBoooks==0">
-              <img *ngIf="!book.bookImageSrc" src="../../../../assets/no.jpg" class="" style="height: 592px;
-              width: 371px;"
-              [class.out-of-stock-overlay]="book.numberOfBoooks==0">
+            <img *ngIf="!book.bookImageSrc" src="../../../../assets/no.jpg" class="" style="height: 592px;
+              width: 371px;" [class.out-of-stock-overlay]="book.numberOfBoooks==0">
 
             <img *ngIf="book.numberOfBoooks==0" src="../../../../assets/images/details/Sold-Out-PNG-Picture.png"
               class="pointer on-top-image out-of-stock-img">
@@ -28,7 +27,7 @@
               </div>
               <div fxFlex="70%" class="ml-1">
                 <a class=" book-info search-redirect color-accent" [routerLink]="['/home/search',book.bookTitle]">
-                {{book.bookTitle}}
+                  {{book.bookTitle}}
                 </a>
               </div>
             </div>
@@ -42,7 +41,8 @@
               <div fxFlex="30%" fxLayout="row wrap book-info">
 
                 <div *ngFor=" let author of book.bookAuthor" class="ml-1">
-                  <a class="search-redirect color-accent book-info" [routerLink]="['/home/search',author.authorId.lastName]">
+                  <a class="search-redirect color-accent book-info"
+                    [routerLink]="['/home/search',author.authorId.lastName]">
                     {{author.authorId.firstName}}
                     {{author.authorId.lastName}}
                   </a>
@@ -59,7 +59,8 @@
               </div>
               <div fxFlex="30%" fxLayout="row wrap">
                 <div class="ml-1">
-                  <a class="search-redirect color-accent book-info" [routerLink]="['/home/search',book.publisher.publisherTitle]">
+                  <a class="search-redirect color-accent book-info"
+                    [routerLink]="['/home/search',book.publisher.publisherTitle]">
 
                     {{book.publisher.publisherTitle}}
                   </a>
@@ -70,12 +71,13 @@
 
             <div *ngIf="book.booksCategories.length > 0" fxFlex fxLayout="row" class="ml-4">
 
-              <div fxFlex="30%"  class="book-info">
+              <div fxFlex="30%" class="book-info">
                 Categorii:
               </div>
               <div fxFlex="30%" fxLayout="row wrap">
                 <div *ngFor="let cat of book.booksCategories" class="ml-1">
-                  <a class="search-redirect color-accent book-info" [routerLink]="['/home/search',cat.categories.categoryTitle]">
+                  <a class="search-redirect color-accent book-info"
+                    [routerLink]="['/home/search',cat.categories.categoryTitle]">
                     {{cat.categories.categoryTitle}}
                   </a>
                 </div>
@@ -183,12 +185,14 @@
             class="mr-lg-0 mr-sm-3 pl-4 pl-lg-0">
 
 
-            <button  class="book-details-button" *ngIf="alreadyInWishlist" mat-raised-button color="warn" (click)="AddToWhishlist()">
+            <button class="book-details-button" *ngIf="alreadyInWishlist" mat-raised-button color="warn"
+              (click)="AddToWhishlist()">
               <mat-icon>favorite</mat-icon>
               Adauga in whishlist
             </button>
 
-            <button class="book-details-button" *ngIf="!alreadyInWishlist" mat-raised-button color="warn" (click)="DeleteFromWishlist()">
+            <button class="book-details-button" *ngIf="!alreadyInWishlist" mat-raised-button color="warn"
+              (click)="DeleteFromWishlist()">
               <mat-icon>favorite</mat-icon>
               Sterge din whishlist
             </button>
@@ -196,14 +200,16 @@
           </div>
           <div *ngIf="book.numberOfBoooks>0" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
-            <button  class="book-details-button" [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary" (click)="AddtoCart()">
+            <button class="book-details-button" [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary"
+              (click)="AddtoCart()">
               <mat-icon>add_shopping_cart</mat-icon>
               Adauga in cos
             </button>
           </div>
           <div *ngIf="book.numberOfBoooks==0" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
-            <button  class="book-details-button" [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary" (click)="AddtoCart()">
+            <button class="book-details-button" [disabled]="book.numberOfBoooks==0" mat-raised-button color="primary"
+              (click)="AddtoCart()">
               <mat-icon>close</mat-icon>
               Indisponibil
             </button>
@@ -211,7 +217,8 @@
 
           <div *ngIf="book.numberOfBoooks==0" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
-            <button  class="book-details-button" [disabled]="book.numberOfBoooks>0" mat-raised-button color="accent" (click)="mailMe()">
+            <button class="book-details-button" [disabled]="book.numberOfBoooks>0" mat-raised-button color="accent"
+              (click)="mailMe()">
               <mat-icon>mail</mat-icon>
               Notifica-ma cand e in stoc
             </button>
@@ -220,12 +227,14 @@
 
           <div fxLayoutAlign="center center" fxLayoutAlign.lt-md="start start" fxFlex>
 
-            <button  class="book-details-button" *ngIf="alreadyInMyBooks" mat-raised-button color="default" (click)="AddToPersonal()">
+            <button class="book-details-button" *ngIf="alreadyInMyBooks" mat-raised-button color="default"
+              (click)="AddToPersonal()">
               <mat-icon>bookmarks</mat-icon>
               Adauga in biblioteca personala
             </button>
 
-            <button  class="book-details-button" *ngIf="!alreadyInMyBooks" mat-raised-button color="default" (click)="DeleteFromPersonal()">
+            <button class="book-details-button" *ngIf="!alreadyInMyBooks" mat-raised-button color="default"
+              (click)="DeleteFromPersonal()">
               <mat-icon>bookmarks</mat-icon>
               Sterge din biblioteca personala
             </button>
@@ -248,12 +257,13 @@
   </div>
   <div class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5" FxFlex fxLayout="row" fxLayoutAlign="center space-between">
     <div fxFlex>
-      <button mat-button mat-raised-button  color="accent" class="border-angular border-color-primary-500" (click)="viewReview=false">VEZI
+      <button mat-button mat-raised-button color="accent" class="border-angular border-color-primary-500"
+        (click)="viewReview=false">VEZI
         RECENZII</button>
     </div>
     <div fxFlex fxLayout="row">
       <div fxFlex>
-        <button mat-button mat-raised-button  color="accent" (click)="viewReview=true">LASA
+        <button mat-button mat-raised-button color="accent" (click)="viewReview=true">LASA
           UN COMENTARIU</button>
 
       </div>
@@ -267,23 +277,47 @@
     </div>
   </div>
 
-  <div *ngIf="!viewReview" class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5 " FxFlex fxLayout="column"
+  <div *ngIf="!viewReview" class="p-lg-2 ml-lg-4 ml-4 mt-5 mt-lg-5 " FxFlex fxLayout="row wrap"
     fxLayoutAlign="center space-between">
-    <div fxFlex fxLayoutAlign="center center" fxLayout="column">
-      <div *ngFor="let rev of reviews" fxFlex fxLayout="column" fxLayoutAlign="center center"
-        class=" my-3">
-        <!-- <div fxFlex>
+    <div fxFlex fxLayoutAlign="center center" fxLayout="row wrap">
+      <div *ngFor="let rev of reviews"  fxLayoutAlign="space-between center" class=" mx-3 my-3">
 
-        </div>
-        <div *ngIf="rev.userReviewMaker!=null" fxFlex>
-          User {{rev.userReviewMaker.username}}
-        </div>
-        <div fxFlex>
-          {{rev.reviewerName}}
-        </div>
-        <div fxFlex>
-          {{rev.textReview}}
-        </div> -->
+        <mat-card class="tp-card">
+          <mat-card-header>
+            <div mat-card-avatar class="tp-header-image"></div>
+            <mat-card-title *ngIf="rev.userReviewMaker && rev.userReviewMaker.username">User
+              {{rev.userReviewMaker.username}}</mat-card-title>
+            <mat-card-title *ngIf="!rev.userReviewMaker|| !rev.userReviewMaker.username">User neidentificat
+            </mat-card-title>
+
+            <mat-card-subtitle>
+              <star-rating [starType]="'svg'" [rating]="rev.value" [readOnly]="true" [showHalfStars]="true"
+              [hoverEnabled]="false" labelPosition="left" [numOfStars]="5"></star-rating>
+
+            </mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="https://i.pinimg.com/originals/4e/05/ed/4e05ed4783b99a9ed3f2e19059b6c814.jpg"
+            alt="Review">
+          <mat-card-content class="fit-in-box-text">
+            <p>
+              {{rev.textReview}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <!-- <button mat-button>
+               <mat-icon>thumbs-up</mat-icon>LIKE</button> -->
+
+            <button mat-button color="primary" style="color:green">
+              <mat-icon>thumb_up
+              </mat-icon>
+            </button>
+
+            <button mat-button color="primary" style="color:red">
+              <mat-icon>thumb_down
+              </mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
       </div>
     </div>
   </div>
@@ -327,7 +361,7 @@
 
         </div>
 
-        <button mat-button mat-raised-button  color="accent" type="submit">
+        <button mat-button mat-raised-button color="accent" type="submit">
           <mat-icon>add</mat-icon> Adauga
         </button>
 
@@ -341,5 +375,6 @@
     </div> -->
 
   </div>
+</div>
 
-  <!-- //TODO ADD BUTON DE BACK -->
+<!-- //TODO ADD BUTON DE BACK -->

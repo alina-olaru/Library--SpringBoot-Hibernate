@@ -68,6 +68,8 @@ export class BookDetailsComponent implements OnInit {
   existReviews: boolean = true;
     //---------------------------------------mail when it's in stock--------------------------------------
 mail : string;
+//---------------------------html vars---------------------
+liked : boolean = true;
 
   constructor(
     private route: ActivatedRoute,
