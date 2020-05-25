@@ -18,8 +18,13 @@ public class VoucherServiceImp implements VoucherService {
 
 
     @Override
-    public List<Voucher> getVoucher() {
-        return this.voucherDao.getVouchers();
+    public List<Voucher> getVoucher()throws DBExceptions {
+        try {
+            return this.voucherDao.getVouchers();
+        }catch (Exception ex){
+            throw new DBExceptions(ex.getMessage(), 400, this.getClass().getName(), "voucher obj", "get");
+
+        }
     }
 
     @Override

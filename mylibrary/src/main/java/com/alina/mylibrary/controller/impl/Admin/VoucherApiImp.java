@@ -22,8 +22,13 @@ public class VoucherApiImp implements VoucherApi {
 
     @Override
     public ApiResponse<List<Voucher>> getVouchers() {
-      return new ApiResponse<List<Voucher>>(ApiResponseType.SUCCESS,
-              this.voucherService.getVoucher(),"s-au adus datele cu succes");
+
+              try{
+                  return new ApiResponse<List<Voucher>>(ApiResponseType.SUCCESS, this.voucherService.getVoucher(),"s-au adus datele cu succes");
+        }catch (Exception ex){
+            return new ApiResponse<List<Voucher>>(ApiResponseType.ERROR,null,ex.getMessage());
+
+        }
     }
 
     @Override

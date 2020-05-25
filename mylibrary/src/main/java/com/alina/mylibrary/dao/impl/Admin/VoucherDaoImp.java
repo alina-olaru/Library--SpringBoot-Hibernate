@@ -25,7 +25,7 @@ public class VoucherDaoImp implements VoucherDao {
     public List<Voucher> getVouchers() {
         LobHandler blobHandler = new DefaultLobHandler();
         var x = this.voucherRepository.findAll();
-        return x;
+        return this.voucherRepository.findAll();
     }
 
     @Override

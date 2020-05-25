@@ -19,7 +19,7 @@ import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: "app-VouchersUser",
   templateUrl: "./VouchersUser.component.html",
-  styleUrls: ["./VouchersUser.component.css"],
+  styleUrls: ["./VouchersUser.component.scss"],
 })
 export class VouchersUserComponent implements OnInit {
   user: BookUser;
@@ -59,22 +59,19 @@ export class VouchersUserComponent implements OnInit {
       .GetVouchers()
       .subscribe((response: ApiResponse<Voucher[]>) => {
         if (response && response.status == ApiResponseType.SUCCESS) {
-        //  this.basicVouchers = response.body;
+          this.basicVouchers = response.body;
         // response.body.forEach((el)=>{
         //   if(el.voucherStartDate.getTime()<this.currentDate.getTime() && el.voucherEndDate.getTime()>this.currentDate.getTime()){
         //     this.basicVouchers.push(el);
         //     console.log(el.voucherStartDate.getTime()<this.currentDate.getTime());
         //   }
         // }
-        response.body.forEach((el)=>{
-          if(el.voucherStartDate<this.currentDate && el.voucherEndDate>this.currentDate){
-            this.basicVouchers.push(el);
-            console.log(el.voucherStartDate.getTime()<this.currentDate.getTime());
-          }
-        }
-
-        )
-        } else {
+        // response.body.forEach((el)=>{
+        //   if(el.voucherStartDate<this.currentDate && el.voucherEndDate>this.currentDate){
+        //     this.basicVouchers.push(el);
+        //     console.log(el.voucherStartDate.getTime()<this.currentDate.getTime());
+           }
+        else {
           //todo daca nu exista vouchere sa faci ceva in html sa nu fie gol
         }
       });

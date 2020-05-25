@@ -17,13 +17,13 @@ import java.util.List;
 @IdClass(VoucherUserId.class)
 public class VoucherUser implements Serializable {
 
-    @JsonIgnoreProperties(ignoreUnknown=true, value = {"userVoucherLink"}, allowSetters = true)
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"reviewsByUser", "persBooks", "wishBooks", "ordersbyuser", "userComplaints", "userVoucherLink", "addresses", "userQuizzes"}, allowSetters = true)
     @Id
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name="FK_USER_VU_ID"))
     private BookUser usersWithVouchers;
 
-    @JsonIgnoreProperties(ignoreUnknown=true, value = {"userVoucherLink"}, allowSetters = true)
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"userVoucherLink", "author_voucher", "publisher_voucher", "category_voucher"}, allowSetters = true)
     @Id
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name="FK_VOUCHER_VU_ID"))
@@ -33,7 +33,7 @@ public class VoucherUser implements Serializable {
     @Column
     private Boolean used=false;
 
-    @JsonIgnoreProperties(ignoreUnknown=true, value = {"vouchersForUser"}, allowSetters = true)
+    @JsonIgnoreProperties(ignoreUnknown=true, value = {"vouchersForUser", "ordersUser.userVoucherLink"}, allowSetters = true)
     @OneToMany(mappedBy = "vouchersForUser",
             fetch = FetchType.LAZY)
     private List<BookOrder> orderWithVouchers;

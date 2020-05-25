@@ -1,19 +1,40 @@
 <div fxFlex fxLayout="column">
 <div *ngFor="let v of basicVouchers" fxFlex fxLayout="column wrap" fxLayoutAlign="center center" class="my-3" (click)="myVouchersAdd(v)">
-  <div fxFlex="100%" fxLayout="column" class="border-angular border-color-accent-100">
-   <div fxFlex fxFill>
-    {{v.voucherTitle}}
-   </div>
-   <div fxFlex fxFill>
-    {{v.voucherDescription}}
-   </div>
-   <div fxFlex fxFill>
-    {{v.voucherStartDate | date}} -  {{v.voucherEndDate  | date}}
-   </div>
-   <div fxFlex fxFill>
-    {{v.voucherMaximumUses}} maxim utilizari
-   </div>
-  </div>
+
+  <mat-card class="tp-card">
+    <mat-card-header>
+      <div mat-card-avatar class="tp-header-image"></div>
+      <mat-card-title> {{v.voucherTitle}}</mat-card-title>
+
+
+      <mat-card-subtitle>
+        {{v.voucherStartDate | date}} -  {{v.voucherEndDate  | date}}
+
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image
+      src="https://www.gpstracker.at/wp-content/uploads/2019/03/How-GPS-Tracking-Can-Benefit-Delivery-Services.jpg"
+      alt="Review">
+    <mat-card-content class="fit-in-box-text ml-5">
+      <p>
+      Descriere
+      </p>
+      <p>
+        {{v.voucherDescription}}
+      </p>
+      <p>
+        {{v.voucherMaximumUses}} maxim utilizari
+      </p>
+    </mat-card-content>
+    <!-- <mat-card-actions>
+
+      <div fxFlex fxLayoutAlign="center center">
+        <button type="button" mat-raised-button color="accent" (click)="chooseAddress(a)"
+          class="pointer">Alege</button>
+      </div>
+    </mat-card-actions> -->
+  </mat-card>
+
 
   <div fxFlex="100%" class="border-angular border-color-accent-100" [ngStyle]="{'background-image': getUrlImageForVoucher(v)}">
 

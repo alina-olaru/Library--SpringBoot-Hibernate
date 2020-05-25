@@ -64,7 +64,6 @@ public class Voucher {
     @Column
     private String language;
 
-
     @JsonIgnoreProperties(ignoreUnknown=true, value = {"author_vouchers"}, allowSetters = true)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_AUTHORR__ID"))
@@ -85,8 +84,4 @@ public class Voucher {
     fetch = FetchType.LAZY)
     private List<VoucherUser> userVoucherLink;
 
-    @Override
-    public String toString() {
-        return " ";
-    }
 }

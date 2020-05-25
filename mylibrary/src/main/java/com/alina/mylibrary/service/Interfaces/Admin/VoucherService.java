@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public interface VoucherService {
 
-    public List<Voucher> getVoucher();
+    public List<Voucher> getVoucher() throws DBExceptions ;
     public Voucher addVoucher(Voucher voucher)  throws DBExceptions;
     public Boolean deleteVoucher(int voucherId)  throws DBExceptions;
     public Voucher updateVoucher(Voucher voucher )  throws DBExceptions;
