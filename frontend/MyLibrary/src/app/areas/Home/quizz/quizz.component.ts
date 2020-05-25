@@ -117,7 +117,7 @@ export class QuizzComponent implements OnInit {
                 .subscribe((response: ApiResponse<QuizzUser>) => {
                   if (response && response.status == ApiResponseType.SUCCESS) {
                     if (
-                      quizz.quizzCorrectAnswer.toLowerCase == answer.toLowerCase
+                      quizz.quizzCorrectAnswer.toUpperCase() == answer.toUpperCase()
                     ) {
                       this.toastr.Swal.fire({
                         title: "Ati raspuns corect!!",

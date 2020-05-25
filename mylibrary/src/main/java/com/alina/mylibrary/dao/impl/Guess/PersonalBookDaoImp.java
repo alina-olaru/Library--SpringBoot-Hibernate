@@ -37,17 +37,20 @@ public class PersonalBookDaoImp implements PersonalBookDao {
             for(PersonalBook p:allMyBooks){
 
                     if (p.getBook().getBookId() == 27) {
-                        response.add(p);
-
+                        if (p.getUser().getUserId() == userId) {
+                            response.add(p);
+                        }
                 }
             }
         }
         if(type==1){
 
 
-            for(PersonalBook p:allMyBooks){
-                if(p.getBook().getBookId()!=27){
-                    response.add(p);
+            for(PersonalBook p:allMyBooks) {
+                if (p.getUser().getUserId() == userId) {
+                    if (p.getBook().getBookId() != 27) {
+                        response.add(p);
+                    }
                 }
             }
         }

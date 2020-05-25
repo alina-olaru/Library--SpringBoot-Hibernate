@@ -9,4 +9,5 @@ import java.util.List;
 public interface MailMeService {
     List<MailWhenInStoc> GetBooksByBook(Book book);
     MailWhenInStoc addMe(MailWhenInStoc user);
+    List<String> sendMails(Integer bookId);
 }

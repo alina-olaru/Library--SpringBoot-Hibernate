@@ -85,6 +85,7 @@ export class VouchersUserComponent implements OnInit {
   //----------------------------------------------------------------actions-------------------------------------------------------
 
   myVouchersAdd(voucher: Voucher) {
+    console.log("myVou");
     if (this.user == null || this.user == undefined) {
       this.toastr.Swal.fire({
         title: "Trebuie sa te loghezi pentru a aduna vouchere!!",
@@ -169,10 +170,12 @@ export class VouchersUserComponent implements OnInit {
 
   checkVoucher(id: number) {
     this.already = false;
+    if(this.myVouchers!= null && this.myVouchers.length>0){
     this.myVouchers.forEach((e) => {
       if (e.voucherId == id) {
         this.already = true;
       }
     });
   }
+}
 }

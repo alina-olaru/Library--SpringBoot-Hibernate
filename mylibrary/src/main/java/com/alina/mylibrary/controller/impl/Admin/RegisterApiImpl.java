@@ -8,6 +8,7 @@ import com.alina.mylibrary.model.db.BookUser;
 import com.alina.mylibrary.model.ConfirmationToken;
 import com.alina.mylibrary.repository.Admin.ConfirmationTokenMailRepository;
 import com.alina.mylibrary.repository.Admin.UserMailRepository;
+import com.alina.mylibrary.service.Interfaces.Admin.BookUserService;
 import com.alina.mylibrary.service.Interfaces.Admin.RegisterService;
 import com.alina.mylibrary.service.impl.Admin.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,9 @@ public class RegisterApiImpl implements RegisterApi {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private BookUserService bookUserService;
 
     @Override
     public ApiResponse<BookUser> registerUser(@RequestBody BookUser user)
@@ -115,6 +119,10 @@ public class RegisterApiImpl implements RegisterApi {
         if(token!=null){
             BookUser user=this.userMailRepository.findByemailAdressIgnoreCase(token.getUser().getEmailAdress());
             user.setIsEnabled(true);
+            BookUser userfinal = this.bookUserService.GetUserByUsernameOrEmail(token.getUser().getEmailAdress());
+            userfinal.setIsEnabled(true);
+            this.bookUserService.editUser(userfinal);
+
 
             //todo de ce nu se salveaza in baza cu true
 
@@ -122,7 +130,7 @@ public class RegisterApiImpl implements RegisterApi {
             BookUser response = null;
 
             try {
-                response=this.registerService.registerUser(user);
+                response=this.registerService.registerUser(userfinal);
             }catch (FieldException f){
                 return new ApiResponse<BookUser>(ApiResponseType.ERROR,response,"Nu s-a putut inregistra userul.");
             }
