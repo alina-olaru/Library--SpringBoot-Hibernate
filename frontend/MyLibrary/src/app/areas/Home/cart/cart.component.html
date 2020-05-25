@@ -39,8 +39,7 @@
                     <mat-label click="updatequantity(b.book.bookId)">{{quantity}}</mat-label>
                     <mat-select required>
 
-                      <mat-option *ngFor="let option of options" [value]="option"
-                        (click)="calculatePrice(option,b)">
+                      <mat-option *ngFor="let option of options" [value]="option" (click)="calculatePrice(option,b)">
                         {{option}}
                       </mat-option>
                     </mat-select>
@@ -52,7 +51,7 @@
 
                 </div>
                 <div fxFlex fxLayoutAlign="end center">
-                 {{b | priceLibrary}} lei
+                  {{b | priceLibrary}} lei
 
                 </div>
               </div>
@@ -73,10 +72,17 @@
       <form *ngIf="user" fxLayout="column">
         <ng-template matStepLabel>Detalii livrare</ng-template>
 
+        <div fxFlex fxLayoutAlign="center center" class="mt-5 p-4">
+          <button class="book-details-button  " mat-raised-button color="accent" (click)="AddAddress()">
+            <mat-icon>mail</mat-icon>
+            Adauga adresa noua
+          </button>
+        </div>
+
         <div *ngFor="let a of addresses" fxFlex="70%" fxLayout="row"
           class="container second-step border-angular border-color-accent-100">
 
-          <div fxFlex="70%" class="">
+          <!-- <div fxFlex="70%" class="">
             <div class="container " fxFlex fxLayout="column">
               <div fxFlex="100%" class="ml-5 my-1">
                 {{a.country}},{{a.city}},{{a.province}}
@@ -92,13 +98,51 @@
               </div>
 
             </div>
-          </div>
+          </div> -->
 
-          <div fxFlex="30%" fxLayoutAlign="center center">
-            <button type="button" mat-raised-button color="accent" (click)="chooseAddress(a)"
-              class="pointer">Alege</button>
+          <mat-card class="tp-card">
+            <mat-card-header>
+              <div mat-card-avatar class="tp-header-image"></div>
+              <mat-card-title>{{a.country}}</mat-card-title>
 
-          </div>
+
+              <mat-card-subtitle>
+                {{a.city}},{{a.province}}}
+
+              </mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image
+              src="https://www.gpstracker.at/wp-content/uploads/2019/03/How-GPS-Tracking-Can-Benefit-Delivery-Services.jpg"
+              alt="Review">
+            <mat-card-content class="fit-in-box-text ml-5">
+              <p>
+                Detalii
+              </p>
+              <p>
+                {{a.streetName}} , nr {{a.streetNumber}}
+              </p>
+              <p>
+                Bloc {{a.block}}
+              </p>
+              <p>
+                Etaj {{a.floor}} , apartament {{a.appartmentNumber}}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <!-- <button mat-button>
+                 <mat-icon>thumbs-up</mat-icon>LIKE</button> -->
+
+              <div fxFlex fxLayoutAlign="center center">
+                <button type="button" mat-raised-button color="accent" (click)="chooseAddress(a)"
+                  class="pointer">Alege</button>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+
+
+
+
+
         </div>
 
         <div fxLayoutAlign="start start" fxFlex>
@@ -119,40 +163,41 @@
 
 
       <div *ngFor="let v of vouchers" fxFlex="70%" fxLayout="row"
-      class="container second-step border-angular border-color-accent-100">
+        class="container second-step border-angular border-color-accent-100">
 
-      <div fxFlex="70%" class="">
-        <div class="container " fxFlex fxLayout="column">
+        <div fxFlex="70%" class="">
+          <div class="container " fxFlex fxLayout="column">
 
-          <div fxFlex="100%" fxLayoutAlign="start start " class="ml-5 my-1">
-           {{v.voucherTitle}} ( {{v.voucherMaximumUses}} utilizari)
-          </div>
+            <div fxFlex="100%" fxLayoutAlign="start start " class="ml-5 my-1">
+              {{v.voucherTitle}} ( {{v.voucherMaximumUses}} utilizari)
+            </div>
 
-          <div *ngIf="v.author_voucher!=null" fxFlex="100%" class="ml-5 my-1">
-           Autor : {{v.author_voucher.firstName}}  {{v.author_voucher.lastName}}
-           </div>
-           <div *ngIf="v.category_voucher!=null" fxFlex="100%" class="ml-5 my-1">
-            Categorie : {{v.category_voucher.categoryTitle}}
+            <div *ngIf="v.author_voucher!=null" fxFlex="100%" class="ml-5 my-1">
+              Autor : {{v.author_voucher.firstName}} {{v.author_voucher.lastName}}
+            </div>
+            <div *ngIf="v.category_voucher!=null" fxFlex="100%" class="ml-5 my-1">
+              Categorie : {{v.category_voucher.categoryTitle}}
             </div>
             <div *ngIf="v.language!=null" fxFlex="100%" class="ml-5 my-1">
               Limba : {{v.language}}
-              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxFlex="30%" fxLayoutAlign="center center">
+          <button type="button" mat-raised-button color="accent" (click)="chooseVoucher(v)"
+            class="pointer">Alege</button>
+
         </div>
       </div>
-
-      <div fxFlex="30%" fxLayoutAlign="center center">
-        <button type="button" mat-raised-button color="accent" (click)="chooseVoucher(v)"
-          class="pointer">Alege</button>
-
-      </div>
-    </div>
 
       <div>
         <div fxLayoutAlign="start start" fxFlex>
           <button type="button" mat-button matStepperPrevious> INAINTE</button>
         </div>
         <div fxLayoutAlign="end end" fxFlex>
-          <button type="button" mat-button fxLayoutAlign="end end" matStepperNext (click)="send()">TRIMITE COMANDA</button>
+          <button type="button" mat-button fxLayoutAlign="end end" matStepperNext (click)="send()">TRIMITE
+            COMANDA</button>
         </div>
       </div>
     </mat-step>
@@ -160,11 +205,14 @@
 </div>
 <div *ngIf="pairBooks.length==0 && sendedOrder==false">
   <!-- ADAUGATI ARTICOLE IN COS -->
-  <img fxFlex fxLayoutAlign="center center" class="empty-cart img-fluid" src="../../../../assets/images/details/empty.png">
+  <img fxFlex fxLayoutAlign="center center" class="empty-cart img-fluid"
+    src="../../../../assets/images/details/empty.png">
 </div>
 
 <div *ngIf="sendedOrder==true">
 
 
-  <img fxFlex fxLayoutAlign="center center" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/a7a7b120588211.56042b16edecd.gif"  class="empty-cart img-fluid">
+  <img fxFlex fxLayoutAlign="center center"
+    src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/a7a7b120588211.56042b16edecd.gif"
+    class="empty-cart img-fluid">
 </div>

@@ -55,10 +55,17 @@ public class searchService {
                         ((ba.getAuthorId().getLastName().toLowerCase().concat(ba.getAuthorId().getFirstName().toLowerCase())) == keyword.toLowerCase())) {
                     response.add(book);
                 }
+                if (((ba.getAuthorId().getLastName().toLowerCase()==keyword.toLowerCase()) || (ba.getAuthorId().getFirstName().toLowerCase()==keyword.toLowerCase())) ||
+                        (((ba.getAuthorId().getLastName().toLowerCase()==keyword.toLowerCase()) && (ba.getAuthorId().getFirstName().toLowerCase()==keyword.toLowerCase()))) ||
+                        ((ba.getAuthorId().getLastName().toLowerCase().equals(keyword.toLowerCase())) || (ba.getAuthorId().getFirstName().toLowerCase().equals(keyword.toLowerCase()))) ||
+                        ((ba.getAuthorId().getLastName().toLowerCase().equals(keyword.toLowerCase())) && (ba.getAuthorId().getFirstName().toLowerCase().equals(keyword.toLowerCase())))){
+                    response.add(book);
+                }
                 for (String word : keyWords) {
                     if ((ba.getAuthorId().getLastName().toLowerCase().contains(word.toLowerCase())) || (ba.getAuthorId().getFirstName().toLowerCase().contains(word.toLowerCase()))) {
                         response.add(book);
                     }
+
                 }
             }
 

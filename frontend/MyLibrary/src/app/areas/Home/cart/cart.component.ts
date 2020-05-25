@@ -24,6 +24,8 @@ import { Voucher } from "src/app/Models/admin/VoucherModel";
 import { VoucherUserService } from "../VouchersUser/VoucherUser.service";
 import { VoucherUser } from "src/app/Models/admin/VoucherUserModel";
 import { LowerCasePipe } from "@angular/common";
+import { AddAddressComponent } from '../../User/addresses-book/add-address/add-address.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: "app-cart",
@@ -66,7 +68,8 @@ export class CartComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private loadingService: LoadingService,
     private router: Router,
-    private voucherUserService: VoucherUserService
+    private voucherUserService: VoucherUserService,
+        public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -159,6 +162,44 @@ export class CartComponent implements OnInit {
     console.log("order" + this.order.idLocatie);
     //todo ceva disable pe cealalta
   }
+
+  AddAddress(){
+    console.log("S-a intrat in functie");
+    const dialogRef = this.dialog.open(AddAddressComponent, {
+      width: '40%',
+      data: {
+        type: 'add'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined && result != null) {
+        this.AddConfirm(result);
+      }
+    });
+  }
+
+  AddConfirm(address:Address) {
+    //this.loadingService.start();
+
+    this.addressService.addAddress(address, this.auth.getUser()).subscribe((response:ApiResponse<BookUser>) =>{
+      if (response && response.status == ApiResponseType.SUCCESS) {
+        this.toastr.Toast.fire({
+          title: 'Adresa a fost adaugata cu succes!',
+          icon: 'success'
+        });
+        this.getAddress();
+    }
+        else {
+          this.toastr.Swal.fire(
+            'Eroare!',
+            'A aparut o eroare la editare, incearca din nou!',
+            'error'
+          );
+        }
+      });
+  }
+
 
   getVouchers() {
     if (this.user == null || this.user == undefined) {
