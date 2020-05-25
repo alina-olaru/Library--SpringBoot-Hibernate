@@ -395,6 +395,7 @@ export class CartComponent implements OnInit {
             console.log("Send method finished");
             if (response && response.status == ApiResponseType.SUCCESS) {
               this.finalOrder = response.body;
+              this.cartService.mailForOrder(response.body.orderId).subscribe();
 
 
               console.log(this.finalOrder);

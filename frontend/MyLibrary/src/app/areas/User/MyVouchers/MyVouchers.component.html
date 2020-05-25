@@ -1,6 +1,6 @@
 <div fxFlex fxLayout="column " fxLayoutAlign="center center">
 <div *ngFor="let v of vouchers " fxFlex fxLayout="column wrap" class="border-angular border-color-accent-100 my-4 mx-lg-5 px-3 py-3 ">
-<div fxFlex>
+<!-- <div fxFlex>
   {{v.voucherTitle}}
 </div>
 <div fxFlex>
@@ -8,6 +8,29 @@
 </div>
 <div fxFlex>
   {{v.voucherStartDate | date}}--  {{v.voucherEndDate | date}}
-</div>
+</div> -->
+<mat-card class="tp-card">
+  <mat-card-header>
+    <div mat-card-avatar class="tp-header-image"></div>
+    <mat-card-title>  {{v.voucherTitle}}</mat-card-title>
+
+
+    <mat-card-subtitle>
+      {{v.voucherStartDate | date}}--  {{v.voucherEndDate | date}}
+
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://i.pinimg.com/originals/4e/05/ed/4e05ed4783b99a9ed3f2e19059b6c814.jpg"
+    alt="Review">
+  <mat-card-content class="fit-in-box-text">
+    <p>
+      {{v.voucherMaximumUses}} utilizari maxim
+    </p>
+
+  </mat-card-content>
+  <mat-card-actions>
+
+  </mat-card-actions>
+</mat-card>
 </div>
 </div>

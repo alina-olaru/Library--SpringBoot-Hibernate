@@ -33,7 +33,7 @@ public class NewsletterSender {
      *
      * <h1>Using cron to send the mail every monday at 13:45</h1>
      */
-    @Scheduled(cron = "0 45 13 ? * MON")
+    @Scheduled(cron = "0 22 17 ? * MON")
     public void create() {
         final LocalDateTime start = LocalDateTime.now();
 
@@ -59,7 +59,7 @@ public class NewsletterSender {
 
     }
 //
-    @Scheduled(cron = "0 45 13 ? * MON")
+    @Scheduled(cron = "0 23 17 ? * MON")
     public void reminderShopping() {
         /**
          * Mail pentru orice user are in whishlist adaugate articole , zilnic la 10
@@ -72,7 +72,7 @@ public class NewsletterSender {
         List<BookUser> usersNews=new ArrayList<>();
         for(BookUser b:users){
             if((b.getBlocked()==false)&&(b.getIsEnabled()==true)&&(b.isNewsletter()==true)){
-                if(b.getWishBooks().size()>=2) {
+                if(b.getWishBooks().size()>=1) {
                     usersNews.add(b);
                 }
             }

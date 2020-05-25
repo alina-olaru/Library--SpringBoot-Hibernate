@@ -1,25 +1,42 @@
-
 <div fxFlex *ngIf="existOrders==true">
-<div fxFlex fxLayout="column " fxLayoutAlign="center center">
-  <div *ngFor="let v of orders " fxFlex fxLayout="column wrap" class="border-angular border-color-accent-100 my-4 mx-lg-5 px-3 py-3 ">
-  <div fxFlex>
-    Comanda {{v.orderId}}
-  </div>
-  <div fxFlex>
-  Pret : {{v.total}}
-  </div>
-  <div fxFlex>
-    Subtotal : {{v.subtotal}}
+  <div fxFlex fxLayout="column " fxLayoutAlign="center center">
+    <div *ngFor="let v of orders " fxFlex fxLayout="column wrap"
+      class="border-angular border-color-accent-100 my-4 mx-lg-5 px-3 py-3 ">
+
+      <mat-card class="tp-card">
+        <mat-card-header>
+          <div mat-card-avatar class="tp-header-image"></div>
+          <mat-card-title> Comanda {{v.orderId}}</mat-card-title>
+
+
+          <mat-card-subtitle>
+            Pret : {{v.total}}
+
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://i.pinimg.com/originals/4e/05/ed/4e05ed4783b99a9ed3f2e19059b6c814.jpg"
+          alt="Review">
+        <mat-card-content class="fit-in-box-text">
+          <p>
+            Subtotal : {{v.subtotal}}
+          </p>
+          <p>
+            Transport : {{v.shipping}}
+          </p>
+          <p>
+            {{v.orderD | date}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+
+        </mat-card-actions>
+      </mat-card>
+
+
     </div>
-    <div fxFlex>
-      Transport : {{v.shipping}}
-      </div>
-  <div fxFlex>
-    {{v.orderD | date}}
-  </div>
-  </div>
   </div>
 </div>
-<div fxFlex *ngIf="existOrders==false">
-<img src ="https://cdn.dribbble.com/users/429792/screenshots/3649946/no_order.png">
-</div>
+  <div fxFlex *ngIf="existOrders==false">
+    <img src="https://cdn.dribbble.com/users/429792/screenshots/3649946/no_order.png">
+
+  </div>

@@ -48,9 +48,9 @@ public class ConfirmOrderSender {
             return new ApiResponse<Boolean>(ApiResponseType.SUCCESS, null);
         }catch (Exception ex){
             return new ApiResponse<Boolean>(ApiResponseType.ERROR,null);
-
         }
     }
+
 
     public ApiResponse<Boolean> sendInvoice(@PathVariable Integer orderId){
 

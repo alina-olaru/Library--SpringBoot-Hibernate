@@ -96,7 +96,7 @@ export class CartService {
     console.log(order);
     console.log(JSON.stringify(order));
     return this.httpClient.post<ApiResponse<BookOrder>>(this.globalVarService.globalUrl+"/api/order",
-    order)
+    order);
   }
 
   getTotalQuantity() : number{
@@ -114,4 +114,8 @@ export class CartService {
     return this.httpClient.get<ApiResponse<BookOrder[]>>(this.globalVarService.globalUrl + "/api/order" , { params:params });
   }
 
+  mailForOrder(id : number)
+  {
+    return this.httpClient.get<ApiResponse<boolean>>(this.globalVarService.globalUrl + "public/api" + "/order/mail/" + id );
+  }
 }
