@@ -15,12 +15,48 @@
          fxFlex >
 
 
-              <div class="fit-font-in-div account-overview-box-info" FxFlex> Id:   {{rev.reviewID}} </div>
+              <!-- <div class="fit-font-in-div account-overview-box-info" FxFlex> Id:   {{rev.reviewID}} </div>
               <div  class="fit-font-in-div account-overview-box-info" FxFlex>Pseudonim:    {{rev.reviewerName}} </div>
               <div class="fit-font-in-div account-overview-box-info" FxFlex> Recenzie:   {{rev.textReview}} </div>
               <div class="fit-font-in-div account-overview-box-info" FxFlex> Carte:   {{rev.bookR.bookTitle}} </div>
-              <div class="fit-font-in-div account-overview-box-info" *ngFor="let auth of rev.bookR.bookAuthor" FxFlex> Autor:   {{auth.authorId.firstName}} {{auth.authorId.lastName}}</div>
+              <div class="fit-font-in-div account-overview-box-info" *ngFor="let auth of rev.bookR.bookAuthor" FxFlex> Autor:   {{auth.authorId.firstName}} {{auth.authorId.lastName}}</div> -->
 
+              <mat-card class="tp-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="tp-header-image"></div>
+                  <mat-card-title *ngIf="rev.userReviewMaker && rev.userReviewMaker.username">User
+                    {{rev.userReviewMaker.username}}</mat-card-title>
+                  <mat-card-title *ngIf="!rev.userReviewMaker|| !rev.userReviewMaker.username">User neidentificat
+                  </mat-card-title>
+
+                  <mat-card-subtitle>
+                    <star-rating [starType]="'svg'" [rating]="rev.value" [readOnly]="true" [showHalfStars]="true"
+                    [hoverEnabled]="false" labelPosition="left" [numOfStars]="5"></star-rating>
+
+                  </mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="https://i.pinimg.com/originals/4e/05/ed/4e05ed4783b99a9ed3f2e19059b6c814.jpg"
+                  alt="Review">
+                <mat-card-content class="fit-in-box-text">
+                  <p>
+                    {{rev.textReview}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <!-- <button mat-button>
+                     <mat-icon>thumbs-up</mat-icon>LIKE</button> -->
+
+                  <button mat-button color="primary" style="color:green">
+                    <mat-icon>thumb_up
+                    </mat-icon>
+                  </button>
+
+                  <button mat-button color="primary" style="color:red">
+                    <mat-icon>thumb_down
+                    </mat-icon>
+                  </button>
+                </mat-card-actions>
+              </mat-card>
             </div>
 
 

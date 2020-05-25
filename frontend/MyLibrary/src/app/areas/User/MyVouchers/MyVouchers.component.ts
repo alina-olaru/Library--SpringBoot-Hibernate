@@ -17,7 +17,7 @@ import { ApiResponseType } from 'src/app/Models/general/api-response-type.enum';
 @Component({
   selector: 'app-MyVouchers',
   templateUrl: './MyVouchers.component.html',
-  styleUrls: ['./MyVouchers.component.css']
+  styleUrls: ['./MyVouchers.component.scss']
 })
 export class MyVouchersComponent implements OnInit {
 
