@@ -103,7 +103,15 @@ export class SearchComponent implements OnInit {
                   private loadingService : LoadingService,
                   public authorsService:AuthorsService,
                   public publishersService : PublishersService
-                 ) { }
+                 ) {
+                  this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+                  this.route.paramMap.subscribe(params => {
+                    //fetch your new parameters here, on which you are switching the routes and call ngOnInit()
+                    this.ngOnInit();
+                   });
+
+
+                  }
 
   ngOnInit() {
 
@@ -117,9 +125,17 @@ export class SearchComponent implements OnInit {
     this.GetCategories();
     this.getAuthors();
     this.getPublishers();
-
   }
 
+ngOnChanges(){
+  this.route.params.subscribe(params => {
+    let query = params['query'];
+    if(query && this.query!=query){
+      this.query = query;
+      this.search();
+    }
+  });
+}
 
   search(){
 

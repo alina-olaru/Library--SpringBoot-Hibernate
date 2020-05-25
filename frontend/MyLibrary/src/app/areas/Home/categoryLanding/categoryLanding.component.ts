@@ -36,7 +36,11 @@ export class CategoryLandingComponent implements OnInit {
     private router:Router
     )
     {
-
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.route.paramMap.subscribe(params => {
+        //fetch your new parameters here, on which you are switching the routes and call ngOnInit()
+        this.ngOnInit();
+       });
     }
 
   ngOnInit() {
