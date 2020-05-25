@@ -395,7 +395,19 @@ export class CartComponent implements OnInit {
             console.log("Send method finished");
             if (response && response.status == ApiResponseType.SUCCESS) {
               this.finalOrder = response.body;
-              this.cartService.mailForOrder(response.body.orderId).subscribe();
+              this.cartService.mailForOrder(response.body.orderId).subscribe((response:ApiResponse<boolean>)=>{
+                if(response && response.status==ApiResponseType.SUCCESS){
+
+                }
+                else{
+                  this.toastr.Toast.fire({
+                    icon: "error",
+                    title: "A aparut o eroare",
+                  });
+
+                }
+              });
+
 
 
               console.log(this.finalOrder);
