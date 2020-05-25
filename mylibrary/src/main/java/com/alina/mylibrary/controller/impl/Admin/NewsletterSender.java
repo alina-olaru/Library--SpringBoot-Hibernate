@@ -33,7 +33,7 @@ public class NewsletterSender {
      *
      * <h1>Using cron to send the mail every monday at 13:45</h1>
      */
-    @Scheduled(cron = "0 22 17 ? * MON")
+    @Scheduled(cron = "0 18 18 ? * MON")
     public void create() {
         final LocalDateTime start = LocalDateTime.now();
 
@@ -42,8 +42,10 @@ public class NewsletterSender {
         List<BookUser> users=bookUserService.getUsers();
         List<BookUser> usersNews=new ArrayList<>();
         for(BookUser b:users){
-            if((b.getBlocked()==false)&&(b.getIsEnabled()==true)&&(b.isNewsletter()==true)){
-                usersNews.add(b);
+            if(b!=null) {
+                if ((b.getBlocked() == false) && (b.getIsEnabled() == true) && (b.isNewsletter() == true)) {
+                    usersNews.add(b);
+                }
             }
         }
 
@@ -52,14 +54,16 @@ public class NewsletterSender {
         simpleMailMessage.setSubject("Newsletter");
         simpleMailMessage.setText("Multumim ca te-ai abonat la newsletter-ul nostru,il vei primi saptmanaal.Pt dezabonare,click mai jos");
         for(BookUser user:usersNews) {
-            simpleMailMessage.setTo(user.getEmailAdress());
-            emailSenderService.sendEmail(simpleMailMessage);
+            if(user!=null) {
+                simpleMailMessage.setTo(user.getEmailAdress());
+                emailSenderService.sendEmail(simpleMailMessage);
+            }
 
         }
 
     }
 //
-    @Scheduled(cron = "0 23 17 ? * MON")
+    @Scheduled(cron = "0 18 18 ? * MON")
     public void reminderShopping() {
         /**
          * Mail pentru orice user are in whishlist adaugate articole , zilnic la 10
@@ -71,10 +75,12 @@ public class NewsletterSender {
         List<BookUser> users=bookUserService.getUsers();
         List<BookUser> usersNews=new ArrayList<>();
         for(BookUser b:users){
-            if((b.getBlocked()==false)&&(b.getIsEnabled()==true)&&(b.isNewsletter()==true)){
-                if(b.getWishBooks().size()>=1) {
+            if(b!=null){
+            if((b.getBlocked()==false)&&(b.getIsEnabled()==true)&&(b.isNewsletter()==true)) {
+                if (b.getWishBooks()!=null && b.getWishBooks().size() >= 1) {
                     usersNews.add(b);
                 }
+            }
             }
         }
 
@@ -83,9 +89,11 @@ public class NewsletterSender {
         simpleMailMessage.setSubject("Ai uitat articole in wishlist!");
         simpleMailMessage.setText("Se pare ca ai uitat articole in wishlist.Intra sa le achizitionezi inainte sa dispara de pe stoc!.http://localhost:4200/cont/wishlist");
         for(BookUser user:usersNews) {
-            simpleMailMessage.setTo(user.getEmailAdress());
-            emailSenderService.sendEmail(simpleMailMessage);
+            if(user!=null) {
+                simpleMailMessage.setTo(user.getEmailAdress());
+                emailSenderService.sendEmail(simpleMailMessage);
 
+            }
         }
 
     }
