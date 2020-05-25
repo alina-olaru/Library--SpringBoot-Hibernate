@@ -213,8 +213,11 @@ else{
       }
 
   getUrlImageForBook(book: Book){
-    return "url('data:image/jpg;base64," + book.bookImageDb + "')";
-      }
+    if (book.bookImageDb != null) {
+      return "url('data:image/jpg;base64," + book.bookImageDb + "')";
+    } else {
+      return "url('../../../../assets/no.png')";
+    }      }
 
       viewDetails(bookId : number){
 
